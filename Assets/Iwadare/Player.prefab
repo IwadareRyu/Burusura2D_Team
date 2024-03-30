@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAnim: {fileID: 3302535831892922202}
-  _dashSpeed: 2
+  _dashSpeed: 3
 --- !u!50 &4030173051409178830
 Rigidbody2D:
   serializedVersion: 4

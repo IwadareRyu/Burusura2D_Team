@@ -1348,13 +1348,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2368097286034300812, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
-      propertyPath: m_FlipX
-      value: 0
+    - target: {fileID: 6230092625257915417, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
+      propertyPath: _jumpPower
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6230092625257915417, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
-      propertyPath: _dashSpeed
-      value: 3
+      propertyPath: _attackCoolTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
