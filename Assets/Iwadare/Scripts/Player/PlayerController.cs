@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -7,12 +8,17 @@ using UnityEngine;
 //[RequireComponent<>]
 public class PlayerController : MonoBehaviour
 {
+    [Tooltip("Playerの弾を出す向きを設定するScripts"),Header("ArrowRotaのオブジェクトを入れる。")]
+    [SerializeField] TargetArrow _targetArrowScript;
     [SerializeField] Animator _playerAnim;
+    [SerializeField] Transform _playerSprite;
+    public Transform PlayerSprite => _playerSprite;
     [Tooltip("x方向のSpeed")]
     [SerializeField] float _dashSpeed = 2f;
     [SerializeField] float _jumpPower = 1f;
     [SerializeField] float _attackCoolTime = 2f;
-    [SerializeField] float MaxAttackCount = 3f;
+    [SerializeField] int MaxAttackCount = 3;
+    [SerializeField] int MaxJumpCount = 2;
 
     [Tooltip("x方向の移動")]
     float _x = 0;
@@ -21,9 +27,13 @@ public class PlayerController : MonoBehaviour
 
     bool _isAttackTime = false;
     Rigidbody2D _playerRb;
+    bool _isGround;
+    public bool IsGround => _isGround;
+
     // Start is called before the first frame update
     void Start()
     {
+        _targetArrowScript.Init(this);
         _playerRb = GetComponent<Rigidbody2D>();
     }
 
@@ -59,9 +69,9 @@ public class PlayerController : MonoBehaviour
     {
         if (x != 0)
         {
-            var scale = transform.localScale;
-            scale.x = x;
-            transform.localScale = scale;
+            var scale = _playerSprite.transform.localScale;
+            scale.x = x * Mathf.Abs(scale.x);
+            _playerSprite.transform.localScale = scale;
         }
     }
 
@@ -103,5 +113,16 @@ public class PlayerController : MonoBehaviour
     void InstansAttack()
     {
         //向いている方向に合わせて弾を打つ処理
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _isGround = true;
+        _targetArrowScript.ResetDirection();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _isGround = false;
     }
 }
