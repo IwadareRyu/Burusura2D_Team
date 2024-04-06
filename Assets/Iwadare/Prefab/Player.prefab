@@ -410,9 +410,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e392d2d4863292a42a29076f368815cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCamera: {fileID: 0}
   _rotateGap: -90
   _arrowObj: {fileID: 4109183709732904103}
   _attackScript: {fileID: 7752026953918853042, guid: b911c0a211db66e42a6c62a9f0756bf6, type: 3}
+  _slashingScript: {fileID: 8508779601250222544, guid: 1f6b5c77cd7e35245816e0a8eec48fe5, type: 3}
   _attackInterval: 0.2
   _attackVaildInputTime: 2
   MaxAttackCount: 3
