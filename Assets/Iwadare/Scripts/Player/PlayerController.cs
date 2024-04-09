@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMove))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     [Tooltip("プレイヤーのアニメーション")]
@@ -17,7 +19,7 @@ public class PlayerController : MonoBehaviour
     float _x = 0;
     public float X => _x;
     bool _isGround;
-    float _jumpCount;
+    [NonSerialized] public float _currentJumpCount;
     public bool IsGround => _isGround;
 
     /// <summary>攻撃系の変数</summary>
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
             _isGround = true;
             Debug.Log("接地");
             _targetArrowScript.ResetDirection();
-            _jumpCount = 1;
+            _currentJumpCount = 0;
         }
     }
 
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Ground")
         {
             _isGround = false;
-            _jumpCount = 0;
+            _currentJumpCount = 1;
         }
     }
 }
