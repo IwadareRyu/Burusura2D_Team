@@ -17,12 +17,15 @@ public class PlayerMove : MonoBehaviour
 
     public void MoveUpdate(PlayerController controller)
     {
-        Jump(controller.IsGround);
+        Jump(controller);
     }
 
     public void MoveFixedUpdate(PlayerController controller)
     {
-        Move(controller.X);
+        if (!Input.GetButton("StopMove"))
+        {
+            Move(controller.X);
+        }
     }
 
     //キャラを左右に動かす処理
@@ -33,14 +36,16 @@ public class PlayerMove : MonoBehaviour
         var dir = new Vector2(move.x, y);
         _playerRb.velocity = dir;
     }
+
     // ジャンプの処理
-    void Jump(bool isGround)
+    void Jump(PlayerController controller)
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && controller._currentJumpCount < MaxJumpCount)
         {
             Debug.Log("ジャンプ！");
             _playerRb.velocity = Vector2.zero;
             _playerRb.AddForce(Vector2.up * _jumpPower,ForceMode2D.Impulse);
+            controller._currentJumpCount++;
         }
     }
 }
