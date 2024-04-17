@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,7 +14,6 @@ public class PlayerSlashing : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _rb.velocity = transform.up * _moveSpeed;
         StartCoroutine(MoveTime());
-        Destroy(gameObject,_moveTime * 2);
     }
 
     IEnumerator MoveTime()
@@ -22,4 +21,6 @@ public class PlayerSlashing : MonoBehaviour
         yield return new WaitForSeconds(_moveTime);
         _rb.velocity = Vector2.zero;
     }
+
+
 }

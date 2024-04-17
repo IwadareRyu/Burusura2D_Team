@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -17,7 +17,10 @@ public class PlayerAttack : MonoBehaviour
         var enemys = Physics2D.OverlapCircleAll(transform.position, _attacksize);
         foreach (var enemy in enemys)
         {
-            if (enemy.tag == "Enemy") { Destroy(enemy); }
+            if (enemy.gameObject.tag == "Enemy") 
+            {
+                Destroy(enemy.gameObject); 
+            }
         }
     }
 

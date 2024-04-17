@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 395723924435330432}
   - component: {fileID: 7728301474289315271}
   - component: {fileID: 8508779601250222544}
+  - component: {fileID: 3288966389624671543}
   - component: {fileID: 6256449972145720049}
   m_Layer: 0
   m_Name: SlashSign
@@ -94,7 +95,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2399705758642616200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 30
   _moveTime: 0.2
+--- !u!114 &3288966389624671543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399705758642616200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3070a2e99e3fb41ac35147a8eb76f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &6256449972145720049
 Rigidbody2D:
   serializedVersion: 4

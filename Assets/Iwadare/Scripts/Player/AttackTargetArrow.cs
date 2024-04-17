@@ -1,4 +1,4 @@
-using Cinemachine;
+ï»¿using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -11,9 +11,9 @@ public class AttackTargetArrow : MonoBehaviour
     [SerializeField] Transform _arrowObj;
     [SerializeField] PlayerAttack _attackScript;
     [SerializeField] PlayerSlashing _slashingScript;
-    [Tooltip("UŒ‚ŠÔ‚ÌƒCƒ“ƒ^[ƒoƒ‹"),Header("UŒ‚ŠÔ‚ÌƒCƒ“ƒ^[ƒoƒ‹")]
+    [Tooltip("æ”»æ’ƒé–“ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«"),Header("æ”»æ’ƒé–“ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«")]
     [SerializeField] float _attackInterval = 0.2f;
-    [Tooltip("UŒ‚‚Ì—LŒø“ü—ÍŠÔ"),Header("UŒ‚‚Ì—LŒø“ü—ÍŠÔ")]
+    [Tooltip("æ”»æ’ƒã®æœ‰åŠ¹å…¥åŠ›æ™‚é–“"),Header("æ”»æ’ƒã®æœ‰åŠ¹å…¥åŠ›æ™‚é–“")]
     [SerializeField] float _attackVaildInputTime = 2f;
     [SerializeField] int MaxAttackCount = 3;
     [SerializeField] float _stopPlayerCameraMove = 0.25f;
@@ -47,7 +47,7 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    /// <summary>’e‚ğo‚·Œü‚«‚Ì–îˆó‚ğ’²®‚·‚éƒƒ\ƒbƒh</summary>
+    /// <summary>å¼¾ã‚’å‡ºã™å‘ãã®çŸ¢å°ã‚’èª¿æ•´ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰</summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
     void RotationArrow(float x, float y)
@@ -57,7 +57,7 @@ public class AttackTargetArrow : MonoBehaviour
         transform.eulerAngles = rota;
     }
 
-    /// <summary>ã‰º¶‰E“ü—Í‚É‰‚¶‚ÄŒü‚«‚ğ•Ï‚¦‚éƒƒ\ƒbƒh</summary>
+    /// <summary>ä¸Šä¸‹å·¦å³å…¥åŠ›ã«å¿œã˜ã¦å‘ãã‚’å¤‰ãˆã‚‹ãƒ¡ã‚½ãƒƒãƒ‰</summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
@@ -70,7 +70,7 @@ public class AttackTargetArrow : MonoBehaviour
             var dir = _controller.PlayerSprite.localScale.x;
             CameraMove(dir / Mathf.Abs(dir));
             return _rotateGap * (dir / Mathf.Abs(dir));
-        }   // ‰º•ûŒü“ü—Í‚ÅAPlayer‚ª’n–Ê‚É‚Â‚¢‚Ä‚¢‚éê‡APlayer‚ªŒü‚¢‚Ä‚¢‚é•ûŒü‚ğ•Ô‚·B
+        }   // ä¸‹æ–¹å‘å…¥åŠ›ã§ã€PlayerãŒåœ°é¢ã«ã¤ã„ã¦ã„ã‚‹å ´åˆã€PlayerãŒå‘ã„ã¦ã„ã‚‹æ–¹å‘ã‚’è¿”ã™ã€‚
         else
         {
             CameraMove(x);
@@ -78,7 +78,7 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    /// <summary>¶‰E“ü—ÍAƒJƒƒ‰‚ÌX²’²®</summary>
+    /// <summary>å·¦å³å…¥åŠ›æ™‚ã€ã‚«ãƒ¡ãƒ©ã®Xè»¸èª¿æ•´</summary>
     /// <param name="x"></param>
     void CameraMove(float x)
     {
@@ -92,7 +92,7 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    /// <summary>Ú’nA‰º•ûŒü‚É–îˆó‚ª‚ ‚éê‡A–îˆó‚Ì•ûŒü‚ğPlayer‚ÌŒü‚¢‚Ä‚¢‚é•ûŒü‚ÉƒŠƒZƒbƒg‚·‚éˆ—</summary>
+    /// <summary>æ¥åœ°æ™‚ã€ä¸‹æ–¹å‘ã«çŸ¢å°ãŒã‚ã‚‹å ´åˆã€çŸ¢å°ã®æ–¹å‘ã‚’Playerã®å‘ã„ã¦ã„ã‚‹æ–¹å‘ã«ãƒªã‚»ãƒƒãƒˆã™ã‚‹å‡¦ç†</summary>
     public void ResetDirection()
     {
         var difX = _arrowObj.transform.position.x - transform.position.x;
@@ -103,7 +103,7 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    /// <summary>‰Šú‚ÌŒü‚«‚ğİ’è‚·‚é‚Æ‚«‚ÆAÚ’n‚ÉŒÄ‚Î‚ê‚éˆ—</summary>
+    /// <summary>åˆæœŸã®å‘ãã‚’è¨­å®šã™ã‚‹ã¨ãã¨ã€æ¥åœ°æ™‚ã«å‘¼ã°ã‚Œã‚‹å‡¦ç†</summary>
     /// <param name="playerScale"></param>
     void PlayerDirection(Vector3 playerScale)
     {
@@ -113,11 +113,11 @@ public class AttackTargetArrow : MonoBehaviour
         transform.eulerAngles = rota;
     }
 
-    /// <summary>UŒ‚‚ÌƒN[ƒ‹ƒ^ƒCƒ€‚Ìˆ—</summary>
-    /// <param name="count">UŒ‚‰ñ”</param>
+    /// <summary>æ”»æ’ƒã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®å‡¦ç†</summary>
+    /// <param name="count">æ”»æ’ƒå›æ•°</param>
     public IEnumerator AttackTime(int count)
     {
-        Debug.Log($"{count}‰ñ–Ú‚ÌUŒ‚I");
+        Debug.Log($"{count}å›ç›®ã®æ”»æ’ƒï¼");
         AttackSlash();
         yield return new WaitForSeconds(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
@@ -131,7 +131,7 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    /// <summary>UŒ‚‚ğo‚·ˆ—</summary>
+    /// <summary>æ”»æ’ƒã‚’å‡ºã™å‡¦ç†</summary>
     void AttackSlash()
     {
         Instantiate(_attackScript.gameObject,_arrowObj.transform.position,transform.rotation);

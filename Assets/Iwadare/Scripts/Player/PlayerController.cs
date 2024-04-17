@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,24 +6,24 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Tooltip("ƒvƒŒƒCƒ„[‚ÌƒAƒjƒ[ƒVƒ‡ƒ“")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³")]
     public Animator _playerAnim;
-    [Tooltip("ƒvƒŒƒCƒ„[‚Ì¶‰E”½“]‚³‚¹‚éƒXƒvƒ‰ƒCƒg")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å·¦å³åè»¢ã•ã›ã‚‹ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ")]
     [SerializeField] Transform _playerSprite;
     public Transform PlayerSprite => _playerSprite;
 
-    /// <summary>ˆÚ“®Œn‚Ì•Ï”</summary>
+    /// <summary>ç§»å‹•ç³»ã®å¤‰æ•°</summary>
     PlayerMove _moveScript;
 
-    [Tooltip("x•ûŒü‚ÌˆÚ“®")]
+    [Tooltip("xæ–¹å‘ã®ç§»å‹•")]
     float _x = 0;
     public float X => _x;
     bool _isGround;
     [NonSerialized] public float _currentJumpCount;
     public bool IsGround => _isGround;
 
-    /// <summary>UŒ‚Œn‚Ì•Ï”</summary>
-    [Tooltip("Player‚Ì’e‚ğo‚·Œü‚«‚ğİ’è‚·‚éScripts"), Header("ArrowRota‚ÌƒIƒuƒWƒFƒNƒg‚ğ“ü‚ê‚éB")]
+    /// <summary>æ”»æ’ƒç³»ã®å¤‰æ•°</summary>
+    [Tooltip("Playerã®å¼¾ã‚’å‡ºã™å‘ãã‚’è¨­å®šã™ã‚‹Scripts"), Header("ArrowRotaã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¥ã‚Œã‚‹ã€‚")]
     [SerializeField] AttackTargetArrow _targetArrowScript;
     bool _isAttackTime = false;
 
@@ -53,14 +53,14 @@ public class PlayerController : MonoBehaviour
         _moveScript.MoveFixedUpdate(this);
     }
 
-    // UŒ‚ˆ—
+    // æ”»æ’ƒå‡¦ç†
     IEnumerator Attack()
     {
         yield return StartCoroutine(_targetArrowScript.AttackTime(1));
         _isAttackTime = false;
     }
 
-    // ¶‰E‚ÉƒLƒƒƒ‰‚ğŒü‚¯‚éˆ—
+    // å·¦å³ã«ã‚­ãƒ£ãƒ©ã‚’å‘ã‘ã‚‹å‡¦ç†
     void FlipX(float x)
     {
         if (x != 0)
@@ -74,10 +74,10 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // UŒ‚‚ğo‚·ˆ—
+    // æ”»æ’ƒã‚’å‡ºã™å‡¦ç†
     void InstansAttack()
     {
-        //Œü‚¢‚Ä‚¢‚é•ûŒü‚É‡‚í‚¹‚Ä’e‚ğ‘Å‚Âˆ—
+        //å‘ã„ã¦ã„ã‚‹æ–¹å‘ã«åˆã‚ã›ã¦å¼¾ã‚’æ‰“ã¤å‡¦ç†
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -85,9 +85,14 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Ground")
         {
             _isGround = true;
-            Debug.Log("Ú’n");
+            Debug.Log("æ¥åœ°");
             _targetArrowScript.ResetDirection();
             _currentJumpCount = 0;
+        }
+
+        if(collision.tag == "Enemy")
+        {
+            //Damageåˆ¤å®š
         }
     }
 
