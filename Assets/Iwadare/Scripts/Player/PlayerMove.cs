@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D _playerRb;
-    [Tooltip("x•ûŒü‚ÌSpeed")]
+    [Tooltip("xæ–¹å‘ã®Speed")]
     [SerializeField] float _dashSpeed = 2f;
     [SerializeField] float _jumpPower = 1f;
     [SerializeField] int MaxJumpCount = 2;
@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    //ƒLƒƒƒ‰‚ğ¶‰E‚É“®‚©‚·ˆ—
+    //ã‚­ãƒ£ãƒ©ã‚’å·¦å³ã«å‹•ã‹ã™å‡¦ç†
     private void Move(float x)
     {
         var y = _playerRb.velocity.y;
@@ -37,12 +37,12 @@ public class PlayerMove : MonoBehaviour
         _playerRb.velocity = dir;
     }
 
-    // ƒWƒƒƒ“ƒv‚Ìˆ—
+    // ã‚¸ãƒ£ãƒ³ãƒ—ã®å‡¦ç†
     void Jump(PlayerController controller)
     {
         if (Input.GetButtonDown("Jump") && controller._currentJumpCount < MaxJumpCount)
         {
-            Debug.Log("ƒWƒƒƒ“ƒvI");
+            Debug.Log("ã‚¸ãƒ£ãƒ³ãƒ—ï¼");
             _playerRb.velocity = Vector2.zero;
             _playerRb.AddForce(Vector2.up * _jumpPower,ForceMode2D.Impulse);
             controller._currentJumpCount++;
