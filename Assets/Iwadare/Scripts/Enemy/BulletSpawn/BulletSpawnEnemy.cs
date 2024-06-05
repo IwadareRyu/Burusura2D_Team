@@ -6,20 +6,20 @@ using UnityEngine;
 public class BulletSpawnEnemy : MonoBehaviour
 {
     [Header("弾の設定")]
-    [Tooltip("弾の動きの設定")]
+    [Tooltip("弾の動きの設定"),Header("弾の動きの設定")]
     [SerializeField] BulletMoveType _bulletMoveType;
-    [Tooltip("弾のスポーン方法の設定")]
+    [Tooltip("弾のスポーン方法の設定"),Header("弾のスポーン方法の設定")]
     [SerializeField] BulletSpawnType _bulletSpawnType;
-    [Tooltip("弾を攻撃したときの起こることの設定")]
+    [Tooltip("弾を攻撃したときの起こることの設定"), Header("弾を攻撃したときの起こることの設定")]
     [SerializeField] BulletBreakType _bulletBreakType;
-    [Tooltip("弾の速さ")]
+    [Tooltip("弾の速さ"), Header("弾の速さ")]
     [SerializeField] float _bulletSpeed = 3f;
-    [Tooltip("弾の回る速度")]
+    [Tooltip("毎秒弾の回る角度"), Header("毎秒弾の回る角度")]
     [SerializeField] float _bulletRotation = 1f;
-    [Tooltip("弾と弾の間隔")]
+    [Tooltip("弾と弾の間隔"), Header("弾と弾の間隔")]
     [SerializeField] float _bulletRange = 30f;
     public float BulletRange => _bulletRange;
-    [Tooltip("弾のスポーンし始めの場所の距離(0は真上から)")]
+    [Tooltip("弾のスポーンし始めの場所の角度(0は真上から)"), Header("弾のスポーンし始めの場所の角度(0は真上から)")]
     [SerializeField] float _bulletDistance = 0f;
     public float BulletDistance => _bulletDistance;
     [SerializeField] float _spawnCoolTime = 2f;
