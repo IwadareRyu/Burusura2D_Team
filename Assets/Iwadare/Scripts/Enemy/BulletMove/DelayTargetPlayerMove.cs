@@ -1,44 +1,61 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 [Serializable]
 public class DelayTargetPlayerMove : BulletMoveClass
 {
-    [SerializeField]float _delayLookPlayerTime = 0.5f;
+    [SerializeField] float _delayLookPlayerTime = 0.5f;
     bool _isLookPlayer = false;
+    float _bulletSpeed;
+    float _currentTime = 0;
 
-    public override void Init(MoveBulletEnemy bulletMove)
+    public override void BulletMove(float bulletSpeed)
     {
-        return;
+        _currentTime = 0;
+        _bulletSpeed = bulletSpeed;
     }
 
-    public override IEnumerator BulletMove(MoveBulletEnemy bulletMove, float bulletSpeed)
+    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove)
     {
-        for (float i = 0f; i < bulletMove.ActiveTime; i += Time.deltaTime)
+        _currentTime += Time.deltaTime;
+        if (!_isLookPlayer && _currentTime > _delayLookPlayerTime)
         {
-            if(!_isLookPlayer && i > _delayLookPlayerTime)
-            {
-                _isLookPlayer = true;
-                bulletMove.PlayerTargetMethod();
-            }
-
-            bulletMove.Move(bulletSpeed);
-            // Playerに当たっているかの判定
-            if (bulletMove.ChackPlayerHit()) { break; }
-
-            //Playerの攻撃に当たっているかの判定
-            if (bulletMove.ChackAttackHit())
-            {
-                bulletMove.BulletBreakMehod();
-                break;
-            }
-
-            yield return new WaitForFixedUpdate();
+            _isLookPlayer = true;
+            bulletMove.PlayerTargetMethod();
         }
+
+        bulletMove.Move(_bulletSpeed);
+
+        /// 弾破壊判定
+
+        // Playerに当たっているかの判定
+        if (bulletMove.ChackPlayerHit()) 
+        {
+            LookReset();
+            return false;
+        }
+
+        //Playerの攻撃に当たっているかの判定
+        if (bulletMove.ChackAttackHit())
+        {
+            LookReset();
+            bulletMove.BulletBreakMehod();
+            return false;
+        }
+
+        // 時間判定
+        if (_currentTime > bulletMove.ActiveTime)
+        {
+            LookReset();
+            return false;
+        }
+
+        return true;
+    }
+
+    void LookReset()
+    {
         _isLookPlayer = false;
-        bulletMove.Reset();
     }
 }

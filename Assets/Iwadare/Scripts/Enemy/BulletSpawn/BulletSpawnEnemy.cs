@@ -73,7 +73,7 @@ public class BulletSpawnEnemy : MonoBehaviour
         bullet.transform.Rotate(0, 0, rota);
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
-        bulletScripts.BulletMoveStart(_bulletSpeed, _bulletRotation, _bulletMoveType, _bulletBreakType);
+        bulletScripts.BulletMoveStart(_bulletMoveType, _bulletBreakType, _bulletSpeed, _bulletRotation);
     }
 
 
