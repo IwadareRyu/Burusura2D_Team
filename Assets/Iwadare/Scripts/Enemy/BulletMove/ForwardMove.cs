@@ -1,27 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ForwardMove : BulletMoveClass
 {
-    public override IEnumerator BulletMove(MoveBulletEnemy bulletMove, float bulletSpeed)
+    float _bulletSpeed;
+    float _currentTime;
+
+    public override void BulletMove(float bulletSpeed)
     {
-        for(float i = 0f;i < bulletMove.ActiveTime; i += Time.deltaTime)
+        _currentTime = 0f;
+        _bulletSpeed = bulletSpeed;
+    }
+
+    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove)
+    {
+        _currentTime += Time.deltaTime;
+        bulletMove.Move(_bulletSpeed);
+
+        // Playerに当たっているかの判定
+        if (bulletMove.ChackPlayerHit()) { return false; }
+
+        //Playerの攻撃に当たっているかの判定
+        if (bulletMove.ChackAttackHit())
         {
-            bulletMove.Move(bulletSpeed);
-
-            // Playerに当たっているかの判定
-            if (bulletMove.ChackPlayerHit()) { break; }
-
-            //Playerの攻撃に当たっているかの判定
-            if(bulletMove.ChackAttackHit())
-            {
-                bulletMove.BulletBreakMehod();
-                break;
-            }
-
-            yield return new WaitForFixedUpdate();
+            bulletMove.BulletBreakMehod();
+            return false;
         }
-        bulletMove.Reset();
+
+        // 時間判定
+        if (_currentTime > bulletMove.ActiveTime)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

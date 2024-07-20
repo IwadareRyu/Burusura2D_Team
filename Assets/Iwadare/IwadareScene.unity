@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db37715aaaad13b489c8f91aff7e52a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletMoveType: 3
-  _bulletSpawnType: 1
-  _bulletBreakType: 0
-  _bulletSpeed: 0.2
+  _bulletMoveType: 2
+  _bulletSpawnType: 2
+  _bulletBreakType: 1
+  _bulletSpeed: 0.05
   _bulletRotation: 7.5
   _bulletRange: 30
   _bulletDistance: 0
@@ -1867,6 +1867,10 @@ PrefabInstance:
     - target: {fileID: 1857518886581908040, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743599520464483070, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
+      propertyPath: m_TagString
+      value: PAttack
       objectReference: {fileID: 0}
     - target: {fileID: 4182582352382481816, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
       propertyPath: _playerCamera
