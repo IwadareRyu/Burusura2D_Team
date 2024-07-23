@@ -39,8 +39,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     private void OnEnable()
     {
-        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+
     }
 
     private void OnDisable()
@@ -51,6 +50,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     public void Init()
     {
+        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
         _targetPlayerMove.Init(this);
     }
 
