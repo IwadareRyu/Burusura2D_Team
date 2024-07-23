@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,HitStopInterface
 {
     [Tooltip("プレイヤーのアニメーション")]
     public Animator _playerAnim;
@@ -33,6 +33,18 @@ public class PlayerController : MonoBehaviour
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
         _moveScript.Init();
+    }
+
+    private void OnEnable()
+    {
+        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+    }
+
+    private void OnDisable()
+    {
+        HitStopManager.instance._speedHitStopActionStart -= HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd -= HitStopEnd;
     }
 
     // Update is called once per frame
@@ -103,5 +115,15 @@ public class PlayerController : MonoBehaviour
             _isGround = false;
             _currentJumpCount = 1;
         }
+    }
+
+    public void HitStopStart(float _hitStopPower)
+    {
+        
+    }
+
+    public void HitStopEnd()
+    {
+
     }
 }

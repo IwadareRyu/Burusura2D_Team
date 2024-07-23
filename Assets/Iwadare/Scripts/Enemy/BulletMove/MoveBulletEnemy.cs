@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBulletEnemy : MonoBehaviour
+public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 {
+    /// <summary>弾の速さ</summary>
+    float _maxBulletSpeed;
+    float _currentBulletSpeed;
+
+    /// <summary>弾の回転</summary>
+    float _maxBulletRota;
+    float _currentBulletRota;
+
     [SerializeField] float _rotaTime = 0.1f;
     [SerializeField] float _maxRotaAngle = 90f;
     float _currentRotaAngle = 0f;
@@ -15,11 +23,31 @@ public class MoveBulletEnemy : MonoBehaviour
     BulletBreakType _breakType;
     bool _attackTime = false;
 
+    [SerializeField] public ParticleSystem _hitParticle;
+
+    // まっすぐ飛ぶ弾のクラス
     ForwardMove _forwardMove = new();
+    // 回転する弾のクラス
     RotationMove _rotationMove = new();
+    // 一定時間たったら追尾する弾のクラス
     [SerializeField] DelayTargetPlayerMove _targetPlayerMove = new();
 
     BulletMoveClass _currentBulletMoveClass;
+
+    public float _timeScale = 1f;
+
+
+    private void OnEnable()
+    {
+        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+    }
+
+    private void OnDisable()
+    {
+        HitStopManager.instance._speedHitStopActionStart -= HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd -= HitStopEnd;
+    }
 
     public void Init()
     {
@@ -34,27 +62,37 @@ public class MoveBulletEnemy : MonoBehaviour
     }
 
     #region 弾の種類
+    /// <summary>
+    /// バレットが動くときの初期化
+    /// </summary>
+    /// <param name="moveState">動き方のState</param>
+    /// <param name="breakType">壊れ方のState</param>
+    /// <param name="bulletSpeed">弾の速さ</param>
+    /// <param name="bulletRota">弾の回る角度</param>
     public void BulletMoveStart(BulletMoveType moveState,BulletBreakType breakType, float bulletSpeed, float bulletRota = 0f)
     {
         _breakType = breakType;
+        _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
+        if (HitStopManager.instance._isSpeedHitStop) { HitStopStart(HitStopManager.instance._speedHitStopPower); }
+        _currentBulletRota = _maxBulletRota = bulletRota;
         switch (moveState)
         {
             case BulletMoveType.Forward:
                 _currentBulletMoveClass = _forwardMove;
-                _currentBulletMoveClass.BulletMove(bulletSpeed);
+                _currentBulletMoveClass.BulletMove();
                 break;
             case BulletMoveType.Rotate:
                 _currentBulletMoveClass = _rotationMove;
-                _currentBulletMoveClass.BulletMove(bulletSpeed, bulletRota);
+                _currentBulletMoveClass.BulletMove();
                 break;
             case BulletMoveType.TargetPlayer:
                 PlayerTargetMethod();
                 _currentBulletMoveClass = _forwardMove;
-                _currentBulletMoveClass.BulletMove(bulletSpeed);
+                _currentBulletMoveClass.BulletMove();
                 break;
             case BulletMoveType.DelayTargetPlayer:
                 _currentBulletMoveClass = _targetPlayerMove;
-                _currentBulletMoveClass.BulletMove(bulletSpeed);
+                _currentBulletMoveClass.BulletMove();
                 break;
         }
         _attackTime = true;
@@ -67,7 +105,7 @@ public class MoveBulletEnemy : MonoBehaviour
     {
         if (_attackTime)
         {
-            _attackTime = _currentBulletMoveClass.BulletMoveUpdate(this);
+            _attackTime = _currentBulletMoveClass.BulletMoveUpdate(this,_currentBulletSpeed,_currentBulletRota);
         }
         else if(_currentBulletMoveClass != null)
         {
@@ -114,6 +152,7 @@ public class MoveBulletEnemy : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
+                if (_hitParticle) Instantiate(_hitParticle, col.transform.position, Quaternion.identity);
                 return true;
             }
         }
@@ -131,6 +170,8 @@ public class MoveBulletEnemy : MonoBehaviour
         {
             if (col.gameObject.tag == "PAttack")
             {
+                if (_hitParticle) Instantiate(_hitParticle, transform.position, Quaternion.identity);
+                HitStopManager.instance.SpeedHitStop();
                 return true;
             }
         }
@@ -163,5 +204,17 @@ public class MoveBulletEnemy : MonoBehaviour
         transform.rotation = Quaternion.identity;
         _currentBulletMoveClass = null;
         gameObject.SetActive(false);
+    }
+
+    public void HitStopStart(float _hitStopPower)
+    {
+        _currentBulletSpeed = _maxBulletSpeed * _hitStopPower;
+        _timeScale = _hitStopPower;
+    }
+
+    public void HitStopEnd()
+    {
+        _currentBulletSpeed = _maxBulletSpeed;
+        _timeScale = 1f;
     }
 }

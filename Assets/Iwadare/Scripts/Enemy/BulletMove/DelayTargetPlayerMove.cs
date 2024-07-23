@@ -7,25 +7,23 @@ public class DelayTargetPlayerMove : BulletMoveClass
 {
     [SerializeField] float _delayLookPlayerTime = 0.5f;
     bool _isLookPlayer = false;
-    float _bulletSpeed;
     float _currentTime = 0;
 
-    public override void BulletMove(float bulletSpeed)
+    public override void BulletMove()
     {
         _currentTime = 0;
-        _bulletSpeed = bulletSpeed;
     }
 
-    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove)
+    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove, float bulletSpeed, float bulletRota)
     {
-        _currentTime += Time.deltaTime;
+        _currentTime += Time.deltaTime * bulletMove._timeScale;
         if (!_isLookPlayer && _currentTime > _delayLookPlayerTime)
         {
             _isLookPlayer = true;
             bulletMove.PlayerTargetMethod();
         }
 
-        bulletMove.Move(_bulletSpeed);
+        bulletMove.Move(bulletSpeed);
 
         /// 弾破壊判定
 

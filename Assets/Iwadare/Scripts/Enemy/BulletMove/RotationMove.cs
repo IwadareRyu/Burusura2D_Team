@@ -2,21 +2,17 @@
 
 public class RotationMove : BulletMoveClass
 {
-    float _bulletSpeed;
-    float _bulletRota;
     float _currentTime;
-    public override void BulletMove(float bulletSpeed, float bulletRota)
+    public override void BulletMove()
     {
         _currentTime = 0f;
-        _bulletSpeed = bulletSpeed;
-        _bulletRota = bulletRota;
     }
 
-    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove)
+    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove,float bulletSpeed,float bulletRota)
     {
-        _currentTime += Time.deltaTime;
-        bulletMove.Rotation(_bulletRota);
-        bulletMove.Move(_bulletSpeed);
+        _currentTime += Time.deltaTime * bulletMove._timeScale;
+        bulletMove.Rotation(bulletRota);
+        bulletMove.Move(bulletSpeed);
 
         /// 弾破壊判定
         // プレイヤーとの当たり判定
