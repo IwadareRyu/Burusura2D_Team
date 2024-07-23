@@ -2,19 +2,17 @@
 
 public class ForwardMove : BulletMoveClass
 {
-    float _bulletSpeed;
     float _currentTime;
 
-    public override void BulletMove(float bulletSpeed)
+    public override void BulletMove()
     {
         _currentTime = 0f;
-        _bulletSpeed = bulletSpeed;
     }
 
-    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove)
+    public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove,float bulletSpeed,float bulletRota)
     {
-        _currentTime += Time.deltaTime;
-        bulletMove.Move(_bulletSpeed);
+        _currentTime += Time.deltaTime * bulletMove._timeScale;
+        bulletMove.Move(bulletSpeed);
 
         // Playerに当たっているかの判定
         if (bulletMove.ChackPlayerHit()) { return false; }
