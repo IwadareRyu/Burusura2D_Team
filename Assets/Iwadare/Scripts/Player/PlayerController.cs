@@ -33,10 +33,6 @@ public class PlayerController : MonoBehaviour,HitStopInterface
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
         _moveScript.Init();
-    }
-
-    private void OnEnable()
-    {
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
     }
