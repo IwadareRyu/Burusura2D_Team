@@ -22,4 +22,5 @@ public enum BulletSpawnType
     ForwardOnceSpawn,
     CircleSpawn,
     DelayCircleSpawn,
+    WaveSpawn,
 }
