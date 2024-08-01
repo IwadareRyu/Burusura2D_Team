@@ -36,23 +36,15 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     public float _timeScale = 1f;
 
-
-    private void OnEnable()
+    public void Init()
     {
-
+        _targetPlayerMove.Init(this);
     }
 
     private void OnDisable()
     {
         HitStopManager.instance._speedHitStopActionStart -= HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd -= HitStopEnd;
-    }
-
-    public void Init()
-    {
-        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
-        _targetPlayerMove.Init(this);
     }
 
     private void OnDrawGizmos()
@@ -72,6 +64,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="bulletRota">弾の回る角度</param>
     public void BulletMoveStart(BulletMoveType moveState,BulletBreakType breakType, float bulletSpeed, float bulletRota = 0f)
     {
+        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
         _breakType = breakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
         if (HitStopManager.instance._isSpeedHitStop) { HitStopStart(HitStopManager.instance._speedHitStopPower); }
@@ -211,11 +205,13 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     {
         _currentBulletSpeed = _maxBulletSpeed * _hitStopPower;
         _timeScale = _hitStopPower;
+        Debug.Log("ぬっ");
     }
 
     public void HitStopEnd()
     {
         _currentBulletSpeed = _maxBulletSpeed;
         _timeScale = 1f;
+        Debug.Log("ん！");
     }
 }

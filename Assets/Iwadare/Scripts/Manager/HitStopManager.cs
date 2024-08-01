@@ -50,7 +50,7 @@ public class HitStopManager : MonoBehaviour
             {
                 case HitStopType.SpeedHitStop:
                     _isSpeedHitStop = false;
-                    _speedHitStopActionEnd.Invoke();
+                    _speedHitStopActionEnd?.Invoke();
                     _hitStopType = HitStopType.None;
                     _isHitStop = false;
                     break;
@@ -71,7 +71,7 @@ public class HitStopManager : MonoBehaviour
             _isHitStop = true;
             _isSpeedHitStop = true;
             _hitStopType = HitStopType.SpeedHitStop;
-            _speedHitStopActionStart.Invoke(_speedHitStopPower);
+            _speedHitStopActionStart?.Invoke(_speedHitStopPower);
         }
         _currentStopTime = 0f;
     }

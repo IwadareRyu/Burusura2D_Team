@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-
+[RequireComponent(typeof(WaveSpawnEnemy))]
 public class BulletSpawnEnemy : MonoBehaviour
 {
     [Header("弾の設定")]
@@ -20,50 +21,61 @@ public class BulletSpawnEnemy : MonoBehaviour
     [SerializeField] float _bulletRange = 30f;
     public float BulletRange => _bulletRange;
     [Tooltip("弾のスポーンし始めの場所の角度(0は真上から)"), Header("弾のスポーンし始めの場所の角度(0は真上から)")]
-    [SerializeField] float _bulletDistance = 0f;
+    public float _bulletDistance = 0f;
     public float BulletDistance => _bulletDistance;
+
     [SerializeField] float _spawnCoolTime = 2f;
     float _currentCoolTime = 0f;
     [Header("弾のプール")]
     [SerializeField] BulletPoolActive _bulletPool;
     [SerializeField] bool _isAttack;
+    bool _isBulletSpawn = true;
 
     ForwardSpawn _forwardSpawn = new();
     [SerializeField] CircleSpawn _circleSpawn = new();
-
+    WaveSpawnEnemy _waveSpawnEnemy;
 
     private void Start()
     {
-        StartCoroutine(SpawnBullet());
+        _waveSpawnEnemy = GetComponent<WaveSpawnEnemy>();
     }
 
-    IEnumerator SpawnBullet()
+    private void Update()
     {
-        while(true)
+        if (_isAttack && _isBulletSpawn)
         {
-            if(_isAttack)
+            _currentCoolTime += Time.deltaTime;
+            if (_currentCoolTime > _spawnCoolTime)
             {
-                _currentCoolTime += Time.deltaTime;
-                if(_currentCoolTime > _spawnCoolTime)
-                {
-                    switch(_bulletSpawnType)
-                    {
-                        case BulletSpawnType.ForwardOnceSpawn:
-                            _forwardSpawn.Spawn(this);
-                            break;
-                        case BulletSpawnType.CircleSpawn:
-                            _circleSpawn.Spawn(this);
-                            break;
-                        case BulletSpawnType.DelayCircleSpawn:
-                            StartCoroutine(_circleSpawn.DelaySpawn(this));
-                            break;
-                    }
-                    _currentCoolTime = 0f;
-                }
+                _isBulletSpawn = false;
+                StartCoroutine(BulletSpawn());
             }
-            yield return new WaitForFixedUpdate();
         }
     }
+
+    IEnumerator BulletSpawn()
+    {
+        switch (_bulletSpawnType)
+        {
+            case BulletSpawnType.ForwardOnceSpawn:
+                _forwardSpawn.Spawn(this);
+                break;
+            case BulletSpawnType.CircleSpawn:
+                _circleSpawn.Spawn(this);
+                break;
+            case BulletSpawnType.DelayCircleSpawn:
+                StartCoroutine(_circleSpawn.DelaySpawn(this));
+                break;
+            case BulletSpawnType.WaveSpawn:
+                yield return StartCoroutine(_waveSpawnEnemy.WaveSpawn(this));
+                break;
+        }
+        _currentCoolTime = 0f;
+        _isBulletSpawn = true;
+        yield return null;
+    }
+
+
 
     public void InitBullet(float rota)
     {
