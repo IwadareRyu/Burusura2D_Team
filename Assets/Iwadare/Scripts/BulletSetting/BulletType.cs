@@ -24,3 +24,14 @@ public enum BulletSpawnType
     DelayCircleSpawn,
     WaveSpawn,
 }
+
+/// <summary>スポーン回数を大まかに決めるState</summary>
+public enum SpawnCountType
+{
+    /// <summary>一回のみ</summary>
+    OneShot,
+    /// <summary>指定回数</summary>
+    Count,
+    /// <summary>ループ</summary>
+    Loop,
+}
