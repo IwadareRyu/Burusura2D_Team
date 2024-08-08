@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 585398510531478470}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.34, y: 1.32, z: 0.20608018}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6521170067959171013}
   - {fileID: 6115999726208628951}
@@ -128,7 +128,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.12}
-  m_Size: {x: 0.66, y: 0.97}
+  m_Size: {x: 0.62, y: 0.76}
   m_Direction: 0
 --- !u!61 &585398510531478470
 BoxCollider2D:
@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.34}
+  m_Offset: {x: 0, y: -0.21}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 3122005145834802421}
   m_Layer: 0
   m_Name: ArrowObj
-  m_TagString: Untagged
+  m_TagString: PAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 3743599520464483070}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0.03692496, y: 0.82632077, z: -0.20608018}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,8 +287,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: -0.20608018}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1553328957981820917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -416,5 +416,7 @@ MonoBehaviour:
   _attackScript: {fileID: 7752026953918853042, guid: b911c0a211db66e42a6c62a9f0756bf6, type: 3}
   _slashingScript: {fileID: 8508779601250222544, guid: 1f6b5c77cd7e35245816e0a8eec48fe5, type: 3}
   _attackInterval: 0.2
-  _attackVaildInputTime: 2
+  _attackVaildInputTime: 0.4
   MaxAttackCount: 3
+  _stopPlayerCameraMove: 0.25
+  _movePlayerCameraMove: 0.2
