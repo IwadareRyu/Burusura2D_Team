@@ -20,9 +20,11 @@ public enum BulletMoveType
 public enum BulletSpawnType
 {
     ForwardOnceSpawn,
+    ForwardAfterSlowSpawn,
     CircleSpawn,
     DelayCircleSpawn,
     WaveSpawn,
+    WaitWaveSpawn,
 }
 
 /// <summary>スポーン回数を大まかに決めるState</summary>

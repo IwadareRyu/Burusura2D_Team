@@ -13,17 +13,20 @@ public class WaveSpawnEnemy : MonoBehaviour
     [SerializeField] float _waveCountTime = 0.5f;
     [Tooltip("波スポーンの変える角度")]
     [SerializeField] float _waveDistance = 5f;
+    float _tmpDistance;
 
-    [SerializeField] CircleSpawn _circleSpawn = new();
-
-    public IEnumerator WaveSpawn(BulletSpawnEnemy bulletSpawnEnemy)
+    public void Init(BulletSpawnEnemy bulletSpawnEnemy)
     {
-        bulletSpawnEnemy._bulletDistance = 0f;
+        _tmpDistance = bulletSpawnEnemy.BulletDistance;
+    }
+    public IEnumerator WaveSpawn(BulletSpawnEnemy bulletSpawnEnemy,CircleSpawn circleSpawn)
+    {
+        bulletSpawnEnemy._bulletDistance = _tmpDistance;
         for (var i = 0; i < _waveCount; i++)
         {
             for (var j = 0; j < _waveWidth; j++)
             {
-                _circleSpawn.Spawn(bulletSpawnEnemy);
+                circleSpawn.Spawn(bulletSpawnEnemy);
                 yield return new WaitForSeconds(_waveWidthTime);
                 bulletSpawnEnemy._bulletDistance += _waveDistance;
             }

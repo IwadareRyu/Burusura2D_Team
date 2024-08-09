@@ -2,18 +2,18 @@
 
 public class DangerousDisplayEnemy : MonoBehaviour
 {
+
     [SerializeField] Sprite _dangerousSprite;
     SpriteRenderer _dangerousSpriteRenderer;
-
     float _displayTime = 1f;
     float _currentDisplayTime;
-
     Color _currentColor;
+
+    [Header("危険信号の点滅の色")]
     [SerializeField] Color _lightUpColor = Color.white;
     [SerializeField] Color _lightDownColor = Color.gray;
     [SerializeField] float _defaultMatualTime = 0.2f;
     float _currentMatualTime;
-
     bool _isDengerous = true;
     // Start is called before the first frame update
     void Start()

@@ -24,6 +24,11 @@ public class ForwardMove : BulletMoveClass
             return false;
         }
 
+        if(_currentTime > bulletMove.ActiveTime - bulletMove.FadeTime)
+        {
+            bulletMove.Fade(bulletMove.ActiveTime - _currentTime);
+        }
+
         // 時間判定
         if (_currentTime > bulletMove.ActiveTime)
         {
