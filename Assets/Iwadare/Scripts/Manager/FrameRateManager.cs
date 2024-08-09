@@ -5,8 +5,11 @@ using UnityEngine;
 public class FrameRateManager : MonoBehaviour
 {
     [SerializeField] int _frameRate = 60;
-    void Start()
+    [SerializeField] bool _vSinc = false;
+    void Awake()
     {
         Application.targetFrameRate = _frameRate;
+        if (_vSinc) QualitySettings.vSyncCount = 1;
+        else QualitySettings.vSyncCount = 0;
     }
 }
