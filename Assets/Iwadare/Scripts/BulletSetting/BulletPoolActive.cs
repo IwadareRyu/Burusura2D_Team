@@ -13,7 +13,7 @@ public class BulletPoolActive : MonoBehaviour
     [Tooltip("生成した球をまとめる場所")]
     [SerializeField] GameObject Parent;
 
-    private void Awake()
+    private void Start()
     {
         //Awakeでプールを作る。
         Pool();

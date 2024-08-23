@@ -16,6 +16,10 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     [SerializeField] float _maxRotaAngle = 90f;
     float _currentRotaAngle = 0f;
 
+    [Tooltip("弾を撃つ方向")]
+    Vector3 _currentDirection = Vector3.zero;
+    float _currentBulletAngle = 0f;
+
 
     [Tooltip("弾のアクティブ時間")]
     float _activeTime = 5f;
@@ -52,10 +56,14 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     public float _timeScale = 1f;
 
+    bool _isRota;
+
     public void Init()
     {
         _targetPlayerMove.Init(this);
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
+        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
+        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
     }
 
     private void OnDisable()
@@ -78,15 +86,21 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="bulletSpeed">弾の速さ</param>
     /// <param name="bulletRota">弾の回る角度</param>
     public void BulletMoveStart(BulletMoveType moveState,BulletBreakType breakType, 
-        float bulletSpeed, float bulletRota = 0f,float activeTime = 5f)
+        float bulletSpeed,float direction, float bulletRota = 0f,float activeTime = 5f,bool isRota = true)
     {
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
         _breakType = breakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
         _activeTime = activeTime + _fadeTime;
-        if (HitStopManager.instance._isSpeedHitStop) { HitStopStart(HitStopManager.instance._speedHitStopPower); }
+        if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
         _currentBulletRota = _maxBulletRota = bulletRota;
+        _currentBulletAngle = direction;
+        _isRota = isRota;
+        if (!_isRota)
+        {
+            _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle));
+        }
         switch (moveState)
         {
             case BulletMoveType.Forward:
@@ -129,7 +143,14 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="speed"></param>
     public void Move(float speed)
     {
-        transform.position += transform.up * speed;
+        if (_isRota)
+        {
+            transform.position += transform.up * speed;
+        }
+        else
+        {
+            transform.position += _currentDirection * speed;
+        }
     }
 
     /// <summary>回転処理</summary>
@@ -141,8 +162,18 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         if (_currentRotaTime > _rotaTime)
         {
             Debug.Log("グルグル");
-            transform.Rotate(0, 0, rota);
-            _currentRotaAngle+= rota;
+
+            if (_isRota)
+            {
+                transform.Rotate(0, 0, rota);
+            }
+            else
+            {
+                _currentBulletAngle += rota;
+                _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle)); 
+            }
+
+            _currentRotaAngle += rota;
             _currentRotaTime = 0;
         }
     }
@@ -152,8 +183,17 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     {
         var playerTrans = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         var distance = playerTrans.position - transform.position;
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, distance);
-        transform.eulerAngles = new Vector3(0,0,transform.eulerAngles.z);
+        if (_isRota)
+        {
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, distance);
+            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+        }
+        else
+        {
+            float rad = Mathf.Atan2(distance.y,distance.x);
+            _currentBulletAngle = rad * Mathf.Rad2Deg;
+            _currentDirection = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
+        }
     }
 
     /// <summary>当たり判定処理</summary>
