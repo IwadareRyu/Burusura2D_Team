@@ -14,7 +14,7 @@ public class DangerousDisplayEnemy : MonoBehaviour
     [SerializeField] Color _lightDownColor = Color.gray;
     [SerializeField] float _defaultMatualTime = 0.2f;
     float _currentMatualTime;
-    bool _isDengerous = true;
+    bool _isDengerous = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +36,7 @@ public class DangerousDisplayEnemy : MonoBehaviour
         }
     }
 
-    public void DengerousStart(float displayTime)
+    public void DangerousStart(float displayTime)
     {
         if (_isDengerous) return;
         _displayTime = displayTime;

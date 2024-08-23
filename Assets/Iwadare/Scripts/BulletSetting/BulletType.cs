@@ -25,6 +25,7 @@ public enum BulletSpawnType
     DelayCircleSpawn,
     WaveSpawn,
     WaitWaveSpawn,
+    ElipseSpawn,
 }
 
 /// <summary>スポーン回数を大まかに決めるState</summary>

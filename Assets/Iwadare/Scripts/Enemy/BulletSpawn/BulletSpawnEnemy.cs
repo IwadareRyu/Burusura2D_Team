@@ -38,7 +38,7 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Header("弾のプール")]
     [SerializeField] BulletPoolActive _bulletPool;
     [SerializeField] bool _isAttack;
-    [SerializeField] DangerousDisplayEnemy _dengerousDisplayEnemy;
+    [SerializeField] DangerousDisplayEnemy _dangerousDisplayEnemy;
     bool _isBulletSpawn = true;
 
     [Header("危険信号設定")]
@@ -48,11 +48,20 @@ public class BulletSpawnEnemy : MonoBehaviour
     float _dangerousTime;
     bool _isDangerous;
 
-    ForwardSpawn _forwardSpawn = new();
-    [SerializeField] CircleSpawn _circleSpawn = new();
-    [SerializeField] ForwardAfterSlowSpawn _forwardAfterSlowSpawn = new();
-    WaveSpawnEnemy _waveSpawnEnemy;
 
+    [Tooltip("真っ直ぐ飛ばす弾をスポーンさせるメソッド")]
+    ForwardSpawn _forwardSpawn = new();
+    [Tooltip("円状に弾をスポーンさせるメソッド")]
+    [SerializeField] CircleSpawn _circleSpawn = new();
+    [Tooltip("軌道上に速さの違う複数の弾をスポーンさせるメソッド")]
+    [SerializeField] ForwardAfterSlowSpawn _forwardAfterSlowSpawn = new();
+    [Tooltip("_circleSpawnを使って波上に弾をスポーンさせるメソッド")]
+    WaveSpawnEnemy _waveSpawnEnemy;
+    [Tooltip("楕円型に弾をスポーンさせるメソッド")]
+    [SerializeField] EllipseSpawn _ellipseSpawn;
+
+    [Tooltip("弾を回転させるか"), Header("弾を回転させるか")]
+    [SerializeField]bool isRota = true;
 
     private void Start()
     {
@@ -71,7 +80,7 @@ public class BulletSpawnEnemy : MonoBehaviour
             if(_isDangerousDisplay && !_isDangerous && _currentCoolTime > _dangerousTime)
             {
                 _isDangerous = true;
-                _dengerousDisplayEnemy.DengerousStart(_dangerousSpawnBeforeTime);
+                _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
             }
 
             // BulletSpawn
@@ -118,6 +127,9 @@ public class BulletSpawnEnemy : MonoBehaviour
             case BulletSpawnType.ForwardAfterSlowSpawn:
                 _forwardAfterSlowSpawn.Spawn(this);
                 break;
+            case BulletSpawnType.ElipseSpawn:
+                _ellipseSpawn.Spawn(this);
+                break;
         }
         yield return null;
     }
@@ -130,10 +142,10 @@ public class BulletSpawnEnemy : MonoBehaviour
         Debug.Log("スポーンするぞ！");
         var bullet = _bulletPool.GetBullet();
         bullet.transform.position = new Vector2(transform.position.x, transform.position.y);
-        bullet.transform.Rotate(0, 0, rota);
+        if(isRota) bullet.transform.Rotate(0, 0, rota);
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
-        bulletScripts.BulletMoveStart(_bulletMoveType, _bulletBreakType, bulletSpeed, _bulletRotation,activeTime);
+        bulletScripts.BulletMoveStart(_bulletMoveType, _bulletBreakType, bulletSpeed,rota + 90f,_bulletRotation,activeTime,isRota);
     }
 
 
