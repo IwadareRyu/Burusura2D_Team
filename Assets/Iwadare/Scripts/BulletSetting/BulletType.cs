@@ -33,8 +33,10 @@ public enum SpawnCountType
 {
     /// <summary>一回のみ</summary>
     OneShot,
-    /// <summary>指定回数</summary>
-    Count,
+
+    /// <summary>任意発動</summary>
+    Any,
+
     /// <summary>ループ</summary>
     Loop,
 }

@@ -60,8 +60,6 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     public void Init()
     {
-        _targetPlayerMove.Init(this);
-        _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
     }
@@ -88,6 +86,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public void BulletMoveStart(BulletMoveType moveState,BulletBreakType breakType, 
         float bulletSpeed,float direction, float bulletRota = 0f,float activeTime = 5f,bool isRota = true)
     {
+        _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
         _breakType = breakType;
