@@ -7,8 +7,12 @@ using UnityEngine;
 public class BulletSpawnEnemy : MonoBehaviour
 {
     [Header("弾の設定")]
-    [Tooltip("弾のスポーン回数の大まかな設定"), Header("弾のスポーン回数の大まかな設定")]
+    [Tooltip("弾のスポーン設定"), Header("弾のスポーン設定")]
     [SerializeField] SpawnCountType _spawnCountType = SpawnCountType.Loop;
+    [Tooltip("一度に出す弾のスポーン回数"), Header("一度に出す弾のスポーン回数")]
+    [SerializeField]int _oneShotSpawnCount = 1;
+    [Tooltip("一度に出す弾ごとのスポーン感覚"), Header("一度に出す弾ごとのスポーン感覚")]
+    [SerializeField] float _oneShotSpawnCoolTime = 0.0f;
     [Tooltip("弾の動きの設定"),Header("弾の動きの設定")]
     [SerializeField] BulletMoveType _bulletMoveType;
     [Tooltip("弾のスポーン方法の設定"),Header("弾のスポーン方法の設定")]
@@ -72,7 +76,7 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (_isAttack && _isBulletSpawn)
+        if (_spawnCountType != SpawnCountType.Any &&_isAttack && _isBulletSpawn)
         {
             _currentCoolTime += Time.deltaTime;
 
@@ -93,9 +97,13 @@ public class BulletSpawnEnemy : MonoBehaviour
     }
 
     /// <summary>弾スポーンの要素を決めるメソッド</summary>
-    IEnumerator BulletSpawn()
+    public IEnumerator BulletSpawn()
     {
-        yield return StartCoroutine(SetSpawnType());
+        for (var i = 0; i < _oneShotSpawnCount; i++)
+        {
+            yield return StartCoroutine(SetSpawnType());
+            yield return new WaitForSeconds(_oneShotSpawnCoolTime);
+        }
         _currentCoolTime = 0f;
         _isBulletSpawn = true;
         if (_spawnCountType == SpawnCountType.OneShot) _isAttack = false;
