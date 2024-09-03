@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class EllipseSpawn : BulletSpawnClass
+public class EllipseSpawn :BulletSpawnClass
 {
     [Tooltip("速さの割合"), Header("速さの割合(実数)")]
     [SerializeField] float _speedDistance = 1f;

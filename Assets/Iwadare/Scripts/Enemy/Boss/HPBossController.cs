@@ -43,7 +43,7 @@ public class HPBossController : EnemyBase
         if (_action.Length <= _currentHPAction + 1) return;
         
         //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
-        if (_action[_currentHPAction + 1]._hpPersent > _currentHP)
+        if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
         {
             _currentHPAction++;
             //特殊攻撃の場合特殊攻撃に移行。

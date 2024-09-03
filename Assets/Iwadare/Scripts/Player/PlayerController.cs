@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     [SerializeField] Transform _playerSprite;
     public Transform PlayerSprite => _playerSprite;
 
+    [NonSerialized]public Rigidbody2D _playerRb;
+    [SerializeField]PhysicsMaterial2D _playerPhysicFric;
+    [SerializeField] PhysicsMaterial2D _playerPhysicNonFric;
+
+
     /// <summary>移動系の変数</summary>
     PlayerMove _moveScript;
 
@@ -32,7 +37,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     {
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
-        _moveScript.Init();
+        _playerRb = GetComponent<Rigidbody2D>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
     }
@@ -96,6 +101,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
             Debug.Log("接地");
             _targetArrowScript.ResetDirection();
             _currentJumpCount = 0;
+            _playerRb.sharedMaterial = _playerPhysicFric;
         }
 
         if(collision.tag == "Enemy")
@@ -110,6 +116,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
         {
             _isGround = false;
             _currentJumpCount = 1;
+            _playerRb.sharedMaterial = _playerPhysicNonFric;
         }
     }
 

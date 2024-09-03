@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -20,7 +18,7 @@ public class ForwardAfterSlowSpawn : BulletSpawnClass
         {
             var speedPower = (float)Math.Pow(_speedPower, i);
             bulletSpawn.InitBullet(bulletSpawn.BulletDistance, bulletSpawn.DefaultBulletSpeed * speedPower, bulletSpawn.BulletActiveTime);
-            if(_isInversion) bulletSpawn.InitBullet(bulletSpawn.BulletDistance + 180, bulletSpawn.DefaultBulletSpeed * speedPower, bulletSpawn.BulletActiveTime);
+            if (_isInversion) bulletSpawn.InitBullet(bulletSpawn.BulletDistance + 180, bulletSpawn.DefaultBulletSpeed * speedPower, bulletSpawn.BulletActiveTime);
         }
     }
 }
