@@ -62,7 +62,7 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Tooltip("_circleSpawnを使って波上に弾をスポーンさせるメソッド")]
     WaveSpawnEnemy _waveSpawnEnemy;
     [Tooltip("楕円型に弾をスポーンさせるメソッド")]
-    [SerializeField] EllipseSpawn _ellipseSpawn;
+    [SerializeField] EllipseSpawn _ellipseSpawn = new();
 
     [Tooltip("弾を回転させるか"), Header("弾を回転させるか")]
     [SerializeField]bool isRota = true;
@@ -80,12 +80,8 @@ public class BulletSpawnEnemy : MonoBehaviour
         {
             _currentCoolTime += Time.deltaTime;
 
-            // DangerousSign
-            if(_isDangerousDisplay && !_isDangerous && _currentCoolTime > _dangerousTime)
-            {
-                _isDangerous = true;
-                _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
-            }
+            // DangerousSignUpdate
+            DangerousSignUpdate(_currentCoolTime, _dangerousTime);
 
             // BulletSpawn
             if (_currentCoolTime > _spawnCoolTime)
@@ -93,6 +89,15 @@ public class BulletSpawnEnemy : MonoBehaviour
                 _isBulletSpawn = false;
                 StartCoroutine(BulletSpawn());
             }
+        }
+    }
+
+    public void DangerousSignUpdate(float currentCoolTime,float dangerousTime)
+    {
+        if (_isDangerousDisplay && !_isDangerous && currentCoolTime > dangerousTime)
+        {
+            _isDangerous = true;
+            _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
         }
     }
 
@@ -155,6 +160,4 @@ public class BulletSpawnEnemy : MonoBehaviour
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
         bulletScripts.BulletMoveStart(_bulletMoveType, _bulletBreakType, bulletSpeed,rota + 90f,_bulletRotation,activeTime,isRota);
     }
-
-
 }

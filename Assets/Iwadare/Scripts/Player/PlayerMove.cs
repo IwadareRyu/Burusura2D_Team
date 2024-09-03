@@ -5,46 +5,42 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D _playerRb;
+
     [Tooltip("x方向のSpeed")]
     [SerializeField] float _dashSpeed = 2f;
     [SerializeField] float _jumpPower = 1f;
     [SerializeField] int MaxJumpCount = 2;
-    public void Init()
-    {
-        _playerRb = GetComponent<Rigidbody2D>();
-    }
 
     public void MoveUpdate(PlayerController controller)
     {
-        Jump(controller);
+        Jump(controller,controller._playerRb);
     }
 
     public void MoveFixedUpdate(PlayerController controller)
     {
         if (!Input.GetButton("StopMove"))
         {
-            Move(controller.X);
+            Move(controller.X,controller._playerRb);
         }
     }
 
     //キャラを左右に動かす処理
-    private void Move(float x)
+    private void Move(float x,Rigidbody2D rb)
     {
-        var y = _playerRb.velocity.y;
+        var y = rb.velocity.y;
         var move = (Vector2.right * x).normalized * _dashSpeed;
         var dir = new Vector2(move.x, y);
-        _playerRb.velocity = dir;
+        rb.velocity = dir;
     }
 
     // ジャンプの処理
-    void Jump(PlayerController controller)
+    void Jump(PlayerController controller,Rigidbody2D rb)
     {
         if (Input.GetButtonDown("Jump") && controller._currentJumpCount < MaxJumpCount)
         {
             Debug.Log("ジャンプ！");
-            _playerRb.velocity = Vector2.zero;
-            _playerRb.AddForce(Vector2.up * _jumpPower,ForceMode2D.Impulse);
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.up * _jumpPower,ForceMode2D.Impulse);
             controller._currentJumpCount++;
         }
     }

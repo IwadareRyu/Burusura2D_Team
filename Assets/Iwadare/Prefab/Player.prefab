@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerAnim: {fileID: 3302535831892922202}
   _playerSprite: {fileID: 6521170067959171013}
+  _playerPhysicFric: {fileID: 6200000, guid: da65460b6eb7b2543b47c54871e42827, type: 2}
+  _playerPhysicNonFric: {fileID: 6200000, guid: 1811a5b493be8924faeaa6516419b9a3, type: 2}
   _targetArrowScript: {fileID: 4182582352382481816}
 --- !u!114 &1344201660471485145
 MonoBehaviour:
@@ -84,7 +86,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: da65460b6eb7b2543b47c54871e42827, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
