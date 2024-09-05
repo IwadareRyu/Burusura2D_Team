@@ -53,25 +53,17 @@ public class BulletSpawnEnemy : MonoBehaviour
     bool _isDangerous;
 
 
-    [Tooltip("真っ直ぐ飛ばす弾をスポーンさせるメソッド")]
-    ForwardSpawn _forwardSpawn = new();
-    [Tooltip("円状に弾をスポーンさせるメソッド")]
-    [SerializeField] CircleSpawn _circleSpawn = new();
-    [Tooltip("軌道上に速さの違う複数の弾をスポーンさせるメソッド")]
-    [SerializeField] ForwardAfterSlowSpawn _forwardAfterSlowSpawn = new();
-    [Tooltip("_circleSpawnを使って波上に弾をスポーンさせるメソッド")]
-    WaveSpawnEnemy _waveSpawnEnemy;
-    [Tooltip("楕円型に弾をスポーンさせるメソッド")]
-    [SerializeField] EllipseSpawn _ellipseSpawn = new();
+    [Tooltip("Bulletパターン一覧"), Header("Bulletパターン一覧")]
+    [SerializeField] BulletPatterns _bulletPatterns;
 
     [Tooltip("弾を回転させるか"), Header("弾を回転させるか")]
     [SerializeField]bool isRota = true;
 
     private void Start()
     {
-        _waveSpawnEnemy = GetComponent<WaveSpawnEnemy>();
+        _bulletPatterns._waveSpawnEnemy = GetComponent<WaveSpawnEnemy>();
         _dangerousTime = _spawnCoolTime - _dangerousSpawnBeforeTime;
-        _waveSpawnEnemy.Init(this);
+        _bulletPatterns._waveSpawnEnemy.Init(this);
     }
 
     private void Update()
@@ -123,25 +115,25 @@ public class BulletSpawnEnemy : MonoBehaviour
         switch (_bulletSpawnType)
         {
             case BulletSpawnType.ForwardOnceSpawn:
-                _forwardSpawn.Spawn(this);
+                _bulletPatterns._forwardSpawn.Spawn(this);
                 break;
             case BulletSpawnType.CircleSpawn:
-                _circleSpawn.Spawn(this);
+                _bulletPatterns._circleSpawn.Spawn(this);
                 break;
             case BulletSpawnType.DelayCircleSpawn:
-                StartCoroutine(_circleSpawn.DelaySpawn(this));
+                StartCoroutine(_bulletPatterns._circleSpawn.DelaySpawn(this));
                 break;
             case BulletSpawnType.WaveSpawn:
-                StartCoroutine(_waveSpawnEnemy.WaveSpawn(this, _circleSpawn));
+                StartCoroutine(_bulletPatterns._waveSpawnEnemy.WaveSpawn(this, _bulletPatterns._circleSpawn));
                 break;
             case BulletSpawnType.WaitWaveSpawn:
-                yield return StartCoroutine(_waveSpawnEnemy.WaveSpawn(this, _circleSpawn));
+                yield return StartCoroutine(_bulletPatterns._waveSpawnEnemy.WaveSpawn(this, _bulletPatterns._circleSpawn));
                 break;
             case BulletSpawnType.ForwardAfterSlowSpawn:
-                _forwardAfterSlowSpawn.Spawn(this);
+                _bulletPatterns._forwardAfterSlowSpawn.Spawn(this);
                 break;
             case BulletSpawnType.ElipseSpawn:
-                _ellipseSpawn.Spawn(this);
+                _bulletPatterns._ellipseSpawn.Spawn(this);
                 break;
         }
         yield return null;

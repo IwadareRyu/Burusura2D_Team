@@ -89,17 +89,21 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+
         _breakType = breakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
         _activeTime = activeTime + _fadeTime;
-        if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
         _currentBulletRota = _maxBulletRota = bulletRota;
         _currentBulletAngle = direction;
-        _isRota = isRota;
+        _isRota = isRota; 
+
+        if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
+
         if (!_isRota)
         {
             _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle));
         }
+
         switch (moveState)
         {
             case BulletMoveType.Forward:
