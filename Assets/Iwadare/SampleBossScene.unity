@@ -187,14 +187,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1852612883}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 4798642}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 0
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &4798644
 Transform:
@@ -276,14 +278,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 569219435}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 40053772}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &40053774
 Transform:
@@ -440,14 +444,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1677643541}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 85435590}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 0
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &85435592
 Transform:
@@ -2006,14 +2012,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1823057169}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 5
-    _speedPower: 0.5
-    _isInversion: 1
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 5
+      _speedPower: 0.5
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 654427911}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!4 &654427913
 Transform:
@@ -2185,14 +2193,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 801402293}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 5
-    _speedPower: 0.5
-    _isInversion: 1
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 5
+      _speedPower: 0.5
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 654427911}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!4 &692161668
 Transform:
@@ -2827,14 +2837,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1327964536}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 5
-    _speedPower: 0.5
-    _isInversion: 1
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 5
+      _speedPower: 0.5
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 654427911}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!4 &1029847302
 Transform:
@@ -2916,14 +2928,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 249299689}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 40053772}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &1032028377
 Transform:
@@ -4681,14 +4695,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1625792170}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 40053772}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &1484289783
 Transform:
@@ -5006,14 +5022,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1251900082}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 0.01
-    _isVerticalEllipse: 1
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 5
+      _speedPower: 0.5
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 654427911}
+    _ellipseSpawn:
+      _speedDistance: 0.01
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!4 &1592997431
 Transform:
@@ -5295,14 +5313,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 159738391}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 1625283616}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 0
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &1625283618
 Transform:
@@ -5485,14 +5505,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 1098990572}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 0.01
-    _isVerticalEllipse: 1
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 5
+      _speedPower: 0.5
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 654427911}
+    _ellipseSpawn:
+      _speedDistance: 0.01
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!4 &1666681989
 Transform:
@@ -9808,14 +9830,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 919384214}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 0.1
-    _isVerticalEllipse: 1
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 1
+    _waveSpawnEnemy: {fileID: 1784961168}
+    _ellipseSpawn:
+      _speedDistance: 0.1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 0
 --- !u!114 &1784961168
 MonoBehaviour:
@@ -10153,6 +10177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949333115}
   - component: {fileID: 1949333114}
+  - component: {fileID: 1949333117}
   - component: {fileID: 1949333116}
   m_Layer: 0
   m_Name: BossEnemy
@@ -10237,26 +10262,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHP: 10
   _hpSlider: {fileID: 1753233695}
+  _bossState: 0
+  _enemyRb: {fileID: 0}
+  _useGravity: 0
+  _stayTime: 0.5
+  _moveTime: 0.5
+  _isMove: 0
+  _isAttack: 0
+  _attackStates:
+    dashAttack:
+      _trans: []
+      _attackTime: 1
+      _attackDisTime: 0.2
   _action:
   - _hpPersent: 100
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   - _hpPersent: 80
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   - _hpPersent: 60
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   - _hpPersent: 40
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   - _hpPersent: 20
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   - _hpPersent: 0
     _specialAction: 0
-    _attackState: []
+    _attackState: 
   _currentHPAction: 0
+  _attackStates:
+    dashAttack:
+      _trans: []
+      _attackTime: 1
+      _attackDisTime: 0.2
+--- !u!50 &1949333117
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949333113}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2059426418
 GameObject:
   m_ObjectHideFlags: 0
@@ -10495,14 +10564,16 @@ MonoBehaviour:
   _dangerousDisplayEnemy: {fileID: 642124263}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
-  _forwardAfterSlowSpawn:
-    _spawnCount: 3
-    _speedPower: 0.8
-    _isInversion: 0
-  _ellipseSpawn:
-    _speedDistance: 1
-    _isVerticalEllipse: 0
-    _minPersents: 0.3
+  _bulletPatterns:
+    _forwardAfterSlowSpawn:
+      _spawnCount: 3
+      _speedPower: 0.8
+      _isInversion: 0
+    _waveSpawnEnemy: {fileID: 40053772}
+    _ellipseSpawn:
+      _speedDistance: 1
+      _isVerticalEllipse: 1
+      _minPersents: 0.3
   isRota: 1
 --- !u!4 &2091885400
 Transform:
