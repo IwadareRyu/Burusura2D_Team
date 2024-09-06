@@ -9,16 +9,22 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Header("弾の設定")]
     [Tooltip("弾のスポーン設定"), Header("弾のスポーン設定")]
     [SerializeField] SpawnCountType _spawnCountType = SpawnCountType.Loop;
+    
     [Tooltip("一度に出す弾のスポーン回数"), Header("一度に出す弾のスポーン回数")]
     [SerializeField]int _oneShotSpawnCount = 1;
+    
     [Tooltip("一度に出す弾ごとのスポーン感覚"), Header("一度に出す弾ごとのスポーン感覚")]
     [SerializeField] float _oneShotSpawnCoolTime = 0.0f;
+    
     [Tooltip("弾の動きの設定"),Header("弾の動きの設定")]
     [SerializeField] BulletMoveType _bulletMoveType;
+    
     [Tooltip("弾のスポーン方法の設定"),Header("弾のスポーン方法の設定")]
     [SerializeField] BulletSpawnType _bulletSpawnType;
+    
     [Tooltip("弾を攻撃したときの起こることの設定"), Header("弾を攻撃したときの起こることの設定")]
     [SerializeField] BulletBreakType _bulletBreakType;
+    
     [Tooltip("弾の速さ"), Header("弾の速さ")]
     [SerializeField] float _defaultBulletSpeed = 3f;
     public float DefaultBulletSpeed => _defaultBulletSpeed;
@@ -29,9 +35,11 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     [Tooltip("毎秒弾の回る角度"), Header("毎秒弾の回る角度")]
     [SerializeField] float _bulletRotation = 1f;
+    
     [Tooltip("弾と弾の間隔"), Header("弾と弾の間隔")]
     [SerializeField] float _bulletRange = 30f;
     public float BulletRange => _bulletRange;
+    
     [Tooltip("弾のスポーンし始めの場所の角度(0は真上から)"), Header("弾のスポーンし始めの場所の角度(0は真上から)")]
     public float _bulletDistance = 90f;
     public float BulletDistance => _bulletDistance;
@@ -91,6 +99,11 @@ public class BulletSpawnEnemy : MonoBehaviour
             _isDangerous = true;
             _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
         }
+    }
+
+    public void DangerousSign()
+    {
+        _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
     }
 
     /// <summary>弾スポーンの要素を決めるメソッド</summary>

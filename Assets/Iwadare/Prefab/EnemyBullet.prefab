@@ -46,11 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d039a001816302a4a95b4c3a75a6e64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotaTime: 1
-  _activeTime: 5
+  _rotaTime: 0.1
+  _maxRotaAngle: 90
   _bulletScale: 0.2
+  _fadeTime: 0.5
+  _isFade: 0
+  _hitParticle: {fileID: 1697422163780812490, guid: b0d135d3d4a69ef46bc56bda4b4cd3e3, type: 3}
   _targetPlayerMove:
     _delayLookPlayerTime: 0.2
+  _timeScale: 1
 --- !u!212 &7708505079245407300
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92,7 +96,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1655926857, guid: 0049772a1acaf4a49b69bb504ffe2669, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f3dc6ccaf04b4061a059006d96715f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

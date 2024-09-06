@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Attack2 : AttackInterface
 {
+    public void ActionReset(EnemyBase enemy)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public IEnumerator Attack(EnemyBase enemy)
     {
         throw new System.NotImplementedException();

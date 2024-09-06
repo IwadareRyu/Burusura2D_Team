@@ -11,4 +11,5 @@ public interface AttackInterface
     abstract void MoveUpdate(EnemyBase enemy);
     [Tooltip("Attack時のUpdate")]
     abstract IEnumerator Attack(EnemyBase enemy);
+    abstract void ActionReset(EnemyBase enemy);
 }
