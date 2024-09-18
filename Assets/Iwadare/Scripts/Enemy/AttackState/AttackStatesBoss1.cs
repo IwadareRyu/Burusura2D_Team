@@ -9,6 +9,6 @@ public class AttackStatesBoss1
         Attack2,
     }
     public DashAttack dashAttack = new();
-    public Attack2 at2 = new();
+    public SampleAttack at2 = new();
 
 }

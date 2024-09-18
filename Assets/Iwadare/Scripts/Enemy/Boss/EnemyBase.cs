@@ -24,6 +24,7 @@ public class EnemyBase : MonoBehaviour
 
     public bool _isMove = false;
     public bool _isAttack = false;
+    public bool _guard = false;
 
     public void BaseInit()
     {

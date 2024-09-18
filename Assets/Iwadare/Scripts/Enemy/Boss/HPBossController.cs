@@ -10,7 +10,6 @@ public class HPBossController : EnemyBase
     BossState _currentActionState = 0;
     AttackInterface _currentAction;
     Coroutine _currentAttackCoroutine;
-    bool _guard = false;
 
     [SerializeField] AttackStatesBoss1 _attackStatesBoss1 = new();
 
@@ -23,6 +22,11 @@ public class HPBossController : EnemyBase
 
 
     void Update()
+    {
+        StateUpdate();
+    }
+
+    void StateUpdate()
     {
         switch (_bossState)
         {
@@ -47,33 +51,36 @@ public class HPBossController : EnemyBase
 
     public override void HPChack()
     {
-        if (_currentHP <= 0)
+        if (_action.Length > _currentHPAction + 1)
         {
-            //死ぬ
-            Destroy(gameObject);
+            //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
+            if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
+            {
+                _bossState = BossState.NextActionState;
+                if (_currentAttackCoroutine != null)
+                {
+                    StopCoroutine(_currentAttackCoroutine);
+                    _currentAttackCoroutine = null;
+                }
+                _currentAction.ActionReset(this);
+                _currentHPAction++;
+                //特殊攻撃の場合特殊攻撃に移行。
+                if (_action[_currentHPAction]._specialAction)
+                {
+                    // 特殊攻撃
+                    SpecialAttack();
+                }
+                // 次に行動するアクションを決める。
+                ChangeAction();
+            }
         }
-
-        if (_action.Length <= _currentHPAction + 1) return;
-
-        //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
-        if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
+        else
         {
-            _bossState = BossState.NextActionState;
-            if (_currentAttackCoroutine != null)
+            if (_currentHP <= 0)
             {
-                StopCoroutine(_currentAttackCoroutine);
-                _currentAttackCoroutine = null;
+                //死ぬ
+                Destroy(gameObject);
             }
-            _currentAction.ActionReset(this);
-            _currentHPAction++;
-            //特殊攻撃の場合特殊攻撃に移行。
-            if (_action[_currentHPAction]._specialAction)
-            {
-                // 特殊攻撃
-                SpecialAttack();
-            }
-            // 次に行動するアクションを決める。
-            ChangeAction();
         }
     }
 
