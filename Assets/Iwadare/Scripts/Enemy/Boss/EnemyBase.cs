@@ -24,9 +24,15 @@ public class EnemyBase : MonoBehaviour
 
     public bool _isMove = false;
     public bool _isAttack = false;
+    public bool _guard = false;
 
-    [SerializeField] AttackStates _attackStates = new();
-    public AttackStates AttackStates => _attackStates;
+    public void BaseInit()
+    {
+        _enemyRb = GetComponent<Rigidbody2D>();
+        if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
+        _currentHP = MaxHP;
+        DisplayHP();
+    }
 
     public void AddDamage(float damage)
     {
@@ -53,19 +59,12 @@ public class EnemyBase : MonoBehaviour
         return ans % maxActionCount;
     }
 
-    public AttackInterface ChoiceAttack(AttackStates.AttackStatesList attackStates)
+    public void SpawnBulletRef(BulletSpawnEnemy spawnBulletEnemy)
     {
-        switch(attackStates)
-        {
-            case AttackStates.AttackStatesList.DashAttack:
-                return _attackStates.dashAttack;
-            case AttackStates.AttackStatesList.Attack2:
-                return _attackStates.at2;
-        }
-        return _attackStates.at2;
+        StartCoroutine(spawnBulletEnemy.BulletSpawn());
     }
 
-    void ResetState()
+    public void ResetState()
     {
         _isMove = false;
         _isAttack = false;
@@ -76,6 +75,8 @@ public class EnemyBase : MonoBehaviour
         StayState,
         MoveState,
         AttackState,
+        ChangeActionState,
+        NextActionState,
         DeathState,
     }
 }

@@ -9,25 +9,24 @@ public class HPBossController : EnemyBase
     [SerializeField] int _currentHPAction = 0;
     BossState _currentActionState = 0;
     AttackInterface _currentAction;
-    bool _guard = false;
+    Coroutine _currentAttackCoroutine;
 
-    [SerializeField] AttackStates _attackStates = new();
+    [SerializeField] AttackStatesBoss1 _attackStatesBoss1 = new();
+
 
     void Start()
     {
-        _enemyRb = GetComponent<Rigidbody2D>();
-        if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
-        _currentHP = MaxHP;
-        DisplayHP();
-        if (_action[_currentHPAction]._attackState.Length != 0)
-        {
-            // ChoiceActionでenumのAttackStateを選び、ChoiceAttackでAttackInterdfaceを継承している攻撃パターンを設定する。
-            _currentAction = ChoiceAttack(_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)]);
-        }
+        BaseInit();
+        ChangeAction();
     }
 
 
     void Update()
+    {
+        StateUpdate();
+    }
+
+    void StateUpdate()
     {
         switch (_bossState)
         {
@@ -41,39 +40,70 @@ public class HPBossController : EnemyBase
                 if (!_isAttack)
                 {
                     _isAttack = true;
-                    StartCoroutine(_currentAction.Attack(this));
+                    _currentAttackCoroutine = StartCoroutine(_currentAction.Attack(this));
                 }
+                break;
+            case BossState.ChangeActionState:
+                ChangeAction();
                 break;
         }
     }
 
     public override void HPChack()
     {
-        if (_currentHP <= 0)
+        if (_action.Length > _currentHPAction + 1)
         {
-            //死ぬ
-            Destroy(gameObject);
-        }
-
-        if (_action.Length <= _currentHPAction + 1) return;
-
-        //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
-        if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
-        {
-            _currentHPAction++;
-            //特殊攻撃の場合特殊攻撃に移行。
-            if (_action[_currentHPAction]._specialAction)
+            //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
+            if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
             {
-                // 特殊攻撃
-                SpecialAttack();
-            }
-            // 次に行動するアクションを決める。
-            if (_action[_currentHPAction]._attackState.Length != 0)
-            {
-                // ChoiceActionでenumのAttackStateを選び、ChoiceAttackでAttackInterdfaceを継承している攻撃パターンを設定する。
-                _currentAction = ChoiceAttack(_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)]);
+                _bossState = BossState.NextActionState;
+                if (_currentAttackCoroutine != null)
+                {
+                    StopCoroutine(_currentAttackCoroutine);
+                    _currentAttackCoroutine = null;
+                }
+                _currentAction.ActionReset(this);
+                _currentHPAction++;
+                //特殊攻撃の場合特殊攻撃に移行。
+                if (_action[_currentHPAction]._specialAction)
+                {
+                    // 特殊攻撃
+                    SpecialAttack();
+                }
+                // 次に行動するアクションを決める。
+                ChangeAction();
             }
         }
+        else
+        {
+            if (_currentHP <= 0)
+            {
+                //死ぬ
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    void ChangeAction()
+    {
+        if (_action[_currentHPAction]._attackState.Length != 0)
+        {
+            // ChoiceActionでenumのAttackStateを選び、ChoiceAttackでAttackInterdfaceを継承している攻撃パターンを設定する。
+            _currentAction = ChoiceAttack(_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)]);
+        }
+        _bossState = BossState.StayState;
+    }
+
+    public AttackInterface ChoiceAttack(AttackStatesBoss1.AttackStatesList attackStates)
+    {
+        switch (attackStates)
+        {
+            case AttackStatesBoss1.AttackStatesList.DashAttack:
+                return _attackStatesBoss1.dashAttack;
+            case AttackStatesBoss1.AttackStatesList.Attack2:
+                return _attackStatesBoss1.at2;
+        }
+        return _attackStatesBoss1.at2;
     }
 
     public void SpecialAttack()
@@ -100,7 +130,7 @@ public class HPBossController : EnemyBase
         public bool _specialAction;
 
         [Tooltip("攻撃のState"), Header("攻撃のState")]
-        public AttackStates.AttackStatesList[] _attackState;
+        public AttackStatesBoss1.AttackStatesList[] _attackState;
     }
 
 }

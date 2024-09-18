@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class AttackStates
+public class AttackStatesBoss1
 {
     public enum AttackStatesList
     {
@@ -9,6 +9,6 @@ public class AttackStates
         Attack2,
     }
     public DashAttack dashAttack = new();
-    public Attack2 at2 = new();
+    public SampleAttack at2 = new();
 
 }
