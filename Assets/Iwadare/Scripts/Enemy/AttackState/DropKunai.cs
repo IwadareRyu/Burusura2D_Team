@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SampleAttack : AttackInterface
+public class DropKunai : AttackInterface
 {
     public void StayUpdate(EnemyBase enemy)
     {
-        enemy._bossState = EnemyBase.BossState.MoveState;
+        throw new System.NotImplementedException();
     }
     public IEnumerator Move(EnemyBase enemy)
     {
-        yield return null;
+        throw new System.NotImplementedException();
     }
 
     public IEnumerator Attack(EnemyBase enemy)
     {
-        yield return null;
+        throw new System.NotImplementedException();
     }
-
     public void ActionReset(EnemyBase enemy)
     {
-        enemy.ResetState();
-        if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
+        throw new System.NotImplementedException();
     }
 }

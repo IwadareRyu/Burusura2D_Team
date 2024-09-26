@@ -1,22 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HPBossController : EnemyBase
 {
-
-    [Tooltip("HPに応じた行動"), Header("HPに応じた行動")]
-    [SerializeField] HPAction[] _action;
-    [SerializeField] int _currentHPAction = 0;
-    BossState _currentActionState = 0;
+    BossState _currentActionState = BossState.StayState;
     AttackInterface _currentAction;
-    Coroutine _currentAttackCoroutine;
-
-    [SerializeField] AttackStatesBoss1 _attackStatesBoss1 = new();
-
+    Coroutine _currentCoroutine;
+    ChoiceActionInterface _enemyActions;
 
     void Start()
     {
         BaseInit();
+        _enemyActions = GetComponent<ChoiceActionInterface>();
         ChangeAction();
     }
 
@@ -34,13 +28,17 @@ public class HPBossController : EnemyBase
                 _currentAction.StayUpdate(this);
                 break;
             case BossState.MoveState:
-                _currentAction.MoveUpdate(this);
+                if(!_isMove)
+                {
+                    _isMove = true;
+                    _currentCoroutine = StartCoroutine(_currentAction.Move(this));
+                }
                 break;
             case BossState.AttackState:
                 if (!_isAttack)
                 {
                     _isAttack = true;
-                    _currentAttackCoroutine = StartCoroutine(_currentAction.Attack(this));
+                    _currentCoroutine = StartCoroutine(_currentAction.Attack(this));
                 }
                 break;
             case BossState.ChangeActionState:
@@ -51,28 +49,17 @@ public class HPBossController : EnemyBase
 
     public override void HPChack()
     {
-        if (_action.Length > _currentHPAction + 1)
+        if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
         {
-            //現在の体力が次のアクションに移行する体力を下回ったら次に移行する処理
-            if (_action[_currentHPAction + 1]._hpPersent >= _currentHP / MaxHP * 100)
+            _bossState = BossState.NextActionState;
+            if (_currentCoroutine != null)
             {
-                _bossState = BossState.NextActionState;
-                if (_currentAttackCoroutine != null)
-                {
-                    StopCoroutine(_currentAttackCoroutine);
-                    _currentAttackCoroutine = null;
-                }
-                _currentAction.ActionReset(this);
-                _currentHPAction++;
-                //特殊攻撃の場合特殊攻撃に移行。
-                if (_action[_currentHPAction]._specialAction)
-                {
-                    // 特殊攻撃
-                    SpecialAttack();
-                }
-                // 次に行動するアクションを決める。
-                ChangeAction();
+                StopCoroutine(_currentCoroutine);
+                _currentCoroutine = null;
             }
+            _currentAction.ActionReset(this);
+            // 次に行動するアクションを決める。
+            ChangeAction();
         }
         else
         {
@@ -86,24 +73,9 @@ public class HPBossController : EnemyBase
 
     void ChangeAction()
     {
-        if (_action[_currentHPAction]._attackState.Length != 0)
-        {
-            // ChoiceActionでenumのAttackStateを選び、ChoiceAttackでAttackInterdfaceを継承している攻撃パターンを設定する。
-            _currentAction = ChoiceAttack(_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)]);
-        }
+        ResetState();
+        _currentAction = _enemyActions.ChoiceAttack();
         _bossState = BossState.StayState;
-    }
-
-    public AttackInterface ChoiceAttack(AttackStatesBoss1.AttackStatesList attackStates)
-    {
-        switch (attackStates)
-        {
-            case AttackStatesBoss1.AttackStatesList.DashAttack:
-                return _attackStatesBoss1.dashAttack;
-            case AttackStatesBoss1.AttackStatesList.Attack2:
-                return _attackStatesBoss1.at2;
-        }
-        return _attackStatesBoss1.at2;
     }
 
     public void SpecialAttack()
@@ -119,18 +91,6 @@ public class HPBossController : EnemyBase
         }
     }
 
-    [Serializable]
-    struct HPAction
-    {
 
-        [Tooltip("HPの％"), Header("HPの％")]
-        public float _hpPersent;
-
-        [Tooltip("特殊アクション"), Header("特殊アクション")]
-        public bool _specialAction;
-
-        [Tooltip("攻撃のState"), Header("攻撃のState")]
-        public AttackStatesBoss1.AttackStatesList[] _attackState;
-    }
 
 }
