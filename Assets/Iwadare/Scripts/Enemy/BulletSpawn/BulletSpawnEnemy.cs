@@ -15,15 +15,13 @@ public class BulletSpawnEnemy : MonoBehaviour
     
     [Tooltip("一度に出す弾ごとのスポーン感覚"), Header("一度に出す弾ごとのスポーン感覚")]
     [SerializeField] float _oneShotSpawnCoolTime = 0.0f;
-    
-    [Tooltip("弾の動きの設定"),Header("弾の動きの設定")]
-    [SerializeField] BulletMoveType _bulletMoveType;
-    
+
+
+    [Tooltip("BulletMoveに渡す変数一覧"), Header("BulletMoveに渡す変数一覧")]
+    [SerializeField] SpawnBulletMoveStruct _spawnBulletMoveStruct;
+
     [Tooltip("弾のスポーン方法の設定"),Header("弾のスポーン方法の設定")]
     [SerializeField] BulletSpawnType _bulletSpawnType;
-    
-    [Tooltip("弾を攻撃したときの起こることの設定"), Header("弾を攻撃したときの起こることの設定")]
-    [SerializeField] BulletBreakType _bulletBreakType;
     
     [Tooltip("弾の速さ"), Header("弾の速さ")]
     [SerializeField] float _defaultBulletSpeed = 3f;
@@ -32,9 +30,6 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Tooltip("弾のActiveTime"), Header("弾のActiveTime")]
     [SerializeField] float _bulletActiveTime = 5f;
     public float BulletActiveTime => _bulletActiveTime;
-
-    [Tooltip("毎秒弾の回る角度"), Header("毎秒弾の回る角度")]
-    [SerializeField] float _bulletRotation = 1f;
     
     [Tooltip("弾と弾の間隔"), Header("弾と弾の間隔")]
     [SerializeField] float _bulletRange = 30f;
@@ -63,9 +58,6 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     [Tooltip("Bulletパターン一覧"), Header("Bulletパターン一覧")]
     [SerializeField] BulletPatterns _bulletPatterns;
-
-    [Tooltip("弾を回転させるか"), Header("弾を回転させるか")]
-    [SerializeField]bool isRota = true;
 
     private void Start()
     {
@@ -160,9 +152,9 @@ public class BulletSpawnEnemy : MonoBehaviour
         Debug.Log("スポーンするぞ！");
         var bullet = _bulletPool.GetBullet();
         bullet.transform.position = new Vector2(transform.position.x, transform.position.y);
-        if(isRota) bullet.transform.Rotate(0, 0, rota);
+        if(_spawnBulletMoveStruct._isRota) bullet.transform.Rotate(0, 0, rota);
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
-        bulletScripts.BulletMoveStart(_bulletMoveType, _bulletBreakType, bulletSpeed,rota + 90f,_bulletRotation,activeTime,isRota);
+        bulletScripts.BulletMoveStart(_spawnBulletMoveStruct,bulletSpeed,rota + 90f,activeTime);
     }
 }

@@ -83,19 +83,19 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="breakType">壊れ方のState</param>
     /// <param name="bulletSpeed">弾の速さ</param>
     /// <param name="bulletRota">弾の回る角度</param>
-    public void BulletMoveStart(BulletMoveType moveState,BulletBreakType breakType, 
-        float bulletSpeed,float direction, float bulletRota = 0f,float activeTime = 5f,bool isRota = true)
+    public void BulletMoveStart(SpawnBulletMoveStruct spawnBulletMoveStruct,
+        float bulletSpeed,float direction,float activeTime = 5f)
     {
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
 
-        _breakType = breakType;
+        _breakType = spawnBulletMoveStruct._bulletBreakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
         _activeTime = activeTime + _fadeTime;
-        _currentBulletRota = _maxBulletRota = bulletRota;
+        _currentBulletRota = _maxBulletRota = spawnBulletMoveStruct._bulletRotation;
         _currentBulletAngle = direction;
-        _isRota = isRota; 
+        _isRota = spawnBulletMoveStruct._isRota;
 
         if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
 
@@ -104,7 +104,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
             _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle));
         }
 
-        switch (moveState)
+        switch (spawnBulletMoveStruct._bulletMoveType)
         {
             case BulletMoveType.Forward:
                 _currentBulletMoveClass = _forwardMove;

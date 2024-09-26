@@ -13,8 +13,6 @@ public class DashAttack : AttackInterface
     [SerializeField] float _attackTime = 1f;
     [SerializeField] float _attackDisTime = 0.2f;
     [SerializeField] BulletSpawnEnemy _bulletSpawnEnemy;
-    bool _isAttackTime = false;
-    IEnumerator _moveCoroutine;
     Tween _moveTween;
 
     public void StayUpdate(EnemyBase enemy)
@@ -28,23 +26,10 @@ public class DashAttack : AttackInterface
                 enemy._enemyRb.gravityScale = 0;
                 enemy._enemyRb.velocity = Vector2.zero;
             }
-            if(_moveCoroutine != null)_moveCoroutine = null;
             enemy._bossState = EnemyBase.BossState.MoveState;
         }
     }
 
-
-    public void MoveUpdate(EnemyBase enemy)
-    {
-        if (_moveCoroutine == null)
-        {
-            _moveCoroutine = Move(enemy);
-        }
-        else
-        {
-            _moveCoroutine.MoveNext();
-        }
-    }
 
     public IEnumerator Move(EnemyBase enemy)
     {

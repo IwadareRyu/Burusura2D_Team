@@ -51,14 +51,6 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void HPChack() { return; }
 
-    public int ChoiceAction(int maxActionCount)
-    {
-        ResetState();
-        UnityEngine.Random.InitState(DateTime.Now.Millisecond);
-        int ans = UnityEngine.Random.Range(0,100);
-        return ans % maxActionCount;
-    }
-
     public void SpawnBulletRef(BulletSpawnEnemy spawnBulletEnemy)
     {
         StartCoroutine(spawnBulletEnemy.BulletSpawn());
@@ -68,6 +60,18 @@ public class EnemyBase : MonoBehaviour
     {
         _isMove = false;
         _isAttack = false;
+    }
+
+    public void GuardMode()
+    {
+
+        _guard = true;
+    }
+
+    public void BreakGuardMode()
+    {
+
+        _guard = false;
     }
 
     public enum BossState

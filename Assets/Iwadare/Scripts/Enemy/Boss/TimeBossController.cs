@@ -1,22 +1,25 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeBossController : EnemyBase
 {
     float _elapTime;
-    
+    int _minute = 0;
     [SerializeField]TimeAction[] _action;
     int _currentActionNumber = 0;
     AttackInterface _currentAction;
-
-    [SerializeField] AttackStatesBoss1 _attackStatesBoss1 = new();
-    private Coroutine _currentAttackCoroutine;
+    [SerializeField] Text _timeText;
+    [SerializeField] YuaiActions _attackStatesBoss1 = new();
+    private Coroutine _currentCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         BaseInit();
         ChangeAction();
+        HPChangeMinite();
+        SetTime();
     }
 
     void ChangeAction()
@@ -26,13 +29,24 @@ public class TimeBossController : EnemyBase
         _bossState = BossState.StayState;
     }
 
-    public AttackInterface ChoiceAttack(AttackStatesBoss1.AttackStatesList attackStates)
+    void HPChangeMinite()
+    {
+        _minute = Mathf.Max(0,(int)_currentHP / 60);
+    }
+
+    void SetTime()
+    {
+        int setSecond = Mathf.Max(0,(int)_currentHP % 60);
+        _timeText.text = $"{_minute.ToString("00")}:{(setSecond).ToString("00")}";
+    }
+
+    public AttackInterface ChoiceAttack(AttackStatesList attackStates)
     {
         switch (attackStates)
         {
-            case AttackStatesBoss1.AttackStatesList.DashAttack:
+            case AttackStatesList.DashAttack:
                 return _attackStatesBoss1.dashAttack;
-            case AttackStatesBoss1.AttackStatesList.Attack2:
+            case AttackStatesList.Attack2:
                 return _attackStatesBoss1.at2;
         }
         return _attackStatesBoss1.at2;
@@ -41,10 +55,15 @@ public class TimeBossController : EnemyBase
     private void Update()
     {
         _currentHP -= Time.deltaTime;
+        if(_minute > 0 && _currentHP - 60 * _minute < 0) _minute--;
         _elapTime += Time.deltaTime;
         DisplayHP();
         HPChack();
+        SetTime();
+    }
 
+    private void FixedUpdate()
+    {
         StateUpdate();
     }
 
@@ -56,13 +75,17 @@ public class TimeBossController : EnemyBase
                 _currentAction.StayUpdate(this);
                 break;
             case BossState.MoveState:
-                _currentAction.MoveUpdate(this);
+                if (!_isMove)
+                {
+                    _isMove = true;
+                    _currentCoroutine = StartCoroutine(_currentAction.Move(this));
+                }
                 break;
             case BossState.AttackState:
                 if (!_isAttack)
                 {
                     _isAttack = true;
-                    _currentAttackCoroutine = StartCoroutine(_currentAction.Attack(this));
+                    _currentCoroutine = StartCoroutine(_currentAction.Attack(this));
                 }
                 break;
             case BossState.ChangeActionState:
@@ -79,10 +102,10 @@ public class TimeBossController : EnemyBase
             if (_elapTime >= _action[_currentActionNumber + 1]._hpPersent)
             {
                 _bossState = BossState.NextActionState;
-                if (_currentAttackCoroutine != null)
+                if (_currentCoroutine != null)
                 {
-                    StopCoroutine(_currentAttackCoroutine);
-                    _currentAttackCoroutine = null;
+                    StopCoroutine(_currentCoroutine);
+                    _currentCoroutine = null;
                 }
                 _currentAction.ActionReset(this);
                 _currentActionNumber++;
@@ -121,6 +144,6 @@ public class TimeBossController : EnemyBase
         public bool _specialAction;
 
         [Tooltip("攻撃のState"), Header("攻撃のState")]
-        public AttackStatesBoss1.AttackStatesList _attackState;
+        public AttackStatesList _attackState;
     }
 }
