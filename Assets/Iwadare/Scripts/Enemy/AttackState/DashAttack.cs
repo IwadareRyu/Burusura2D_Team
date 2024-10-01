@@ -10,6 +10,8 @@ public class DashAttack : AttackInterface
     [SerializeField] Transform[] _trans;
     int _currentTrans = 0;
     bool _isMove = false;
+    [SerializeField] float _stayTime = 1f;
+    [SerializeField] float _moveTime = 1f;
     [SerializeField] float _attackTime = 1f;
     [SerializeField] float _attackDisTime = 0.2f;
     [SerializeField] BulletSpawnEnemy _bulletSpawnEnemy;
@@ -18,7 +20,7 @@ public class DashAttack : AttackInterface
     public void StayUpdate(EnemyBase enemy)
     {
         _currentTime += Time.deltaTime;
-        if (_currentTime > enemy.StayTime)
+        if (_currentTime > _stayTime)
         {
             _currentTime = 0f;
             if (enemy._useGravity) 
@@ -33,7 +35,7 @@ public class DashAttack : AttackInterface
 
     public IEnumerator Move(EnemyBase enemy)
     {
-        yield return _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, enemy.MoveTime).SetLink(enemy.gameObject);
+        yield return _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _moveTime).SetLink(enemy.gameObject);
         _currentTrans++;
         enemy._bossState = EnemyBase.BossState.AttackState;
     }
@@ -44,7 +46,7 @@ public class DashAttack : AttackInterface
         for (; _currentTrans < _trans.Length; _currentTrans++)
         {
             _bulletSpawnEnemy.DangerousSign();
-            yield return new WaitForSeconds(enemy.StayTime);
+            yield return new WaitForSeconds(_stayTime);
             _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _attackTime).SetLink(enemy.gameObject);
             for (float currentAttackTime = 0; currentAttackTime < _attackTime; currentAttackTime += Time.deltaTime)
             {
@@ -67,12 +69,18 @@ public class DashAttack : AttackInterface
 
     public void ActionReset(EnemyBase enemy)
     {
-        if (_moveTween.IsPlaying())
+        if (_moveTween.IsActive())
         {
             _moveTween.Kill(false);
         }
         enemy.ResetState();
         _currentTrans = 0;
         if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
+        _bulletSpawnEnemy.ResetBullet();
+    }
+
+    public void Init()
+    {
+        return;
     }
 }

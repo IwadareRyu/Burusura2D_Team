@@ -16,9 +16,9 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Tooltip("一度に出す弾ごとのスポーン感覚"), Header("一度に出す弾ごとのスポーン感覚")]
     [SerializeField] float _oneShotSpawnCoolTime = 0.0f;
 
-
     [Tooltip("BulletMoveに渡す変数一覧"), Header("BulletMoveに渡す変数一覧")]
     [SerializeField] SpawnBulletMoveStruct _spawnBulletMoveStruct;
+    public SpawnBulletMoveStruct SpawnBulletMoveStruct => _spawnBulletMoveStruct;
 
     [Tooltip("弾のスポーン方法の設定"),Header("弾のスポーン方法の設定")]
     [SerializeField] BulletSpawnType _bulletSpawnType;
@@ -58,6 +58,13 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     [Tooltip("Bulletパターン一覧"), Header("Bulletパターン一覧")]
     [SerializeField] BulletPatterns _bulletPatterns;
+
+
+    [Tooltip("手動で弾を動かす変数"), Header("手動で弾を動かす変数")]
+    [SerializeField] bool _isManualMove = false;
+    public bool IsManualMove => _isManualMove;
+    public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
+    
 
     private void Start()
     {
@@ -155,6 +162,25 @@ public class BulletSpawnEnemy : MonoBehaviour
         if(_spawnBulletMoveStruct._isRota) bullet.transform.Rotate(0, 0, rota);
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
-        bulletScripts.BulletMoveStart(_spawnBulletMoveStruct,bulletSpeed,rota + 90f,activeTime);
+        bulletScripts.BulletMoveStart(this,bulletSpeed,rota,activeTime);
     }
+
+    public void MoveBullet()
+    {
+        if(_moveBulletList.Count != 0)
+        {
+            foreach(var bullet in _moveBulletList)
+            {
+                bullet._isAttackTime = true;
+            }
+        }
+    }
+
+    public void ResetBullet()
+    {
+        while(_moveBulletList.Count != 0)
+        {
+            _moveBulletList[0].Reset();
+        }
+    } 
 }

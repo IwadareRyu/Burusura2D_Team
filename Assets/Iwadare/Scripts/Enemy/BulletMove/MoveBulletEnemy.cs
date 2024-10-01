@@ -31,7 +31,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public float BulletScale => _bulletScale;
 
     BulletBreakType _breakType;
-    bool _isAttackTime = false;
+    public bool _isAttackTime = false;
+    public bool _isReset = false;
 
     [Tooltip("フェードの時間"), Header("フェードの時間")]
     [SerializeField] float _fadeTime = 1f;
@@ -41,7 +42,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     SpriteRenderer _mySpriteRenderer;
 
-    [SerializeField] public ParticleSystem _hitParticle;
+    public ParticleSystem _hitParticle;
 
     [Tooltip("まっすぐ飛ぶ弾のクラス")]
     ForwardMove _forwardMove = new();
@@ -53,6 +54,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     [SerializeField] DelayTargetPlayerMove _targetPlayerMove = new();
 
     BulletMoveClass _currentBulletMoveClass;
+
+    List<MoveBulletEnemy> _bulletListRef;
 
     public float _timeScale = 1f;
 
@@ -83,19 +86,19 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="breakType">壊れ方のState</param>
     /// <param name="bulletSpeed">弾の速さ</param>
     /// <param name="bulletRota">弾の回る角度</param>
-    public void BulletMoveStart(SpawnBulletMoveStruct spawnBulletMoveStruct,
+    public void BulletMoveStart(BulletSpawnEnemy spawnPoint,
         float bulletSpeed,float direction,float activeTime = 5f)
     {
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
 
-        _breakType = spawnBulletMoveStruct._bulletBreakType;
+        _breakType = spawnPoint.SpawnBulletMoveStruct._bulletBreakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
         _activeTime = activeTime + _fadeTime;
-        _currentBulletRota = _maxBulletRota = spawnBulletMoveStruct._bulletRotation;
+        _currentBulletRota = _maxBulletRota = spawnPoint.SpawnBulletMoveStruct._bulletRotation;
         _currentBulletAngle = direction;
-        _isRota = spawnBulletMoveStruct._isRota;
+        _isRota = spawnPoint.SpawnBulletMoveStruct._isRota;
 
         if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
 
@@ -104,7 +107,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
             _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle));
         }
 
-        switch (spawnBulletMoveStruct._bulletMoveType)
+        switch (spawnPoint.SpawnBulletMoveStruct._bulletMoveType)
         {
             case BulletMoveType.Forward:
                 _currentBulletMoveClass = _forwardMove;
@@ -124,7 +127,12 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
                 _currentBulletMoveClass.BulletMove();
                 break;
         }
-        _isAttackTime = true;
+        _bulletListRef = spawnPoint._moveBulletList;
+        _bulletListRef.Add(this);
+        if (!spawnPoint.IsManualMove)
+        {
+            _isAttackTime = true;
+        }
     }
     #endregion
 
@@ -134,11 +142,11 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     {
         if (_isAttackTime)
         {
-            _isAttackTime = _currentBulletMoveClass.BulletMoveUpdate(this,_currentBulletSpeed,_currentBulletRota);
-        }
-        else if(_currentBulletMoveClass != null)
-        {
-            Reset();
+            _isReset = _currentBulletMoveClass.BulletMoveUpdate(this,_currentBulletSpeed,_currentBulletRota);
+            if (_isReset == false)
+            {
+                Reset();
+            }
         }
     }
 
@@ -267,6 +275,12 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     // <summary>リセット</summary>
     public void Reset()
     {
+        _isAttackTime = false;
+        if(_bulletListRef != null)
+        {
+            _bulletListRef.Remove(this);
+            _bulletListRef = null;
+        }
         //参照MoveClassのリセット
         _currentBulletMoveClass = null;
         //弾の回転処理のリセット

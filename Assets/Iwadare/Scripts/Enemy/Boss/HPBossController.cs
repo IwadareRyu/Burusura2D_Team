@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class HPBossController : EnemyBase
 {
     BossState _currentActionState = BossState.StayState;
     AttackInterface _currentAction;
     Coroutine _currentCoroutine;
+    [SerializeField] Image _timePanel;
     ChoiceActionInterface _enemyActions;
 
     void Start()
@@ -12,6 +14,7 @@ public class HPBossController : EnemyBase
         BaseInit();
         _enemyActions = GetComponent<ChoiceActionInterface>();
         ChangeAction();
+        if(_timePanel) _timePanel.gameObject.SetActive(false);
     }
 
 
@@ -28,7 +31,7 @@ public class HPBossController : EnemyBase
                 _currentAction.StayUpdate(this);
                 break;
             case BossState.MoveState:
-                if(!_isMove)
+                if (!_isMove)
                 {
                     _isMove = true;
                     _currentCoroutine = StartCoroutine(_currentAction.Move(this));
@@ -61,13 +64,10 @@ public class HPBossController : EnemyBase
             // 次に行動するアクションを決める。
             ChangeAction();
         }
-        else
+        if (_currentHP <= 0)
         {
-            if (_currentHP <= 0)
-            {
-                //死ぬ
-                Destroy(gameObject);
-            }
+            //死ぬ
+            Destroy(gameObject);
         }
     }
 
@@ -90,7 +90,4 @@ public class HPBossController : EnemyBase
             AddDamage(1);
         }
     }
-
-
-
 }

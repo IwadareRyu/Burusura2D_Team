@@ -2,6 +2,6 @@
 {
     public void Spawn(BulletSpawnEnemy bulletSpawn)
     {
-        bulletSpawn.InitBullet(90, bulletSpawn.DefaultBulletSpeed, bulletSpawn.BulletActiveTime);
+        bulletSpawn.InitBullet(bulletSpawn.BulletDistance, bulletSpawn.DefaultBulletSpeed, bulletSpawn.BulletActiveTime);
     }
 }
