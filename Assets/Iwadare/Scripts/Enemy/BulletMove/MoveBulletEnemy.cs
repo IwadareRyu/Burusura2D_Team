@@ -18,6 +18,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     [Tooltip("弾を撃つ方向")]
     Vector3 _currentDirection = Vector3.zero;
+    public Vector3 CurrentDirection => _currentDirection;
     float _currentBulletAngle = 0f;
 
 
@@ -39,6 +40,9 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public float FadeTime => _fadeTime;
     float defaultBulleetAlpha = 1f;
     public bool _isFade = false;
+    
+    bool _isRay = false;
+    public bool IsRay => _isRay;
 
     SpriteRenderer _mySpriteRenderer;
 
@@ -53,6 +57,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     [Tooltip("一定時間たったら追尾する弾のクラス")]
     [SerializeField] DelayTargetPlayerMove _targetPlayerMove = new();
 
+    DelayFastLazer _delayFastLazer = new();
+
     BulletMoveClass _currentBulletMoveClass;
 
     List<MoveBulletEnemy> _bulletListRef;
@@ -60,6 +66,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public float _timeScale = 1f;
 
     bool _isRota;
+    public bool IsRota => _isRota;
 
     public void Init()
     {
@@ -124,6 +131,10 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
                 break;
             case BulletMoveType.DelayTargetPlayer:
                 _currentBulletMoveClass = _targetPlayerMove;
+                _currentBulletMoveClass.BulletMove();
+                break;
+            case BulletMoveType.DelayFastLazer:
+                _currentBulletMoveClass = _delayFastLazer;
                 _currentBulletMoveClass.BulletMove();
                 break;
         }
@@ -270,6 +281,30 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         if(_fadeTime != 0) color.a = currentFadeTime / _fadeTime;
         else color.a = _fadeTime;
         _mySpriteRenderer.color = color;
+    }
+
+    public Vector3 RayCatch()
+    {
+        RaycastHit2D[] ray;
+        if (_isRota)
+        {
+            ray = Physics2D.RaycastAll(transform.position, transform.up);
+        }
+        else
+        {
+            ray = Physics2D.RaycastAll(transform.position, _currentDirection);
+        }
+        Vector3 hitPoint = transform.position;
+        foreach(var hit in ray)
+        {
+            if(hit.collider.tag == "Ground")
+            {
+                hitPoint = hit.point;
+                break;
+            }
+        }
+        _isRay = true;
+        return hitPoint;
     }
 
     // <summary>リセット</summary>

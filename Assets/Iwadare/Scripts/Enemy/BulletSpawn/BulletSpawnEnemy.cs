@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,7 +45,6 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     [Header("弾のプール")]
     [SerializeField] BulletPoolActive _bulletPool;
-    [SerializeField] bool _isAttack;
     [SerializeField] DangerousDisplayEnemy _dangerousDisplayEnemy;
     bool _isBulletSpawn = true;
 
@@ -63,7 +63,8 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Tooltip("手動で弾を動かす変数"), Header("手動で弾を動かす変数")]
     [SerializeField] bool _isManualMove = false;
     public bool IsManualMove => _isManualMove;
-    public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
+    [NonSerialized]public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
+    
     
 
     private void Start()
@@ -75,7 +76,7 @@ public class BulletSpawnEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (_spawnCountType != SpawnCountType.Any &&_isAttack && _isBulletSpawn)
+        if (_spawnCountType != SpawnCountType.Any && _isBulletSpawn)
         {
             _currentCoolTime += Time.deltaTime;
 
@@ -115,7 +116,7 @@ public class BulletSpawnEnemy : MonoBehaviour
         }
         _currentCoolTime = 0f;
         _isBulletSpawn = true;
-        if (_spawnCountType == SpawnCountType.OneShot) _isAttack = false;
+        if (_spawnCountType == SpawnCountType.OneShot) _isBulletSpawn = false;
         if (_isDangerous) _isDangerous = false;
         yield return null;
     }

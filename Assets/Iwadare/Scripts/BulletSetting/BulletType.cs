@@ -14,6 +14,7 @@ public enum BulletMoveType
     TargetPlayer,
     DelayTargetPlayer,
     Rotate,
+    DelayFastLazer
 }
 
 /// <summary>Bulletのスポーン方法を決めるState</summary>

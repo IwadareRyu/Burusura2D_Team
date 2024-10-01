@@ -46,24 +46,24 @@ public class LineTest : MonoBehaviour
 
     private void Update()
     {
-        _currentTime += Time.deltaTime;
-        _persent = _currentTime / _lineTime;
-        if (_lineTime > _currentTime)
-        {
-            if (_isVertical)
-            {
-                LineUpdateVertical(_point0 + _disPoint * _persent);
-            }
-            else
-            {
-                LineUpdateHorizontal(_lineRange * _persent);
-            }
-        }
-        else if (!_isTime)
-        {
-            _isTime = true;
-            StartCoroutine(ShotBullet());
-        }
+        //_currentTime += Time.deltaTime;
+        //_persent = _currentTime / _lineTime;
+        //if (_lineTime > _currentTime)
+        //{
+        //    if (_isVertical)
+        //    {
+        //        LineUpdateVertical(_point0 + _disPoint * _persent);
+        //    }
+        //    else
+        //    {
+        //        LineUpdateHorizontal(_lineRange * _persent);
+        //    }
+        //}
+        //else if (!_isTime)
+        //{
+        //    _isTime = true;
+        //    StartCoroutine(ShotBullet());
+        //}
     }
 
     void LineUpdateHorizontal(float timePersent)
