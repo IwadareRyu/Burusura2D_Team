@@ -146,4 +146,10 @@ public class TimeBossController : EnemyBase
         [Tooltip("攻撃のState"), Header("攻撃のState")]
         public AttackStatesList _attackState;
     }
+
+    public enum AttackStatesList
+    {
+        DashAttack,
+        Attack2,
+    }
 }
