@@ -8,6 +8,11 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
     [SerializeField] YuaiActionStruct[] _action;
     [SerializeField] int _currentHPAction = 0;
 
+    void start()
+    {
+        _yuaiActions.dropKunai.Init();
+    }
+
     public AttackInterface ChoiceAttack()
     {
         switch (_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)])
@@ -16,6 +21,8 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
                 return _yuaiActions.dashAttack;
             case AttackStatesList.Attack2:
                 return _yuaiActions.at2;
+            case AttackStatesList.DropKunai:
+                return _yuaiActions.dropKunai;
         }
         return _yuaiActions.at2;
     }
@@ -52,4 +59,12 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
         [Tooltip("攻撃のState"), Header("攻撃のState")]
         public AttackStatesList[] _attackState;
     }
+
+    public enum AttackStatesList
+    {
+        DashAttack,
+        Attack2,
+        DropKunai,
+    }
+        
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public interface AttackInterface
 {
 
+    abstract void Init();
+
     [Tooltip("Stay時のUpdate")]
     abstract void StayUpdate(EnemyBase enemy);
     [Tooltip("Move時のUpdate")]

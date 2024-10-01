@@ -23,4 +23,9 @@ public class SampleAttack : AttackInterface
         enemy.ResetState();
         if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
     }
+
+    public void Init()
+    {
+        return;
+    }
 }
