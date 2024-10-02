@@ -291,7 +291,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -383,7 +383,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -475,7 +475,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -1079,7 +1079,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 15dc4eb01dbeea343b3b8dfcdeb10bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -1854,7 +1854,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -1946,7 +1946,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -2240,7 +2240,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -2648,16 +2648,7 @@ MonoBehaviour:
       _attackTime: 1
       _attackDisTime: 0.2
       _bulletSpawnEnemy: {fileID: 640312088}
-    dropKunai:
-      _stayTime: 1
-      _moveTime: 3
-      _kunaiGimmick: {fileID: 0}
-      _bulletSpawnEnemyOne: []
-      _bulletSpawnEnemyTwo: []
-      _bulletSpawnEnemyThree: []
-      _bossDammys: []
-      _dummyMovePoint: {fileID: 0}
-      _dummyDafaultPoint: {fileID: 0}
+    dropKunai: {fileID: 0}
 --- !u!50 &484000787
 Rigidbody2D:
   serializedVersion: 4
@@ -3069,7 +3060,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -3161,7 +3152,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -3412,7 +3403,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -3633,7 +3624,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 15dc4eb01dbeea343b3b8dfcdeb10bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3949,6 +3940,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &604650324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604650326}
+  - component: {fileID: 604650325}
+  m_Layer: 0
+  m_Name: ShotPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &604650325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604650324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a793a415e1475a549a6b37b5719adfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolObj: {fileID: 1315018216035348002, guid: 2e8364040af425941bb8a1364d836581, type: 3}
+  _maxCount: 50
+  Parent: {fileID: 604650324}
+--- !u!4 &604650326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604650324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.5, y: 2.7218583, z: -9.708176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606938314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,7 +4054,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -4676,7 +4714,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -5051,7 +5089,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -5291,7 +5329,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -5743,7 +5781,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -5972,7 +6010,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -6754,7 +6792,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -6947,7 +6985,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -7039,7 +7077,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -7735,6 +7773,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 108784442}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!212 &1142242243 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 831302166432696995, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+  m_PrefabInstance: {fileID: 1598175477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1144645033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7829,7 +7872,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 15dc4eb01dbeea343b3b8dfcdeb10bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8322,7 +8365,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -8504,6 +8547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307267370}
+  - component: {fileID: 1307267371}
   m_Layer: 0
   m_Name: KunaiDrop
   m_TagString: Untagged
@@ -8535,6 +8579,72 @@ Transform:
   - {fileID: 66685078}
   m_Father: {fileID: 1105986267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1307267371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307267369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282dc96cd0d1d2f4eba3abb067d60187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stayTime: 1
+  _moveTime: 1
+  _disAttackTime: 0.1
+  _attackCoolTime: 2
+  _kunaiGimmick: {fileID: 1307267369}
+  _bulletSpawnEnemyOne:
+  - {fileID: 2069589897}
+  - {fileID: 509941156}
+  - {fileID: 1281208604}
+  - {fileID: 820121171}
+  - {fileID: 703110830}
+  - {fileID: 6326390}
+  - {fileID: 1383958776}
+  - {fileID: 295726344}
+  - {fileID: 1679077320}
+  - {fileID: 1316753563}
+  _bulletSpawnEnemyTwo:
+  - {fileID: 2000818314}
+  - {fileID: 2128785142}
+  - {fileID: 2015475836}
+  - {fileID: 32146613}
+  - {fileID: 1605586945}
+  - {fileID: 851628891}
+  - {fileID: 305464176}
+  - {fileID: 547051148}
+  - {fileID: 523999984}
+  - {fileID: 2134559020}
+  _bulletSpawnEnemyThree:
+  - {fileID: 1416196877}
+  - {fileID: 606938317}
+  - {fileID: 1012242756}
+  - {fileID: 1667572481}
+  - {fileID: 779670924}
+  - {fileID: 349569371}
+  - {fileID: 673949792}
+  - {fileID: 1633578346}
+  - {fileID: 1018296186}
+  - {fileID: 158939201}
+  - {fileID: 1911850943}
+  - {fileID: 381968005}
+  - {fileID: 1462069633}
+  - {fileID: 1661543207}
+  - {fileID: 1389012964}
+  - {fileID: 1408048767}
+  - {fileID: 1912336043}
+  - {fileID: 2024949562}
+  - {fileID: 44930640}
+  - {fileID: 971423488}
+  _bossDammys:
+  - {fileID: 1144645035}
+  - {fileID: 575864093}
+  - {fileID: 122122833}
+  _dummyMovePoint: {fileID: 1554754953}
+  _dummyDafaultPoint: {fileID: 66685078}
 --- !u!1 &1316753560
 GameObject:
   m_ObjectHideFlags: 0
@@ -8602,7 +8712,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -8896,7 +9006,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -8988,7 +9098,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -9080,7 +9190,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -9172,7 +9282,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -9387,7 +9497,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 110
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -10041,7 +10151,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -10534,6 +10644,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 831302166432696995, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: _shotPool
+      value: 
+      objectReference: {fileID: 604650325}
     - target: {fileID: 3473792543063635512, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: m_Name
       value: EnemyBullet (1)
@@ -10890,6 +11008,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 831302166432696995, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1655926857, guid: 0049772a1acaf4a49b69bb504ffe2669, type: 3}
+    - target: {fileID: 831302166432696995, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: _isFade
       value: 0
@@ -10903,9 +11029,17 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: _shotPool
+      value: 
+      objectReference: {fileID: 604650325}
+    - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: _hitParticle
       value: 
       objectReference: {fileID: 1697422163780812490, guid: b0d135d3d4a69ef46bc56bda4b4cd3e3, type: 3}
+    - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: _mySpriteRenderer
+      value: 
+      objectReference: {fileID: 1142242243}
     - target: {fileID: 3473792543063635512, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: m_Name
       value: EnemyBullet
@@ -10990,7 +11124,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -11205,7 +11339,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -11297,7 +11431,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -11582,7 +11716,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -11717,7 +11851,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 110
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -15609,7 +15743,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -16594,59 +16728,7 @@ MonoBehaviour:
       _attackTime: 1
       _attackDisTime: 0.2
       _bulletSpawnEnemy: {fileID: 1514252851}
-    dropKunai:
-      _stayTime: 1
-      _moveTime: 1.5
-      _kunaiGimmick: {fileID: 1307267369}
-      _bulletSpawnEnemyOne:
-      - {fileID: 2069589897}
-      - {fileID: 509941156}
-      - {fileID: 1281208604}
-      - {fileID: 820121171}
-      - {fileID: 703110830}
-      - {fileID: 6326390}
-      - {fileID: 1383958776}
-      - {fileID: 295726344}
-      - {fileID: 1679077320}
-      - {fileID: 1316753563}
-      _bulletSpawnEnemyTwo:
-      - {fileID: 2000818314}
-      - {fileID: 2128785142}
-      - {fileID: 2015475836}
-      - {fileID: 32146613}
-      - {fileID: 1605586945}
-      - {fileID: 851628891}
-      - {fileID: 305464176}
-      - {fileID: 547051148}
-      - {fileID: 523999984}
-      - {fileID: 2134559020}
-      _bulletSpawnEnemyThree:
-      - {fileID: 1416196877}
-      - {fileID: 606938317}
-      - {fileID: 1012242756}
-      - {fileID: 1667572481}
-      - {fileID: 779670924}
-      - {fileID: 349569371}
-      - {fileID: 673949792}
-      - {fileID: 1633578346}
-      - {fileID: 1018296186}
-      - {fileID: 158939201}
-      - {fileID: 1911850943}
-      - {fileID: 381968005}
-      - {fileID: 1462069633}
-      - {fileID: 1661543207}
-      - {fileID: 1389012964}
-      - {fileID: 1408048767}
-      - {fileID: 1912336043}
-      - {fileID: 2024949562}
-      - {fileID: 44930640}
-      - {fileID: 971423488}
-      _bossDammys:
-      - {fileID: 1144645035}
-      - {fileID: 575864093}
-      - {fileID: 122122833}
-      _dummyMovePoint: {fileID: 1554754953}
-      _dummyDafaultPoint: {fileID: 66685078}
+    dropKunai: {fileID: 1307267371}
   _action:
   - _hpPersent: 100
     _specialAction: 0
@@ -17041,7 +17123,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -17133,7 +17215,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -17415,16 +17497,7 @@ MonoBehaviour:
       _attackTime: 1
       _attackDisTime: 0.2
       _bulletSpawnEnemy: {fileID: 1784961167}
-    dropKunai:
-      _stayTime: 1
-      _moveTime: 3
-      _kunaiGimmick: {fileID: 0}
-      _bulletSpawnEnemyOne: []
-      _bulletSpawnEnemyTwo: []
-      _bulletSpawnEnemyThree: []
-      _bossDammys: []
-      _dummyMovePoint: {fileID: 0}
-      _dummyDafaultPoint: {fileID: 0}
+    dropKunai: {fileID: 0}
   _action:
   - _hpPersent: 100
     _specialAction: 0
@@ -17613,7 +17686,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -17781,7 +17854,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -17873,7 +17946,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 1
     _bulletRotation: 0
     _isRota: 1
@@ -18442,7 +18515,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -18640,7 +18713,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -18732,7 +18805,7 @@ MonoBehaviour:
   _oneShotSpawnCount: 1
   _oneShotSpawnCoolTime: 0
   _spawnBulletMoveStruct:
-    _bulletMoveType: 0
+    _bulletMoveType: 4
     _bulletBreakType: 0
     _bulletRotation: 0
     _isRota: 1
@@ -18818,71 +18891,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e141d440bb7092b48a9cde65d2603a73, type: 3}
---- !u!1001 &3411106267857651741
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1315018216035348002, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_Name
-      value: Shot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1315018216035348002, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2807883832965358842, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: _isVertical
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413637555035408173, guid: 2e8364040af425941bb8a1364d836581, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2e8364040af425941bb8a1364d836581, type: 3}
 --- !u!4 &5335921259668238798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1553328957981820917, guid: 709f3848e5b673e409f57b7ff5ca0d6c, type: 3}
@@ -19115,6 +19123,7 @@ SceneRoots:
   - {fileID: 1141339385}
   - {fileID: 1296470705}
   - {fileID: 758648129}
+  - {fileID: 604650326}
   - {fileID: 1598175477}
   - {fileID: 1585112807}
   - {fileID: 108784441}
@@ -19131,5 +19140,4 @@ SceneRoots:
   - {fileID: 2059426421}
   - {fileID: 1191721137}
   - {fileID: 120961620037320972}
-  - {fileID: 3411106267857651741}
   - {fileID: 1105986267}

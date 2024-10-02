@@ -5075,7 +5075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _point0: {x: 5, y: 4, z: 0}
   _point1: {x: -5, y: -4, z: 0}
-  _lineRange: 0.8
+  _lineRange: 0.5
   _lineTime: 1
   _shotTime: 0.7
   _shotRange: 0.2
@@ -5170,7 +5170,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.5428543
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -10193,8 +10193,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.03838705
-        value: 1
+        time: 0
+        value: 0.5333328
         inSlope: 0
         outSlope: 0
         tangentMode: 0

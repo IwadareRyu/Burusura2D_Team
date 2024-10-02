@@ -10,7 +10,7 @@ public class RotationMove : BulletMoveClass
 
     public override bool BulletMoveUpdate(MoveBulletEnemy bulletMove,float bulletSpeed,float bulletRota)
     {
-        _currentTime += Time.deltaTime * bulletMove._timeScale;
+        _currentTime += Time.deltaTime * bulletMove.TimeScale;
         bulletMove.Rotation(bulletRota);
         bulletMove.Move(bulletSpeed);
 

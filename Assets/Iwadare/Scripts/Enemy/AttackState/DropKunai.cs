@@ -4,11 +4,13 @@ using System.Collections;
 using UnityEngine;
 
 [Serializable]
-public class DropKunai : AttackInterface
+public class DropKunai : MonoBehaviour,AttackInterface
 {
     float _currentTime = 0f;
     [SerializeField] float _stayTime = 1f;
     [SerializeField] float _moveTime = 3f;
+    [SerializeField] float _disAttackTime = 0.1f;
+    [SerializeField] float _attackCoolTime = 2f;
     [SerializeField] GameObject _kunaiGimmick;
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyOne;
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyTwo;
@@ -66,12 +68,36 @@ public class DropKunai : AttackInterface
 
     public IEnumerator Attack(EnemyBase enemy)
     {
-        yield return null;
+        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne));
+        yield return new WaitForSeconds(_attackCoolTime);
+        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo));
+        yield return new WaitForSeconds(_attackCoolTime);
+        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyThree));
+        yield return new WaitForSeconds(_attackCoolTime);
+        Reset();
+        enemy._bossState = EnemyBase.BossState.ChangeActionState;
+
+    }
+
+    public IEnumerator MoveBullets(BulletSpawnEnemy[] bulletSpawns)
+    {
+        foreach (var spawnPoint in bulletSpawns)
+        {
+            spawnPoint.MoveBullet();
+            yield return new WaitForSeconds(_disAttackTime);
+        }
     }
 
     public void Reset()
     {
-
+        foreach (var dummyEnemy in _bossDammys)
+        {
+            var pos = dummyEnemy.transform.position;
+            pos.x = _dummyDafaultPoint.position.x;
+            dummyEnemy.transform.position = pos;
+        }
+        _currentTime = 0;
+        _kunaiGimmick.SetActive(false);
     }
 
     public void ActionReset(EnemyBase enemy)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     [Tooltip("弾の回転")]
     float _maxBulletRota;
     float _currentBulletRota;
-    [SerializeField] float _rotaTime = 0.1f;
+    [SerializeField]float _rotaTime = 0.1f;
     [SerializeField] float _maxRotaAngle = 90f;
     float _currentRotaAngle = 0f;
 
@@ -32,21 +33,26 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public float BulletScale => _bulletScale;
 
     BulletBreakType _breakType;
-    public bool _isAttackTime = false;
-    public bool _isReset = false;
+    [NonSerialized]public bool _isAttackTime = false;
+    [NonSerialized]public bool _isReset = false;
 
     [Tooltip("フェードの時間"), Header("フェードの時間")]
     [SerializeField] float _fadeTime = 1f;
     public float FadeTime => _fadeTime;
     float defaultBulleetAlpha = 1f;
-    public bool _isFade = false;
+    [NonSerialized] public bool _isFade = false;
     
     bool _isRay = false;
     public bool IsRay => _isRay;
 
-    SpriteRenderer _mySpriteRenderer;
+    [SerializeField]SpriteRenderer _mySpriteRenderer;
 
-    public ParticleSystem _hitParticle;
+    [SerializeField] ParticleSystem _hitParticle;
+    public ParticleSystem HitParticle => _hitParticle;
+
+    [SerializeField] BulletPoolActive _shotPool;
+    ShotLine _currentShotLine;
+    public ShotLine CurrentShotLine => _currentShotLine;
 
     [Tooltip("まっすぐ飛ぶ弾のクラス")]
     ForwardMove _forwardMove = new();
@@ -63,7 +69,8 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     List<MoveBulletEnemy> _bulletListRef;
 
-    public float _timeScale = 1f;
+    float _timeScale = 1f;
+    public float TimeScale => _timeScale;
 
     bool _isRota;
     public bool IsRota => _isRota;
@@ -89,14 +96,9 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
     #region 弾の種類
     /// <summary>弾が動くときの初期化</summary>
-    /// <param name="moveState">動き方のState</param>
-    /// <param name="breakType">壊れ方のState</param>
-    /// <param name="bulletSpeed">弾の速さ</param>
-    /// <param name="bulletRota">弾の回る角度</param>
     public void BulletMoveStart(BulletSpawnEnemy spawnPoint,
         float bulletSpeed,float direction,float activeTime = 5f)
     {
-        _mySpriteRenderer = GetComponent<SpriteRenderer>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
 
@@ -303,8 +305,37 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
                 break;
             }
         }
+        _currentShotLine = _shotPool.GetBullet().GetComponent<ShotLine>();
+        if (_currentShotLine != null)
+        {
+            _currentShotLine.SetLine(transform.position,hitPoint);
+        }
         _isRay = true;
         return hitPoint;
+    }
+
+    public void AttackRay()
+    {
+        RaycastHit2D[] hitRays;
+        _currentShotLine.ShotBulletRef();
+        if (_isRota)
+        {
+            hitRays = Physics2D.RaycastAll(transform.position, transform.up);
+        }
+        else
+        {
+            hitRays = Physics2D.RaycastAll(transform.position, _currentDirection);
+        }
+        foreach (var hit in hitRays)
+        {
+            if(hit.transform.TryGetComponent<PlayerController>(out var player))
+            {
+                if (_hitParticle) Instantiate(_hitParticle, player.transform.position, Quaternion.identity);
+                break;
+            }
+        }
+        _currentShotLine.ShotParticle();
+        _isRay = false;
     }
 
     // <summary>リセット</summary>
