@@ -133,14 +133,12 @@ MonoBehaviour:
   _rotaTime: 0.1
   _maxRotaAngle: 90
   _bulletScale: 0.2
-  _isAttackTime: 0
-  _isReset: 0
   _fadeTime: 0.5
-  _isFade: 0
+  _mySpriteRenderer: {fileID: 831302166432696995}
   _hitParticle: {fileID: 1697422163780812490, guid: b0d135d3d4a69ef46bc56bda4b4cd3e3, type: 3}
+  _shotPool: {fileID: 0}
   _targetPlayerMove:
     _delayLookPlayerTime: 0.2
-  _timeScale: 1
 --- !u!58 &8744686359379972116
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class LineTest : MonoBehaviour
+public class ShotLine : MonoBehaviour
 {
     [SerializeField] Vector3 _point0;
     [SerializeField] Vector3 _point1;
@@ -19,8 +19,11 @@ public class LineTest : MonoBehaviour
     [SerializeField] LineRenderer _shotLine;
     [SerializeField] ParticleSystem _shotBulletParticle;
     [SerializeField] ParticleSystem _shotEffectParticle;
-    private void Start()
+    
+    public void SetLine(Vector3 startPos,Vector3 endPos)
     {
+        _point0 = startPos;
+        _point1 = endPos;
         //_lineForwardの初期設定
         _lineForward.SetPosition(0, _point0);
         if (_isVertical)
@@ -66,6 +69,18 @@ public class LineTest : MonoBehaviour
         //}
     }
 
+    public void LineUpdate(float persent)
+    {
+        if (_isVertical)
+        {
+            LineUpdateVertical(_point0 + _disPoint * persent);
+        }
+        else
+        {
+            LineUpdateHorizontal(_lineRange * persent);
+        }
+    }
+
     void LineUpdateHorizontal(float timePersent)
     {
         _lineForward.startWidth = timePersent;
@@ -76,15 +91,17 @@ public class LineTest : MonoBehaviour
         _lineForward.SetPosition(1, timePersent);
     }
 
+    public void ShotBulletRef()
+    {
+        StartCoroutine(ShotBullet());
+    }
+
     IEnumerator ShotBullet()
     {
         // shotEffectParticle
         _shotEffectParticle.transform.position = _point1;
         _shotEffectParticle.transform.LookAt(_point0);
         _shotEffectParticle.Play();
-        // shotBulletParticle
-        _shotBulletParticle.transform.position = _point1;
-        _shotBulletParticle.Play();
         //Line
         _lineBack.startWidth = 0f;
         _lineForward.startWidth = 0f;
@@ -94,5 +111,13 @@ public class LineTest : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         _shotLine.startWidth = 0f;
+        gameObject.SetActive(false);
+    }
+    
+    public void ShotParticle()
+    {
+        // shotBulletParticle
+        _shotBulletParticle.transform.position = _point1;
+        _shotBulletParticle.Play();
     }
 }
