@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(WaveSpawnEnemy))]
+[RequireComponent(typeof(WaveSpawnEnemy),typeof(SpawnShotLine))]
 public class BulletSpawnEnemy : MonoBehaviour
 {
     [Header("弾の設定")]
@@ -59,17 +59,18 @@ public class BulletSpawnEnemy : MonoBehaviour
     [Tooltip("Bulletパターン一覧"), Header("Bulletパターン一覧")]
     [SerializeField] BulletPatterns _bulletPatterns;
 
+    SpawnShotLine _spawnShotLine;
+    [SerializeField] bool _isActiveShotLine = false;
 
     [Tooltip("手動で弾を動かす変数"), Header("手動で弾を動かす変数")]
     [SerializeField] bool _isManualMove = false;
     public bool IsManualMove => _isManualMove;
-    [NonSerialized]public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
-    
-    
 
+    [NonSerialized]public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
     private void Start()
     {
         _bulletPatterns._waveSpawnEnemy = GetComponent<WaveSpawnEnemy>();
+        _spawnShotLine = GetComponent<SpawnShotLine>();
         _dangerousTime = _spawnCoolTime - _dangerousSpawnBeforeTime;
         _bulletPatterns._waveSpawnEnemy.Init(this);
     }
@@ -89,6 +90,11 @@ public class BulletSpawnEnemy : MonoBehaviour
                 _isBulletSpawn = false;
                 StartCoroutine(BulletSpawn());
             }
+        }
+
+        if(_spawnShotLine && _spawnShotLine.RayUpdate())
+        {
+            MoveBullet();
         }
     }
 
@@ -164,6 +170,15 @@ public class BulletSpawnEnemy : MonoBehaviour
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
         bulletScripts.BulletMoveStart(this,bulletSpeed,rota,activeTime);
+        if (!_isManualMove && _isActiveShotLine) SetRay(rota);
+    }
+
+    public void SetRay(float direction)
+    {
+        if(_spawnShotLine)
+        {
+            _spawnShotLine.SetRayStart(direction);
+        }
     }
 
     public void MoveBullet()
@@ -181,7 +196,8 @@ public class BulletSpawnEnemy : MonoBehaviour
     {
         while(_moveBulletList.Count != 0)
         {
-            _moveBulletList[0].Reset();
+            _moveBulletList[0].CancelBullet();
         }
+        _spawnShotLine.ResetShotLine();
     } 
 }

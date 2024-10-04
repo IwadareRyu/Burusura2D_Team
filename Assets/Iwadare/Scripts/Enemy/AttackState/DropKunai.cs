@@ -2,8 +2,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
-[Serializable]
 public class DropKunai : MonoBehaviour,AttackInterface
 {
     float _currentTime = 0f;
@@ -18,6 +18,7 @@ public class DropKunai : MonoBehaviour,AttackInterface
     [SerializeField] Animator[] _bossDammys;
     [SerializeField] Transform _dummyMovePoint;
     [SerializeField] Transform _dummyDafaultPoint;
+    [SerializeField] Transform _bossPosition;
     Tween[] _moveTween;
 
     public void Init()
@@ -43,6 +44,7 @@ public class DropKunai : MonoBehaviour,AttackInterface
     }
     public IEnumerator Move(EnemyBase enemy)
     {
+        enemy.transform.DOMove(_bossPosition.position,_moveTime).SetLink(enemy.gameObject);
         for (var i = 0; i < _bossDammys.Length; i++)
         {
             _moveTween[i] = _bossDammys[i].transform.DOMoveX(_dummyMovePoint.position.x, _moveTime);
@@ -72,9 +74,9 @@ public class DropKunai : MonoBehaviour,AttackInterface
         yield return new WaitForSeconds(_attackCoolTime);
         yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo));
         yield return new WaitForSeconds(_attackCoolTime);
-        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyThree));
+        yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree));
         yield return new WaitForSeconds(_attackCoolTime);
-        Reset();
+        Reset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
 
     }
@@ -88,13 +90,27 @@ public class DropKunai : MonoBehaviour,AttackInterface
         }
     }
 
-    public void Reset()
+    public IEnumerator SetRayBullets(BulletSpawnEnemy[] bulletSpawns)
+    {
+        foreach (var spawnPoint in bulletSpawns)
+        {
+            spawnPoint.SetRay(spawnPoint.BulletDistance);
+            yield return new WaitForSeconds(_disAttackTime);
+        }
+    }
+
+    public void Reset(EnemyBase enemy)
     {
         foreach (var dummyEnemy in _bossDammys)
         {
             var pos = dummyEnemy.transform.position;
             pos.x = _dummyDafaultPoint.position.x;
             dummyEnemy.transform.position = pos;
+        }
+        if (enemy._useGravity)
+        {
+            enemy._enemyRb.gravityScale = 1;
+            enemy._enemyRb.velocity = Vector2.zero;
         }
         _currentTime = 0;
         _kunaiGimmick.SetActive(false);
@@ -107,6 +123,11 @@ public class DropKunai : MonoBehaviour,AttackInterface
             var pos = dummyEnemy.transform.position;
             pos.x = _dummyDafaultPoint.position.x;
             dummyEnemy.transform.position = pos;
+        }
+        if (enemy._useGravity)
+        {
+            enemy._enemyRb.gravityScale = 1;
+            enemy._enemyRb.velocity = Vector2.zero;
         }
         ResetBulletSpawn();
         _currentTime = 0;
