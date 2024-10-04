@@ -98,10 +98,6 @@ public class ShotLine : MonoBehaviour
 
     IEnumerator ShotBullet()
     {
-        // shotEffectParticle
-        _shotEffectParticle.transform.position = _point1;
-        _shotEffectParticle.transform.LookAt(_point0);
-        _shotEffectParticle.Play();
         //Line
         _lineBack.startWidth = 0f;
         _lineForward.startWidth = 0f;
@@ -116,6 +112,10 @@ public class ShotLine : MonoBehaviour
     
     public void ShotParticle()
     {
+        // shotEffectParticle
+        _shotEffectParticle.transform.position = _point1;
+        _shotEffectParticle.transform.LookAt(_point0);
+        _shotEffectParticle.Play();
         // shotBulletParticle
         _shotBulletParticle.transform.position = _point1;
         _shotBulletParticle.Play();

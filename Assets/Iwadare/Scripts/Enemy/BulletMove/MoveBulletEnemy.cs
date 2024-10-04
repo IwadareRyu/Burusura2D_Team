@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
+public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
 {
 
     [Tooltip("弾の速さ")]
@@ -13,7 +12,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     [Tooltip("弾の回転")]
     float _maxBulletRota;
     float _currentBulletRota;
-    [SerializeField]float _rotaTime = 0.1f;
+    [SerializeField] float _rotaTime = 0.1f;
     [SerializeField] float _maxRotaAngle = 90f;
     float _currentRotaAngle = 0f;
 
@@ -33,19 +32,19 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     public float BulletScale => _bulletScale;
 
     BulletBreakType _breakType;
-    [NonSerialized]public bool _isAttackTime = false;
-    [NonSerialized]public bool _isReset = false;
+    [NonSerialized] public bool _isAttackTime = false;
+    [NonSerialized] public bool _isReset = false;
 
     [Tooltip("フェードの時間"), Header("フェードの時間")]
     [SerializeField] float _fadeTime = 1f;
     public float FadeTime => _fadeTime;
     float defaultBulleetAlpha = 1f;
     [NonSerialized] public bool _isFade = false;
-    
+
     bool _isRay = false;
     public bool IsRay => _isRay;
 
-    [SerializeField]SpriteRenderer _mySpriteRenderer;
+    [SerializeField] SpriteRenderer _mySpriteRenderer;
 
     [SerializeField] ParticleSystem _hitParticle;
     public ParticleSystem HitParticle => _hitParticle;
@@ -97,7 +96,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     #region 弾の種類
     /// <summary>弾が動くときの初期化</summary>
     public void BulletMoveStart(BulletSpawnEnemy spawnPoint,
-        float bulletSpeed,float direction,float activeTime = 5f)
+        float bulletSpeed, float direction, float activeTime = 5f)
     {
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
@@ -113,7 +112,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
 
         if (!_isRota)
         {
-            _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle));
+            _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (_currentBulletAngle + 90f)), Mathf.Sin(Mathf.Deg2Rad * (_currentBulletAngle + 90f)));
         }
 
         switch (spawnPoint.SpawnBulletMoveStruct._bulletMoveType)
@@ -155,7 +154,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     {
         if (_isAttackTime)
         {
-            _isReset = _currentBulletMoveClass.BulletMoveUpdate(this,_currentBulletSpeed,_currentBulletRota);
+            _isReset = _currentBulletMoveClass.BulletMoveUpdate(this, _currentBulletSpeed, _currentBulletRota);
             if (_isReset == false)
             {
                 Reset();
@@ -181,7 +180,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     /// <param name="rota"></param>
     public void Rotation(float rota)
     {
-        if(_currentRotaAngle > _maxRotaAngle) { return; }
+        if (_currentRotaAngle > _maxRotaAngle) { return; }
         _currentRotaTime += Time.deltaTime;
         if (_currentRotaTime > _rotaTime)
         {
@@ -194,7 +193,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
             else
             {
                 _currentBulletAngle += rota;
-                _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * _currentBulletAngle), Mathf.Sin(Mathf.Deg2Rad * _currentBulletAngle)); 
+                _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (_currentBulletAngle + 90f)), Mathf.Sin(Mathf.Deg2Rad * (_currentBulletAngle + 90f)));
             }
 
             _currentRotaAngle += rota;
@@ -214,7 +213,7 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         }
         else
         {
-            float rad = Mathf.Atan2(distance.y,distance.x);
+            float rad = Mathf.Atan2(distance.y, distance.x);
             _currentBulletAngle = rad * Mathf.Rad2Deg;
             _currentDirection = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
         }
@@ -280,11 +279,12 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
     {
         if (!_isFade) _isFade = true;
         var color = _mySpriteRenderer.color;
-        if(_fadeTime != 0) color.a = currentFadeTime / _fadeTime;
+        if (_fadeTime != 0) color.a = currentFadeTime / _fadeTime;
         else color.a = _fadeTime;
         _mySpriteRenderer.color = color;
     }
 
+    /// <summary>Rayで当たった地面のPositionを取ってきて、予測線の終点に渡すメソッド</summary>
     public Vector3 RayCatch()
     {
         RaycastHit2D[] ray;
@@ -297,9 +297,9 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
             ray = Physics2D.RaycastAll(transform.position, _currentDirection);
         }
         Vector3 hitPoint = transform.position;
-        foreach(var hit in ray)
+        foreach (var hit in ray)
         {
-            if(hit.collider.tag == "Ground")
+            if (hit.collider.tag == "Ground" || hit.collider.tag == "Wall")
             {
                 hitPoint = hit.point;
                 break;
@@ -308,12 +308,13 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         _currentShotLine = _shotPool.GetBullet().GetComponent<ShotLine>();
         if (_currentShotLine != null)
         {
-            _currentShotLine.SetLine(transform.position,hitPoint);
+            _currentShotLine.SetLine(transform.position, hitPoint);
         }
         _isRay = true;
         return hitPoint;
     }
 
+    /// <summary>弾からRayを出して当たった自機を攻撃するメソッド</summary>
     public void AttackRay()
     {
         RaycastHit2D[] hitRays;
@@ -326,23 +327,43 @@ public class MoveBulletEnemy : MonoBehaviour,HitStopInterface
         {
             hitRays = Physics2D.RaycastAll(transform.position, _currentDirection);
         }
+        bool isHitRay = false;
         foreach (var hit in hitRays)
         {
-            if(hit.transform.TryGetComponent<PlayerController>(out var player))
+            if (hit.transform.TryGetComponent<PlayerController>(out var player))
             {
-                if (_hitParticle) Instantiate(_hitParticle, player.transform.position, Quaternion.identity);
+                if (_hitParticle)
+                {
+                    Instantiate(_hitParticle, player.transform.position, Quaternion.identity);
+                    isHitRay = true;
+                }
                 break;
             }
         }
-        _currentShotLine.ShotParticle();
+        if (!isHitRay)
+        {
+            _currentShotLine.ShotParticle();
+        }
         _isRay = false;
+    }
+
+    void ResetRay()
+    {
+        _isRay = false;
+        _currentShotLine.gameObject.SetActive(false);
+    }
+
+    public void CancelBullet()
+    {
+        if (_isRay) ResetRay();
+        Reset();
     }
 
     // <summary>リセット</summary>
     public void Reset()
     {
         _isAttackTime = false;
-        if(_bulletListRef != null)
+        if (_bulletListRef != null)
         {
             _bulletListRef.Remove(this);
             _bulletListRef = null;
