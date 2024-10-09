@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour,HitStopInterface
 {
+    [Tooltip("PlayerのHP"), Header("PlayerのHP")]
+    [SerializeField]float _playerDefaultHP = 100;
+    float _currentPlayerHP;
+    [SerializeField] Slider _playerHPSlider;
     [Tooltip("プレイヤーのアニメーション")]
     public Animator _playerAnim;
     [Tooltip("プレイヤーの左右反転させるスプライト")]
@@ -13,7 +18,9 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     public Transform PlayerSprite => _playerSprite;
 
     [NonSerialized]public Rigidbody2D _playerRb;
-    [SerializeField]PhysicsMaterial2D _playerPhysicFric;
+
+    [Tooltip("Playerのジャンプ時、着地時のFric"), Header("Playerのジャンプ時、着地時のFric")]
+    [SerializeField] PhysicsMaterial2D _playerPhysicFric;
     [SerializeField] PhysicsMaterial2D _playerPhysicNonFric;
 
 
@@ -32,14 +39,31 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     [SerializeField] AttackTargetArrow _targetArrowScript;
     bool _isAttackTime = false;
 
+    [Tooltip("Playerの状態")]
+    PlayerState _playerState;
+    public PlayerState PlayerState => _playerState;
+
+    [SerializeField] float _invisibleTime = 0.5f;
+    float _currentInvisibleTime = 0f;
+    
+
+    [SerializeField] bool _isInvisible;
+
     // Start is called before the first frame update
     void Start()
     {
+        _currentPlayerHP = _playerDefaultHP;
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
         _playerRb = GetComponent<Rigidbody2D>();
         HitStopManager.instance._speedHitStopActionStart += HitStopStart;
         HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+        Init();
+    }
+
+    public void Init()
+    {
+        _playerState = PlayerState.NormalState;
     }
 
     private void OnDisable()
@@ -51,19 +75,34 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     // Update is called once per frame
     void Update()
     {
-        _x = Input.GetAxisRaw("Horizontal");
-        FlipX(_x);
-        _moveScript.MoveUpdate(this);
-        if (Input.GetButton("Fire1") && !_isAttackTime)
+        if (_playerState != PlayerState.DeathState && GameStateManager.instance.GameState == GameState.InBattleState)
         {
-            _isAttackTime = true;
-            StartCoroutine(Attack());
+            _x = Input.GetAxisRaw("Horizontal");
+            FlipX(_x);
+            _moveScript.MoveUpdate(this);
+            if (Input.GetButton("Fire1") && !_isAttackTime)
+            {
+                _isAttackTime = true;
+                StartCoroutine(Attack());
+            }
+            if(_playerState == PlayerState.InvisibleState)
+            {
+                _currentInvisibleTime += Time.deltaTime;
+                if(_currentInvisibleTime >= _invisibleTime)
+                {
+                    _currentInvisibleTime = 0;
+                    _playerState = PlayerState.NormalState;
+                }
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        _moveScript.MoveFixedUpdate(this);
+        if (_playerState != PlayerState.DeathState && GameStateManager.instance.GameState == GameState.InBattleState)
+        {
+            _moveScript.MoveFixedUpdate(this);
+        }
     }
 
     // 攻撃処理
@@ -82,15 +121,6 @@ public class PlayerController : MonoBehaviour,HitStopInterface
             scale.x = x * Mathf.Abs(scale.x);
             _playerSprite.transform.localScale = scale;
         }
-    }
-
-
-
-
-    // 攻撃を出す処理
-    void InstansAttack()
-    {
-        //向いている方向に合わせて弾を打つ処理
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -120,13 +150,46 @@ public class PlayerController : MonoBehaviour,HitStopInterface
         }
     }
 
+    public void AddDamage(int damage)
+    {
+        if (_isInvisible || _playerState == PlayerState.InvisibleState) return;
+        _currentPlayerHP -= damage;
+        if(_currentPlayerHP <= 0)
+        {
+            _currentPlayerHP = 0;
+            Death();
+        }
+        else
+        {
+            PlayerInvisible();
+        }
+        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+    }
+
+    public void Death()
+    {
+        _playerState = PlayerState.DeathState;
+    }
+
+    public void PlayerInvisible()
+    {
+        _playerState = PlayerState.InvisibleState;
+    }
+
     public void HitStopStart(float _hitStopPower)
     {
-        
+
     }
 
     public void HitStopEnd()
     {
 
     }
+}
+
+public enum PlayerState
+{
+    NormalState,
+    InvisibleState,
+    DeathState,
 }

@@ -226,9 +226,10 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, _bulletScale);
         foreach (var col in cols)
         {
-            if (col.gameObject.tag == "Player")
+            if (col.TryGetComponent<PlayerController>(out var player))
             {
                 if (_hitParticle) Instantiate(_hitParticle, col.transform.position, Quaternion.identity);
+                player.AddDamage(1);
                 return true;
             }
         }
@@ -335,6 +336,7 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
                 if (_hitParticle)
                 {
                     Instantiate(_hitParticle, player.transform.position, Quaternion.identity);
+                    player.AddDamage(1);
                     isHitRay = true;
                 }
                 break;
