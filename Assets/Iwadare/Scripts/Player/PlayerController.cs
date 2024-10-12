@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour,HitStopInterface
+public class PlayerController : MonoBehaviour, TimeScaleInterface
 {
     [Tooltip("PlayerのHP"), Header("PlayerのHP")]
-    [SerializeField]float _playerDefaultHP = 100;
+    [SerializeField] float _playerDefaultHP = 100;
     float _currentPlayerHP;
     [SerializeField] Slider _playerHPSlider;
     [Tooltip("プレイヤーのアニメーション")]
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     [SerializeField] Transform _playerSprite;
     public Transform PlayerSprite => _playerSprite;
 
-    [NonSerialized]public Rigidbody2D _playerRb;
+    [NonSerialized] public Rigidbody2D _playerRb;
 
     [Tooltip("Playerのジャンプ時、着地時のFric"), Header("Playerのジャンプ時、着地時のFric")]
     [SerializeField] PhysicsMaterial2D _playerPhysicFric;
@@ -45,10 +45,15 @@ public class PlayerController : MonoBehaviour,HitStopInterface
 
     [SerializeField] float _invisibleTime = 0.5f;
     float _currentInvisibleTime = 0f;
-    
+
 
     [SerializeField] bool _isInvisible;
 
+    float _timeScale;
+    public float TimeScale => _timeScale;
+
+    Vector3 _tmpVelocity;
+    float _tmpGravity;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,26 +61,29 @@ public class PlayerController : MonoBehaviour,HitStopInterface
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
         _playerRb = GetComponent<Rigidbody2D>();
-        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
         Init();
     }
 
     public void Init()
     {
         _playerState = PlayerState.NormalState;
+        _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
     }
 
     private void OnDisable()
     {
-        HitStopManager.instance._speedHitStopActionStart -= HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd -= HitStopEnd;
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_playerState != PlayerState.DeathState && GameStateManager.instance.GameState == GameState.InBattleState)
+        if (_playerState != PlayerState.DeathState && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
             _x = Input.GetAxisRaw("Horizontal");
             FlipX(_x);
@@ -85,10 +93,11 @@ public class PlayerController : MonoBehaviour,HitStopInterface
                 _isAttackTime = true;
                 StartCoroutine(Attack());
             }
-            if(_playerState == PlayerState.InvisibleState)
+
+            if (_playerState == PlayerState.InvisibleState)
             {
                 _currentInvisibleTime += Time.deltaTime;
-                if(_currentInvisibleTime >= _invisibleTime)
+                if (_currentInvisibleTime >= _invisibleTime)
                 {
                     _currentInvisibleTime = 0;
                     _playerState = PlayerState.NormalState;
@@ -99,7 +108,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
 
     private void FixedUpdate()
     {
-        if (_playerState != PlayerState.DeathState && GameStateManager.instance.GameState == GameState.InBattleState)
+        if (_playerState != PlayerState.DeathState && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
             _moveScript.MoveFixedUpdate(this);
         }
@@ -134,7 +143,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
             _playerRb.sharedMaterial = _playerPhysicFric;
         }
 
-        if(collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
             //Damage判定
         }
@@ -154,7 +163,7 @@ public class PlayerController : MonoBehaviour,HitStopInterface
     {
         if (_isInvisible || _playerState == PlayerState.InvisibleState) return;
         _currentPlayerHP -= damage;
-        if(_currentPlayerHP <= 0)
+        if (_currentPlayerHP <= 0)
         {
             _currentPlayerHP = 0;
             Death();
@@ -176,14 +185,23 @@ public class PlayerController : MonoBehaviour,HitStopInterface
         _playerState = PlayerState.InvisibleState;
     }
 
-    public void HitStopStart(float _hitStopPower)
+    public void TimeScaleChange(float timeScale)
     {
-
+        _timeScale = timeScale;
     }
 
-    public void HitStopEnd()
+    public void StartPause()
     {
+        _tmpVelocity = _playerRb.velocity;
+        _playerRb.velocity = Vector2.zero;
+        _tmpGravity = _playerRb.gravityScale;
+        _playerRb.gravityScale = 0f;
+    }
 
+    public void EndPause()
+    {
+        _playerRb.velocity = _tmpVelocity;
+        _playerRb.gravityScale = _tmpGravity;
     }
 }
 

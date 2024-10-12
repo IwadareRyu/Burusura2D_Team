@@ -4,27 +4,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class GameStateManager : MonoBehaviour
+public class GameStateManager : SingletonMonovihair<GameStateManager>
 {
     [SerializeField]GameState _gameState = GameState.StayState;
     public GameState GameState => _gameState;
 
-    public static GameStateManager instance;
-
-    bool _isPause = false;
-
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
+        base.Awake();
         ChangeState(GameState.InBattleState);
     }
 

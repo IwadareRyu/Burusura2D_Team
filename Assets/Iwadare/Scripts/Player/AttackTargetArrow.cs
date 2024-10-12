@@ -20,7 +20,6 @@ public class AttackTargetArrow : MonoBehaviour
     [SerializeField] float _movePlayerCameraMove = 0.15f;
     float _x;
     float _y;
-
     public void Init(PlayerController playerController)
     {
         _controller = playerController;
@@ -31,8 +30,11 @@ public class AttackTargetArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _x = Input.GetAxisRaw("Horizontal");
-        _y = Input.GetAxisRaw("Vertical");
+        if (GameStateManager.Instance.GameState == GameState.InBattleState)
+        {
+            _x = Input.GetAxisRaw("Horizontal");
+            _y = Input.GetAxisRaw("Vertical");
+        }
     }
 
     private void FixedUpdate()
