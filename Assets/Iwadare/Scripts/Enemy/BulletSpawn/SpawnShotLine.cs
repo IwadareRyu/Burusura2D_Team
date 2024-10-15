@@ -61,6 +61,7 @@ public class SpawnShotLine : MonoBehaviour
         if(_isRay)
         {
             _isRay = false;
+            _shotLine.gameObject.SetActive(false);
         }
     }
 }

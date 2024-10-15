@@ -1,10 +1,11 @@
 ﻿using DG.Tweening;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-public class DashAttack : AttackInterface
+public class DashAttack : AttackInterface,PauseTimeInterface
 {
     float _currentTime = 0f;
     [SerializeField] Transform[] _trans;
@@ -16,12 +17,17 @@ public class DashAttack : AttackInterface
     [SerializeField] float _attackDisTime = 0.2f;
     [SerializeField] BulletSpawnEnemy _bulletSpawnEnemy;
     Tween _moveTween;
+    public void Init()
+    {
+        return;
+    }
 
     public void StayUpdate(EnemyBase enemy)
     {
-        _currentTime += Time.deltaTime;
+        _currentTime += Time.deltaTime * enemy._timeScale;
         if (_currentTime > _stayTime)
         {
+
             _currentTime = 0f;
             if (enemy._useGravity) 
             {
@@ -32,11 +38,13 @@ public class DashAttack : AttackInterface
         }
     }
 
-
     public IEnumerator Move(EnemyBase enemy)
     {
-        yield return _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _moveTime).SetLink(enemy.gameObject);
+        UnityActionSet();
+        _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _moveTime).SetLink(enemy.gameObject);
+        yield return new WaitForSeconds(_moveTime / enemy._timeScale);
         _currentTrans++;
+        Debug.Log("Attackに移行");
         enemy._bossState = EnemyBase.BossState.AttackState;
     }
 
@@ -46,11 +54,16 @@ public class DashAttack : AttackInterface
         for (; _currentTrans < _trans.Length; _currentTrans++)
         {
             _bulletSpawnEnemy.DangerousSign();
-            yield return new WaitForSeconds(_stayTime);
-            _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _attackTime).SetLink(enemy.gameObject);
-            for (float currentAttackTime = 0; currentAttackTime < _attackTime; currentAttackTime += Time.deltaTime)
+            yield return new WaitForSeconds(_stayTime / enemy._timeScale);
+            _moveTween = enemy.transform.DOMove(
+                _trans[_currentTrans].position, 
+                _attackTime / (Time.timeScale * enemy._timeScale)
+                )
+                .SetLink(enemy.gameObject);
+
+            for (float currentAttackTime = 0; currentAttackTime < _attackTime; currentAttackTime += Time.deltaTime * enemy._timeScale)
             {
-                currentDisTime += Time.deltaTime;
+                currentDisTime += Time.deltaTime * enemy._timeScale;
                 if (currentDisTime >= _attackDisTime)
                 {
                     enemy.SpawnBulletRef(_bulletSpawnEnemy);
@@ -62,6 +75,7 @@ public class DashAttack : AttackInterface
         }
         _currentTrans = 0;
         if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
+        UnityActionReset();
         enemy.ResetState();
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
         yield return null;
@@ -79,8 +93,32 @@ public class DashAttack : AttackInterface
         _bulletSpawnEnemy.ResetBullet();
     }
 
-    public void Init()
+    public void UnityActionSet()
     {
-        return;
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
+    }
+
+    private void UnityActionReset()
+    {
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
+    }
+
+    public void TimeScaleChange(float timeScale)
+    {
+        _moveTween.timeScale = timeScale;
+    }
+
+    public void StartPause()
+    {
+        _moveTween.timeScale = 0f;
+    }
+
+    public void EndPause()
+    {
+        _moveTween.timeScale = 1f;
     }
 }

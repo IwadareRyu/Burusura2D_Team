@@ -1151,7 +1151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &137782495
 Transform:
   m_ObjectHideFlags: 0
@@ -16152,7 +16152,7 @@ MonoBehaviour:
   _action:
   - _hpPersent: 100
     _specialAction: 0
-    _attackState: 00000000
+    _attackState: 02000000
   - _hpPersent: 80
     _specialAction: 0
     _attackState: 01000000

@@ -8,7 +8,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
     [SerializeField] YuaiActionStruct[] _action;
     [SerializeField] int _currentHPAction = 0;
 
-    void start()
+    private void Start()
     {
         _yuaiActions.dropKunai.Init();
     }

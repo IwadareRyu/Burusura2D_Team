@@ -1,4 +1,4 @@
-﻿public interface TimeScaleInterface
+﻿public interface PauseTimeInterface
 {
     public abstract void TimeScaleChange(float timeScale);
     public abstract void StartPause();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
+public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
 {
 
     [Tooltip("弾の速さ")]
@@ -76,14 +76,21 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
 
     public void Init()
     {
-        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
+        return;
+    }
+
+    private void OnEnable()
+    {
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
     }
 
     private void OnDisable()
     {
-        HitStopManager.instance._speedHitStopActionStart -= HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd -= HitStopEnd;
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
     }
 
     private void OnDrawGizmos()
@@ -98,8 +105,6 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
     public void BulletMoveStart(BulletSpawnEnemy spawnPoint,
         float bulletSpeed, float direction, float activeTime = 5f)
     {
-        HitStopManager.instance._speedHitStopActionStart += HitStopStart;
-        HitStopManager.instance._speedHitStopActionEnd += HitStopEnd;
 
         _breakType = spawnPoint.SpawnBulletMoveStruct._bulletBreakType;
         _currentBulletSpeed = _maxBulletSpeed = bulletSpeed;
@@ -108,7 +113,7 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
         _currentBulletAngle = direction;
         _isRota = spawnPoint.SpawnBulletMoveStruct._isRota;
 
-        if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
+        //if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
 
         if (!_isRota)
         {
@@ -168,11 +173,11 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
     {
         if (_isRota)
         {
-            transform.position += transform.up * speed;
+            transform.position += transform.up * speed * _timeScale;
         }
         else
         {
-            transform.position += _currentDirection * speed;
+            transform.position += _currentDirection * speed * _timeScale;
         }
     }
 
@@ -181,22 +186,22 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
     public void Rotation(float rota)
     {
         if (_currentRotaAngle > _maxRotaAngle) { return; }
-        _currentRotaTime += Time.deltaTime;
+        _currentRotaTime += Time.deltaTime * _timeScale;
         if (_currentRotaTime > _rotaTime)
         {
             Debug.Log("グルグル");
 
             if (_isRota)
             {
-                transform.Rotate(0, 0, rota);
+                transform.Rotate(0, 0, rota * _timeScale);
             }
             else
             {
-                _currentBulletAngle += rota;
+                _currentBulletAngle += rota * _timeScale;
                 _currentDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (_currentBulletAngle + 90f)), Mathf.Sin(Mathf.Deg2Rad * (_currentBulletAngle + 90f)));
             }
 
-            _currentRotaAngle += rota;
+            _currentRotaAngle += rota * _timeScale;
             _currentRotaTime = 0;
         }
     }
@@ -386,17 +391,32 @@ public class MoveBulletEnemy : MonoBehaviour, HitStopInterface
         gameObject.SetActive(false);
     }
 
-    public void HitStopStart(float _hitStopPower)
+    public void TimeScaleChange(float timeScale)
     {
-        _currentBulletSpeed = _maxBulletSpeed * _hitStopPower;
-        _timeScale = _hitStopPower;
-        Debug.Log("ぬっ");
+        _timeScale = timeScale;
     }
 
-    public void HitStopEnd()
+    public void StartPause()
     {
-        _currentBulletSpeed = _maxBulletSpeed;
-        _timeScale = 1f;
-        Debug.Log("ん！");
+        _timeScale = 0f;
     }
+
+    public void EndPause()
+    {
+        _timeScale = 1f;
+    }
+
+    //public void HitStopStart(float _hitStopPower)
+    //{
+    //    _currentBulletSpeed = _maxBulletSpeed * _hitStopPower;
+    //    _timeScale = _hitStopPower;
+    //    Debug.Log("ぬっ");
+    //}
+
+    //public void HitStopEnd()
+    //{
+    //    _currentBulletSpeed = _maxBulletSpeed;
+    //    _timeScale = 1f;
+    //    Debug.Log("ん！");
+    //}
 }

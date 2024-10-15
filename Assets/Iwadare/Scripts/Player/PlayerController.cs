@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour, TimeScaleInterface
+public class PlayerController : MonoBehaviour, PauseTimeInterface
 {
     [Tooltip("PlayerのHP"), Header("PlayerのHP")]
     [SerializeField] float _playerDefaultHP = 100;
@@ -202,6 +202,16 @@ public class PlayerController : MonoBehaviour, TimeScaleInterface
     {
         _playerRb.velocity = _tmpVelocity;
         _playerRb.gravityScale = _tmpGravity;
+    }
+
+    public void HitStopStart(float _hitStopPower)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void HitStopEnd()
+    {
+        throw new NotImplementedException();
     }
 }
 
