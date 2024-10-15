@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(WaveSpawnEnemy),typeof(SpawnShotLine))]
-public class BulletSpawnEnemy : MonoBehaviour
+public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 {
     [Header("弾の設定")]
     [Tooltip("弾のスポーン設定"), Header("弾のスポーン設定")]
@@ -66,6 +66,10 @@ public class BulletSpawnEnemy : MonoBehaviour
     [SerializeField] bool _isManualMove = false;
     public bool IsManualMove => _isManualMove;
 
+    float _timeScale = 1f;
+
+    IEnumerator _spawnCoroutine;
+
     [NonSerialized]public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
     private void Start()
     {
@@ -75,20 +79,35 @@ public class BulletSpawnEnemy : MonoBehaviour
         _bulletPatterns._waveSpawnEnemy.Init(this);
     }
 
+    private void OnEnable()
+    {
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
+    }
+
+    private void OnDisable()
+    {
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
+    }
+
     private void Update()
     {
         if (_spawnCountType != SpawnCountType.Any && _isBulletSpawn)
         {
-            _currentCoolTime += Time.deltaTime;
+            _currentCoolTime += Time.deltaTime * _timeScale;
 
             // DangerousSignUpdate
-            DangerousSignUpdate(_currentCoolTime, _dangerousTime);
+            DangerousSignStart(_currentCoolTime, _dangerousTime);
 
             // BulletSpawn
             if (_currentCoolTime > _spawnCoolTime)
             {
                 _isBulletSpawn = false;
-                StartCoroutine(BulletSpawn());
+                _spawnCoroutine = BulletSpawn();
+                StartCoroutine(_spawnCoroutine);
             }
         }
 
@@ -98,7 +117,7 @@ public class BulletSpawnEnemy : MonoBehaviour
         }
     }
 
-    public void DangerousSignUpdate(float currentCoolTime,float dangerousTime)
+    public void DangerousSignStart(float currentCoolTime,float dangerousTime)
     {
         if (_isDangerousDisplay && !_isDangerous && currentCoolTime > dangerousTime)
         {
@@ -124,6 +143,7 @@ public class BulletSpawnEnemy : MonoBehaviour
         _isBulletSpawn = true;
         if (_spawnCountType == SpawnCountType.OneShot) _isBulletSpawn = false;
         if (_isDangerous) _isDangerous = false;
+        _spawnCoroutine = null;
         yield return null;
     }
 
@@ -199,5 +219,28 @@ public class BulletSpawnEnemy : MonoBehaviour
             _moveBulletList[0].CancelBullet();
         }
         _spawnShotLine.ResetShotLine();
-    } 
+    }
+
+    public void TimeScaleChange(float timeScale)
+    {
+        _timeScale = timeScale;
+    }
+
+    public void StartPause()
+    {
+        if (_spawnCoroutine != null)
+        {
+            StopCoroutine(_spawnCoroutine);
+        }
+        _timeScale = 0f;
+    }
+
+    public void EndPause()
+    {
+        _timeScale = 1f;
+        if (_spawnCoroutine != null)
+        {
+            StartCoroutine(_spawnCoroutine);
+        }
+    }
 }

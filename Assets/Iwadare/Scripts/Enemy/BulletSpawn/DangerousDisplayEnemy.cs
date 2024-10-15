@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DangerousDisplayEnemy : MonoBehaviour
+public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
 {
 
     [SerializeField] Sprite _dangerousSprite;
@@ -15,6 +15,7 @@ public class DangerousDisplayEnemy : MonoBehaviour
     [SerializeField] float _defaultMatualTime = 0.2f;
     float _currentMatualTime;
     bool _isDengerous = false;
+    float _timeScale = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +24,35 @@ public class DangerousDisplayEnemy : MonoBehaviour
         _dangerousSpriteRenderer.sprite = null;
     }
 
+    private void OnEnable()
+    {
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
+    }
+
+    private void OnDisable()
+    {
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (_isDengerous)
         {
-            _currentDisplayTime += Time.deltaTime;
+            // 点滅
+            _currentMatualTime += Time.deltaTime * _timeScale;
+            if (_currentMatualTime > _defaultMatualTime)
+            {
+                RepeatLight();
+                _currentMatualTime = 0f;
+            }
+
+            // 警告出てる時間
+            _currentDisplayTime += Time.deltaTime * _timeScale;
             if (_currentDisplayTime > _displayTime)
             {
                 Reset();
@@ -43,7 +67,6 @@ public class DangerousDisplayEnemy : MonoBehaviour
         _dangerousSpriteRenderer.sprite = _dangerousSprite;
         _dangerousSpriteRenderer.color = _lightUpColor;
         _currentColor = _lightDownColor;
-        InvokeRepeating("RepeatLight", 0f, _currentMatualTime);
         _isDengerous = true;
     }
 
@@ -60,6 +83,22 @@ public class DangerousDisplayEnemy : MonoBehaviour
         CancelInvoke("RepeatLight");
         _isDengerous = false;
         _currentDisplayTime = 0;
+        _currentMatualTime = 0;
         _dangerousSpriteRenderer.sprite = null;
+    }
+
+    public void TimeScaleChange(float timeScale)
+    {
+        _timeScale = timeScale;
+    }
+
+    public void StartPause()
+    {
+        _timeScale = 0f;
+    }
+
+    public void EndPause()
+    {
+        _timeScale = 1f;
     }
 }

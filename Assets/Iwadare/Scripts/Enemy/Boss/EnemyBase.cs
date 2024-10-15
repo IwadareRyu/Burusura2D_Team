@@ -22,6 +22,8 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] float _moveTime = 0.5f;
     public float MoveTime => _moveTime;
 
+    [NonSerialized]public float _timeScale = 1f;
+
     public bool _isMove = false;
     public bool _isAttack = false;
     public bool _guard = false;

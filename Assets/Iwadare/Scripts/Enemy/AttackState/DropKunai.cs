@@ -2,9 +2,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine.SocialPlatforms;
 
-public class DropKunai : MonoBehaviour,AttackInterface
+public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
 {
     float _currentTime = 0f;
     [SerializeField] float _stayTime = 1f;
@@ -19,7 +19,8 @@ public class DropKunai : MonoBehaviour,AttackInterface
     [SerializeField] Transform _dummyMovePoint;
     [SerializeField] Transform _dummyDafaultPoint;
     [SerializeField] Transform _bossPosition;
-    Tween[] _moveTween;
+    Tween[] _dummyMoveTween;
+    Tween _bossMoveTween;
 
     public void Init()
     {
@@ -28,7 +29,7 @@ public class DropKunai : MonoBehaviour,AttackInterface
 
     public void StayUpdate(EnemyBase enemy)
     {
-        _currentTime += Time.deltaTime;
+        _currentTime += Time.deltaTime * enemy._timeScale;
         if (_currentTime > _stayTime)
         {
             _currentTime = 0f;
@@ -38,16 +39,17 @@ public class DropKunai : MonoBehaviour,AttackInterface
                 enemy._enemyRb.gravityScale = 0;
                 enemy._enemyRb.velocity = Vector2.zero;
             }
-            _moveTween = new Tween[_bossDammys.Length];
+            _dummyMoveTween = new Tween[_bossDammys.Length];
             enemy._bossState = EnemyBase.BossState.MoveState;
         }
     }
     public IEnumerator Move(EnemyBase enemy)
     {
-        enemy.transform.DOMove(_bossPosition.position,_moveTime).SetLink(enemy.gameObject);
+        UnityActionSet();
+        _bossMoveTween = enemy.transform.DOMove(_bossPosition.position,_moveTime).SetLink(enemy.gameObject);
         for (var i = 0; i < _bossDammys.Length; i++)
         {
-            _moveTween[i] = _bossDammys[i].transform.DOMoveX(_dummyMovePoint.position.x, _moveTime);
+            _dummyMoveTween[i] = _bossDammys[i].transform.DOMoveX(_dummyMovePoint.position.x, _moveTime);
         }
         var k = 0;
         for (var j = 0; j < _bulletSpawnEnemyThree.Length; j++)
@@ -62,7 +64,7 @@ public class DropKunai : MonoBehaviour,AttackInterface
                 k++;
             }
             enemy.SpawnBulletRef(_bulletSpawnEnemyThree[j]);
-            yield return new WaitForSeconds(_moveTime / _bulletSpawnEnemyThree.Length / 2);
+            yield return new WaitForSeconds((_moveTime / _bulletSpawnEnemyThree.Length / 2));
         }
         yield return null;
         enemy._bossState = EnemyBase.BossState.AttackState;
@@ -70,36 +72,52 @@ public class DropKunai : MonoBehaviour,AttackInterface
 
     public IEnumerator Attack(EnemyBase enemy)
     {
-        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne));
-        yield return new WaitForSeconds(_attackCoolTime);
-        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo));
-        yield return new WaitForSeconds(_attackCoolTime);
-        yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree));
-        yield return new WaitForSeconds(_attackCoolTime);
+        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
+        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
+        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo, enemy));
+        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
+        yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
+        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
         Reset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
 
     }
 
-    public IEnumerator MoveBullets(BulletSpawnEnemy[] bulletSpawns)
+    public IEnumerator MoveBullets(BulletSpawnEnemy[] bulletSpawns,EnemyBase enemy)
     {
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.MoveBullet();
-            yield return new WaitForSeconds(_disAttackTime);
+            while(enemy._timeScale == 0) yield return null;
+            yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
         }
     }
 
-    public IEnumerator SetRayBullets(BulletSpawnEnemy[] bulletSpawns)
+    public IEnumerator SetRayBullets(BulletSpawnEnemy[] bulletSpawns,EnemyBase enemy)
     {
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.SetRay(spawnPoint.BulletDistance);
-            yield return new WaitForSeconds(_disAttackTime);
+            while (enemy._timeScale == 0) yield return null;
+            yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
         }
     }
 
-    public void Reset(EnemyBase enemy)
+    public void UnityActionSet()
+    {
+        TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
+        TimeScaleManager.StartPauseAction += StartPause;
+        TimeScaleManager.EndPauseAction += EndPause;
+    }
+
+    private void UnityActionReset()
+    {
+        TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
+        TimeScaleManager.StartPauseAction -= StartPause;
+        TimeScaleManager.EndPauseAction -= EndPause;
+    }
+
+    private void Reset(EnemyBase enemy)
     {
         foreach (var dummyEnemy in _bossDammys)
         {
@@ -113,6 +131,8 @@ public class DropKunai : MonoBehaviour,AttackInterface
             enemy._enemyRb.velocity = Vector2.zero;
         }
         _currentTime = 0;
+        UnityActionReset();
+        enemy.ResetState();
         _kunaiGimmick.SetActive(false);
     }
 
@@ -130,7 +150,9 @@ public class DropKunai : MonoBehaviour,AttackInterface
             enemy._enemyRb.velocity = Vector2.zero;
         }
         ResetBulletSpawn();
+        UnityActionReset();
         _currentTime = 0;
+        enemy.ResetState();
         _kunaiGimmick.SetActive(false);
 
     }
@@ -150,6 +172,33 @@ public class DropKunai : MonoBehaviour,AttackInterface
                 k++;
             }
             _bulletSpawnEnemyThree[j].ResetBullet();
+        }
+    }
+
+    public void TimeScaleChange(float timeScale)
+    {
+        _bossMoveTween.timeScale = timeScale;
+        foreach(var dummyTween in _dummyMoveTween)
+        {
+            dummyTween.timeScale = timeScale;
+        }
+    }
+
+    public void StartPause()
+    {
+        _bossMoveTween.timeScale = 0f;
+        foreach (var dummyTween in _dummyMoveTween)
+        {
+            dummyTween.timeScale = 0f;
+        }
+    }
+
+    public void EndPause()
+    {
+        _bossMoveTween.timeScale = 1f;
+        foreach (var dummyTween in _dummyMoveTween)
+        {
+            dummyTween.timeScale = 1f;
         }
     }
 }

@@ -20,17 +20,17 @@ public class PlayerMove : MonoBehaviour
     {
         if (!Input.GetButton("StopMove"))
         {
-            Move(controller.X,controller._playerRb);
+            Move(controller.X,controller._playerRb,controller.TimeScale);
         }
     }
 
     //キャラを左右に動かす処理
-    private void Move(float x,Rigidbody2D rb)
+    private void Move(float x,Rigidbody2D rb,float _timeScale)
     {
         var y = rb.velocity.y;
         var move = (Vector2.right * x).normalized * _dashSpeed;
         var dir = new Vector2(move.x, y);
-        rb.velocity = dir;
+        rb.velocity = dir * _timeScale;
     }
 
     // ジャンプの処理
