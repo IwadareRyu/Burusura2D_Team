@@ -3,7 +3,8 @@
 [Serializable]
 public class YuaiActions
 {
-    public DashAttack dashAttack = new();
-    public SampleAttack at2 = new();
-    public DropKunai dropKunai;
+    public DashAttack _dashAttack = new();
+    public SampleAttack _at2 = new();
+    public DropKunai _dropKunai;
+    public YuaiSpecialAttack _yuaiSpecialAttack = new();
 }

@@ -7,14 +7,19 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     BossState _currentActionState = BossState.StayState;
     AttackInterface _currentAction;
     [SerializeField] Image _timePanel;
+    [SerializeField] float _specialAttackHP = 4;
+    [SerializeField] SpecialAttackUI _specialAttackUI;
     IEnumerator _currentCoroutine;
     ChoiceActionInterface _enemyActions;
     Vector3 _tmpVelocity;
     float _tmpGravity;
+    bool _isSpecialAttackMode = false;
 
     void Start()
     {
         BaseInit();
+        _specialAttackUI.InitHPView(_specialAttackHP);
+        _specialAttackUI.gameObject.SetActive(false);
         _enemyActions = GetComponent<ChoiceActionInterface>();
         ChangeAction();
         if(_timePanel) _timePanel.gameObject.SetActive(false);
@@ -80,8 +85,16 @@ public class HPBossController : EnemyBase,PauseTimeInterface
                 _currentCoroutine = null;
             }
             _currentAction.ActionReset(this);
-            // 次に行動するアクションを決める。
-            ChangeAction();
+            if (_enemyActions.ChackSpecial())
+            {
+                // スペシャルアタック発動
+                SpecialAttack();
+            }
+            else
+            {
+                // 次に行動するアクションを決める。
+                ChangeAction();
+            }
         }
         if (_currentHP <= 0)
         {
@@ -99,6 +112,11 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public void SpecialAttack()
     {
+        ResetState();
+        _isSpecialAttackMode = true;
+        _specialAttackUI.gameObject.SetActive(true);
+        _specialAttackUI.HPDamageView();
+        _currentAction = _enemyActions.SelectSpecialAttack();
 
     }
 
@@ -117,11 +135,10 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public void StartPause()
     {
-        if(_isMove || _isAttack)
-        {
-            StopCoroutine(_currentCoroutine);
-            Debug.Log("Stopですわ！");
-        }
+        //if(_isMove || _isAttack)
+        //{
+        //    StopCoroutine(_currentCoroutine);
+        //}
         _timeScale = 0f;
         _tmpVelocity = _enemyRb.velocity;
         _enemyRb.velocity = Vector2.zero;
@@ -132,10 +149,10 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     public void EndPause()
     {
         _timeScale = 1f;
-        if (_isAttack || _isMove)
-        {
-            StartCoroutine(_currentCoroutine);
-        }
+        //if (_isMove || _isAttack)
+        //{
+        //    StartCoroutine(_currentCoroutine);
+        //}
         _enemyRb.velocity = _tmpVelocity;
         _enemyRb.gravityScale = _tmpGravity;
     }

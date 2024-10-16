@@ -30,6 +30,7 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     /// <param name="timeScale"></param>
     public void StartPauseManager()
     {
+        Time.timeScale = 0f;
         //ChangeTimeScaleAction.Invoke(_currentTimeScale);
         StartPauseAction.Invoke();
     }
@@ -37,7 +38,7 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     /// <summary>時間を動かして処理を再開する処理</summary>
     public void EndPauseManager()
     {
-        _currentTimeScale = _defaultTimeScale;
+        Time.timeScale = 1f;
         //ChangeTimeScaleAction.Invoke(_currentTimeScale);
         EndPauseAction.Invoke();
     }

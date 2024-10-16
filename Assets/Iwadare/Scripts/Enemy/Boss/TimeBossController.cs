@@ -45,11 +45,11 @@ public class TimeBossController : EnemyBase
         switch (attackStates)
         {
             case AttackStatesList.DashAttack:
-                return _attackStatesBoss1.dashAttack;
+                return _attackStatesBoss1._dashAttack;
             case AttackStatesList.Attack2:
-                return _attackStatesBoss1.at2;
+                return _attackStatesBoss1._at2;
         }
-        return _attackStatesBoss1.at2;
+        return _attackStatesBoss1._at2;
     }
 
     private void Update()
