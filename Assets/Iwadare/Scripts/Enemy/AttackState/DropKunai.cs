@@ -88,7 +88,6 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.MoveBullet();
-            while(enemy._timeScale == 0) yield return null;
             yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
         }
     }
@@ -98,7 +97,6 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.SetRay(spawnPoint.BulletDistance);
-            while (enemy._timeScale == 0) yield return null;
             yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
         }
     }

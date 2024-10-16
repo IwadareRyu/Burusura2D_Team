@@ -10,7 +10,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
 
     private void Start()
     {
-        _yuaiActions.dropKunai.Init();
+        _yuaiActions._dropKunai.Init();
     }
 
     public AttackInterface ChoiceAttack()
@@ -18,13 +18,13 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
         switch (_action[_currentHPAction]._attackState[ChoiceAction(_action[_currentHPAction]._attackState.Length)])
         {
             case AttackStatesList.DashAttack:
-                return _yuaiActions.dashAttack;
+                return _yuaiActions._dashAttack;
             case AttackStatesList.Attack2:
-                return _yuaiActions.at2;
+                return _yuaiActions._at2;
             case AttackStatesList.DropKunai:
-                return _yuaiActions.dropKunai;
+                return _yuaiActions._dropKunai;
         }
-        return _yuaiActions.at2;
+        return _yuaiActions._at2;
     }
 
     public bool ChackHP(float currentHpPersent)
@@ -39,11 +39,21 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
         return false;
     }
 
+    public bool ChackSpecial()
+    {
+        return _action[_currentHPAction]._specialAction;
+    }
+
     int ChoiceAction(int maxActionCount)
     {
         UnityEngine.Random.InitState(DateTime.Now.Millisecond);
         int ans = UnityEngine.Random.Range(0, 100);
         return ans % maxActionCount;
+    }
+
+    public AttackInterface SelectSpecialAttack()
+    {
+        return _yuaiActions._yuaiSpecialAttack;
     }
 
     [Serializable]
