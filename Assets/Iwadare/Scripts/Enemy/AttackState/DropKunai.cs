@@ -73,11 +73,11 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
     public IEnumerator Attack(EnemyBase enemy)
     {
         yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
-        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
+        yield return new WaitForSeconds(_attackCoolTime);
         yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo, enemy));
-        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
+        yield return new WaitForSeconds(_attackCoolTime);
         yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
-        yield return new WaitForSeconds(_attackCoolTime / enemy._timeScale);
+        yield return new WaitForSeconds(_attackCoolTime);
         Reset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
 
@@ -88,7 +88,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.MoveBullet();
-            yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
+            yield return new WaitForSeconds(_disAttackTime);
         }
     }
 
@@ -97,7 +97,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.SetRay(spawnPoint.BulletDistance);
-            yield return new WaitForSeconds(_disAttackTime / enemy._timeScale);
+            yield return new WaitForSeconds(_disAttackTime);
         }
     }
 

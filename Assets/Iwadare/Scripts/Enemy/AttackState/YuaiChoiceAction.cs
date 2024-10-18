@@ -11,6 +11,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
     private void Start()
     {
         _yuaiActions._dropKunai.Init();
+        _yuaiActions._yuaiSpecialAttack.Init();
     }
 
     public AttackInterface ChoiceAttack()
@@ -22,6 +23,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
             case AttackStatesList.Attack2:
                 return _yuaiActions._at2;
             case AttackStatesList.DropKunai:
+                _yuaiActions._dropKunai.gameObject.SetActive(true);
                 return _yuaiActions._dropKunai;
         }
         return _yuaiActions._at2;
@@ -53,6 +55,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
 
     public AttackInterface SelectSpecialAttack()
     {
+        _yuaiActions._yuaiSpecialAttack.gameObject.SetActive(true);
         return _yuaiActions._yuaiSpecialAttack;
     }
 
