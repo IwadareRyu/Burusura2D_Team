@@ -38,9 +38,9 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     /// <summary>時間を動かして処理を再開する処理</summary>
     public void EndPauseManager()
     {
+        EndPauseAction.Invoke();
         Time.timeScale = 1f;
         //ChangeTimeScaleAction.Invoke(_currentTimeScale);
-        EndPauseAction.Invoke();
     }
 
     /// <summary>デフォルトのゲームスピードを上げる処理</summary>

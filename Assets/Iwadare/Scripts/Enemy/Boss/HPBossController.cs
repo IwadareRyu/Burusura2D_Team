@@ -6,7 +6,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 {
     BossState _currentActionState = BossState.StayState;
     AttackInterface _currentAction;
-    [SerializeField] Image _timePanel;
+    public Image _timePanel;
     [SerializeField] float _specialAttackHP = 4;
     [SerializeField] SpecialAttackUI _specialAttackUI;
     IEnumerator _currentCoroutine;
@@ -21,8 +21,17 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         _specialAttackUI.InitHPView(_specialAttackHP);
         _specialAttackUI.gameObject.SetActive(false);
         _enemyActions = GetComponent<ChoiceActionInterface>();
-        ChangeAction();
-        if(_timePanel) _timePanel.gameObject.SetActive(false);
+        if (_enemyActions.ChackSpecial())
+        {
+            // スペシャルアタック発動
+            SpecialAttack();
+        }
+        else
+        {
+            // 次に行動するアクションを決める。
+            ChangeAction();
+        }
+        if (_timePanel) _timePanel.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -117,7 +126,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         _specialAttackUI.gameObject.SetActive(true);
         _specialAttackUI.HPDamageView();
         _currentAction = _enemyActions.SelectSpecialAttack();
-
+        _bossState = BossState.StayState;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
