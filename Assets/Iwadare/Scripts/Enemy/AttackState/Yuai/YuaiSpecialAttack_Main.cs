@@ -4,25 +4,23 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class YuaiSpecialAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
+[RequireComponent(typeof(YuaiSpecialAttack_UI))]
+public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
+    YuaiSpecialAttack_UI _yuaiUI;
     [SerializeField] float _thinkingTime = 30f;
     [SerializeField] float _stayTime = 1f;
     [SerializeField] float _moveTime = 3f;
     [SerializeField] float _disAttackTime = 0.1f;
     [SerializeField] float _attackCoolTime = 2f;
     [SerializeField] Transform _bossPos;
-    [SerializeField] Canvas _uiCanvas;
-    [SerializeField] Canvas _specialUI;
-    [SerializeField] Image _fadeImage;
-    [SerializeField] Animator _bossFadeAnim;
-    [SerializeField] AnimationClip _bossFadeAnimation;
+    [SerializeField] Transform _bossHidePos;
     [SerializeField] CinemachineVirtualCamera _BossUpCamera;
     [SerializeField] MimicryPos[] _mimicryPos;
     CinemachineBrain _cameraBrain;
     float _currentTime = 0f;
-    int randomNumber = 0;
+    int _randomNumber = 0;
+    public int RandomNumber => _randomNumber;
 
     public void UnityActionSet()
     {
@@ -41,8 +39,8 @@ public class YuaiSpecialAttack : MonoBehaviour, AttackInterface, PauseTimeInterf
 
     public void Init()
     {
-        if (_specialUI) _specialUI.enabled = false;
-        _bossFadeAnim.gameObject.SetActive(false);
+        _yuaiUI = GetComponent<YuaiSpecialAttack_UI>();
+        _yuaiUI.Init();
         _cameraBrain = Camera.main.GetComponent<CinemachineBrain>();
         foreach (var mimic in _mimicryPos)
         {
@@ -70,21 +68,33 @@ public class YuaiSpecialAttack : MonoBehaviour, AttackInterface, PauseTimeInterf
     public IEnumerator Move(EnemyBase enemy)
     {
         GameStateManager.Instance.ChangeState(GameState.BattleStopState);
-        enemy.transform.DOMove(_bossPos.position,_moveTime);
-        if (_uiCanvas) _uiCanvas.enabled = false;
+        enemy.transform.DOMove(_bossPos.position, _moveTime);
         if (_BossUpCamera) _BossUpCamera.Priority = 20;
-        if (_specialUI) _specialUI.enabled = true;
+        _yuaiUI.BossUpStart();
         yield return new WaitForSeconds(_moveTime);
         if (_BossUpCamera) _BossUpCamera.Priority = 0;
-        if (_uiCanvas) _uiCanvas.enabled = true;
-        if (_specialUI) _specialUI.enabled = false;
+        _yuaiUI.BossUpEnd(_thinkingTime);
         yield return new WaitForSeconds(1f);
-        _bossFadeAnim.gameObject.SetActive(true);
-        yield return StartCoroutine(FadeManager.Instance.CustomFadeIn(_fadeImage,0.5f));
-        _bossFadeAnim.Play(_bossFadeAnimation.name);
-        yield return StartCoroutine(FadeManager.Instance.FadeIn());
-
+        yield return StartCoroutine(_yuaiUI.FadeInBoss());
+        SetYuaiUI();
+        enemy.transform.position = _bossHidePos.position;
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(_yuaiUI.FadeOutBoss());
+        GameStateManager.Instance.ChangeState(GameState.InBattleState);
         yield return null;
+    }
+
+    public void SetYuaiUI()
+    {
+        _randomNumber = RandomNumberSet(_mimicryPos.Length);
+        for(var i = 0;i < _mimicryPos.Length;i++)
+        {
+            _mimicryPos[i]._hitPosColider.gameObject.SetActive(true);
+            if (i == _randomNumber)
+            {
+                _mimicryPos[i]._hitPosImage.enabled = true;
+            }
+        }
     }
 
     public IEnumerator Attack(EnemyBase enemy)
@@ -97,7 +107,7 @@ public class YuaiSpecialAttack : MonoBehaviour, AttackInterface, PauseTimeInterf
         throw new System.NotImplementedException();
     }
 
-    public int RandomNumber(int max)
+    public int RandomNumberSet(int max)
     {
         UnityEngine.Random.InitState(DateTime.Now.Millisecond);
         return UnityEngine.Random.Range(0, max);
