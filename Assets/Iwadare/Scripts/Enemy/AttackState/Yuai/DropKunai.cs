@@ -64,7 +64,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
                 k++;
             }
             enemy.SpawnBulletRef(_bulletSpawnEnemyThree[j]);
-            yield return new WaitForSeconds((_moveTime / _bulletSpawnEnemyThree.Length / 2));
+            yield return WaitforSecondsCashe.Wait((_moveTime / _bulletSpawnEnemyThree.Length / 2));
         }
         yield return null;
         enemy._bossState = EnemyBase.BossState.AttackState;
@@ -73,11 +73,11 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
     public IEnumerator Attack(EnemyBase enemy)
     {
         yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
-        yield return new WaitForSeconds(_attackCoolTime);
+        yield return WaitforSecondsCashe.Wait(_attackCoolTime);
         yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo, enemy));
-        yield return new WaitForSeconds(_attackCoolTime);
+        yield return WaitforSecondsCashe.Wait(_attackCoolTime);
         yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
-        yield return new WaitForSeconds(_attackCoolTime);
+        yield return WaitforSecondsCashe.Wait(_attackCoolTime);
         Reset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
 
@@ -88,7 +88,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.MoveBullet();
-            yield return new WaitForSeconds(_disAttackTime);
+            yield return WaitforSecondsCashe.Wait(_disAttackTime);
         }
     }
 
@@ -97,7 +97,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         foreach (var spawnPoint in bulletSpawns)
         {
             spawnPoint.SetRay(spawnPoint.BulletDistance);
-            yield return new WaitForSeconds(_disAttackTime);
+            yield return WaitforSecondsCashe.Wait(_disAttackTime);
         }
     }
 

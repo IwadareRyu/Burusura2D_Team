@@ -45,7 +45,7 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
         if (_specialUI && !_isBossUpFade) _specialUI.enabled = false;
     }
 
-    void TimerSet(float thinkingTime)
+    public void TimerSet(float thinkingTime)
     {
         var _timerText = _timerPanel.GetComponentInChildren<Text>();
         if (!_timerText) return;
@@ -66,9 +66,16 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     {
         _yuaiSearchText.gameObject.SetActive(true);
         yield return StartCoroutine(FadeManager.Instance.FadeOut());
-        yield return new WaitForSeconds(1f);
+        yield return WaitforSecondsCashe.Wait(1f);
         yield return StartCoroutine(FadeManager.Instance.CustomFadeOut(_fadeImage,0.5f));
+    }
 
+    public void UIReset()
+    {
+        _timerPanel.gameObject.SetActive(false);
+        _yuaiSearchText.gameObject.SetActive(false);
+        _bossUpFadeAnim.gameObject.SetActive(false);
+        _bossFadeAnim.gameObject.SetActive(false);
     }
 
 }

@@ -228,19 +228,11 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 
     public void StartPause()
     {
-        //if (_spawnCoroutine != null)
-        //{
-        //    StopCoroutine(_spawnCoroutine);
-        //}
         _timeScale = 0f;
     }
 
     public void EndPause()
     {
         _timeScale = 1f;
-        //if (_spawnCoroutine != null)
-        //{
-        //    StartCoroutine(_spawnCoroutine);
-        //}
     }
 }
