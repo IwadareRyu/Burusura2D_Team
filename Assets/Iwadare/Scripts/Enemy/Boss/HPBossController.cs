@@ -8,6 +8,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     AttackInterface _currentAction;
     public Image _timePanel;
     [SerializeField] float _specialAttackHP = 4;
+    float _currentSpecialAttackHP;
     [SerializeField] SpecialAttackUI _specialAttackUI;
     IEnumerator _currentCoroutine;
     ChoiceActionInterface _enemyActions;
@@ -20,6 +21,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         BaseInit();
         _specialAttackUI.InitHPView(_specialAttackHP);
         _specialAttackUI.gameObject.SetActive(false);
+        _currentSpecialAttackHP = _specialAttackHP;
         _enemyActions = GetComponent<ChoiceActionInterface>();
         if (_enemyActions.ChackSpecial())
         {
@@ -85,7 +87,12 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public override void HPChack()
     {
-        if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
+
+        if(_isSpecialAttackMode)
+        {
+            AddSpecialHPDamage();
+        }
+        else if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
         {
             _bossState = BossState.NextActionState;
             if (_currentCoroutine != null)
@@ -112,21 +119,32 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         }
     }
 
+    public void AddSpecialHPDamage()
+    {
+        _currentSpecialAttackHP--;
+        _specialAttackUI.HPDamageView();
+        if (_currentSpecialAttackHP <= 0f)
+        {
+            _isSpecialAttackMode = false;
+            _currentAction.ActionReset(this);
+            ChangeAction();
+        }
+    }
+
     void ChangeAction()
     {
         ResetState();
-        _currentAction = _enemyActions.ChoiceAttack();
+        if (_isSpecialAttackMode) _currentAction = _enemyActions.SelectSpecialAttack();
+        else _currentAction = _enemyActions.ChoiceAttack();
         _bossState = BossState.StayState;
     }
 
     public void SpecialAttack()
     {
-        ResetState();
         _isSpecialAttackMode = true;
+        GuardMode();
         _specialAttackUI.gameObject.SetActive(true);
-        _specialAttackUI.HPDamageView();
-        _currentAction = _enemyActions.SelectSpecialAttack();
-        _bossState = BossState.StayState;
+        ChangeAction();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -144,10 +162,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public void StartPause()
     {
-        //if(_isMove || _isAttack)
-        //{
-        //    StopCoroutine(_currentCoroutine);
-        //}
         _timeScale = 0f;
         _tmpVelocity = _enemyRb.velocity;
         _enemyRb.velocity = Vector2.zero;
@@ -158,10 +172,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     public void EndPause()
     {
         _timeScale = 1f;
-        //if (_isMove || _isAttack)
-        //{
-        //    StartCoroutine(_currentCoroutine);
-        //}
         _enemyRb.velocity = _tmpVelocity;
         _enemyRb.gravityScale = _tmpGravity;
     }

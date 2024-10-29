@@ -36,8 +36,9 @@ public class EnemyBase : MonoBehaviour
         DisplayHP();
     }
 
-    public void AddDamage(float damage)
+    public void AddDamage(float damage = 1f)
     {
+        if (_guard) return;
         _currentHP -= damage;
         DisplayHP();
         HPChack();
@@ -66,13 +67,11 @@ public class EnemyBase : MonoBehaviour
 
     public void GuardMode()
     {
-
         _guard = true;
     }
 
     public void BreakGuardMode()
     {
-
         _guard = false;
     }
 

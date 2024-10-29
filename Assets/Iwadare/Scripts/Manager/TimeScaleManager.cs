@@ -22,6 +22,7 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     /// <param name="timeScale"></param>
     public void TimeScaleChange(float timeScale)
     {
+        WaitforSecondsCashe._waitTimeScale = timeScale;
         _currentTimeScale = timeScale;
         ChangeTimeScaleAction.Invoke(_currentTimeScale);
     }
@@ -30,17 +31,17 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     /// <param name="timeScale"></param>
     public void StartPauseManager()
     {
+        WaitforSecondsCashe._waitTimeScale = 0f;
         Time.timeScale = 0f;
-        //ChangeTimeScaleAction.Invoke(_currentTimeScale);
         StartPauseAction.Invoke();
     }
 
     /// <summary>時間を動かして処理を再開する処理</summary>
     public void EndPauseManager()
     {
+        WaitforSecondsCashe._waitTimeScale = 1f;
         EndPauseAction.Invoke();
         Time.timeScale = 1f;
-        //ChangeTimeScaleAction.Invoke(_currentTimeScale);
     }
 
     /// <summary>デフォルトのゲームスピードを上げる処理</summary>

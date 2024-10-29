@@ -42,7 +42,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
     {
         UnityActionSet();
         _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _moveTime).SetLink(enemy.gameObject);
-        yield return new WaitForSeconds(_moveTime);
+        yield return WaitforSecondsCashe.Wait(_moveTime);
         _currentTrans++;
         Debug.Log("Attackに移行");
         enemy._bossState = EnemyBase.BossState.AttackState;
@@ -54,7 +54,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
         for (; _currentTrans < _trans.Length; _currentTrans++)
         {
             _bulletSpawnEnemy.DangerousSign();
-            yield return new WaitForSeconds(_stayTime);
+            yield return WaitforSecondsCashe.Wait(_stayTime);
             _moveTween = enemy.transform.DOMove(
                 _trans[_currentTrans].position, 
                 _attackTime / (Time.timeScale * enemy._timeScale)
