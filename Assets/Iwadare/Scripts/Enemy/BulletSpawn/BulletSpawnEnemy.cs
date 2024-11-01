@@ -117,7 +117,7 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
         }
     }
 
-    public void DangerousSignStart(float currentCoolTime,float dangerousTime)
+    void DangerousSignStart(float currentCoolTime,float dangerousTime)
     {
         if (_isDangerousDisplay && !_isDangerous && currentCoolTime > dangerousTime)
         {
@@ -126,9 +126,9 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
         }
     }
 
-    public void DangerousSign()
+    public void DangerousSign(float dangerousSpawnBeforeTime = 1f)
     {
-        _dangerousDisplayEnemy.DangerousStart(_dangerousSpawnBeforeTime);
+        _dangerousDisplayEnemy.DangerousStart(dangerousSpawnBeforeTime);
     }
 
     /// <summary>弾スポーンの要素を決めるメソッド</summary>

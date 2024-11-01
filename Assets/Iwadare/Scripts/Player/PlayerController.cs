@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] PhysicsMaterial2D _playerPhysicFric;
     [SerializeField] PhysicsMaterial2D _playerPhysicNonFric;
 
-
     /// <summary>移動系の変数</summary>
     PlayerMove _moveScript;
 
@@ -48,6 +47,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
 
     [SerializeField] bool _isInvisible;
+    [SerializeField] SpriteRenderer _guardSprite;
+    bool _isGuard = false;
 
     float _timeScale;
     public float TimeScale => _timeScale;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void Init()
     {
+        if(!_isInvisible) _guardSprite.enabled = false;
         _playerState = PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
@@ -161,7 +163,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void AddDamage(int damage)
     {
-        if (_isInvisible || _playerState == PlayerState.InvisibleState) return;
+        if (_isInvisible || _isGuard ||_playerState == PlayerState.InvisibleState) return;
         _currentPlayerHP -= damage;
         if (_currentPlayerHP <= 0)
         {
@@ -203,6 +205,18 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _playerRb.velocity = _tmpVelocity;
         _playerRb.gravityScale = _tmpGravity;
     }
+
+    public void StartGuardMode()
+    {
+        _guardSprite.enabled = true;
+        _isGuard = true;
+    }
+
+    public void EndGuardMode()
+    {
+        if(!_isInvisible) _guardSprite.enabled = false;
+        _isGuard = false;
+     }
 
     public void HitStopStart(float _hitStopPower)
     {

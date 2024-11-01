@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
+    PlayerController _player;
+    public PlayerController Player => _player;
     [Tooltip("敵のMaxHP"), Header("敵のMaxHP")]
     [SerializeField] float _maxHP = 100;
     public float MaxHP => _maxHP;
@@ -30,6 +32,7 @@ public class EnemyBase : MonoBehaviour
 
     public void BaseInit()
     {
+        _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         _enemyRb = GetComponent<Rigidbody2D>();
         if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
         _currentHP = MaxHP;

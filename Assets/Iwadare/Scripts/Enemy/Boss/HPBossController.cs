@@ -126,8 +126,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         if (_currentSpecialAttackHP <= 0f)
         {
             _isSpecialAttackMode = false;
-            _currentAction.ActionReset(this);
-            ChangeAction();
         }
     }
 

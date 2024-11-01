@@ -19,6 +19,7 @@ public class WaveSpawnEnemy : MonoBehaviour
     {
         _tmpDistance = bulletSpawnEnemy.BulletDistance;
     }
+
     public IEnumerator WaveSpawn(BulletSpawnEnemy bulletSpawnEnemy,CircleSpawn circleSpawn)
     {
         bulletSpawnEnemy._bulletDistance = _tmpDistance;

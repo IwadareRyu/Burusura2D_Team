@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: Fixly Virtual Camera (1)
+  - m_From: MainPositionCamera
     m_To: BossUpCamera
     m_Blend:
       m_Style: 6
@@ -25,10 +25,32 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: BossUpCamera
-    m_To: Fixly Virtual Camera (1)
+    m_To: MainPositionCamera
     m_Blend:
       m_Style: 1
       m_Time: 1
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: MainPositionCamera
+    m_To: CenterUpCamera
+    m_Blend:
+      m_Style: 1
+      m_Time: 1.5
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: CenterUpCamera
+    m_To: MainPositionCamera
+    m_Blend:
+      m_Style: 1
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
