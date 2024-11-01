@@ -4,22 +4,23 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
-[RequireComponent(typeof(YuaiSpecialAttack_UI))]
+[RequireComponent(typeof(YuaiSpecialAttack_UI),typeof(YuaiSpecialAttack_Bullet))]
 public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
     YuaiSpecialAttack_UI _yuaiUI;
+    YuaiSpecialAttack_Bullet _yuaiAttack;
     [SerializeField] float _thinkingTime = 30f;
     [SerializeField] float _stayTime = 1f;
     [SerializeField] float _moveTime = 3f;
     [SerializeField] float _disAttackTime = 0.1f;
     [SerializeField] float _attackCoolTime = 2f;
+    [SerializeField] float _dangerousTime = 1f;
+    [SerializeField] float _attackTime = 10f;
     [SerializeField] Transform _bossPos;
     [SerializeField] Transform _bossHidePos;
-    [SerializeField] CinemachineVirtualCamera _BossUpCamera;
+    [SerializeField] CinemachineVirtualCamera _bossUpCamera;
+    [SerializeField] CinemachineVirtualCamera _centerUpCamera;
     [SerializeField] MimicryPos[] _mimicryPos;
-    CinemachineBrain _cameraBrain;
-    WaitForSeconds _sleep;
     float _currentTime = 0f;
     int _randomNumber = 0;
     int _answerNumber = -1;
@@ -46,7 +47,8 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     {
         _yuaiUI = GetComponent<YuaiSpecialAttack_UI>();
         _yuaiUI.Init();
-        _cameraBrain = Camera.main.GetComponent<CinemachineBrain>();
+        _yuaiAttack = GetComponent<YuaiSpecialAttack_Bullet>();
+        _yuaiAttack.Init();
         foreach (var mimic in _mimicryPos)
         {
             mimic._hitPosColider.gameObject.SetActive(false);
@@ -74,10 +76,10 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     {
         GameStateManager.Instance.ChangeState(GameState.BattleStopState);
         enemy.transform.DOMove(_bossPos.position, _moveTime);
-        if (_BossUpCamera) _BossUpCamera.Priority = 20;
+        if (_bossUpCamera) _bossUpCamera.Priority = 20;
         _yuaiUI.BossUpStart();
         yield return WaitforSecondsCashe.Wait(_moveTime);
-        if (_BossUpCamera) _BossUpCamera.Priority = 0;
+        if (_bossUpCamera) _bossUpCamera.Priority = 0;
         _yuaiUI.BossUpEnd(_thinkingTime);
         yield return WaitforSecondsCashe.Wait(1f);
         yield return StartCoroutine(_yuaiUI.FadeInBoss());
@@ -92,7 +94,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     public void SetYuaiUI()
     {
         _randomNumber = RandomNumberSet(_mimicryPos.Length);
-        for(var i = 0;i < _mimicryPos.Length;i++)
+        for (var i = 0; i < _mimicryPos.Length; i++)
         {
             _mimicryPos[i]._hitPosColider.gameObject.SetActive(true);
             if (i == _randomNumber)
@@ -104,13 +106,15 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
 
     public IEnumerator Attack(EnemyBase enemy)
     {
-        for(var time = 0f;time < _thinkingTime;time += Time.deltaTime * enemy._timeScale)
+        for (var time = 0f; time < _thinkingTime; time += Time.deltaTime * enemy._timeScale)
         {
-            for(var i = 0;i < _mimicryPos.Length;i++)
+            for (var i = 0; i < _mimicryPos.Length; i++)
             {
                 if (_mimicryPos[i]._hitPosColider._isHit == true)
                 {
                     _answerNumber = i;
+                    _yuaiUI.ChangeYuaiSearchText();
+                    _yuaiUI.ChangeSearchText($"選択\n{_mimicryPos[i]._hitPosText}");
                     _isSelect = true;
                     break;
                 }
@@ -119,28 +123,61 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             _yuaiUI.TimerSet(_thinkingTime - time);
             yield return new WaitForFixedUpdate();
         }
-        if(_answerNumber == _randomNumber)
-        {
-            enemy.HPChack();
-        }
-        enemy.transform.position = _mimicryPos[_randomNumber]._hitPosColider.transform.position;
-        enemy.ResetState();
-        Reset(enemy);
-        enemy._bossState = EnemyBase.BossState.ChangeActionState;
-    }
 
-    void Reset(EnemyBase enemy)
-    {
-        _isAnswer = false;
-        _isSelect = false;
-        _answerNumber = -1;
-        _yuaiUI.UIReset();
         foreach (var mimic in _mimicryPos)
         {
             mimic._hitPosColider._isHit = false;
             mimic._hitPosColider.gameObject.SetActive(false);
             mimic._hitPosImage.enabled = false;
         }
+        _yuaiUI.ChangeMainUIDisable();
+        _centerUpCamera.Priority = 20;
+        yield return WaitforSecondsCashe.Wait(2f);
+        enemy.transform.position = _mimicryPos[_randomNumber]._hitPosColider.transform.position;
+        _centerUpCamera.Priority = 0;
+        yield return WaitforSecondsCashe.Wait(1f);
+        _yuaiUI.ChangeMainUIEnable();
+        if (_answerNumber == _randomNumber)
+        {
+            _yuaiUI.ChangeSearchText("正解！");
+            _isAnswer = true;
+            enemy.Player.StartGuardMode();
+            enemy.HPChack();
+        }
+        else
+        {
+            _yuaiUI.ChangeSearchText("不正解！");
+        }
+        yield return WaitforSecondsCashe.Wait(_attackCoolTime);
+        for(var i = 0;i < _mimicryPos.Length;i++)
+        {
+            if(!_isAnswer || i != _answerNumber)
+            {
+                _yuaiAttack.RefDangerousSign(_mimicryPos[i]._bulletSpawn,_dangerousTime);
+            }
+        }
+        yield return WaitforSecondsCashe.Wait(_dangerousTime);
+        for (var i = 0; i < _mimicryPos.Length; i++)
+        {
+            if (!_isAnswer || i != _answerNumber)
+            {
+                _yuaiAttack.RefSpawnBullet(_mimicryPos[i]._bulletSpawn);
+            }
+        }
+        yield return WaitforSecondsCashe.Wait(_attackTime);
+        enemy.Player.EndGuardMode();
+        enemy.ResetState();
+        ResetAction(enemy);
+        enemy._bossState = EnemyBase.BossState.ChangeActionState;
+    }
+
+    void ResetAction(EnemyBase enemy)
+    {
+        
+        _isAnswer = false;
+        _isSelect = false;
+        _answerNumber = -1;
+        _yuaiUI.UIReset();
         if (enemy._useGravity)
         {
             enemy._enemyRb.gravityScale = 1;
@@ -151,7 +188,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     public void ActionReset(EnemyBase enemy)
     {
         enemy.BreakGuardMode();
-        Reset(enemy);
+        ResetAction(enemy);
     }
 
     public int RandomNumberSet(int max)
@@ -162,7 +199,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
 
     public void TimeScaleChange(float timeScale)
     {
-        throw new NotImplementedException();
+
     }
 
     public void StartPause()
@@ -172,7 +209,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
 
     public void EndPause()
     {
-        throw new NotImplementedException();
+
     }
 
     [Serializable]
@@ -180,5 +217,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     {
         public YuaiSpecialAttack_Col _hitPosColider;
         public Text _hitPosImage;
+        public string _hitPosText;
+        public BulletSpawnEnemy _bulletSpawn; 
     }
 }

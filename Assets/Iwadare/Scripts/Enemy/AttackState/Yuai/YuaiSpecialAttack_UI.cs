@@ -9,6 +9,7 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     [SerializeField] Canvas _specialUI;
     [SerializeField] Image _fadeImage;
     [SerializeField] Text _yuaiSearchText;
+    [SerializeField] Text _worldYuaiText;
     [SerializeField] Image _timerPanel;
     [SerializeField] Animator _bossFadeAnim;
     [SerializeField] AnimationClip _bossFadeAnimationClip;
@@ -22,7 +23,11 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
         _bossFadeAnim.gameObject.SetActive(false);
         _bossUpFadeAnim.gameObject.SetActive(false);
         _yuaiSearchText.gameObject.SetActive(false);
+        _worldYuaiText.gameObject.SetActive(false);
     }
+
+    public void ChangeMainUIEnable() { _uiCanvas.enabled = true; }
+    public void ChangeMainUIDisable() { _uiCanvas.enabled = false; }
 
     public void BossUpStart()
     {
@@ -32,14 +37,13 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
             _bossUpFadeAnim.gameObject.SetActive(true);
             _bossUpFadeAnim.Play(_bossUpFadeAnimClip.name);
         }
-
-        if (_uiCanvas) _uiCanvas.enabled = false;
+        ChangeMainUIDisable();
     }
 
     public void BossUpEnd(float thinkingTime)
     {
         _timerPanel.enabled = true;
-        if (_uiCanvas) _uiCanvas.enabled = true;
+        ChangeMainUIEnable();
         _timerPanel.gameObject.SetActive(true);
         TimerSet(thinkingTime);
         if (_specialUI && !_isBossUpFade) _specialUI.enabled = false;
@@ -74,8 +78,20 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     {
         _timerPanel.gameObject.SetActive(false);
         _yuaiSearchText.gameObject.SetActive(false);
+        _worldYuaiText.gameObject.SetActive(false);
         _bossUpFadeAnim.gameObject.SetActive(false);
         _bossFadeAnim.gameObject.SetActive(false);
+    }
+
+    public void ChangeYuaiSearchText()
+    {
+        _yuaiSearchText.gameObject.SetActive(false);
+        _worldYuaiText.gameObject.SetActive(true);
+    }
+
+    public void ChangeSearchText(string text)
+    {
+        _worldYuaiText.text = text;
     }
 
 }

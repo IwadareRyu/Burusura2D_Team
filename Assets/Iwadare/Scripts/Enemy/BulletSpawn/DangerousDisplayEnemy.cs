@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
 {
 
     [SerializeField] Sprite _dangerousSprite;
     SpriteRenderer _dangerousSpriteRenderer;
+    [SerializeField] Image _dangerousImage;
     float _displayTime = 1f;
     float _currentDisplayTime;
     Color _currentColor;
@@ -16,12 +18,15 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
     float _currentMatualTime;
     bool _isDengerous = false;
     float _timeScale = 1f;
+    [SerializeField] bool _isUseImage;
+
     // Start is called before the first frame update
     void Start()
     {
         _currentMatualTime = _defaultMatualTime;
         _dangerousSpriteRenderer = GetComponent<SpriteRenderer>();
-        _dangerousSpriteRenderer.sprite = null;
+        if (_isUseImage) _dangerousImage.enabled = false;
+        else _dangerousSpriteRenderer.sprite = null;
     }
 
     private void OnEnable()
@@ -55,7 +60,7 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
             _currentDisplayTime += Time.deltaTime * _timeScale;
             if (_currentDisplayTime > _displayTime)
             {
-                Reset();
+                ActionReset();
             }
         }
     }
@@ -64,27 +69,43 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
     {
         if (_isDengerous) return;
         _displayTime = displayTime;
-        _dangerousSpriteRenderer.sprite = _dangerousSprite;
-        _dangerousSpriteRenderer.color = _lightUpColor;
+        if (_isUseImage)
+        {
+            _dangerousImage.enabled = true;
+            _dangerousImage.sprite = _dangerousSprite;
+            _dangerousImage.color = _lightUpColor;
+        }
+        else
+        {
+            _dangerousSpriteRenderer.sprite = _dangerousSprite;
+            _dangerousSpriteRenderer.color = _lightUpColor;
+        }
         _currentColor = _lightDownColor;
         _isDengerous = true;
     }
 
     public void RepeatLight()
     {
-        _dangerousSpriteRenderer.color = _currentColor;
+        if (_isUseImage)
+        {
+            _dangerousImage.color = _currentColor;
+        }
+        else
+        {
+            _dangerousSpriteRenderer.color = _currentColor;
+        }
         if (_currentColor == _lightUpColor) _currentColor = _lightDownColor;
         else _currentColor = _lightUpColor;
     }
 
 
-    private void Reset()
+    private void ActionReset()
     {
         CancelInvoke("RepeatLight");
         _isDengerous = false;
         _currentDisplayTime = 0;
-        _currentMatualTime = 0;
-        _dangerousSpriteRenderer.sprite = null;
+        if (_isUseImage) _dangerousImage.enabled = false;
+        else _dangerousSpriteRenderer.sprite = null;
     }
 
     public void TimeScaleChange(float timeScale)
