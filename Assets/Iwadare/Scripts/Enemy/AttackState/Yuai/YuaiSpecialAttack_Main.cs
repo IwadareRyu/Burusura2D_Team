@@ -123,6 +123,12 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             _yuaiUI.TimerSet(_thinkingTime - time);
             yield return new WaitForFixedUpdate();
         }
+        if(!_isSelect)
+        {
+            _answerNumber = -1;
+            _yuaiUI.ChangeYuaiSearchText();
+            _yuaiUI.ChangeSearchText($"選択\nなし");
+        }
 
         foreach (var mimic in _mimicryPos)
         {
