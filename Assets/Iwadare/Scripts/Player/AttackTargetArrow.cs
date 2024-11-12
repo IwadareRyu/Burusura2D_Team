@@ -23,7 +23,7 @@ public class AttackTargetArrow : MonoBehaviour
     public void Init(PlayerController playerController)
     {
         _controller = playerController;
-        PlayerDirection(playerController.PlayerSprite.localScale);
+        PlayerDirection(playerController.PlayerSprite.transform.localScale);
         _playerCameraFraming = _playerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
@@ -69,7 +69,7 @@ public class AttackTargetArrow : MonoBehaviour
         CameraMove(_x);
         if (_controller.IsGround && rad < 0)
         {
-            var dir = _controller.PlayerSprite.localScale.x;
+            var dir = _controller.PlayerSprite.transform.localScale.x;
             CameraMove(dir / Mathf.Abs(dir));
             return _rotateGap * (dir / Mathf.Abs(dir));
         }   // 下方向入力で、Playerが地面についている場合、Playerが向いている方向を返す。
@@ -101,7 +101,7 @@ public class AttackTargetArrow : MonoBehaviour
         var difY = _arrowObj.transform.position.y - transform.position.y;
         if (Mathf.Atan2(difX, difY) * Mathf.Rad2Deg < 0)
         {
-            PlayerDirection(_controller.PlayerSprite.localScale);
+            PlayerDirection(_controller.PlayerSprite.transform.localScale);
         }
     }
 

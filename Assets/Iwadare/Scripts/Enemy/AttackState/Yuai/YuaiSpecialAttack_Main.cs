@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Spine.Unity;
+using Spine.Unity.Examples;
 [RequireComponent(typeof(YuaiSpecialAttack_UI),typeof(YuaiSpecialAttack_Bullet))]
 public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
@@ -122,6 +124,12 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             if (_isSelect) break;
             _yuaiUI.TimerSet(_thinkingTime - time);
             yield return new WaitForFixedUpdate();
+        }
+        if(!_isSelect)
+        {
+            _answerNumber = -1;
+            _yuaiUI.ChangeYuaiSearchText();
+            _yuaiUI.ChangeSearchText($"選択\nなし");
         }
 
         foreach (var mimic in _mimicryPos)

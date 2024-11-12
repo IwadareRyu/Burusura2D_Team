@@ -489,6 +489,22 @@ InputManager:
     m_Name: StopMove
     descriptiveName: 
     descriptiveNegativeName: 
+    negativeButton: left ctrl
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Avoid
+    descriptiveName: 
+    descriptiveNegativeName: 
     negativeButton: left shift
     positiveButton: 
     altNegativeButton: 

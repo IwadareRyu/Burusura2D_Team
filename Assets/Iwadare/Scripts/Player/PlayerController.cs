@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [Tooltip("プレイヤーのアニメーション")]
     public Animator _playerAnim;
     [Tooltip("プレイヤーの左右反転させるスプライト")]
-    [SerializeField] Transform _playerSprite;
-    public Transform PlayerSprite => _playerSprite;
+    [SerializeField] SpriteRenderer _playerSprite;
+    public SpriteRenderer PlayerSprite => _playerSprite;
 
     [NonSerialized] public Rigidbody2D _playerRb;
 
@@ -39,8 +39,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     bool _isAttackTime = false;
 
     [Tooltip("Playerの状態")]
-    PlayerState _playerState;
-    public PlayerState PlayerState => _playerState;
+    [NonSerialized] public PlayerState _playerState;
 
     [SerializeField] float _invisibleTime = 0.5f;
     float _currentInvisibleTime = 0f;
@@ -49,6 +48,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] bool _isInvisible;
     [SerializeField] SpriteRenderer _guardSprite;
     bool _isGuard = false;
+    [NonSerialized]public bool _isAvoidCoolTime = false;
 
     float _timeScale;
     public float TimeScale => _timeScale;
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public void Init()
     {
         if(!_isInvisible) _guardSprite.enabled = false;
-        _playerState = PlayerState.NormalState;
+        _playerState |= PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
         TimeScaleManager.StartPauseAction += StartPause;
@@ -85,24 +85,38 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     // Update is called once per frame
     void Update()
     {
-        if (_playerState != PlayerState.DeathState && GameStateManager.Instance.GameState == GameState.InBattleState)
+        Debug.Log(_playerState);
+        if ((int)(_playerState & PlayerState.DeathState) == 0 && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
-            _x = Input.GetAxisRaw("Horizontal");
-            FlipX(_x);
-            _moveScript.MoveUpdate(this);
-            if (Input.GetButton("Fire1") && !_isAttackTime)
+            if ((int)(_playerState & PlayerState.AvoidState) == 0)
             {
-                _isAttackTime = true;
+                _x = Input.GetAxisRaw("Horizontal");
+                FlipX(_x);
+                _moveScript.MoveUpdate(this);
+            }
+
+            if (Input.GetButton("Fire1") && (int)(_playerState & PlayerState.AttackState) == 0)
+            {
+                _playerState |= PlayerState.AttackState;
                 StartCoroutine(Attack());
             }
 
-            if (_playerState == PlayerState.InvisibleState)
+            if(Input.GetButton("Avoid") 
+                && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0
+                && !_isAvoidCoolTime)
+            {
+                _playerState |= PlayerState.AvoidState;
+                _playerState &= ~PlayerState.NormalState;
+                StartCoroutine(_moveScript.Avoidance(this,_playerRb,_playerSprite));
+            }
+
+            if ((int)(_playerState & PlayerState.InvisibleState) != 0)
             {
                 _currentInvisibleTime += Time.deltaTime;
                 if (_currentInvisibleTime >= _invisibleTime)
                 {
                     _currentInvisibleTime = 0;
-                    _playerState = PlayerState.NormalState;
+                    _playerState &= ~PlayerState.InvisibleState;
                 }
             }
         }
@@ -110,7 +124,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     private void FixedUpdate()
     {
-        if (_playerState != PlayerState.DeathState && GameStateManager.Instance.GameState == GameState.InBattleState)
+        if ((int)(_playerState & (PlayerState.DeathState | PlayerState.AvoidState)) == 0 
+            && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
             _moveScript.MoveFixedUpdate(this);
         }
@@ -120,7 +135,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     IEnumerator Attack()
     {
         yield return StartCoroutine(_targetArrowScript.AttackTime(1));
-        _isAttackTime = false;
+        _playerState &= ~PlayerState.AttackState;
     }
 
     // 左右にキャラを向ける処理
@@ -163,7 +178,15 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void AddDamage(int damage)
     {
-        if (_isInvisible || _isGuard ||_playerState == PlayerState.InvisibleState) return;
+        if((int)(_playerState & PlayerState.AvoidState) != 0)
+        {
+            return;
+        }
+
+        if (_isInvisible || _isGuard 
+            ||(int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState)) != 0) 
+            return;
+
         _currentPlayerHP -= damage;
         if (_currentPlayerHP <= 0)
         {
@@ -174,17 +197,20 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             PlayerInvisible();
         }
+
         _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
     }
 
     public void Death()
     {
-        _playerState = PlayerState.DeathState;
+        _playerState |= PlayerState.DeathState;
+        _playerState &= ~PlayerState.NormalState;
     }
 
     public void PlayerInvisible()
     {
-        _playerState = PlayerState.InvisibleState;
+        _playerState |= PlayerState.InvisibleState;
+        _playerState |= PlayerState.NormalState;
     }
 
     public void TimeScaleChange(float timeScale)
@@ -229,9 +255,12 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     }
 }
 
+[Flags]
 public enum PlayerState
 {
-    NormalState,
-    InvisibleState,
-    DeathState,
+    NormalState = 1,
+    AttackState = 1 << 1,
+    InvisibleState = 1 << 2,
+    AvoidState = 1 << 3,
+    DeathState = 1 << 4,
 }
