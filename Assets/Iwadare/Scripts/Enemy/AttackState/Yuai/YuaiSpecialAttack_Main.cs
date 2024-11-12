@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Spine.Unity;
+using Spine.Unity.Examples;
 [RequireComponent(typeof(YuaiSpecialAttack_UI),typeof(YuaiSpecialAttack_Bullet))]
 public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeInterface
 {

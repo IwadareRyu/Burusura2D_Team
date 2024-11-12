@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class YuaiSpecialAttack_UI : MonoBehaviour
 {
     [SerializeField] Canvas _uiCanvas;
@@ -16,6 +17,7 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     [SerializeField] Animator _bossUpFadeAnim;
     [SerializeField] AnimationClip _bossUpFadeAnimClip;
     [SerializeField] bool _isBossUpFade;
+    
 
     public void Init()
     {
