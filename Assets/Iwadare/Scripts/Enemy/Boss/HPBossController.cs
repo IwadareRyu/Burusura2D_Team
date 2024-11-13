@@ -53,7 +53,11 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     void Update()
     {
-        StateUpdate();
+        if (GameStateManager.Instance.GameState != GameState.StayState
+            && GameStateManager.Instance.GameState != GameState.BattleEndState)
+        {
+            StateUpdate();
+        }
     }
 
     void StateUpdate()

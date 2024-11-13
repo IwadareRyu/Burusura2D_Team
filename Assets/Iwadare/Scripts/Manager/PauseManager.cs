@@ -15,7 +15,7 @@ public class PauseManager : MonoBehaviour
     private void Start()
     {
         _pauseText.gameObject.SetActive(false);
-        _timeScaleManager = GetComponent<TimeScaleManager>();
+        _timeScaleManager = TimeScaleManager.Instance;
     }
 
     private void Update()

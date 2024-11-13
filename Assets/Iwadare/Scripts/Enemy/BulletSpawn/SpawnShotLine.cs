@@ -34,7 +34,7 @@ public class SpawnShotLine : MonoBehaviour
 
     public void SetRayStart(float direction)
     {
-        _shotLine = _shotpool.GetBullet().GetComponent<ShotLine>();
+        _shotLine = _shotpool.GetPool().GetComponent<ShotLine>();
         _shotLine.SetLine(transform.position,EndLine(direction));
         _currentShotCoolTime = 0f;
         _isRay = true;

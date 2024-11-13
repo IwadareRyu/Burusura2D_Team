@@ -49,7 +49,7 @@ public class BulletPoolActive : MonoBehaviour
 
     /// <summary>未使用の球の物理演算をtrueにして返すメソッド球を全て使っていたら新しく作って返す</summary>
     /// <returns>未使用の球or新しく作った球</returns>
-    public GameObject GetBullet()
+    public GameObject GetPool()
     {
         //使用中でないものを探して返す。
         foreach (var obj in _poolObjects)

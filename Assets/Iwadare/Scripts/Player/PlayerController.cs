@@ -23,8 +23,12 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] PhysicsMaterial2D _playerPhysicFric;
     [SerializeField] PhysicsMaterial2D _playerPhysicNonFric;
 
+    [SerializeField] BulletPoolActive _missParticlePool;
+    [SerializeField] BulletPoolActive _hitParticlePool;
+    [SerializeField] BulletPoolActive _reflectHitPool;
     /// <summary>移動系の変数</summary>
     PlayerMove _moveScript;
+    PlayerSpecialGuage _specialGuage;
 
     [Tooltip("x方向の移動")]
     float _x = 0;
@@ -48,7 +52,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] bool _isInvisible;
     [SerializeField] SpriteRenderer _guardSprite;
     bool _isGuard = false;
-    [NonSerialized]public bool _isAvoidCoolTime = false;
+    [NonSerialized] public bool _isAvoidCoolTime = false;
 
     float _timeScale;
     public float TimeScale => _timeScale;
@@ -61,13 +65,15 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _currentPlayerHP = _playerDefaultHP;
         _targetArrowScript.Init(this);
         _moveScript = GetComponent<PlayerMove>();
+        _specialGuage = InGameManager.Instance._playerSpecialGuage;
+        _specialGuage.Init();
         _playerRb = GetComponent<Rigidbody2D>();
         Init();
     }
 
     public void Init()
     {
-        if(!_isInvisible) _guardSprite.enabled = false;
+        if (!_isInvisible) _guardSprite.enabled = false;
         _playerState |= PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
@@ -101,13 +107,13 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 StartCoroutine(Attack());
             }
 
-            if(Input.GetButton("Avoid") 
+            if (Input.GetButton("Avoid")
                 && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0
                 && !_isAvoidCoolTime)
             {
                 _playerState |= PlayerState.AvoidState;
                 _playerState &= ~PlayerState.NormalState;
-                StartCoroutine(_moveScript.Avoidance(this,_playerRb,_playerSprite));
+                StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerSprite));
             }
 
             if ((int)(_playerState & PlayerState.InvisibleState) != 0)
@@ -124,7 +130,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     private void FixedUpdate()
     {
-        if ((int)(_playerState & (PlayerState.DeathState | PlayerState.AvoidState)) == 0 
+        if ((int)(_playerState & (PlayerState.DeathState | PlayerState.AvoidState)) == 0
             && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
             _moveScript.MoveFixedUpdate(this);
@@ -176,17 +182,28 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         }
     }
 
-    public void AddDamage(int damage)
+    public void AddBulletDamage(int damage)
     {
-        if((int)(_playerState & PlayerState.AvoidState) != 0)
+        if (_isInvisible || _isGuard
+            || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState)) != 0)
         {
+            var missParticle = _missParticlePool.GetPool().GetComponent<ParticleDestroy>();
+            var reflectHit = _reflectHitPool.GetPool().GetComponent<ParticleDestroy>();
+            {
+                missParticle.transform.position = reflectHit.transform.position = transform.position;
+                missParticle.Init();
+                reflectHit.Init();
+                _specialGuage.AddGuage(_specialGuage.AvoidBulletAddGuage);
+            }
             return;
         }
 
-        if (_isInvisible || _isGuard 
-            ||(int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState)) != 0) 
-            return;
-
+        var hitParticle = _hitParticlePool.GetPool().GetComponent<ParticleDestroy>();
+        if (hitParticle)
+        {
+            hitParticle.transform.position = transform.position;
+            hitParticle.Init();
+        }
         _currentPlayerHP -= damage;
         if (_currentPlayerHP <= 0)
         {
@@ -205,6 +222,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         _playerState |= PlayerState.DeathState;
         _playerState &= ~PlayerState.NormalState;
+        GameStateManager.Instance.ChangeState(GameState.BattleEndState);
     }
 
     public void PlayerInvisible()
@@ -240,9 +258,9 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void EndGuardMode()
     {
-        if(!_isInvisible) _guardSprite.enabled = false;
+        if (!_isInvisible) _guardSprite.enabled = false;
         _isGuard = false;
-     }
+    }
 
     public void HitStopStart(float _hitStopPower)
     {

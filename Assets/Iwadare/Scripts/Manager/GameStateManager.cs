@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.XR;
+﻿using UnityEngine;
 
 public class GameStateManager : SingletonMonovihair<GameStateManager>
 {
