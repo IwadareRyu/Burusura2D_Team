@@ -46,8 +46,8 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
 
     [SerializeField] SpriteRenderer _mySpriteRenderer;
 
-    [SerializeField] ParticleSystem _hitParticle;
-    public ParticleSystem HitParticle => _hitParticle;
+    [SerializeField] BulletPoolActive _hitParticlePool;
+    public BulletPoolActive HitParticle => _hitParticlePool;
 
     [SerializeField] BulletPoolActive _shotPool;
     ShotLine _currentShotLine;
@@ -233,8 +233,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         {
             if (col.TryGetComponent<PlayerController>(out var player))
             {
-                if (_hitParticle) Instantiate(_hitParticle, col.transform.position, Quaternion.identity);
-                player.AddDamage(1);
+                player.AddBulletDamage(1);
                 return true;
             }
         }
@@ -253,8 +252,13 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         {
             if (col.gameObject.tag == "PAttack")
             {
-                if (_hitParticle) Instantiate(_hitParticle, transform.position, Quaternion.identity);
-                HitStopManager.instance.SpeedHitStop();
+                var hitParticle = _hitParticlePool.GetPool().GetComponent<ParticleDestroy>();
+                if (hitParticle)
+                {
+                    hitParticle.transform.position = transform.position;
+                    hitParticle.Init();
+                }
+                InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.BreakAddGuage);
                 return true;
             }
         }
@@ -311,7 +315,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
                 break;
             }
         }
-        _currentShotLine = _shotPool.GetBullet().GetComponent<ShotLine>();
+        _currentShotLine = _shotPool.GetPool().GetComponent<ShotLine>();
         if (_currentShotLine != null)
         {
             _currentShotLine.SetLine(transform.position, hitPoint);
@@ -338,12 +342,8 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         {
             if (hit.transform.TryGetComponent<PlayerController>(out var player))
             {
-                if (_hitParticle)
-                {
-                    Instantiate(_hitParticle, player.transform.position, Quaternion.identity);
-                    player.AddDamage(1);
-                    isHitRay = true;
-                }
+                player.AddBulletDamage(1);
+                isHitRay = true;
                 break;
             }
         }

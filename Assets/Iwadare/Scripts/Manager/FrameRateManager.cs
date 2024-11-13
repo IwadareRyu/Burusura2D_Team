@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrameRateManager : MonoBehaviour
+public class FrameRateManager : SingletonMonovihair<FrameRateManager>
 {
     [SerializeField] int _frameRate = 60;
     [SerializeField] bool _vSinc = false;
