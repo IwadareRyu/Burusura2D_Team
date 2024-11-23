@@ -308,9 +308,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1198706425899429235, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198706425899429235, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.005706961
+      objectReference: {fileID: 0}
     - target: {fileID: 1236031359738267699, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
       propertyPath: m_Name
       value: Burusura
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245605827332605491, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.005706961
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027130403432440820, guid: c23482a912b30ef4fb205cfa42266bf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
