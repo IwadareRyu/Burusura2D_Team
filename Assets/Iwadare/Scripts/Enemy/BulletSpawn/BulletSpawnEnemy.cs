@@ -183,7 +183,7 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
     /// <param name="rota">回転</param>
     public void InitBullet(float rota,float bulletSpeed,float activeTime = 5f)
     {
-        Debug.Log("スポーンするぞ！");
+        //Debug.Log("スポーンするぞ！");
         var bullet = _bulletPool.GetPool();
         bullet.transform.position = new Vector2(transform.position.x, transform.position.y);
         if(_spawnBulletMoveStruct._isRota) bullet.transform.Rotate(0, 0, rota);

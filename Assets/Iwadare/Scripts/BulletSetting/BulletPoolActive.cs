@@ -62,7 +62,7 @@ public class BulletPoolActive : MonoBehaviour
         }
         //全て使用中だったら新しく作り、リストに追加してから返す。
         var newObj = CreateNewBullet();
-        Debug.Log("生成しました。");
+        //Debug.Log("生成しました。");
         _poolObjects.Add(newObj);
         if (Parent) newObj.transform.parent = Parent.transform; //Hielarceyを綺麗にしたいので一度球を空の親オブジェクトの子にした。
         newObj.SetActive(true);

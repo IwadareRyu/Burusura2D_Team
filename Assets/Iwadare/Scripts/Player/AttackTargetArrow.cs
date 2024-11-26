@@ -23,7 +23,7 @@ public class AttackTargetArrow : MonoBehaviour
     public void Init(PlayerController playerController)
     {
         _controller = playerController;
-        PlayerDirection(playerController.PlayerSprite.transform.localScale);
+        PlayerDirection(playerController.PlayerObj.transform.localScale);
         _playerCameraFraming = _playerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
@@ -37,11 +37,11 @@ public class AttackTargetArrow : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void ArrowUpdate(PlayerController controller)
     {
         if (_x != 0 || _y != 0)
         {
-            RotationArrow(_x, _y);
+            RotationArrow(_x, _y,controller._upPlayerAnim.transform);
         }
         else
         {
@@ -52,11 +52,14 @@ public class AttackTargetArrow : MonoBehaviour
     /// <summary>弾を出す向きの矢印を調整するメソッド</summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
-    void RotationArrow(float x, float y)
+    void RotationArrow(float x, float y,Transform _upBody)
     {
         var rota = transform.eulerAngles;
         rota.z = ArrowDirection(x, y);
         transform.eulerAngles = rota;
+        var bodyrota = _upBody.localEulerAngles;
+        bodyrota.z = Mathf.Max(Mathf.Min(90 * Mathf.Cos(rota.z * Mathf.Deg2Rad) / 2,40f),-40f);
+        _upBody.localEulerAngles = bodyrota;
     }
 
     /// <summary>上下左右入力に応じて向きを変えるメソッド</summary>
@@ -69,7 +72,7 @@ public class AttackTargetArrow : MonoBehaviour
         CameraMove(_x);
         if (_controller.IsGround && rad < 0)
         {
-            var dir = _controller.PlayerSprite.transform.localScale.x;
+            var dir = _controller.PlayerObj.transform.localScale.x;
             CameraMove(dir / Mathf.Abs(dir));
             return _rotateGap * (dir / Mathf.Abs(dir));
         }   // 下方向入力で、Playerが地面についている場合、Playerが向いている方向を返す。
@@ -101,7 +104,7 @@ public class AttackTargetArrow : MonoBehaviour
         var difY = _arrowObj.transform.position.y - transform.position.y;
         if (Mathf.Atan2(difX, difY) * Mathf.Rad2Deg < 0)
         {
-            PlayerDirection(_controller.PlayerSprite.transform.localScale);
+            PlayerDirection(_controller.PlayerObj.transform.localScale);
         }
     }
 
@@ -117,16 +120,17 @@ public class AttackTargetArrow : MonoBehaviour
 
     /// <summary>攻撃のクールタイムの処理</summary>
     /// <param name="count">攻撃回数</param>
-    public IEnumerator AttackTime(int count)
+    public IEnumerator AttackTime(int count,Animator upBodyAnim)
     {
         Debug.Log($"{count}回目の攻撃！");
+        upBodyAnim.SetTrigger("AttackTrigger");
         AttackSlash();
         yield return new WaitForSeconds(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
         {
             if (Input.GetButton("Fire1") && count < MaxAttackCount)
             {
-                yield return StartCoroutine(AttackTime(count + 1));
+                yield return StartCoroutine(AttackTime(count + 1,upBodyAnim));
                 break;
             }
             yield return null;

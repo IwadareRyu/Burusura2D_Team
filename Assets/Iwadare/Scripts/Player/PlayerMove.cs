@@ -1,9 +1,5 @@
-﻿using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.WebSockets;
+﻿using System.Collections;
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -21,19 +17,20 @@ public class PlayerMove : MonoBehaviour
 
     public void MoveUpdate(PlayerController controller)
     {
-        Jump(controller,controller._playerRb);
+        Jump(controller, controller._playerRb);
     }
 
     public void MoveFixedUpdate(PlayerController controller)
     {
         if (!Input.GetButton("StopMove"))
         {
-            Move(controller.X,controller._playerRb,controller.TimeScale);
+            Move(controller.X, controller._playerRb, controller.TimeScale);
+            controller._downPlayerAnim.SetFloat("MoveSpeed",Mathf.Abs(controller.X));
         }
     }
 
     //キャラを左右に動かす処理
-    private void Move(float x,Rigidbody2D rb,float _timeScale)
+    private void Move(float x, Rigidbody2D rb, float _timeScale)
     {
         var y = rb.velocity.y;
         var move = (Vector2.right * x).normalized * _dashSpeed;
@@ -42,41 +39,40 @@ public class PlayerMove : MonoBehaviour
     }
 
     // ジャンプの処理
-    void Jump(PlayerController controller,Rigidbody2D rb)
+    void Jump(PlayerController controller, Rigidbody2D rb)
     {
         if (Input.GetButtonDown("Jump") && controller._currentJumpCount < MaxJumpCount)
         {
             Debug.Log("ジャンプ！");
             rb.velocity = Vector2.zero;
-            rb.AddForce(Vector2.up * _jumpPower,ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             controller._currentJumpCount++;
+            controller._downPlayerAnim.SetTrigger("Jump");
         }
     }
 
-    public IEnumerator Avoidance(PlayerController controller,Rigidbody2D rb,SpriteRenderer playerSprite)
+    public IEnumerator Avoidance(PlayerController controller, Rigidbody2D rb, Transform playerSprite)
     {
-        playerSprite.color = _avoidColor;
         var dirScale = playerSprite.transform.localScale.x;
         var tmpGravity = rb.gravityScale;
         rb.gravityScale = 0;
+        controller._downPlayerAnim.SetBool("Avoid", true);
         for (float currentTime = 0; currentTime < _avoidTime; currentTime += Time.deltaTime)
         {
             Vector2 dir;
             if (dirScale >= 0) dir = Vector2.right * _avoidSpeed;
             else dir = Vector2.left * _avoidSpeed;
-            rb.velocity = dir * EaseFunction.EaseInExpoReverse(_avoidTime,currentTime);
-            yield return WaitforSecondsCashe.Wait(Time.deltaTime);  
+            rb.velocity = dir * EaseFunction.EaseInExpoReverse(_avoidTime, currentTime);
+            yield return WaitforSecondsCashe.Wait(Time.deltaTime);
         }
         rb.velocity = Vector2.zero;
         rb.gravityScale = tmpGravity;
         controller._isAvoidCoolTime = true;
+        controller._downPlayerAnim.SetBool("Avoid",false);
         controller._playerState &= ~PlayerState.AvoidState;
         controller._playerState |= PlayerState.NormalState;
-        playerSprite.color = _normalColor;
         yield return WaitforSecondsCashe.Wait(_avoidCoolTime);
-        playerSprite.color = _avoidCompleteColor;
         yield return WaitforSecondsCashe.Wait(0.1f);
-        playerSprite.color = _normalColor;
         controller._isAvoidCoolTime = false;
     }
 }

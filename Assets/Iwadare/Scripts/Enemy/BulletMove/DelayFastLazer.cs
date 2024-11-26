@@ -17,7 +17,7 @@ public class DelayFastLazer : BulletMoveClass
         if (!bulletMove.IsRay)
         {
             _hitPosition = bulletMove.RayCatch();
-            Debug.Log(_hitPosition);
+            //Debug.Log(_hitPosition);
             return true;
         }
 
