@@ -76,6 +76,11 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
         yield return StartCoroutine(FadeManager.Instance.CustomFadeOut(_fadeImage,0.5f));
     }
 
+    public void UIRenderChange()
+    {
+        _uiCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+    }
+
     public void UIReset()
     {
         _timerPanel.gameObject.SetActive(false);

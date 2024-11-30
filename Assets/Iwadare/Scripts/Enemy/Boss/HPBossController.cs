@@ -15,6 +15,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     Vector3 _tmpVelocity;
     float _tmpGravity;
     bool _isSpecialAttackMode = false;
+    public override bool SpecialHPChack() => _isSpecialAttackMode;
 
     void Start()
     {
@@ -161,6 +162,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     {
         _timeScale = timeScale;
     }
+
 
     public void StartPause()
     {

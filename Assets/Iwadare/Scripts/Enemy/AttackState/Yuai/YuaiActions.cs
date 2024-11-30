@@ -7,4 +7,5 @@ public class YuaiActions
     public SampleAttack _at2 = new();
     public DropKunai _dropKunai;
     public YuaiSpecialAttack_Main _yuaiSpecialAttack = new();
+    public UIAttack _uiAttack;
 }
