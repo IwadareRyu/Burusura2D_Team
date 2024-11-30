@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] float _playerDefaultHP = 100;
     float _currentPlayerHP;
     [SerializeField] Slider _playerHPSlider;
-    [Tooltip("プレイヤーのアニメーション")]
-    public Animator _playerAnim;
+    [Tooltip("プレイヤーのアニメーション(下半身)")]
+    public Animator _downPlayerAnim;
+    [Tooltip("プレイヤーのアニメーション(上半身)")]
+    public Animator _upPlayerAnim;
     [Tooltip("プレイヤーの左右反転させるスプライト")]
-    [SerializeField] SpriteRenderer _playerSprite;
-    public SpriteRenderer PlayerSprite => _playerSprite;
+    [SerializeField] Transform _playerObj;
+    public Transform PlayerObj => _playerObj;
 
     [NonSerialized] public Rigidbody2D _playerRb;
 
@@ -91,7 +93,6 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_playerState);
         if ((int)(_playerState & PlayerState.DeathState) == 0 && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
             if ((int)(_playerState & PlayerState.AvoidState) == 0)
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             {
                 _playerState |= PlayerState.AvoidState;
                 _playerState &= ~PlayerState.NormalState;
-                StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerSprite));
+                StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerObj));
             }
 
             if ((int)(_playerState & PlayerState.InvisibleState) != 0)
@@ -135,13 +136,18 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             _moveScript.MoveFixedUpdate(this);
         }
+        _targetArrowScript.ArrowUpdate(this);
     }
 
     // 攻撃処理
     IEnumerator Attack()
     {
-        yield return StartCoroutine(_targetArrowScript.AttackTime(1));
+        _downPlayerAnim.SetBool("IsAttack",true);
+        _upPlayerAnim.SetBool("IsAttack", true);
+        yield return StartCoroutine(_targetArrowScript.AttackTime(1,_upPlayerAnim));
         _playerState &= ~PlayerState.AttackState;
+        _downPlayerAnim.SetBool("IsAttack", false);
+        _upPlayerAnim.SetBool("IsAttack", false);
     }
 
     // 左右にキャラを向ける処理
@@ -149,9 +155,9 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         if (x != 0)
         {
-            var scale = _playerSprite.transform.localScale;
+            var scale = _playerObj.transform.localScale;
             scale.x = x * Mathf.Abs(scale.x);
-            _playerSprite.transform.localScale = scale;
+            _playerObj.transform.localScale = scale;
         }
     }
 
@@ -164,6 +170,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             _targetArrowScript.ResetDirection();
             _currentJumpCount = 0;
             _playerRb.sharedMaterial = _playerPhysicFric;
+            _downPlayerAnim.SetBool("IsGround",_isGround);
         }
 
         if (collision.tag == "Enemy")
@@ -179,6 +186,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             _isGround = false;
             _currentJumpCount = 1;
             _playerRb.sharedMaterial = _playerPhysicNonFric;
+            _downPlayerAnim.SetBool("IsGround", _isGround);
         }
     }
 
@@ -223,6 +231,14 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _playerState |= PlayerState.DeathState;
         _playerState &= ~PlayerState.NormalState;
         GameStateManager.Instance.ChangeState(GameState.BattleEndState);
+        StartCoroutine(DeathCoroutine());
+    }
+
+    public IEnumerator DeathCoroutine()
+    {
+        _downPlayerAnim.Play("Death");
+        yield return WaitforSecondsCashe.Wait(4f);
+        Debug.Log("GameOver");
     }
 
     public void PlayerInvisible()

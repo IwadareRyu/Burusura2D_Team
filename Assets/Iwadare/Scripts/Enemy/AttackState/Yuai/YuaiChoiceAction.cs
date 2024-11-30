@@ -25,6 +25,9 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
             case AttackStatesList.DropKunai:
                 _yuaiActions._dropKunai.gameObject.SetActive(true);
                 return _yuaiActions._dropKunai;
+            case AttackStatesList.UIAttack:
+                _yuaiActions._uiAttack.gameObject.SetActive(true);
+                return _yuaiActions._uiAttack;
         }
         return _yuaiActions._at2;
     }
@@ -78,6 +81,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
         DashAttack,
         Attack2,
         DropKunai,
+        UIAttack,
     }
         
 }

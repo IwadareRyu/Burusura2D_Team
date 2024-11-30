@@ -176,12 +176,15 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         enemy.Player.EndGuardMode();
         enemy.ResetState();
         ResetAction(enemy);
+        if(!enemy.SpecialHPChack())
+        {
+            _yuaiUI.UIRenderChange();
+        }
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
     }
 
     void ResetAction(EnemyBase enemy)
     {
-        
         _isAnswer = false;
         _isSelect = false;
         _answerNumber = -1;

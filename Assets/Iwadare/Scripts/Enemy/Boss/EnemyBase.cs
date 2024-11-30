@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
     PlayerController _player;
+    public AnimationController_Enemy _enemyObj;
     public PlayerController Player => _player;
     [Tooltip("敵のMaxHP"), Header("敵のMaxHP")]
     [SerializeField] float _maxHP = 100;
@@ -57,10 +61,38 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void HPChack() { return; }
 
+    public virtual bool SpecialHPChack() => false;
+
     public void SpawnBulletRef(BulletSpawnEnemy spawnBulletEnemy)
     {
         StartCoroutine(spawnBulletEnemy.BulletSpawn());
     }
+
+    /// <summary>BossSpriteのFlipの設定</summary>
+    /// <param name="flip">左ならfalse右ならtrueを渡す。</param>
+    public void BossObjFlipX(bool flip)
+    {
+        var scale = _enemyObj.transform.localScale;
+        if (flip)
+        {
+            scale.x = -Mathf.Abs(scale.x);
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x);
+        }
+        _enemyObj.transform.localScale = scale;
+    }
+
+    /// <summary>BossSpriteのRotationの設定。</summary>
+    /// <param name="angle"></param>
+    public void ObjSetRotation(float angle)
+    {
+        var rota = _enemyObj.transform.localEulerAngles;
+        rota.z = angle;
+        _enemyObj.transform.localEulerAngles = rota;
+    }
+
 
     public void ResetState()
     {
