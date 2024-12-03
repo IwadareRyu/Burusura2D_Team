@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -15,6 +16,11 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyOne;
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyTwo;
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyThree;
+    [SerializeField] Transform[] _bossMovePosition;
+    int _bossMoveNumber;
+    [SerializeField]float _disMoveTime = 1f;
+    float _movetimefirst = 0.5f;
+    float _movetimelast = 1.5f;
     [SerializeField] Animator[] _bossDammys;
     [SerializeField] Transform _dummyMovePoint;
     [SerializeField] Transform _dummyDafaultPoint;
@@ -40,6 +46,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
                 enemy._enemyRb.velocity = Vector2.zero;
             }
             _dummyMoveTween = new Tween[_bossDammys.Length];
+            _bossMoveNumber = 0;
             enemy._bossState = EnemyBase.BossState.MoveState;
         }
     }
@@ -72,15 +79,36 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
 
     public IEnumerator Attack(EnemyBase enemy)
     {
-        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
+        /// 攻撃1回目
+        BossMove(enemy, _movetimefirst, false);
+        StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
+        yield return WaitforSecondsCashe.Wait(_disMoveTime);
+        BossMove(enemy, _movetimelast,false);
         yield return WaitforSecondsCashe.Wait(_attackCoolTime);
-        yield return StartCoroutine(MoveBullets(_bulletSpawnEnemyTwo, enemy));
+        /// 攻撃2回目
+        BossMove(enemy, _movetimefirst,true);
+        var bulletSpawnTwoReverse = _bulletSpawnEnemyTwo.Reverse().ToArray();
+        StartCoroutine(MoveBullets(bulletSpawnTwoReverse, enemy));
+        yield return WaitforSecondsCashe.Wait(_disMoveTime);
+        BossMove(enemy, _movetimelast,true);
         yield return WaitforSecondsCashe.Wait(_attackCoolTime);
-        yield return StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
-        yield return WaitforSecondsCashe.Wait(_attackCoolTime);
+        /// 攻撃3回目
+        BossMove(enemy, _movetimefirst, false);
+        StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
+        yield return WaitforSecondsCashe.Wait(_disMoveTime - 0.5f);
+        BossMove(enemy, _movetimelast + 1f, false);
+        yield return WaitforSecondsCashe.Wait(_attackCoolTime + 1f);
+        /// 攻撃終了
         Reset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
 
+    }
+
+    public void BossMove(EnemyBase enemy,float time,bool flip)
+    {
+        enemy.transform.DOMove(_bossMovePosition[_bossMoveNumber].position, time).SetLink(enemy.gameObject);
+        enemy.BossObjFlipX(flip);
+        _bossMoveNumber++;
     }
 
     public IEnumerator MoveBullets(BulletSpawnEnemy[] bulletSpawns,EnemyBase enemy)

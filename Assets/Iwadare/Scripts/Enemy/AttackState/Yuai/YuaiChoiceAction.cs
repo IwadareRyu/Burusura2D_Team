@@ -12,6 +12,7 @@ public class YuaiChoiceAction : MonoBehaviour,ChoiceActionInterface
     {
         _yuaiActions._dropKunai.Init();
         _yuaiActions._yuaiSpecialAttack.Init();
+        _yuaiActions._uiAttack.Init();
     }
 
     public AttackInterface ChoiceAttack()

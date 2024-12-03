@@ -233,7 +233,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         {
             if (col.TryGetComponent<PlayerController>(out var player))
             {
-                player.AddBulletDamage(1);
+                player.AddBulletDamage(2);
                 return true;
             }
         }
@@ -342,7 +342,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         {
             if (hit.transform.TryGetComponent<PlayerController>(out var player))
             {
-                player.AddBulletDamage(1);
+                player.AddBulletDamage(2);
                 isHitRay = true;
                 break;
             }
