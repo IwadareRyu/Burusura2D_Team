@@ -27,7 +27,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     int _randomNumber = 0;
     int _answerNumber = -1;
     bool _isAnswer = false;
-    bool _isSelect = false;
+    bool _isSelectUI = false;
     public int RandomNumber => _randomNumber;
 
     public void UnityActionSet()
@@ -117,15 +117,15 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
                     _answerNumber = i;
                     _yuaiUI.ChangeYuaiSearchText();
                     _yuaiUI.ChangeSearchText($"選択\n{_mimicryPos[i]._hitPosText}");
-                    _isSelect = true;
+                    _isSelectUI = true;
                     break;
                 }
             }
-            if (_isSelect) break;
+            if (_isSelectUI) break;
             _yuaiUI.TimerSet(_thinkingTime - time);
             yield return new WaitForFixedUpdate();
         }
-        if(!_isSelect)
+        if(!_isSelectUI)
         {
             _answerNumber = -1;
             _yuaiUI.ChangeYuaiSearchText();
@@ -178,6 +178,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         ResetAction(enemy);
         if(!enemy.SpecialHPChack())
         {
+            enemy.BreakGuardMode();
             _yuaiUI.UIRenderChange();
         }
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
@@ -186,7 +187,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     void ResetAction(EnemyBase enemy)
     {
         _isAnswer = false;
-        _isSelect = false;
+        _isSelectUI = false;
         _answerNumber = -1;
         _yuaiUI.UIReset();
         if (enemy._useGravity)

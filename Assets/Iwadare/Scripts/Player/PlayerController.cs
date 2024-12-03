@@ -142,12 +142,12 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     // 攻撃処理
     IEnumerator Attack()
     {
-        _downPlayerAnim.SetBool("IsAttack",true);
-        _upPlayerAnim.SetBool("IsAttack", true);
+        _downPlayerAnim.SetBool("Attack",true);
+        _upPlayerAnim.SetBool("Attack", true);
         yield return StartCoroutine(_targetArrowScript.AttackTime(1,_upPlayerAnim));
         _playerState &= ~PlayerState.AttackState;
-        _downPlayerAnim.SetBool("IsAttack", false);
-        _upPlayerAnim.SetBool("IsAttack", false);
+        _downPlayerAnim.SetBool("Attack", false);
+        _upPlayerAnim.SetBool("Attack", false);
     }
 
     // 左右にキャラを向ける処理
