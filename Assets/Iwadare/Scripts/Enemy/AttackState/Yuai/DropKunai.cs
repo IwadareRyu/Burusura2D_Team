@@ -178,6 +178,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         ResetBulletSpawn();
         UnityActionReset();
         _currentTime = 0;
+        enemy.BossObjFlipX(false);
         enemy.ResetState();
         _kunaiGimmick.SetActive(false);
 

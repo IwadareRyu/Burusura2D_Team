@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour, PauseTimeInterface
 {
+    [SerializeField] SpriteRenderer _currentPlayerArrowSprite;
+    [SerializeField] Collider2D _playerCollition;
     [Tooltip("PlayerのHP"), Header("PlayerのHP")]
     [SerializeField] float _playerDefaultHP = 100;
     float _currentPlayerHP;
@@ -61,23 +63,27 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     Vector3 _tmpVelocity;
     float _tmpGravity;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _currentPlayerHP = _playerDefaultHP;
-        _targetArrowScript.Init(this);
-        _moveScript = GetComponent<PlayerMove>();
-        _specialGuage = InGameManager.Instance._playerSpecialGuage;
-        _specialGuage.Init();
-        _playerRb = GetComponent<Rigidbody2D>();
-        Init();
-    }
 
-    public void Init()
+    public void Init(SetPlayerStruct setPlayer)
     {
+        /// シーン上の変数Set
+        _playerHPSlider = setPlayer._playerHpSlider;
+        _hitParticlePool = setPlayer._hitParticlePool;
+        _missParticlePool = setPlayer._missBulletPool;
+        _reflectHitPool = setPlayer._reflectParticlePool;
+        /// GetComponent
+        _moveScript = GetComponent<PlayerMove>();
+        _playerRb = GetComponent<Rigidbody2D>();
+        /// Init
         if (!_isInvisible) _guardSprite.enabled = false;
         _playerState |= PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
+        _currentPlayerHP = _playerDefaultHP;
+        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+        _targetArrowScript.Init(this);
+        _specialGuage = InGameManager.Instance._playerSpecialGuage;
+        _specialGuage.Init();
+        /// ActionSet
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
         TimeScaleManager.StartPauseAction += StartPause;
         TimeScaleManager.EndPauseAction += EndPause;
@@ -85,6 +91,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     private void OnDisable()
     {
+        ///ActionReset
         TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
         TimeScaleManager.StartPauseAction -= StartPause;
         TimeScaleManager.EndPauseAction -= EndPause;
@@ -142,9 +149,9 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     // 攻撃処理
     IEnumerator Attack()
     {
-        _downPlayerAnim.SetBool("Attack",true);
+        _downPlayerAnim.SetBool("Attack", true);
         _upPlayerAnim.SetBool("Attack", true);
-        yield return StartCoroutine(_targetArrowScript.AttackTime(1,_upPlayerAnim));
+        yield return StartCoroutine(_targetArrowScript.AttackTime(1, _upPlayerAnim));
         _playerState &= ~PlayerState.AttackState;
         _downPlayerAnim.SetBool("Attack", false);
         _upPlayerAnim.SetBool("Attack", false);
@@ -170,7 +177,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             _targetArrowScript.ResetDirection();
             _currentJumpCount = 0;
             _playerRb.sharedMaterial = _playerPhysicFric;
-            _downPlayerAnim.SetBool("IsGround",_isGround);
+            _downPlayerAnim.SetBool("IsGround", _isGround);
         }
 
         if (collision.tag == "Enemy")
@@ -230,15 +237,18 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         _playerState |= PlayerState.DeathState;
         _playerState &= ~PlayerState.NormalState;
-        GameStateManager.Instance.ChangeState(GameState.BattleEndState);
         StartCoroutine(DeathCoroutine());
     }
 
     public IEnumerator DeathCoroutine()
     {
         _downPlayerAnim.Play("Death");
+        _playerRb.gravityScale = 0f;
+        _playerRb.velocity = Vector3.zero;
+        _currentPlayerArrowSprite.enabled = false;
+        _playerCollition.isTrigger = true;
         yield return WaitforSecondsCashe.Wait(4f);
-        Debug.Log("GameOver");
+        Destroy(this.gameObject);
     }
 
     public void PlayerInvisible()
