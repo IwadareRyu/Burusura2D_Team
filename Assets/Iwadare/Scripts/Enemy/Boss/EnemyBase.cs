@@ -36,11 +36,15 @@ public class EnemyBase : MonoBehaviour
 
     public void BaseInit()
     {
-        _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         _enemyRb = GetComponent<Rigidbody2D>();
         if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
         _currentHP = MaxHP;
         DisplayHP();
+    }
+
+    public void PlayerSet(PlayerController player)
+    {
+        _player = player;
     }
 
     public void AddDamage(float damage = 1f)

@@ -173,7 +173,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             }
         }
         yield return WaitforSecondsCashe.Wait(_attackTime);
-        enemy.Player.EndGuardMode();
+        if(enemy.Player) enemy.Player.EndGuardMode();
         enemy.ResetState();
         ResetAction(enemy);
         if(!enemy.SpecialHPChack())
