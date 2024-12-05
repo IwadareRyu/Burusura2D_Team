@@ -10,7 +10,8 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
     [SerializeField] float _allAttackTime = 10f;
     [SerializeField] int _spawnCount = 3;
     [SerializeField] float _spawnTime = 2f;
-    [SerializeField] Text _dangerousText;
+    [SerializeField] Text _leftDangerousText;
+    [SerializeField] Text _rightDangerousText;
     int _dangerousCount = 3;
     float _waitDangerousTime = 0.5f;
     float _bulletTime = 10f;
@@ -18,7 +19,8 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
 
     public void Init()
     {
-        _dangerousText.gameObject.SetActive(false);
+        _leftDangerousText.gameObject.SetActive(false);
+        _rightDangerousText.gameObject.SetActive(false);
     }
 
     public IEnumerator Attack(EnemyBase enemy)
@@ -26,10 +28,20 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
         yield return DangerousText();
         for (var i = 0; i < _spawnCount; i++)
         {
-            
-            foreach (var spawn in _leftSpadeSpawns)
+            _isRight = RamdomMethod.RamdomNumber(99) < 50 ? true : false;
+            if (_isRight)
             {
-                enemy.SpawnBulletRef(spawn);
+                foreach(var spawn in _rightSpadeSpawns)
+                {
+                    enemy.SpawnBulletRef(spawn);
+                }
+            }
+            else
+            {
+                foreach (var spawn in _leftSpadeSpawns)
+                {
+                    enemy.SpawnBulletRef(spawn);
+                }
             }
             yield return WaitforSecondsCashe.Wait(_spawnTime);
         }
@@ -41,9 +53,9 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
         for(var i = 0;i < _dangerousCount;i++)
         {
             yield return WaitforSecondsCashe.Wait(_waitDangerousTime);
-            _dangerousText.gameObject.SetActive(true);
+            _leftDangerousText.gameObject.SetActive(true);
             yield return WaitforSecondsCashe.Wait(_waitDangerousTime);
-            _dangerousText.gameObject.SetActive(false);
+            _leftDangerousText.gameObject.SetActive(false);
         }
     }
 

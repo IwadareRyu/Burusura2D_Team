@@ -1,0 +1,545 @@
+fileFormatVersion: 2
+guid: eaa8c25f1c2e4a448a7b459de2621f65
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Burusura_UpBody
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 456
+        width: 65
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcddd18c0097ec245b5fa0a163e8df22
+      internalID: 2004604424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_MantoLeft
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 534
+        width: 52
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6432f5f0f9fce814b94f2a1cfb492056
+      internalID: 21629361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_UpArmRight
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 445
+        width: 55
+        height: 68
+      alignment: 9
+      pivot: {x: 0.7355263, y: 0.7930751}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a61fae9a61f3180469bfde92df3203f5
+      internalID: 273443127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_UpArmLeft
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 444
+        width: 58
+        height: 64
+      alignment: 9
+      pivot: {x: 0.27665657, y: 0.7646837}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d85adecb07fe624ab523857808eb4b1
+      internalID: 615570413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_Manto
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 343
+        width: 167
+        height: 167
+      alignment: 9
+      pivot: {x: 0.58353555, y: 0.905742}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212a764f4b3ff9b47b23fe620614680a
+      internalID: 2103826781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_DownArmRight
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 336
+        width: 70
+        height: 76
+      alignment: 9
+      pivot: {x: 0.75623214, y: 0.7884473}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 840bce17e271f8e46a3f61d3c6df1651
+      internalID: -1000822748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_DownBody
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 387
+        width: 66
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2b46e7d51533384cb78d79b4da8ec67
+      internalID: -321841650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_DownArmLeft
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 336
+        width: 66
+        height: 73
+      alignment: 9
+      pivot: {x: 0.27353367, y: 0.786652}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f6ad346159fce54fa5a54153c9da396
+      internalID: -1285654241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_Katana
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 176
+        width: 302
+        height: 119
+      alignment: 9
+      pivot: {x: 0.89924175, y: 0.9019321}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3cb35e78a5de543bbefca06af0fbf8
+      internalID: -1762158409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_UpLegRight
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 270
+        width: 69
+        height: 92
+      alignment: 9
+      pivot: {x: 0.7021794, y: 0.8574242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec4466a9b25cc81459d930acadd52096
+      internalID: -1837835162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_UpLegLeft
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 271
+        width: 59
+        height: 104
+      alignment: 9
+      pivot: {x: 0.5337783, y: 0.85450804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d04082784f19feb45bbe56475c97e31b
+      internalID: 1750596441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_LeftHand
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 239
+        width: 34
+        height: 48
+      alignment: 9
+      pivot: {x: 0.32415593, y: 0.749115}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8ef1d13e8b9d84fa14e695b25ab301
+      internalID: -685860565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_Saya
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 215
+        width: 219
+        height: 113
+      alignment: 9
+      pivot: {x: 0.7320515, y: 0.68518174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d962318ebd866684282c68add0a17b57
+      internalID: -1398850219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_DownLegRight
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 119
+        width: 79
+        height: 141
+      alignment: 9
+      pivot: {x: 0.5504541, y: 0.83921856}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e096e7162c78ba47a78e683c187cb83
+      internalID: 1193767508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_DownLegLeft
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 123
+        width: 64
+        height: 131
+      alignment: 9
+      pivot: {x: 0.46886158, y: 0.8955393}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed46b80893e9aff49b923e370fb97903
+      internalID: -290621902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_rightFeet
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 55
+        width: 70
+        height: 31
+      alignment: 9
+      pivot: {x: 0.27223948, y: 0.5000007}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90094a23e1b80424a8ae829338d81674
+      internalID: -1636561246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_LeftFeet
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 56
+        width: 71
+        height: 30
+      alignment: 9
+      pivot: {x: 0.23334429, y: 0.500001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5f9792bde90602498db3b91158f2ed5
+      internalID: 42112178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_Head
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 589
+        width: 149
+        height: 164
+      alignment: 9
+      pivot: {x: 0.52006316, y: 0.111140184}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a37ecb4766a6c45a8b2be0e5ad2ffd
+      internalID: 432452069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burusura_ArmMantoRight
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 531
+        width: 75
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d21fe5d7f57f944c9a92be5c051af80
+      internalID: -718857593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Burusura_ArmMantoRight: -718857593
+      Burusura_DownArmLeft: -1285654241
+      Burusura_DownArmRight: -1000822748
+      Burusura_DownBody: -321841650
+      Burusura_DownLegLeft: -290621902
+      Burusura_DownLegRight: 1193767508
+      Burusura_Head: 432452069
+      Burusura_Katana: -1762158409
+      Burusura_LeftFeet: 42112178
+      Burusura_LeftHand: -685860565
+      Burusura_Manto: 2103826781
+      Burusura_MantoLeft: 21629361
+      Burusura_Saya: -1398850219
+      Burusura_UpArmLeft: 615570413
+      Burusura_UpArmRight: 273443127
+      Burusura_UpBody: 2004604424
+      Burusura_UpLegLeft: 1750596441
+      Burusura_UpLegRight: -1837835162
+      Burusura_rightFeet: -1636561246
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
