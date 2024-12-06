@@ -118,7 +118,7 @@ TextureImporter:
         width: 136
         height: 137
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,6 +126,90 @@ TextureImporter:
       bones: []
       spriteID: 2e034bd6bf00dc44cb79f717a372be47
       internalID: 19071047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rjhgdbfgb_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 174
+        width: 65
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7a0ff1417ca9d347a5e7adc80db11c1
+      internalID: -1339785170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rjhgdbfgb_2
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 168
+        width: 67
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c884d1f67550f1b4f8221bfed7091748
+      internalID: -432849987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rjhgdbfgb_3
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 274
+        width: 120
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc04560c724cb0744bd21ad20f50af08
+      internalID: 1197154320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rjhgdbfgb_4
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 17
+        width: 111
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584ee88e697acf444a33ee67450238b6
+      internalID: 311605847
       vertices: []
       indices: 
       edges: []
@@ -142,6 +226,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       rjhgdbfgb_0: 19071047
+      rjhgdbfgb_1: -1339785170
+      rjhgdbfgb_2: -432849987
+      rjhgdbfgb_3: 1197154320
+      rjhgdbfgb_4: 311605847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
