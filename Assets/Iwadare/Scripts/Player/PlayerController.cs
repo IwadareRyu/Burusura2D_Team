@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _playerRb.gravityScale = 0f;
         _playerRb.velocity = Vector3.zero;
         _currentPlayerArrowSprite.enabled = false;
-        _playerCollition.isTrigger = true;
+        _playerCollition.enabled = false;
         yield return WaitforSecondsCashe.Wait(4f);
         Destroy(this.gameObject);
     }
