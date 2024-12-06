@@ -54,8 +54,10 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
         {
             yield return WaitforSecondsCashe.Wait(_waitDangerousTime);
             _leftDangerousText.gameObject.SetActive(true);
+            _rightDangerousText.gameObject.SetActive(true);
             yield return WaitforSecondsCashe.Wait(_waitDangerousTime);
             _leftDangerousText.gameObject.SetActive(false);
+            _rightDangerousText.gameObject.SetActive(false);
         }
     }
 
