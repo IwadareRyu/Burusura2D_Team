@@ -1,17 +1,16 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-using UnityEditor.UIElements;
 
-public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
+public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
     [SerializeField] UIPosition[] _uiPos;
     [SerializeField] SpadeAttack _spade;
     [SerializeField] SpadeAttack _crover;
-    [SerializeField] SpadeAttack _heart;
+    [SerializeField] HeartAttack _heart;
     [SerializeField] SpadeAttack _daiya;
     [SerializeField] Image _timerPanel;
     Text _timerText;
@@ -23,6 +22,7 @@ public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
     [SerializeField] int _lookingAroundCount = 2;
     int _uiPosNumber = -1;
     List<int> _aroundNumber = new List<int>();
+    [SerializeField] UIPositionState _posState;
 
     public void Init()
     {
@@ -81,30 +81,38 @@ public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
             yield return WaitforSecondsCashe.Wait(0.5f);
         }
         yield return WaitforSecondsCashe.Wait(0.5f);
-        /// 移動する場所決め
-        if (_aroundNumber.Count >= _uiPos.Length) _aroundNumber.Clear();
-        var randomNumber = _uiPosNumber;
-        while (true)
+        /// 移動する場所決め(ランダム)
+        if (_posState == UIPositionState.Random)
         {
-            randomNumber = RamdomMethod.RamdomNumber(_uiPos.Length);
-            bool _chackAround = false;
-            /// 1順で全ての場所に移動できるよう調整。
-            for (var i = 0;i < _aroundNumber.Count;i++)
+            if (_aroundNumber.Count >= _uiPos.Length) _aroundNumber.Clear();
+            var randomNumber = _uiPosNumber;
+            while (true)
             {
-                if(randomNumber == _aroundNumber[i])
+                randomNumber = RamdomMethod.RamdomNumber(_uiPos.Length);
+                bool _chackAround = false;
+                /// 1順で全ての場所に移動できるよう調整。
+                for (var i = 0; i < _aroundNumber.Count; i++)
                 {
-                    _chackAround = true;
+                    if (randomNumber == _aroundNumber[i])
+                    {
+                        _chackAround = true;
+                        break;
+                    }
+                }
+                if (!_chackAround)
+                {
+                    _aroundNumber.Add(randomNumber);
                     break;
                 }
             }
-            if(!_chackAround)
-            {
-                _aroundNumber.Add(randomNumber);
-                break;
-            }
+            Debug.Log(randomNumber);
+            _uiPosNumber = randomNumber;
         }
-        Debug.Log(randomNumber);
-        _uiPosNumber = randomNumber;
+        else
+        {
+            /// 移動する場所決め(指定)
+            _uiPosNumber = (int)_posState;
+        }
         /// 移動
         yield return enemy.transform.DOMove(_uiPos[_uiPosNumber]._movePoint.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         Debug.Log("移動しました");
@@ -129,7 +137,7 @@ public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
         enemy.BossObjFlipX(false);
         if (_uiPosNumber != -1)
         {
-            _uiPos[_uiPosNumber]._yuaiText.enabled = false; 
+            _uiPos[_uiPosNumber]._yuaiText.enabled = false;
         }
     }
 
@@ -162,14 +170,14 @@ public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
 
 
     public void EndPause()
-    { 
+    {
 
     }
 
 
     public void TimeScaleChange(float timeScale)
     {
-        
+
     }
 
     [Serializable]
@@ -186,6 +194,7 @@ public class UIAttack : MonoBehaviour,AttackInterface, PauseTimeInterface
         LeftUp,
         RightUp,
         LeftDown,
-        RightDown
+        RightDown,
+        Random,
     }
 }
