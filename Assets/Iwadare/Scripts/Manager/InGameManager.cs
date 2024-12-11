@@ -17,12 +17,12 @@ public class InGameManager : MonoBehaviour
         else Destroy(gameObject);
         _playerSpecialGuage = GetComponent<PlayerSpecialGuage>();
         _deathCount = 0;
-        _deathCountText.text = $"死んだ回数: {_deathCount}";
+        _deathCountText.text = $"死亡回数: {_deathCount}";
     }
 
     public void PlayerDeath()
     {
         _deathCount++;
-        _deathCountText.text = $"死んだ回数: {_deathCount}";
+        _deathCountText.text = $"死亡回数: {_deathCount}";
     }
 }

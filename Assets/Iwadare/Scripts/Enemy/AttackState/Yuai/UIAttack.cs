@@ -9,7 +9,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
     [SerializeField] UIPosition[] _uiPos;
     [SerializeField] SpadeAttack _spade;
-    [SerializeField] SpadeAttack _crover;
+    [SerializeField] CloverAttack _clover;
     [SerializeField] HeartAttack _heart;
     [SerializeField] SpadeAttack _daiya;
     [SerializeField] Image _timerPanel;
@@ -27,7 +27,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
     public void Init()
     {
         _spade.Init();
-        _crover.Init();
+        _clover.Init();
         _heart.Init();
         _daiya.Init();
         for (int i = 0; i < _uiPos.Length; i++)
@@ -35,7 +35,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
             switch (_uiPos[i]._uiPosState)
             {
                 case UIPositionState.LeftUp:
-                    _uiPos[i]._attackScript = _crover;
+                    _uiPos[i]._attackScript = _clover;
                     break;
                 case UIPositionState.LeftDown:
                     _uiPos[i]._attackScript = _heart;

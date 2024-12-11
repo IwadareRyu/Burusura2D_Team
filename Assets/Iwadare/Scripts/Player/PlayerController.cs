@@ -204,12 +204,11 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             var missParticle = _missParticlePool.GetPool().GetComponent<ParticleDestroy>();
             var reflectHit = _reflectHitPool.GetPool().GetComponent<ParticleDestroy>();
-            {
-                missParticle.transform.position = reflectHit.transform.position = transform.position;
-                missParticle.Init();
-                reflectHit.Init();
-                _specialGuage.AddGuage(_specialGuage.AvoidBulletAddGuage);
-            }
+            missParticle.transform.position = reflectHit.transform.position = transform.position;
+            missParticle.Init();
+            reflectHit.Init();
+            _specialGuage.AddGuage(_specialGuage.AvoidBulletAddGuage);
+
             return;
         }
 
