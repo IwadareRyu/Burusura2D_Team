@@ -72,6 +72,11 @@ public class EnemyBase : MonoBehaviour
         StartCoroutine(spawnBulletEnemy.BulletSpawn());
     }
 
+    public void SpawnBulletRefDangerous(BulletSpawnEnemy spawnBulletEnemy,float _time = 1f)
+    {
+        StartCoroutine(spawnBulletEnemy.BulletSpawnDangerous(_time));
+    }
+
     /// <summary>BossSpriteのFlipの設定</summary>
     /// <param name="flip">左ならfalse右ならtrueを渡す。</param>
     public void BossObjFlipX(bool flip)
