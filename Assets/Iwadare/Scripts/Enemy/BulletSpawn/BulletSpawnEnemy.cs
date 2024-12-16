@@ -126,6 +126,13 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
         }
     }
 
+    public IEnumerator BulletSpawnDangerous(float _time)
+    {
+        DangerousSign(_time);
+        yield return WaitforSecondsCashe.Wait(_time);
+        StartCoroutine(BulletSpawn());
+    }
+
     public void DangerousSign(float dangerousSpawnBeforeTime = 1f)
     {
         _dangerousDisplayEnemy.DangerousStart(dangerousSpawnBeforeTime);

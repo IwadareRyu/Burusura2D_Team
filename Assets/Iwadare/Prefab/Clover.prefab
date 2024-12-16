@@ -1050,6 +1050,7 @@ MonoBehaviour:
   - {fileID: 8261906871347260495}
   - {fileID: 9017616996634147196}
   - {fileID: 7760919955253904935}
+  _waitDangerousTime: 1
 --- !u!1 &8604967146898068185
 GameObject:
   m_ObjectHideFlags: 0

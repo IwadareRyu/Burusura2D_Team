@@ -11,7 +11,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
     [SerializeField] SpadeAttack _spade;
     [SerializeField] CloverAttack _clover;
     [SerializeField] HeartAttack _heart;
-    [SerializeField] SpadeAttack _daiya;
+    [SerializeField] DaiyaAttack _daiya;
     [SerializeField] Image _timerPanel;
     Text _timerText;
     [SerializeField] Transform _centerPos;

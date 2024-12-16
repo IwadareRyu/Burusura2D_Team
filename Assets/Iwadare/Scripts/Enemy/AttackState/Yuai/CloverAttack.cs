@@ -30,9 +30,9 @@ public class CloverAttack : MonoBehaviour, IUIAttack
             {
                 for (var j = 0; j < _rightSpawn.Length; j++)
                 {
-                    _rightSpawn[j].EnemyMixSpawnRef(enemy);
-                    _leftSpawn[j].EnemyMixSpawnRef(enemy);
-                    _centerSpawn[_centerSpawn.Length - (j + 1)].EnemyMixSpawnRef(enemy);
+                    StartCoroutine(_rightSpawn[j].EnemyMixSpawnRefDangerous(enemy));
+                    StartCoroutine(_leftSpawn[j].EnemyMixSpawnRefDangerous(enemy));
+                    StartCoroutine(_centerSpawn[_centerSpawn.Length - (j + 1)].EnemyMixSpawnRefDangerous(enemy));
                     yield return WaitforSecondsCashe.Wait(_spawnTime);
                 }
             }
@@ -40,9 +40,9 @@ public class CloverAttack : MonoBehaviour, IUIAttack
             {
                 for (var j = _rightSpawn.Length - 1; j >= 0; j--)
                 {
-                    _rightSpawn[j].EnemyMixSpawnRef(enemy);
-                    _leftSpawn[j].EnemyMixSpawnRef(enemy);
-                    _centerSpawn[_centerSpawn.Length - (j + 1)].EnemyMixSpawnRef(enemy);
+                    StartCoroutine(_rightSpawn[j].EnemyMixSpawnRefDangerous(enemy));
+                    StartCoroutine(_leftSpawn[j].EnemyMixSpawnRefDangerous(enemy)   );
+                    StartCoroutine(_centerSpawn[_centerSpawn.Length - (j + 1)].EnemyMixSpawnRefDangerous(enemy));
                     yield return WaitforSecondsCashe.Wait(_spawnTime);
                 }
             }
