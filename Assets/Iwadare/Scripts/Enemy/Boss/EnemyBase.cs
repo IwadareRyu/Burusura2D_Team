@@ -29,7 +29,13 @@ public class EnemyBase : MonoBehaviour
     public float MoveTime => _moveTime;
 
     [NonSerialized]public float _timeScale = 1f;
+    [SerializeField] BulletPoolActive _slashEffect;
+    [SerializeField] float _moveSpeed = 2f;
+    public Canvas _attackCanvas;
 
+    public bool _isFlip = false;
+    public bool _isWaitDamage = false;
+    public bool _isTrueDamage = false;
     public bool _isMove = false;
     public bool _isAttack = false;
     public bool _guard = false;
@@ -47,13 +53,25 @@ public class EnemyBase : MonoBehaviour
         _player = player;
     }
 
-    public void AddDamage(float damage = 1f)
+    public void AddDamage(float damage = 1f,HitEffect effect = HitEffect.Slash)
     {
+        if (_isWaitDamage) _isTrueDamage = true;
         if (_guard) return;
+
+        if (effect == HitEffect.Slash)
+        {
+            var effectObj = _slashEffect.GetPool().GetComponent<ParticleSystem>();
+            if (effectObj != null)
+            {
+                effectObj.transform.position = transform.position;
+                effectObj.Play();
+            }
+        }
         _currentHP -= damage;
         DisplayHP();
         HPChack();
     }
+
 
     public void DisplayHP()
     {
@@ -85,12 +103,21 @@ public class EnemyBase : MonoBehaviour
         if (flip)
         {
             scale.x = -Mathf.Abs(scale.x);
+            _isFlip = true;
         }
         else
         {
             scale.x = Mathf.Abs(scale.x);
+            _isFlip = false;
         }
         _enemyObj.transform.localScale = scale;
+    }
+
+    public void MoveEnemyX(bool leftvertical)
+    {
+        var velocity = _enemyRb.velocity;
+        velocity.x = leftvertical ? Vector2.left.x * _moveSpeed : Vector2.right.x * _moveSpeed;
+        _enemyRb.velocity = velocity;
     }
 
     /// <summary>BossSpriteのRotationの設定。</summary>
@@ -102,6 +129,18 @@ public class EnemyBase : MonoBehaviour
         _enemyObj.transform.localEulerAngles = rota;
     }
 
+    public void MeleeAttack(Vector2 size,Vector2 pos ,int damage)
+    {
+        var attackTargets = Physics2D.OverlapBoxAll(pos, size,0f);
+        foreach(var target in attackTargets)
+        {
+            if(target == _player)
+            {
+                _player.AddBulletDamage(damage);
+                break;
+            }
+        }
+    }
 
     public void ResetState()
     {
@@ -128,4 +167,11 @@ public class EnemyBase : MonoBehaviour
         NextActionState,
         DeathState,
     }
+}
+
+public enum HitEffect
+{
+    None,
+    Slash,
+    Blow,
 }
