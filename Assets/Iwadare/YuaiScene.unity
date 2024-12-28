@@ -3745,7 +3745,7 @@ MonoBehaviour:
   _stayTime: 0.5
   _moveTime: 2
   _lookingAroundCount: 2
-  _posState: 0
+  _posState: 4
 --- !u!1 &425773984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4416,6 +4416,9 @@ MonoBehaviour:
   _useGravity: 0
   _stayTime: 1
   _moveTime: 1
+  _slashEffect: {fileID: 0}
+  _moveSpeed: 2
+  _attackCanvas: {fileID: 0}
   _isMove: 0
   _isAttack: 0
   _guard: 0
@@ -27757,18 +27760,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyObj: {fileID: 1750430955}
-  _maxHP: 10
+  _maxHP: 100
   _hpSlider: {fileID: 1753233695}
   _bossState: 0
   _enemyRb: {fileID: 1832103389}
   _useGravity: 0
   _stayTime: 1
   _moveTime: 1
+  _slashEffect: {fileID: 1770785513}
+  _moveSpeed: 2
+  _attackCanvas: {fileID: 0}
   _isMove: 0
   _isAttack: 0
   _guard: 0
   _timePanel: {fileID: 2006878242}
-  _specialAttackHP: 1
+  _specialAttackHP: 2
   _specialAttackUI: {fileID: 883051505}
 --- !u!50 &1832103389
 Rigidbody2D:
@@ -29030,6 +29036,9 @@ MonoBehaviour:
   _useGravity: 0
   _stayTime: 1
   _moveTime: 1
+  _slashEffect: {fileID: 0}
+  _moveSpeed: 2
+  _attackCanvas: {fileID: 0}
   _isMove: 0
   _isAttack: 0
   _guard: 0

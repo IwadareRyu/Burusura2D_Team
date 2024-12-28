@@ -11,9 +11,15 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float _avoidCoolTime = 3f;
     [SerializeField] float _jumpPower = 1f;
     [SerializeField] int MaxJumpCount = 2;
+    [SerializeField] TrailRenderer _bodyTrail;
     [SerializeField] Color _avoidColor = Color.white;
     [SerializeField] Color _normalColor = Color.white;
     [SerializeField] Color _avoidCompleteColor = Color.black;
+
+    public void MoveInit()
+    {
+        _bodyTrail.enabled = false;
+    }
 
     public void MoveUpdate(PlayerController controller)
     {
@@ -53,6 +59,7 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator Avoidance(PlayerController controller, Rigidbody2D rb, Transform playerSprite)
     {
+        _bodyTrail.enabled = true;
         var dirScale = playerSprite.transform.localScale.x;
         var tmpGravity = rb.gravityScale;
         rb.gravityScale = 0;
@@ -71,6 +78,7 @@ public class PlayerMove : MonoBehaviour
         controller._downPlayerAnim.SetBool("Avoid",false);
         controller._playerState &= ~PlayerState.AvoidState;
         controller._playerState |= PlayerState.NormalState;
+        _bodyTrail.enabled = false;
         yield return WaitforSecondsCashe.Wait(_avoidCoolTime);
         yield return WaitforSecondsCashe.Wait(0.1f);
         controller._isAvoidCoolTime = false;

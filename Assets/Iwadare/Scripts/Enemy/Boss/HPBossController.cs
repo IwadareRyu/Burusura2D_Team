@@ -92,7 +92,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public override void HPChack()
     {
-
         if(_isSpecialAttackMode)
         {
             AddSpecialHPDamage();

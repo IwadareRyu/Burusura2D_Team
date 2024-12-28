@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public Animator _downPlayerAnim;
     [Tooltip("プレイヤーのアニメーション(上半身)")]
     public Animator _upPlayerAnim;
+    [SerializeField] TrailRenderer _katanaTrail;
     [Tooltip("プレイヤーの左右反転させるスプライト")]
     [SerializeField] Transform _playerObj;
     public Transform PlayerObj => _playerObj;
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _hitParticlePool = setPlayer._hitParticlePool;
         _missParticlePool = setPlayer._missBulletPool;
         _reflectHitPool = setPlayer._reflectParticlePool;
+        _katanaTrail.enabled = false;
         /// GetComponent
         _moveScript = GetComponent<PlayerMove>();
         _playerRb = GetComponent<Rigidbody2D>();
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _targetArrowScript.Init(this);
         _specialGuage = InGameManager.Instance._playerSpecialGuage;
         _specialGuage.Init();
+        _moveScript.MoveInit();
         /// ActionSet
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
         TimeScaleManager.StartPauseAction += StartPause;
@@ -151,8 +154,10 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         _downPlayerAnim.SetBool("Attack", true);
         _upPlayerAnim.SetBool("Attack", true);
+        _katanaTrail.enabled = true;
         yield return StartCoroutine(_targetArrowScript.AttackTime(1, _upPlayerAnim));
         _playerState &= ~PlayerState.AttackState;
+        _katanaTrail.enabled = false;
         _downPlayerAnim.SetBool("Attack", false);
         _upPlayerAnim.SetBool("Attack", false);
     }

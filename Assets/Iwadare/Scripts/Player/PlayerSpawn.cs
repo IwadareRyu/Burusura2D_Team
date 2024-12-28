@@ -43,7 +43,7 @@ public class PlayerSpawn : MonoBehaviour
     {
         if (_currentPlayer) _targetGroup.RemoveMember(_currentPlayer.transform);
         _currentPlayer = Instantiate(_player, transform.position, Quaternion.identity);
-        _targetGroup.AddMember(_currentPlayer.transform,1,0);
+        _targetGroup.AddMember(_currentPlayer.transform,3,0);
         _currentPlayer.Init(_setPlayerStruct);
         _enemy.PlayerSet(_currentPlayer);
         if(_spawnParticle) _spawnParticle.Play();
