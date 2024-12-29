@@ -31,6 +31,7 @@ public class EnemyBase : MonoBehaviour
     [NonSerialized]public float _timeScale = 1f;
     [SerializeField] BulletPoolActive _slashEffect;
     [SerializeField] float _moveSpeed = 2f;
+    [SerializeField] SpriteRenderer _shieldRenderer;
     public Canvas _attackCanvas;
 
     public bool _isFlip = false;
@@ -46,6 +47,7 @@ public class EnemyBase : MonoBehaviour
         if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
         _currentHP = MaxHP;
         DisplayHP();
+        _shieldRenderer.enabled = false;
     }
 
     public void PlayerSet(PlayerController player)
@@ -134,7 +136,7 @@ public class EnemyBase : MonoBehaviour
         var attackTargets = Physics2D.OverlapBoxAll(pos, size,0f);
         foreach(var target in attackTargets)
         {
-            if(target == _player)
+            if(target.transform == _player.transform)
             {
                 _player.AddBulletDamage(damage);
                 break;
@@ -151,11 +153,13 @@ public class EnemyBase : MonoBehaviour
     public void GuardMode()
     {
         _guard = true;
+        _shieldRenderer.enabled = true;
     }
 
     public void BreakGuardMode()
     {
         _guard = false;
+        _shieldRenderer.enabled = false;
     }
 
     public enum BossState
