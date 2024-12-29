@@ -13,12 +13,13 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     [SerializeField] float _TrueAttackWaitTime = 1f;
     [SerializeField] float _distanceAttack = 0.5f;
     [SerializeField] int _attackCount = 0;
+    [SerializeField] int _damage = 2;
     [SerializeField] Vector2 _firstAttackPosition;
     [SerializeField] Vector2 _firstAttackSize;
     [SerializeField] ParticleDestroy _firstParticle;
     [SerializeField] Vector2 _secondAttackPosition;
     [SerializeField] Vector2 _secondAttackSize;
-    [SerializeField] ParticleDestroy _secondParticle;
+    [SerializeField] Transform _secondParticle;
     float _currentTime = 0f;
     float _distance = 0f;
 
@@ -89,7 +90,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
                     position = _firstAttackPosition;
                     if (enemy._isFlip) position.x = -position.x;
                     position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
-                    enemy.MeleeAttack(_firstAttackSize, position, 5);
+                    enemy.MeleeAttack(_firstAttackSize, position, _damage);
                     var AttackParticle = Instantiate(_firstParticle, position, _firstParticle.transform.rotation);
                     if (enemy._isFlip)
                     {
@@ -105,7 +106,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
                     if (enemy._isFlip) position.x = -position.x;
                     position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
                     enemy.MeleeAttack(_secondAttackSize, position, 5);
-                    var AttackParticle = Instantiate(_secondParticle, position,_secondParticle.transform.rotation);
+                    var AttackParticle = Instantiate(_secondParticle, position,_secondParticle.transform.rotation).GetComponentInChildren<ParticleDestroy>();
                     if (enemy._isFlip)
                     {
                         var particleSize = AttackParticle.transform.localScale;
