@@ -22,20 +22,20 @@ public class PlayerSpecialGuage : MonoBehaviour
 
     public void AddGuage(float addNumber)
     {
-        _currentGuage = Mathf.Min(_maxGuage,_currentGuage + addNumber);
-        SetSlider(_maxGuage,_currentGuage);
+        _currentGuage = Mathf.Min(_maxGuage, _currentGuage + addNumber);
+        SetSlider(_maxGuage, _currentGuage);
     }
 
     public bool CostGuage(float cost)
     {
-        if(_currentGuage < cost) return false;
+        if (_currentGuage < cost) return false;
 
-        _currentGuage -= cost;
-        SetSlider(_maxGuage,_currentGuage);
+        _currentGuage = 0;
+        SetSlider(_maxGuage, _currentGuage);
         return true;
     }
 
-    private void SetSlider(float maxNumber,float currentNumber)
+    private void SetSlider(float maxNumber, float currentNumber)
     {
         var num = currentNumber / maxNumber;
         _guageSlider.value = num;
