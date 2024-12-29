@@ -105,7 +105,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
                     position = _secondAttackPosition;
                     if (enemy._isFlip) position.x = -position.x;
                     position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
-                    enemy.MeleeAttack(_secondAttackSize, position, 5);
+                    enemy.MeleeAttack(_secondAttackSize, position, _damage);
                     var AttackParticle = Instantiate(_secondParticle, position,_secondParticle.transform.rotation).GetComponentInChildren<ParticleDestroy>();
                     if (enemy._isFlip)
                     {
