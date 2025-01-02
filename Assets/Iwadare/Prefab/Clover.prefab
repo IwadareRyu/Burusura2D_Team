@@ -1,52 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &543051983230330995
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3212008941851587178}
-  - component: {fileID: 1712135028736428871}
-  m_Layer: 0
-  m_Name: Pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3212008941851587178
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543051983230330995}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.7384515, y: 2.7451272, z: -0.1824379}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4505262827389790675}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1712135028736428871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 543051983230330995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a793a415e1475a549a6b37b5719adfdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _poolObj: {fileID: 3473792543063635512, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
-  _maxCount: 20
-  Parent: {fileID: 543051983230330995}
 --- !u!1 &1093068404133162547
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +61,7 @@ MonoBehaviour:
   _bulletRange: 20
   _bulletDistance: 30
   _spawnCoolTime: 2
-  _bulletPool: {fileID: 1712135028736428871}
+  _bulletPool: {fileID: 0}
   _dangerousDisplayEnemy: {fileID: 9027063431107529346}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
@@ -215,7 +168,7 @@ MonoBehaviour:
   _bulletRange: 30
   _bulletDistance: 0
   _spawnCoolTime: 2
-  _bulletPool: {fileID: 1712135028736428871}
+  _bulletPool: {fileID: 0}
   _dangerousDisplayEnemy: {fileID: 1654682797838804076}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
@@ -425,7 +378,7 @@ MonoBehaviour:
   _bulletRange: 30
   _bulletDistance: 0
   _spawnCoolTime: 2
-  _bulletPool: {fileID: 1712135028736428871}
+  _bulletPool: {fileID: 0}
   _dangerousDisplayEnemy: {fileID: 289788117098408353}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
@@ -710,7 +663,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1098623694496005761}
-  - {fileID: 3212008941851587178}
   m_Father: {fileID: 5286658236230757381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8261906871347260495
@@ -739,7 +691,7 @@ MonoBehaviour:
   _bulletRange: 30
   _bulletDistance: 0
   _spawnCoolTime: 2
-  _bulletPool: {fileID: 1712135028736428871}
+  _bulletPool: {fileID: 0}
   _dangerousDisplayEnemy: {fileID: 3299264758636872223}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
@@ -949,7 +901,7 @@ MonoBehaviour:
   _bulletRange: 20
   _bulletDistance: 15
   _spawnCoolTime: 2
-  _bulletPool: {fileID: 1712135028736428871}
+  _bulletPool: {fileID: 0}
   _dangerousDisplayEnemy: {fileID: 5822284865461782952}
   _isDangerousDisplay: 1
   _dangerousSpawnBeforeTime: 1
@@ -1020,7 +972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8603924158293431676}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.620733, y: 1.7168937, z: 10}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
