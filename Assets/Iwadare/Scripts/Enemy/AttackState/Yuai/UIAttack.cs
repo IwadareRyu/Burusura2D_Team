@@ -68,7 +68,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
 
     public IEnumerator Move(EnemyBase enemy)
     {
-        SetEnemyAngle(enemy);
+        SetEnemyAngle(enemy,_centerPos);
         /// 中央に移動
         yield return enemy.transform.DOMove(_centerPos.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         enemy.ObjSetRotation(0);
@@ -113,6 +113,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
             /// 移動する場所決め(指定)
             _uiPosNumber = (int)_posState;
         }
+        SetEnemyAngle(enemy, _uiPos[_uiPosNumber]._movePoint);
         /// 移動
         yield return enemy.transform.DOMove(_uiPos[_uiPosNumber]._movePoint.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         Debug.Log("移動しました");
@@ -141,9 +142,9 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
         }
     }
 
-    void SetEnemyAngle(EnemyBase enemy)
+    void SetEnemyAngle(EnemyBase enemy,Transform targetPos)
     {
-        var angle = GetAngle(enemy.transform, _centerPos);
+        var angle = GetAngle(enemy.transform,targetPos);
         Debug.Log(angle);
         if (angle <= 90 && angle >= -90)
         {

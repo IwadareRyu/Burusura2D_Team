@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6549722189909641602, guid: f918d02da2157b449b509c5983e9f425, type: 3}
+      propertyPath: _parentObject
+      value: 
+      objectReference: {fileID: 5976656344763380482}
     - target: {fileID: 7641850182242550789, guid: f918d02da2157b449b509c5983e9f425, type: 3}
       propertyPath: m_Name
       value: DownStone slash

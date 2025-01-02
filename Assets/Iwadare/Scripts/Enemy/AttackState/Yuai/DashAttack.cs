@@ -83,7 +83,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
 
     public void ActionReset(EnemyBase enemy)
     {
-        if (_moveTween.IsActive())
+        if (_moveTween != null && _moveTween.IsActive())
         {
             _moveTween.Kill(false);
         }

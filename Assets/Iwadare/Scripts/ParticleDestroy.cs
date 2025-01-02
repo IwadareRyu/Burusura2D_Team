@@ -11,6 +11,7 @@ public class ParticleDestroy : MonoBehaviour
     [SerializeField] bool _poolEffect = true;
     [SerializeField] bool _mixParticle = false;
     [SerializeField] ParticleSystem[] _mixParticleArray;
+    [SerializeField] GameObject _parentObject;
 
     private void Awake()
     {
@@ -35,8 +36,12 @@ public class ParticleDestroy : MonoBehaviour
         if (_currentTime >= _particleTime)
         {
             _currentTime = 0f;
-            if(_poolEffect)gameObject.SetActive(false);
-            else Destroy(gameObject);
+            if (_poolEffect) gameObject.SetActive(false);
+            else
+            {
+                if(_parentObject) Destroy(_parentObject);
+                Destroy(gameObject);
+            }
         }
     }
 }

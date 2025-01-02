@@ -1,12 +1,18 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
+public class DangerousDisplayEnemy : MonoBehaviour, PauseTimeInterface
 {
 
     [SerializeField] Sprite _dangerousSprite;
+    [SerializeField] BulletPoolActive _dangerousFramePool;
     SpriteRenderer _dangerousSpriteRenderer;
+    SpriteRenderer _dangerousFrameSprite;
     [SerializeField] Image _dangerousImage;
+    [SerializeField] Image _dangerousFrameImage;
+    Vector3 _tmpDangerousScale;
     float _displayTime = 1f;
     float _currentDisplayTime;
     Color _currentColor;
@@ -17,16 +23,29 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
     [SerializeField] float _defaultMatualTime = 0.2f;
     float _currentMatualTime;
     bool _isDengerous = false;
+    bool _isDangerousMove = false;
+    [SerializeField] float _rotationDangerousRange = 1800f;
+    Sequence _tmpSequence;
     float _timeScale = 1f;
     [SerializeField] bool _isUseImage;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _currentMatualTime = _defaultMatualTime;
         _dangerousSpriteRenderer = GetComponent<SpriteRenderer>();
-        if (_isUseImage) _dangerousImage.enabled = false;
-        else _dangerousSpriteRenderer.sprite = null;
+        if (_isUseImage)
+        {
+            _dangerousImage.enabled = false;
+            _dangerousFrameImage.enabled = false;
+            _tmpDangerousScale = _dangerousImage.transform.localScale;
+        }
+        else
+        {
+            _dangerousSpriteRenderer.sprite = null;
+            _tmpDangerousScale = _dangerousSpriteRenderer.transform.localScale;
+        }
     }
 
     private void OnEnable()
@@ -48,19 +67,24 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
     {
         if (_isDengerous)
         {
-            // 点滅
-            _currentMatualTime += Time.deltaTime * _timeScale;
-            if (_currentMatualTime > _defaultMatualTime)
-            {
-                RepeatLight();
-                _currentMatualTime = 0f;
-            }
+            //// 点滅
+            //_currentMatualTime += Time.deltaTime * _timeScale;
+            //if (_currentMatualTime > _defaultMatualTime)
+            //{
+            //    RepeatLight();
+            //    _currentMatualTime = 0f;
+            //}
+            //// 警告出てる時間
+            //_currentDisplayTime += Time.deltaTime * _timeScale;
+            //if (_currentDisplayTime > _displayTime)
+            //{
+            //    ActionReset();
+            //}
 
-            // 警告出てる時間
-            _currentDisplayTime += Time.deltaTime * _timeScale;
-            if (_currentDisplayTime > _displayTime)
+            if (!_isDangerousMove)
             {
-                ActionReset();
+                _isDangerousMove = true;
+                StartCoroutine(DangerousCoroutine());
             }
         }
     }
@@ -69,9 +93,14 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
     {
         if (_isDengerous) return;
         _displayTime = displayTime;
+        _tmpSequence = DOTween.Sequence()
+            .Pause()
+            .SetAutoKill(false)
+            .SetLink(gameObject);
         if (_isUseImage)
         {
             _dangerousImage.enabled = true;
+            _dangerousFrameImage.enabled = true;
             _dangerousImage.sprite = _dangerousSprite;
             _dangerousImage.color = _lightUpColor;
         }
@@ -79,6 +108,8 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
         {
             _dangerousSpriteRenderer.sprite = _dangerousSprite;
             _dangerousSpriteRenderer.color = _lightUpColor;
+            _dangerousFrameSprite = _dangerousFramePool.GetPool().GetComponent<SpriteRenderer>();
+            _dangerousFrameSprite.transform.position = _dangerousSpriteRenderer.transform.position;
         }
         _currentColor = _lightDownColor;
         _isDengerous = true;
@@ -98,14 +129,53 @@ public class DangerousDisplayEnemy : MonoBehaviour,PauseTimeInterface
         else _currentColor = _lightUpColor;
     }
 
+    IEnumerator DangerousCoroutine()
+    {
+        if (_isUseImage)
+        {
+            _dangerousImage.transform.rotation = Quaternion.identity;
+            _tmpSequence
+                .Append(_dangerousImage.transform.DORotate(new Vector3(0, 0, 1) * _rotationDangerousRange, _displayTime, RotateMode.LocalAxisAdd)
+                    .SetEase(Ease.OutQuart))
+                .Insert(0, _dangerousImage.transform.DOScale(_tmpDangerousScale, _displayTime / 2))
+                .Insert(0, _dangerousFrameImage.transform.DOScale(_tmpDangerousScale, _displayTime / 4));
+            yield return _tmpSequence.Play().SetLink(gameObject).WaitForCompletion();
+        }
+        else
+        {
+            _dangerousSpriteRenderer.transform.rotation = Quaternion.identity;
+            _dangerousSpriteRenderer.transform.localScale = Vector3.zero; _dangerousFrameSprite.transform.localScale = Vector3.zero;
+            _tmpSequence
+                .Append(
+                    _dangerousSpriteRenderer.transform.DORotate(new Vector3(0, 0, 1) * _rotationDangerousRange, _displayTime,RotateMode.LocalAxisAdd)
+                    .SetEase(Ease.OutQuart))
+                .Insert(0, _dangerousSpriteRenderer.transform.DOScale(_tmpDangerousScale, _displayTime / 2))
+                .Insert(0, _dangerousFrameSprite.transform.DOScale(_tmpDangerousScale, _displayTime / 4));
+
+            yield return _tmpSequence.Play().WaitForCompletion();
+
+        }
+        yield return null;
+        ActionReset();
+    }
+
 
     private void ActionReset()
     {
-        CancelInvoke("RepeatLight");
         _isDengerous = false;
+        _isDangerousMove = false;
         _currentDisplayTime = 0;
-        if (_isUseImage) _dangerousImage.enabled = false;
-        else _dangerousSpriteRenderer.sprite = null;
+        if (_tmpSequence != null && _tmpSequence.IsActive()) _tmpSequence.Kill();
+        if (_isUseImage)
+        {
+            _dangerousImage.enabled = false;
+            _dangerousFrameImage.enabled = false;
+        }
+        else
+        {
+            _dangerousSpriteRenderer.sprite = null;
+            _dangerousFrameSprite.gameObject.SetActive(false);
+        }
     }
 
     public void TimeScaleChange(float timeScale)
