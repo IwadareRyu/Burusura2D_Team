@@ -40,9 +40,6 @@ public class PlayerSpecialGuage : MonoBehaviour
     {
         var num = currentNumber / maxNumber;
         _guageSlider.value = num;
-        if(_guageSlider.value >=200)
-        {
-            IconManager.Instance.UpdateIcon(num, TargetIcon.Special);
-        }
+        IconManager.Instance.UpdateIcon(num, TargetIcon.Special);
     }
 }
