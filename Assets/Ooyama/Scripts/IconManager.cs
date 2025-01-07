@@ -28,11 +28,11 @@ public class IconManager : MonoBehaviour
     }
     public void Test()
     {
-        UpdateIcon(0.5f, TargetIcon.Special);
+        UpdateIcon(0.5f, TargetIcon.Attack);
     }
     public void Test2()
     {
-        UpdateIcon(1, TargetIcon.Special);
+        UpdateIcon(1, TargetIcon.Avoid);
     }
     public void Test3()
     {
@@ -58,6 +58,9 @@ public class IconManager : MonoBehaviour
     }
     private IEnumerator WaitingTimeIcon(float waitingTime, Image icon)
     {
+        var waitingColor = icon.color;
+        waitingColor.a = 0.5f;
+        icon.color = waitingColor;
         icon.fillAmount = 0;
         float dividedNum = waitingTime / _splitNumber;
         for (int i = 0; i < _splitNumber && this.gameObject; i++)
@@ -66,6 +69,8 @@ public class IconManager : MonoBehaviour
             icon.fillAmount += 1.0f / _splitNumber;
         }
         icon.fillAmount = 1;
+        waitingColor.a = 1.0f;
+        icon.color = waitingColor;
         yield break;
     }
     private void SpecialIconChanger(float reciveValue)
