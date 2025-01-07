@@ -5409,6 +5409,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 6612350626532617041, guid: 29dce89d3d6a6b34f8690f839c54309c, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612350626532617041, guid: 29dce89d3d6a6b34f8690f839c54309c, type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 19b4fa6febd83474196de5c6e512b932, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

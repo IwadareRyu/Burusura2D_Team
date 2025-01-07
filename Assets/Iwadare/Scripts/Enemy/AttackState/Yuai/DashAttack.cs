@@ -53,6 +53,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
         var currentDisTime = 0f;
         for (; _currentTrans < _trans.Length; _currentTrans++)
         {
+            enemy.BossObjFlipX(enemy.transform.position.x < _trans[_currentTrans].position.x);
             _bulletSpawnEnemy.DangerousSign();
             yield return WaitforSecondsCashe.Wait(_stayTime);
             _moveTween = enemy.transform.DOMove(
@@ -91,6 +92,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
         _currentTrans = 0;
         if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
         _bulletSpawnEnemy.ResetBullet();
+        enemy.BossObjFlipX(false);
     }
 
     public void UnityActionSet()

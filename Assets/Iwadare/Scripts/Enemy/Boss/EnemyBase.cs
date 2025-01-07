@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Animations;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,9 +31,12 @@ public class EnemyBase : MonoBehaviour
 
     [NonSerialized]public float _timeScale = 1f;
     [SerializeField] BulletPoolActive _slashEffect;
-    [SerializeField] float _moveSpeed = 2f;
+    [SerializeField] float _defaultMoveSpeed = 2f;
     [SerializeField] SpriteRenderer _shieldRenderer;
-    public Canvas _attackCanvas;
+    public ParticleSystem _parryParticle;
+    public Text _attackText;
+    public Transform[] _movePoint;
+    [NonSerialized] public int _minMovePointIndex;
 
     public bool _isFlip = false;
     public bool _isWaitDamage = false;
@@ -48,6 +52,7 @@ public class EnemyBase : MonoBehaviour
         _currentHP = MaxHP;
         DisplayHP();
         _shieldRenderer.enabled = false;
+        if(_attackText)_attackText.enabled = false;
     }
 
     public void PlayerSet(PlayerController player)
@@ -115,10 +120,10 @@ public class EnemyBase : MonoBehaviour
         _enemyObj.transform.localScale = scale;
     }
 
-    public void MoveEnemyX(bool leftvertical)
+    public void MoveEnemyX(bool leftvertical,float moveMag = 1f)
     {
         var velocity = _enemyRb.velocity;
-        velocity.x = leftvertical ? Vector2.left.x * _moveSpeed : Vector2.right.x * _moveSpeed;
+        velocity.x = leftvertical ? Vector2.left.x * (_defaultMoveSpeed * moveMag) : Vector2.right.x * (_defaultMoveSpeed * moveMag);
         _enemyRb.velocity = velocity;
     }
 
@@ -129,19 +134,6 @@ public class EnemyBase : MonoBehaviour
         var rota = _enemyObj.transform.localEulerAngles;
         rota.z = angle;
         _enemyObj.transform.localEulerAngles = rota;
-    }
-
-    public void MeleeAttack(Vector2 size,Vector2 pos ,int damage)
-    {
-        var attackTargets = Physics2D.OverlapBoxAll(pos, size,0f);
-        foreach(var target in attackTargets)
-        {
-            if(target.transform == _player.transform)
-            {
-                _player.AddBulletDamage(damage);
-                break;
-            }
-        }
     }
 
     public void ResetState()

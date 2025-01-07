@@ -12,6 +12,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     [SerializeField] float _damageWaitTime = 0.5f;
     [SerializeField] float _TrueAttackWaitTime = 1f;
     [SerializeField] float _distanceAttack = 0.5f;
+    [SerializeField] float _moveMagnitude = 1f;
     [SerializeField] int _attackCount = 0;
     [SerializeField] int _damage = 2;
     [SerializeField] Vector2 _firstAttackPosition;
@@ -20,12 +21,13 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     [SerializeField] Vector2 _secondAttackPosition;
     [SerializeField] Vector2 _secondAttackSize;
     [SerializeField] Transform _secondParticle;
+    [SerializeField] MeleeAttackScripts _meleeAttack;
     float _currentTime = 0f;
     float _distance = 0f;
 
     public void Init()
     {
-
+        return;
     }
 
     public void OnDrawGizmos()
@@ -50,7 +52,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
 
     public IEnumerator Move(EnemyBase enemy)
     {
-         _distance = Mathf.Abs(enemy.transform.position.x) - Mathf.Abs(enemy.Player.transform.position.x);
+         _distance = enemy.transform.position.x - enemy.Player.transform.localPosition.x;
         while (_distance > _distancePlayer || _distance < -_distancePlayer)
         {
             ChackDistance(enemy);
@@ -62,26 +64,33 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     public IEnumerator Attack(EnemyBase enemy)
     {
         enemy.GuardMode();
+        Debug.Log("攻撃待機");
+        enemy._enemyRb.velocity = Vector3.zero;
+        _meleeAttack.StartParryTime(enemy);
         enemy._isWaitDamage = true;
-        for(var i = 0f;i < _damageWaitTime; i += Time.deltaTime)
+        for (var i = 0f; i < _damageWaitTime; i += Time.deltaTime)
         {
-            Debug.Log("攻撃待機");
-            if(enemy._isTrueDamage)
+            _meleeAttack.ParryTimeUpdate();
+            if (enemy._isTrueDamage)
             {
                 break;
             }
             yield return new WaitForFixedUpdate();
         }
         enemy._isWaitDamage = false;
-        if(enemy._isTrueDamage)
+        _meleeAttack.EndParryTime(enemy);
+        if (enemy._isTrueDamage)
         {
             enemy.BreakGuardMode();
+            enemy._parryParticle.Play();
+            TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
+            InGameManager.Instance._playerSpecialGuage.AddGuage(20);
             yield return WaitforSecondsCashe.Wait(_TrueAttackWaitTime);
+            TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
             enemy._isTrueDamage = false;
         }
         else
         {
-            Debug.Log("攻撃待機終わり");
             for (var i = 0; i < _attackCount; i++)
             {
                 Vector2 position;
@@ -90,7 +99,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
                     position = _firstAttackPosition;
                     if (enemy._isFlip) position.x = -position.x;
                     position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
-                    enemy.MeleeAttack(_firstAttackSize, position, _damage);
+                    _meleeAttack.MeleeAttack(enemy,_firstAttackSize, position, _damage);
                     var AttackParticle = Instantiate(_firstParticle, position, _firstParticle.transform.rotation);
                     if (enemy._isFlip)
                     {
@@ -105,7 +114,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
                     position = _secondAttackPosition;
                     if (enemy._isFlip) position.x = -position.x;
                     position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
-                    enemy.MeleeAttack(_secondAttackSize, position, _damage);
+                    _meleeAttack.MeleeAttack(enemy, _firstAttackSize, position, _damage);
                     var AttackParticle = Instantiate(_secondParticle, position,_secondParticle.transform.rotation).GetComponentInChildren<ParticleDestroy>();
                     if (enemy._isFlip)
                     {
@@ -136,12 +145,12 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
         if (enemy.transform.position.x > enemy.Player.transform.position.x)
         {
             enemy.BossObjFlipX(false);
-            if(isMove)enemy.MoveEnemyX(true);
+            if(isMove)enemy.MoveEnemyX(true,_moveMagnitude);
         }
         else
         {
             enemy.BossObjFlipX(true);
-            if(isMove)enemy.MoveEnemyX(false);
+            if(isMove)enemy.MoveEnemyX(false,_moveMagnitude);
         }
     }
 }
