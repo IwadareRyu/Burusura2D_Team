@@ -9,7 +9,7 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image _avoidIcon;
     [SerializeField] private Image _jumpIcon;
     [SerializeField] private Image _specialIcon;
-    [SerializeField] private int _splitNumber = 12;
+    [SerializeField] private float _splitNumber = 12.0f;
     public static IconManager Instance = null;
     private void Awake()
     {
@@ -28,11 +28,11 @@ public class IconManager : MonoBehaviour
     }
     public void Test()
     {
-        UpdateIcon(1, TargetIcon.Attack);
+        UpdateIcon(0.5f, TargetIcon.Attack);
     }
     public void Test2()
     {
-        UpdateIcon(2, TargetIcon.Jump);
+        UpdateIcon(2, TargetIcon.Avoid);
     }
     public void Test3()
     {
@@ -59,18 +59,18 @@ public class IconManager : MonoBehaviour
     private IEnumerator WaitingTimeIcon(float waitingTime, Image icon)
     {
         icon.fillAmount = 0;
-        float Increase = waitingTime / _splitNumber;
+        float dividedNum = waitingTime / _splitNumber;
         for (int i = 0; i < _splitNumber && this.gameObject; i++)
         {
-            yield return WaitforSecondsCashe.Wait(Increase);
-            icon.fillAmount += Increase;
+            yield return WaitforSecondsCashe.Wait(dividedNum);
+            icon.fillAmount += 1.0f / _splitNumber;
         }
         icon.fillAmount = 1;
         yield break;
     }
     private void SpecialIconChanger(float reciveValue)
     {
-        if (reciveValue >= 200)
+        if (reciveValue == 1.0f)
         {
             _specialIcon.gameObject.SetActive(true);
         }
