@@ -10,12 +10,16 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image _jumpIcon;
     [SerializeField] private Image _specialIcon;
     [SerializeField] private int _splitNumber = 12;
-    public static IconManager Instance;
+    public static IconManager Instance = null;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+        }
+        else
+        {
+            Destroy(this);
         }
         _attackIcon.fillAmount = 1;
         _avoidIcon.fillAmount = 1;
