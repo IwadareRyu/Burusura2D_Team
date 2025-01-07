@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance = null;
 
-    private AudioMixer _audioMixer = null;
+    [SerializeField] private AudioMixer _audioMixer = null;
 
     private void Awake()
     {
@@ -63,29 +63,19 @@ public class AudioManager : MonoBehaviour
         AudioSource[] audioSources = GetComponents<AudioSource>();
         _seSourcesLis = new();
 
-        //audioSources[0].loop = true;
 
+        audioSources[0].loop = true;
+        _bgmSource = audioSources[0];
+        _bgmSource.volume = GetBGMVolume();
+        _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
-        for (int i = 0; i < audioSources.Length; i++)
+        for (int i = 1; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
-            if (i == 0)
-            {
-                audioSources[i].loop = true;
-                _bgmSource = audioSources[i];
-                _bgmSource.volume = GetBGMVolume();
-                _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
-            }
-            else
-            {
-                _seSourcesLis.Add(audioSources[i]);
-                audioSources[i].volume = GetSEVolume();
-                
-            }
+            _seSourcesLis.Add(audioSources[i]);
+            audioSources[i].volume = GetSEVolume();
+            audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
         }
-
-        //_audioMixer = (AudioMixer)Resources.Load("Mixer");
-        //_audioMixer.outputAudioMixerGroup
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {

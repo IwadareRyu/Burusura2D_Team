@@ -28,11 +28,11 @@ public class IconManager : MonoBehaviour
     }
     public void Test()
     {
-        UpdateIcon(0.5f, TargetIcon.Attack);
+        UpdateIcon(0.5f, TargetIcon.Special);
     }
     public void Test2()
     {
-        UpdateIcon(2, TargetIcon.Avoid);
+        UpdateIcon(1, TargetIcon.Special);
     }
     public void Test3()
     {
