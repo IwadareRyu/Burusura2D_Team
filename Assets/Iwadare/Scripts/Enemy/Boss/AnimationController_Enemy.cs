@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AnimationController_Enemy : MonoBehaviour
 {
-    [SerializeField] Animator _objAnimator;
+    public Animator _objAnimator;
 }

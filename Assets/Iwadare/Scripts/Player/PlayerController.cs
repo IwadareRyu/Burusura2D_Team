@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [NonSerialized] public PlayerState _playerState;
 
     [SerializeField] float _invisibleTime = 0.5f;
+    [SerializeField] float _attackWaitTime = 0.5f;
     float _currentInvisibleTime = 0f;
 
 
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 _moveScript.MoveUpdate(this);
             }
 
-            if (Input.GetButton("Fire1") && (int)(_playerState & PlayerState.AttackState) == 0)
+            if (Input.GetButton("Fire1") && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0)
             {
                 _playerState |= PlayerState.AttackState;
                 StartCoroutine(Attack());
@@ -155,11 +156,14 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _downPlayerAnim.SetBool("Attack", true);
         _upPlayerAnim.SetBool("Attack", true);
         _katanaTrail.enabled = true;
-        yield return StartCoroutine(_targetArrowScript.AttackTime(1, _upPlayerAnim));
-        _playerState &= ~PlayerState.AttackState;
+        yield return StartCoroutine(_targetArrowScript.AttackTime(this,1, _upPlayerAnim));
+        IconManager.Instance.UpdateIcon(_attackWaitTime,TargetIcon.Attack);
         _katanaTrail.enabled = false;
         _downPlayerAnim.SetBool("Attack", false);
         _upPlayerAnim.SetBool("Attack", false);
+        yield return WaitforSecondsCashe.Wait(_attackWaitTime);
+        _playerState &= ~PlayerState.AttackState;
+
     }
 
     // 左右にキャラを向ける処理
@@ -183,6 +187,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             _currentJumpCount = 0;
             _playerRb.sharedMaterial = _playerPhysicFric;
             _downPlayerAnim.SetBool("IsGround", _isGround);
+            IconManager.Instance.UpdateIcon(_currentJumpCount,TargetIcon.Jump);
+            _playerState &= ~PlayerState.ImpactState;
         }
 
         if (collision.tag == "Enemy")
@@ -205,7 +211,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public void AddBulletDamage(int damage)
     {
         if (_isInvisible || _isGuard
-            || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState)) != 0)
+            || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState)) != 0
+            || GameStateManager.Instance.GameState == GameState.BattleEndState)
         {
             var missParticle = _missParticlePool.GetPool().GetComponent<ParticleDestroy>();
             var reflectHit = _reflectHitPool.GetPool().GetComponent<ParticleDestroy>();
@@ -247,6 +254,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public IEnumerator DeathCoroutine()
     {
         _downPlayerAnim.Play("Death");
+        IconManager.Instance.UpdateIcon(0, TargetIcon.Jump);
         _playerRb.gravityScale = 0f;
         _playerRb.velocity = Vector3.zero;
         _currentPlayerArrowSprite.enabled = false;
@@ -311,4 +319,5 @@ public enum PlayerState
     InvisibleState = 1 << 2,
     AvoidState = 1 << 3,
     DeathState = 1 << 4,
+    ImpactState = 1 << 5,
 }

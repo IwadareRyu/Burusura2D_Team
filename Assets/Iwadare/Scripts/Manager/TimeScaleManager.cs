@@ -24,6 +24,7 @@ public class TimeScaleManager : SingletonMonovihair<TimeScaleManager>
     {
         WaitforSecondsCashe._waitTimeScale = timeScale;
         _currentTimeScale = timeScale;
+        Time.timeScale = timeScale;
         ChangeTimeScaleAction.Invoke(_currentTimeScale);
     }
 

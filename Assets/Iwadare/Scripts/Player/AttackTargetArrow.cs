@@ -120,17 +120,17 @@ public class AttackTargetArrow : MonoBehaviour
 
     /// <summary>攻撃のクールタイムの処理</summary>
     /// <param name="count">攻撃回数</param>
-    public IEnumerator AttackTime(int count,Animator upBodyAnim)
+    public IEnumerator AttackTime(PlayerController player,int count,Animator upBodyAnim)
     {
         Debug.Log($"{count}回目の攻撃！");
         upBodyAnim.SetTrigger("AttackTrigger");
         AttackSlash();
-        yield return new WaitForSeconds(_attackInterval);
+        yield return WaitforSecondsCashe.Wait(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
         {
             if (Input.GetButton("Fire1") && count < MaxAttackCount)
             {
-                yield return StartCoroutine(AttackTime(count + 1,upBodyAnim));
+                yield return StartCoroutine(AttackTime(player,count + 1,upBodyAnim));
                 break;
             }
             yield return null;

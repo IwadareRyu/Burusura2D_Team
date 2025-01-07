@@ -12,12 +12,6 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
 
     void Start()
     {
-
-    }
-
-    void Update()
-    {
-
     }
 
     public bool ChackHP(float currentHpPersent)
@@ -40,7 +34,16 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
 
     public AttackInterface ChoiceAttack()
     {
-        return _dataraActions._normalAttack;
+        switch (_action[_currentHPAction]._attackState[RamdomMethod.RamdomNumber(_action[_currentHPAction]._attackState.Length)])
+        {
+            case AttackStatesList.Attack:
+                return _dataraActions._normalAttack;
+            case AttackStatesList.JumpAttack:
+                return _dataraActions._jumpAttack;
+            default:
+                return _dataraActions._normalAttack;
+        }
+
     }
 
     public AttackInterface SelectSpecialAttack()
@@ -65,5 +68,6 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
     public enum AttackStatesList
     {
         Attack,
+        JumpAttack,
     }
 }
