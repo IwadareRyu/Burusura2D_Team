@@ -16,7 +16,7 @@ public abstract class SingletonMonovihair<T> : MonoBehaviour where T : MonoBehav
                 instance = (T)FindObjectOfType(t);
                 if (!instance)
                 {
-                    Debug.LogError(t + "はありません。");
+                    Debug.LogWarning(t + "はありません。");
                 }
             }
             return instance;
