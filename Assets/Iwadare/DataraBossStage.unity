@@ -6825,10 +6825,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4570823966217909419, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -281
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996249998683991189, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _maxchat
+      value: "\u30CB\u30E3\u30CB\u30E3\uFF01\uFF1F\\n\u6570\u3048\u304D\u308C\u306A\u3044\u307B\u3069\u306EV\u30B3\u30A4\u30F3\u306B\u3083\uFF01\\n\u3042\u308A\u304C\u3068\u3046\u30CB\u30E3\uFF01"
+      objectReference: {fileID: 0}
     - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _maxSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fa89439ef5bf544ca861f44b85c254e, type: 3}
     - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
       propertyPath: _ultraChatPanel
       value: 
@@ -6858,7 +6874,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2111064162}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d5976ac7f68b994cbe0cea440c93f49, type: 3}
   m_Name: 

@@ -1,23 +1,17 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Animations;
-using UnityEditor.ShaderGraph.Internal;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
     PlayerController _player;
-    public AnimationController_Enemy _enemyObj;
+    public AnimationController_Enemy _enemyAnim;
     public PlayerController Player => _player;
     [Tooltip("敵のMaxHP"), Header("敵のMaxHP")]
     [SerializeField] float _maxHP = 100;
     public float MaxHP => _maxHP;
     [Tooltip("敵の現在HP")]
-    [NonSerialized]public float _currentHP;
+    [NonSerialized] public float _currentHP;
     [Tooltip("HP表示"), Header("HP表示")]
     [SerializeField] Slider _hpSlider;
     public BossState _bossState = BossState.StayState;
@@ -29,7 +23,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] float _moveTime = 0.5f;
     public float MoveTime => _moveTime;
 
-    [NonSerialized]public float _timeScale = 1f;
+    [NonSerialized] public float _timeScale = 1f;
     [SerializeField] BulletPoolActive _slashEffect;
     [SerializeField] float _defaultMoveSpeed = 2f;
     [SerializeField] SpriteRenderer _shieldRenderer;
@@ -52,7 +46,8 @@ public class EnemyBase : MonoBehaviour
         _currentHP = MaxHP;
         DisplayHP();
         _shieldRenderer.enabled = false;
-        if(_attackText)_attackText.enabled = false;
+        if (_attackText) _attackText.enabled = false;
+
     }
 
     public void PlayerSet(PlayerController player)
@@ -60,7 +55,7 @@ public class EnemyBase : MonoBehaviour
         _player = player;
     }
 
-    public void AddDamage(float damage = 1f,HitEffect effect = HitEffect.Slash)
+    public void AddDamage(float damage = 1f, HitEffect effect = HitEffect.Slash)
     {
         if (_isWaitDamage) _isTrueDamage = true;
         if (_guard) return;
@@ -97,7 +92,7 @@ public class EnemyBase : MonoBehaviour
         StartCoroutine(spawnBulletEnemy.BulletSpawn());
     }
 
-    public void SpawnBulletRefDangerous(BulletSpawnEnemy spawnBulletEnemy,float _time = 1f)
+    public void SpawnBulletRefDangerous(BulletSpawnEnemy spawnBulletEnemy, float _time = 1f)
     {
         StartCoroutine(spawnBulletEnemy.BulletSpawnDangerous(_time));
     }
@@ -106,7 +101,7 @@ public class EnemyBase : MonoBehaviour
     /// <param name="flip">左ならfalse右ならtrueを渡す。</param>
     public void BossObjFlipX(bool flip)
     {
-        var scale = _enemyObj.transform.localScale;
+        var scale = _enemyAnim.transform.localScale;
         if (flip)
         {
             scale.x = -Mathf.Abs(scale.x);
@@ -117,10 +112,10 @@ public class EnemyBase : MonoBehaviour
             scale.x = Mathf.Abs(scale.x);
             _isFlip = false;
         }
-        _enemyObj.transform.localScale = scale;
+        _enemyAnim.transform.localScale = scale;
     }
 
-    public void MoveEnemyX(bool leftvertical,float moveMag = 1f)
+    public void MoveEnemyX(bool leftvertical, float moveMag = 1f)
     {
         var velocity = _enemyRb.velocity;
         velocity.x = leftvertical ? Vector2.left.x * (_defaultMoveSpeed * moveMag) : Vector2.right.x * (_defaultMoveSpeed * moveMag);
@@ -131,9 +126,9 @@ public class EnemyBase : MonoBehaviour
     /// <param name="angle"></param>
     public void ObjSetRotation(float angle)
     {
-        var rota = _enemyObj.transform.localEulerAngles;
+        var rota = _enemyAnim.transform.localEulerAngles;
         rota.z = angle;
-        _enemyObj.transform.localEulerAngles = rota;
+        _enemyAnim.transform.localEulerAngles = rota;
     }
 
     public void ResetState()

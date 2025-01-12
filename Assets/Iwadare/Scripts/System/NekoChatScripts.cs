@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,9 @@ public class NekoChatScripts : MonoBehaviour
     [SerializeField] float _testResponceCoolTime = 5f;
     [SerializeField] Sprite[] _nekoSprite;
     [SerializeField] String[] _chat;
+    [SerializeField] float _maxCount = 100000;
+    [SerializeField] Sprite _maxSprite;
+    [SerializeField] String _maxchat;
     float _testResponceCurrentTime;
 
     private void Awake()
@@ -36,15 +40,29 @@ public class NekoChatScripts : MonoBehaviour
     public IEnumerator UltraChatCoroutine(float coinNumber)
     {
         _isResponceUltraChat = false;
-        var ram = RamdomMethod.RamdomNumber(_nekoSprite.Length);
         _ultraChatText.text = "";
-        var str = _chat[ram].Split("\\n");
-        for (int i = 0; i < str.Length; i++)
+        if (coinNumber <= _maxCount)
         {
-            _ultraChatText.text += str[i].Contains("yen") ? str[i].Replace("yen", coinNumber.ToString()) : str[i];
-            _ultraChatText.text += Environment.NewLine;
+            var ram = RamdomMethod.RamdomNumber(_nekoSprite.Length);
+            var str = _chat[ram].Split("\\n");
+            for (int i = 0; i < str.Length; i++)
+            {
+                _ultraChatText.text += str[i].Contains("yen") ? str[i].Replace("yen", coinNumber.ToString()) : str[i];
+                _ultraChatText.text += Environment.NewLine;
+            }
+
+            _nekoImage.sprite = _nekoSprite[ram];
         }
-        _nekoImage.sprite = _nekoSprite[ram];
+        else
+        {
+            var str = _maxchat.Split("\\n");
+            for (int i = 0; i < str.Length; i++)
+            {
+                _ultraChatText.text += str[i];
+                _ultraChatText.text += Environment.NewLine;
+            }
+            _nekoImage.sprite = _maxSprite;
+        }
         _ultraChatPanel.Play(_ultraChatMoveAnimClip.name);
         yield return WaitforSecondsCashe.Wait(_ultraChatMoveAnimClip.length);
         Debug.Log("ResponceOK");
