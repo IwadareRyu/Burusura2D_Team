@@ -47,7 +47,11 @@ public class EnemyBase : MonoBehaviour
         DisplayHP();
         _shieldRenderer.enabled = false;
         if (_attackText) _attackText.enabled = false;
-
+        if (_enemyAnim)
+        {
+            _enemyAnim.gameObject.SetActive(true);
+            _enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
+        }
     }
 
     public void PlayerSet(PlayerController player)
@@ -147,6 +151,13 @@ public class EnemyBase : MonoBehaviour
     {
         _guard = false;
         _shieldRenderer.enabled = false;
+    }
+
+    public void ChangeAnimationObject(AnimationController_Enemy enemyAnim)
+    {
+        _enemyAnim.gameObject.SetActive(false);
+        _enemyAnim = enemyAnim;
+        _enemyAnim.gameObject.SetActive(true);
     }
 
     public enum BossState

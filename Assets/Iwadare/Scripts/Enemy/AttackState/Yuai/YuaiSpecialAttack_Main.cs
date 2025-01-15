@@ -23,6 +23,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     [SerializeField] CinemachineVirtualCamera _bossUpCamera;
     [SerializeField] CinemachineVirtualCamera _centerUpCamera;
     [SerializeField] MimicryPos[] _mimicryPos;
+    [SerializeField] AnimationController_Enemy _yureiAnim;
     float _currentTime = 0f;
     int _randomNumber = 0;
     int _answerNumber = -1;
@@ -164,6 +165,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
                 _yuaiAttack.RefDangerousSign(_mimicryPos[i]._bulletSpawn,_dangerousTime);
             }
         }
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Attack);
         yield return WaitforSecondsCashe.Wait(_dangerousTime);
         for (var i = 0; i < _mimicryPos.Length; i++)
         {
@@ -173,14 +175,18 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             }
         }
         yield return WaitforSecondsCashe.Wait(_attackTime);
-        if(enemy.Player) enemy.Player.EndGuardMode();
-        enemy.ResetState();
-        ResetAction(enemy);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
+        if (enemy.Player) enemy.Player.EndGuardMode();
         if(!enemy.SpecialHPChack())
         {
+            yield return WaitforSecondsCashe.Wait(1f);
+            enemy.ChangeAnimationObject(_yureiAnim);
+            enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
             enemy.BreakGuardMode();
             _yuaiUI.UIRenderChange();
         }
+        enemy.ResetState();
+        ResetAction(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
     }
 

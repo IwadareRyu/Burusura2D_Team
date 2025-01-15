@@ -70,8 +70,10 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
     {
         SetEnemyAngle(enemy,_centerPos);
         /// 中央に移動
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         yield return enemy.transform.DOMove(_centerPos.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         enemy.ObjSetRotation(0);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         ///　キョロキョロ
         for (var i = 0; i < _lookingAroundCount; i++)
         {
@@ -114,10 +116,12 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
             _uiPosNumber = (int)_posState;
         }
         SetEnemyAngle(enemy, _uiPos[_uiPosNumber]._movePoint);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         /// 移動
         yield return enemy.transform.DOMove(_uiPos[_uiPosNumber]._movePoint.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         Debug.Log("移動しました");
         _uiPos[_uiPosNumber]._yuaiText.enabled = true;
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         /// 隠れるアニメーション
         enemy.transform.position = _hidePos.position;
         enemy._bossState = EnemyBase.BossState.AttackState;
