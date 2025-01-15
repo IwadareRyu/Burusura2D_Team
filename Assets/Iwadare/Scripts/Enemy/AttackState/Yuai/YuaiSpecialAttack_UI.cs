@@ -12,7 +12,7 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     [SerializeField] Text _yuaiSearchText;
     [SerializeField] Text _worldYuaiText;
     [SerializeField] Image _timerPanel;
-    [SerializeField] Animator _bossFadeAnim;
+    [SerializeField] Transform _bossFadeAnim;
     [SerializeField] AnimationClip _bossFadeAnimationClip;
     [SerializeField] Animator _bossUpFadeAnim;
     [SerializeField] AnimationClip _bossUpFadeAnimClip;
@@ -63,7 +63,6 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
     {
         _bossFadeAnim.gameObject.SetActive(true);
         yield return StartCoroutine(FadeManager.Instance.CustomFadeIn(_fadeImage, 0.5f));
-        _bossFadeAnim.Play(_bossFadeAnimationClip.name);
         yield return StartCoroutine(FadeManager.Instance.FadeIn());
         _bossFadeAnim.gameObject.SetActive(false);
     }
@@ -83,7 +82,6 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
 
     public void UIReset()
     {
-        _timerPanel.gameObject.SetActive(false);
         _yuaiSearchText.gameObject.SetActive(false);
         _worldYuaiText.gameObject.SetActive(false);
         _bossUpFadeAnim.gameObject.SetActive(false);
