@@ -9,6 +9,8 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image _avoidIcon;
     [SerializeField] private Image _jumpIcon;
     [SerializeField] private Image _specialIcon;
+    [SerializeField] private Image _playerShieldIcon;
+    [SerializeField] private Image _enemyShieldIcon;
     [SerializeField] private float _splitNumber = 12.0f;
     public static IconManager Instance = null;
     private void Awake()
@@ -53,6 +55,30 @@ public class IconManager : MonoBehaviour
                 break;
             case TargetIcon.Special:
                 SpecialIconChanger(reciveValue);
+                break;
+        }
+    }
+    public void ChangeIconActive(TargetIcon icon,bool TargetEnabled)
+    {
+        switch (icon)
+        {
+            case TargetIcon.Attack:
+                _attackIcon.gameObject.SetActive(TargetEnabled);
+                break;
+            case TargetIcon.Avoid:
+                _avoidIcon.gameObject.SetActive(TargetEnabled);
+                break;
+            case TargetIcon.Jump:
+                _jumpIcon.gameObject.SetActive(TargetEnabled);
+                break;
+            case TargetIcon.Special:
+                _specialIcon.gameObject.SetActive(TargetEnabled);
+                break;
+            case TargetIcon.PlayerShield:
+                _playerShieldIcon.gameObject.SetActive(TargetEnabled);
+                break;
+            case TargetIcon.EnemyShield:
+                _enemyShieldIcon.gameObject.SetActive(TargetEnabled);
                 break;
         }
     }
@@ -105,6 +131,8 @@ public enum TargetIcon
     Attack,
     Avoid,
     Jump,
-    Special
+    Special,
+    PlayerShield,
+    EnemyShield
 }
 
