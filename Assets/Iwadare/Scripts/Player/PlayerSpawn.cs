@@ -11,15 +11,20 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] PlayerController _player;
     [SerializeField] EnemyBase _enemy;
     PlayerController _currentPlayer;
+    [SerializeField] int _playerRemain = 3;
+    int _currentPlayerRemain;
     [SerializeField] SetPlayerStruct _setPlayerStruct;
     [SerializeField] CinemachineTargetGroup _targetGroup;
     [SerializeField] ParticleSystem _spawnParticle;
     [SerializeField] float _spawnDelayTime = 1.5f;
     bool _isDeath = false;
+    bool _isNotRemain = false;
 
     private void Start()
     {
+        _currentPlayerRemain = _playerRemain;
         SpawnPlayer();
+        InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
     }
 
     private void Update()
@@ -27,13 +32,21 @@ public class PlayerSpawn : MonoBehaviour
         if(!_isDeath &&_currentPlayer && (int)(_currentPlayer._playerState & PlayerState.DeathState) != 0)
         {
             _isDeath = true;
+            _currentPlayerRemain--;
             StartCoroutine(PlayerDelaySpawn());
-            InGameManager.Instance.PlayerDeath();
+            InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
         }
     }
 
     private IEnumerator PlayerDelaySpawn()
     {
+        if(!_isNotRemain && _currentPlayerRemain <= 0)
+        {
+            yield return null;
+            GameStateManager.Instance.ChangeState(GameState.BattleEndState);
+            _isNotRemain = true;
+            yield break;
+        }
         yield return WaitforSecondsCashe.Wait(_spawnDelayTime);
         SpawnPlayer();
         _isDeath = false;
