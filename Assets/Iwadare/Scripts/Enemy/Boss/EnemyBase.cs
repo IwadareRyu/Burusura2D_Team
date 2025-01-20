@@ -50,7 +50,7 @@ public class EnemyBase : MonoBehaviour
         if (_enemyAnim)
         {
             _enemyAnim.gameObject.SetActive(true);
-            _enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
+            _enemyAnim.ChangeAnimationSpain(_enemyAnim._initialName);
         }
     }
 

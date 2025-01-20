@@ -55,7 +55,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         foreach (var mimic in _mimicryPos)
         {
             mimic._hitPosColider.gameObject.SetActive(false);
-            mimic._hitPosImage.enabled = false;
+            mimic._hitPosImage.SetActive(false);
         }
         gameObject.SetActive(false);
     }
@@ -78,10 +78,12 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     public IEnumerator Move(EnemyBase enemy)
     {
         GameStateManager.Instance.ChangeState(GameState.BattleStopState);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         enemy.transform.DOMove(_bossPos.position, _moveTime);
         if (_bossUpCamera) _bossUpCamera.Priority = 20;
         _yuaiUI.BossUpStart();
         yield return WaitforSecondsCashe.Wait(_moveTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         if (_bossUpCamera) _bossUpCamera.Priority = 0;
         _yuaiUI.BossUpEnd(_thinkingTime);
         yield return WaitforSecondsCashe.Wait(1f);
@@ -102,7 +104,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
             _mimicryPos[i]._hitPosColider.gameObject.SetActive(true);
             if (i == _randomNumber)
             {
-                _mimicryPos[i]._hitPosImage.enabled = true;
+                _mimicryPos[i]._hitPosImage.SetActive(true);
             }
         }
     }
@@ -137,7 +139,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         {
             mimic._hitPosColider._isHit = false;
             mimic._hitPosColider.gameObject.SetActive(false);
-            mimic._hitPosImage.enabled = false;
+            mimic._hitPosImage.SetActive(false);
         }
         _yuaiUI.ChangeMainUIDisable();
         _centerUpCamera.Priority = 20;
@@ -180,8 +182,11 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         if(!enemy.SpecialHPChack())
         {
             yield return WaitforSecondsCashe.Wait(1f);
+            enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Change);
+            yield return StartCoroutine(_yuaiUI.AttackEndFadeIn());
             enemy.ChangeAnimationObject(_yureiAnim);
             enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
+            yield return StartCoroutine(_yuaiUI.AttackEndFadeOut());
             enemy.BreakGuardMode();
             _yuaiUI.UIRenderChange();
         }
@@ -234,7 +239,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
     struct MimicryPos
     {
         public YuaiSpecialAttack_Col _hitPosColider;
-        public Text _hitPosImage;
+        public GameObject _hitPosImage;
         public string _hitPosText;
         public BulletSpawnEnemy _bulletSpawn; 
     }

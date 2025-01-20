@@ -42,7 +42,9 @@ public class DashAttack : AttackInterface,PauseTimeInterface
     {
         UnityActionSet();
         _moveTween = enemy.transform.DOMove(_trans[_currentTrans].position, _moveTime).SetLink(enemy.gameObject);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         yield return WaitforSecondsCashe.Wait(_moveTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         _currentTrans++;
         Debug.Log("Attackに移行");
         enemy._bossState = EnemyBase.BossState.AttackState;
@@ -56,6 +58,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
             enemy.BossObjFlipX(enemy.transform.position.x < _trans[_currentTrans].position.x);
             _bulletSpawnEnemy.DangerousSign();
             yield return WaitforSecondsCashe.Wait(_stayTime);
+            enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
             _moveTween = enemy.transform.DOMove(
                 _trans[_currentTrans].position, 
                 _attackTime / (Time.timeScale * enemy._timeScale)
@@ -72,6 +75,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
                 }
                 yield return new WaitForFixedUpdate();
             }
+            enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
             currentDisTime = 0f;
         }
         _currentTrans = 0;
@@ -93,6 +97,7 @@ public class DashAttack : AttackInterface,PauseTimeInterface
         if (enemy._useGravity) enemy._enemyRb.gravityScale = 1;
         _bulletSpawnEnemy.ResetBullet();
         enemy.BossObjFlipX(false);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
     }
 
     public void UnityActionSet()

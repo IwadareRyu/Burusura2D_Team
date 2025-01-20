@@ -120,7 +120,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
         /// 移動
         yield return enemy.transform.DOMove(_uiPos[_uiPosNumber]._movePoint.position, _moveTime).SetLink(enemy.gameObject).WaitForCompletion();
         Debug.Log("移動しました");
-        _uiPos[_uiPosNumber]._yuaiText.enabled = true;
+        _uiPos[_uiPosNumber]._yuaiText.SetActive(true);
         enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         /// 隠れるアニメーション
         enemy.transform.position = _hidePos.position;
@@ -132,7 +132,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
         StartCoroutine(_uiPos[_uiPosNumber]._attackScript.Attack(enemy));
         yield return WaitforSecondsCashe.Wait(_uiPos[_uiPosNumber]._attackScript.GetAllAttackTime());
         enemy.transform.position = _uiPos[_uiPosNumber]._movePoint.position;
-        _uiPos[_uiPosNumber]._yuaiText.enabled = false;
+        _uiPos[_uiPosNumber]._yuaiText.SetActive(false);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
     }
 
@@ -142,7 +142,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
         enemy.BossObjFlipX(false);
         if (_uiPosNumber != -1)
         {
-            _uiPos[_uiPosNumber]._yuaiText.enabled = false;
+            _uiPos[_uiPosNumber]._yuaiText.SetActive(false);
         }
     }
 
@@ -191,7 +191,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
         public UIPositionState _uiPosState;
         public IUIAttack _attackScript;
         public Transform _movePoint;
-        public Text _yuaiText;
+        public GameObject _yuaiText;
     }
 
     enum UIPositionState

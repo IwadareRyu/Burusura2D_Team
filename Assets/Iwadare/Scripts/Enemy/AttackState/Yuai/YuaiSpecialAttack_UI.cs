@@ -67,6 +67,16 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
         _bossFadeAnim.gameObject.SetActive(false);
     }
 
+    public IEnumerator AttackEndFadeIn()
+    {
+        yield return StartCoroutine(FadeManager.Instance.CustomFadeIn(_fadeImage, 0.5f));
+    }
+
+    public IEnumerator AttackEndFadeOut()
+    {
+        yield return StartCoroutine(FadeManager.Instance.CustomFadeOut(_fadeImage, 0.5f));
+    }
+
     public IEnumerator FadeOutBoss()
     {
         _yuaiSearchText.gameObject.SetActive(true);

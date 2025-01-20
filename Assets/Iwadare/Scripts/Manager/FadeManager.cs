@@ -44,6 +44,7 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
     {
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime);
         //ロード処理完了的な何か
+
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime);
     }
 
