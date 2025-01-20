@@ -1,11 +1,12 @@
 ﻿using DG.Tweening;
+using Spine.Unity;
 using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
+public class DropKunai : MonoBehaviour, AttackInterface, PauseTimeInterface
 {
     float _currentTime = 0f;
     [SerializeField] float _stayTime = 1f;
@@ -18,10 +19,12 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
     [SerializeField] BulletSpawnEnemy[] _bulletSpawnEnemyThree;
     [SerializeField] Transform[] _bossMovePosition;
     int _bossMoveNumber;
-    [SerializeField]float _disMoveTime = 1f;
+    [SerializeField] float _disMoveTime = 1f;
     float _movetimefirst = 0.5f;
     float _movetimelast = 1.5f;
-    [SerializeField] Animator[] _bossDammys;
+    [SerializeField] SkeletonAnimation[] _bossDammys;
+    [SpineAnimation]
+    [SerializeField] string _moveName;
     [SerializeField] Transform _dummyMovePoint;
     [SerializeField] Transform _dummyDafaultPoint;
     [SerializeField] Transform _bossPosition;
@@ -56,6 +59,8 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         _bossMoveTween = enemy.transform.DOMove(_bossPosition.position,_moveTime).SetLink(enemy.gameObject);
         for (var i = 0; i < _bossDammys.Length; i++)
         {
+            var state = _bossDammys[i].AnimationState;
+            state.SetAnimation(0,_moveName,true);
             _dummyMoveTween[i] = _bossDammys[i].transform.DOMoveX(_dummyMovePoint.position.x, _moveTime);
         }
         var k = 0;
@@ -79,23 +84,29 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
 
     public IEnumerator Attack(EnemyBase enemy)
     {
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         /// 攻撃1回目
         BossMove(enemy, _movetimefirst, false);
         StartCoroutine(MoveBullets(_bulletSpawnEnemyOne, enemy));
         yield return WaitforSecondsCashe.Wait(_disMoveTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         BossMove(enemy, _movetimelast,false);
         yield return WaitforSecondsCashe.Wait(_attackCoolTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         /// 攻撃2回目
         BossMove(enemy, _movetimefirst,true);
         var bulletSpawnTwoReverse = _bulletSpawnEnemyTwo.Reverse().ToArray();
         StartCoroutine(MoveBullets(bulletSpawnTwoReverse, enemy));
         yield return WaitforSecondsCashe.Wait(_disMoveTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         BossMove(enemy, _movetimelast,true);
         yield return WaitforSecondsCashe.Wait(_attackCoolTime);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
         /// 攻撃3回目
         BossMove(enemy, _movetimefirst, false);
         StartCoroutine(SetRayBullets(_bulletSpawnEnemyThree, enemy));
         yield return WaitforSecondsCashe.Wait(_disMoveTime - 0.5f);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Run);
         BossMove(enemy, _movetimelast + 1f, false);
         yield return WaitforSecondsCashe.Wait(_attackCoolTime + 1f);
         /// 攻撃終了
@@ -160,6 +171,7 @@ public class DropKunai : MonoBehaviour,AttackInterface, PauseTimeInterface
         UnityActionReset();
         enemy.ResetState();
         _kunaiGimmick.SetActive(false);
+        enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);
     }
 
     public void ActionReset(EnemyBase enemy)

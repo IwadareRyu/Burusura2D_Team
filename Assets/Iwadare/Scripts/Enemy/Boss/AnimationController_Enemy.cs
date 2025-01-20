@@ -1,5 +1,7 @@
-﻿using Spine.Unity;
+﻿using Spine;
+using Spine.Unity;
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -16,10 +18,19 @@ public class AnimationController_Enemy : MonoBehaviour
     public string _changeAnimationName;
     [SpineAnimation]
     public string _attackAnimationName;
+
+    bool _isAttackTime = false;
+    bool _isParticlePlaying = false;
+    [SerializeField] ParticleSystem _attackParticle;
+
+    [SpineEvent]
+    [SerializeField] string _attackEventName = "1";
     [SpineAnimation]
     public string _runAnimationName;
     [SpineAnimation]
     public string _damageAnimationName;
+
+    public AnimationName _initialName;
 
     public void Awake()
     {
@@ -28,7 +39,14 @@ public class AnimationController_Enemy : MonoBehaviour
             _spineAnimationState = _skeletonAnimation.AnimationState;
             _skeleton = _skeletonAnimation.Skeleton;
         }
+        if (_attackParticle) _attackParticle.Stop();
         gameObject.SetActive(false);
+    }
+
+    public void OnEnable()
+    {
+        _skeletonAnimation.AnimationState.Event += AddAttackAnimationEvent;
+        _skeletonAnimation.AnimationState.End += RemoveAttackAnimationEvent;
     }
 
     public void ChangeAnimationSpain(AnimationName animation)
@@ -47,11 +65,42 @@ public class AnimationController_Enemy : MonoBehaviour
                 if (_runAnimationName != "") _spineAnimationState.SetAnimation(0, _runAnimationName, true);
                 break;
             case AnimationName.Damage:
-                if (_damageAnimationName != "") _spineAnimationState.SetAnimation(0, _damageAnimationName, true);
+                if (_damageAnimationName != "") _spineAnimationState.SetAnimation(0, _damageAnimationName, false);
                 break;
             case AnimationName.Attack:
-                if (_attackAnimationName != "") _spineAnimationState.SetAnimation(0, _attackAnimationName, true);
+                if (_attackAnimationName != "")
+                {
+                    _spineAnimationState.SetAnimation(0, _attackAnimationName, true);
+                    _isAttackTime = true;
+                }
                 break;
+        }
+    }
+
+    public void AddAttackAnimationEvent(TrackEntry trackEntry, Spine.Event e)
+    {
+        if(e.Data.Name == _attackEventName)
+        {
+            if (_isParticlePlaying)
+            {
+                _attackParticle.Stop();
+                _isParticlePlaying = false;
+            }
+            else
+            {
+                _attackParticle.Play();
+                _isParticlePlaying = true;
+            }
+        }
+    }
+
+    public void RemoveAttackAnimationEvent(TrackEntry trackEntry)
+    {
+        if(_isAttackTime)
+        {
+            _attackParticle.Stop();
+            _isParticlePlaying = false;
+            _isAttackTime = false;
         }
     }
 }

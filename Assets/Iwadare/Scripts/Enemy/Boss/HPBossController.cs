@@ -15,6 +15,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     Vector3 _tmpVelocity;
     float _tmpGravity;
     bool _isSpecialAttackMode = false;
+    bool _gameEnd = false;
     public override bool SpecialHPChack() => _isSpecialAttackMode;
 
     void Start()
@@ -54,10 +55,22 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     void Update()
     {
+
         if (GameStateManager.Instance.GameState != GameState.StayState
             && GameStateManager.Instance.GameState != GameState.BattleEndState)
         {
             StateUpdate();
+        }
+
+        if(!_gameEnd && GameStateManager.Instance.GameState == GameState.BattleEndState)
+        {
+            _gameEnd = true;
+            if (_currentCoroutine != null)
+            {
+                StopCoroutine(_currentCoroutine);
+                _currentCoroutine = null;
+            }
+            _currentAction.ActionReset(this);
         }
     }
 
