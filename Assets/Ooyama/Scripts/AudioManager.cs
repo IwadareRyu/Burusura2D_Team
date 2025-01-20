@@ -53,8 +53,6 @@ public class AudioManager : MonoBehaviour
         }
 
         _seCount = seList.Length;
-
-        gameObject.AddComponent<AudioListener>();
         for (int i = 0; i <= _seCount; i++)
         {
             gameObject.AddComponent<AudioSource>();

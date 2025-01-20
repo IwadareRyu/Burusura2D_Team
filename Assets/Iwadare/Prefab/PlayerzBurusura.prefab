@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentPlayerArrowSprite: {fileID: 126320054075687383}
   _playerCollition: {fileID: 8733709516700746868}
-  _playerDefaultHP: 10
+  _playerDefaultHP: 100
   _playerHPSlider: {fileID: 0}
   _downPlayerAnim: {fileID: 5550373071737114952}
   _upPlayerAnim: {fileID: 5407705333902377667}

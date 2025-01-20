@@ -52,6 +52,7 @@ public class EnemyBase : MonoBehaviour
             _enemyAnim.gameObject.SetActive(true);
             _enemyAnim.ChangeAnimationSpain(_enemyAnim._initialName);
         }
+        GameStateManager.Instance.InBattle();
     }
 
     public void PlayerSet(PlayerController player)
@@ -73,6 +74,13 @@ public class EnemyBase : MonoBehaviour
                 effectObj.Play();
             }
         }
+        _currentHP -= damage;
+        DisplayHP();
+        HPChack();
+    }
+
+    public void PerforateDamage(float damage)
+    {
         _currentHP -= damage;
         DisplayHP();
         HPChack();

@@ -25,7 +25,6 @@ public class InGameManager : MonoBehaviour
 
     public void PlayerRemain(int remain)
     {
-        _deathCount++;
         _deathCountText.text = $"残機数: {remain}";
     }
 

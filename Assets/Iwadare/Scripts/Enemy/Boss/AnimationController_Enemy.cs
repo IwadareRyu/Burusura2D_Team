@@ -45,8 +45,11 @@ public class AnimationController_Enemy : MonoBehaviour
 
     public void OnEnable()
     {
-        _skeletonAnimation.AnimationState.Event += AddAttackAnimationEvent;
-        _skeletonAnimation.AnimationState.End += RemoveAttackAnimationEvent;
+        if (_animType == AnimationType.SkeletonAnimator)
+        {
+            _skeletonAnimation.AnimationState.Event += AddAttackAnimationEvent;
+            _skeletonAnimation.AnimationState.End += RemoveAttackAnimationEvent;
+        }
     }
 
     public void ChangeAnimationSpain(AnimationName animation)
