@@ -208,6 +208,19 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         }
     }
 
+    public void AddDamage(int damage)
+    {
+        _currentPlayerHP = Mathf.Min(_playerDefaultHP,_currentPlayerHP -= damage);
+
+        if (_currentPlayerHP <= 0)
+        {
+            _currentPlayerHP = 0;
+            Death();
+        }
+
+        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+    }
+
     public void AddBulletDamage(int damage)
     {
         if (_isInvisible || _isGuard

@@ -10,7 +10,7 @@ public class PlayerSpawn : MonoBehaviour
 {
     [SerializeField] PlayerController _player;
     [SerializeField] EnemyBase _enemy;
-    PlayerController _currentPlayer;
+    public PlayerController _currentPlayer;
     [SerializeField] int _playerRemain = 3;
     int _currentPlayerRemain;
     [SerializeField] SetPlayerStruct _setPlayerStruct;
@@ -61,6 +61,12 @@ public class PlayerSpawn : MonoBehaviour
         _enemy.PlayerSet(_currentPlayer);
         if(_spawnParticle) _spawnParticle.Play();
         ResponceManager.Instance.PlayerDeathResponce();
+    }
+
+    public void AddRemain(int plusRemain)
+    {
+        _currentPlayerRemain += plusRemain;
+        InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
     }
 }
 

@@ -8,8 +8,14 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     // Start is called before the first frame update
     protected override void Awake()
     {
-        base.Awake();
+        //base.Awake();
+        //ChangeState(GameState.InBattleState);
+    }
+
+    public void InBattle()
+    {
         ChangeState(GameState.InBattleState);
+        ResponceManager.Instance.GetPlayerEnemy();
     }
 
     public void ChangeState(GameState state)
