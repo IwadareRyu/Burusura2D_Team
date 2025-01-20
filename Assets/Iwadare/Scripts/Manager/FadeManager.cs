@@ -40,11 +40,11 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         TimeScaleManager.EndPauseAction -= EndPause;
     }
 
-    public IEnumerator SceneChangeFade()
+    public IEnumerator SceneChangeFade(string nextSceneName)
     {
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime);
         //ロード処理完了的な何か
-
+        SceneLoader.Instance.SceneLoad(nextSceneName,0.5f);
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime);
     }
 

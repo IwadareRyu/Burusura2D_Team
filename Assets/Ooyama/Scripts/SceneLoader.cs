@@ -17,9 +17,9 @@ public class SceneLoader : MonoBehaviour
             Destroy(this);
         }
     }
-    public void SceneLoad(string SceneName,float WaitTime)
+    public void SceneLoad(string sceneName,float waitTime)
     {
-        StartCoroutine(WaitTimer(SceneName,WaitTime));
+        StartCoroutine(WaitTimer(sceneName,waitTime));
     }
     IEnumerator WaitTimer(string NextSceneName,float WaitTime)
     {
