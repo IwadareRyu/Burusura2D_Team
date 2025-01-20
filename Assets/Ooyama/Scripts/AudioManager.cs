@@ -10,8 +10,8 @@ public class AudioManager : MonoBehaviour
     //音量設定保存用のKey及び各音声のデフォルト音量
     private const string BGM_VOLUME_KEY = "BGM_VOLUME";
     private const string SE_VOLUME_KEY = "SE_VOLUME";
-    private const float BGM_VOLUME_DEFULT = 1.0f;
-    private const float SE_VOLUME_DEFULT = 1.0f;
+    [SerializeField,Range(0f,1.0f)] private float _defaultBGMVolume = 1.0f;
+    [SerializeField,Range(0f,1.0f)] private float _defaultSEVolume = 1.0f;
 
     //各ファイルのパス
     private const string BGM_PATH = "Audio/BGM";
@@ -141,11 +141,11 @@ public class AudioManager : MonoBehaviour
     }
     public float GetBGMVolume()
     {
-        return PlayerPrefs.GetFloat(BGM_VOLUME_KEY, BGM_VOLUME_DEFULT);
+        return PlayerPrefs.GetFloat(BGM_VOLUME_KEY, _defaultBGMVolume);
     }
     public float GetSEVolume()
     {
-        return PlayerPrefs.GetFloat(SE_VOLUME_KEY, SE_VOLUME_DEFULT);
+        return PlayerPrefs.GetFloat(SE_VOLUME_KEY, _defaultSEVolume);
     }
     public void SetBGMVolume(float BGMVolume)
     {
