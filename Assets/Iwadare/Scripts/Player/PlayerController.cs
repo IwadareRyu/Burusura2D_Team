@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     [SerializeField] bool _isInvisible;
     [SerializeField] SpriteRenderer _guardSprite;
+    Image _guardImage;
     bool _isGuard = false;
     [NonSerialized] public bool _isAvoidCoolTime = false;
 
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _hitParticlePool = setPlayer._hitParticlePool;
         _missParticlePool = setPlayer._missBulletPool;
         _reflectHitPool = setPlayer._reflectParticlePool;
+        _guardImage = setPlayer._shieldImage;
+        _guardImage.enabled = false;
         _katanaTrail.enabled = false;
         /// GetComponent
         _moveScript = GetComponent<PlayerMove>();
@@ -304,12 +307,14 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public void StartGuardMode()
     {
         _guardSprite.enabled = true;
+        _guardImage.enabled = true;
         _isGuard = true;
     }
 
     public void EndGuardMode()
     {
         if (!_isInvisible) _guardSprite.enabled = false;
+        _guardImage.enabled = false;
         _isGuard = false;
     }
 

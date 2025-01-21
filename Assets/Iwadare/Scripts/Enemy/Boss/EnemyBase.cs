@@ -27,6 +27,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] BulletPoolActive _slashEffect;
     [SerializeField] float _defaultMoveSpeed = 2f;
     [SerializeField] SpriteRenderer _shieldRenderer;
+    [SerializeField] Image _shieldImage;
     public ParticleSystem _parryParticle;
     public Text _attackText;
     public Transform[] _movePoint;
@@ -46,6 +47,7 @@ public class EnemyBase : MonoBehaviour
         _currentHP = MaxHP;
         DisplayHP();
         _shieldRenderer.enabled = false;
+        _shieldImage.enabled = false;
         if (_attackText) _attackText.enabled = false;
         if (_enemyAnim)
         {
@@ -153,12 +155,14 @@ public class EnemyBase : MonoBehaviour
     {
         _guard = true;
         _shieldRenderer.enabled = true;
+        _shieldImage.enabled = true;
     }
 
     public void BreakGuardMode()
     {
         _guard = false;
         _shieldRenderer.enabled = false;
+        _shieldImage.enabled = false;
     }
 
     public void ChangeAnimationObject(AnimationController_Enemy enemyAnim)
