@@ -1,10 +1,12 @@
 ﻿using Cinemachine;
+using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using VTNConnect;
 
 public class PlayerSpawn : MonoBehaviour
 {
@@ -40,14 +42,15 @@ public class PlayerSpawn : MonoBehaviour
 
     private IEnumerator PlayerDelaySpawn()
     {
-        if(!_isNotRemain && _currentPlayerRemain <= 0)
+        yield return WaitforSecondsCashe.Wait(_spawnDelayTime);
+        ResponceManager.Instance.PlayerDeathResponce();
+        if (!_isNotRemain && _currentPlayerRemain <= 0)
         {
-            yield return null;
             GameStateManager.Instance.ChangeState(GameState.BattleEndState);
             _isNotRemain = true;
+            InGameManager.Instance.GameOver();
             yield break;
         }
-        yield return WaitforSecondsCashe.Wait(_spawnDelayTime);
         SpawnPlayer();
         _isDeath = false;
     }

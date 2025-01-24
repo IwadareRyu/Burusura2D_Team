@@ -2,8 +2,9 @@
 using System;
 using System.Threading;
 using UnityEngine;
+using VTNConnect;
 
-public class ResponceManager : SingletonMonovihair<ResponceManager>
+public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConnectEventReceiver
 {
     [SerializeField] NekoChatScripts _ultraChatScripts;
     [SerializeField] int _plusRemain = 3;
@@ -12,9 +13,23 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>
     PlayerSpawn _playerSpawn;
     EnemyBase _enemy;
     [SerializeField] bool _network = true;
+
+    public bool IsActive => throw new NotImplementedException();
+
     protected override void Awake()
     {
         base.Awake();
+    }
+
+
+    public void OnEventCall(EventData data)
+    {
+        switch (data.EventId)
+        {
+            case (int)EventDefine.DefeatBomb:
+
+                break;
+        }
     }
 
     public void GetPlayerEnemy()
@@ -29,7 +44,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>
 
     public void RemainUp()
     {
-        if(_playerSpawn)
+        if (_playerSpawn)
         {
             _playerSpawn.AddRemain(_plusRemain);
         }
@@ -37,7 +52,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>
 
     public void PlayerDamage()
     {
-        if(_playerSpawn)
+        if (_playerSpawn)
         {
             _playerSpawn._currentPlayer.AddDamage(_playerDamage);
         }
@@ -45,7 +60,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>
 
     public void EnemyDamage()
     {
-        if(_enemy)
+        if (_enemy)
         {
             _enemy.AddDamage(_enemyDamage);
         }
@@ -55,17 +70,10 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>
     public void PlayerDeathResponce()
     {
         if (!_network) return;
-        var ct = this.GetCancellationTokenOnDestroy();
-        PlayerDeathResponceAsync(ct).Forget();
+        EventData data = new EventData(EventDefine.DeathStack);
+         VantanConnect.SendEvent(data);
     }
 
-    public async UniTask PlayerDeathResponceAsync(CancellationToken ct)
-    {
-        /// サーバーに指令を送る。
-
-        ///
-        await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime), cancellationToken: ct);
-    }
 
     public void StageClearResponce()
     {

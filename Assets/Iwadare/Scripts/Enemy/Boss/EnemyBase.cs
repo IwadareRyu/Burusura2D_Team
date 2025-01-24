@@ -6,6 +6,7 @@ public class EnemyBase : MonoBehaviour
 {
     PlayerController _player;
     public AnimationController_Enemy _enemyAnim;
+    public AudioBoss _bossAudio;
     public PlayerController Player => _player;
     [Tooltip("敵のMaxHP"), Header("敵のMaxHP")]
     [SerializeField] float _maxHP = 100;
@@ -43,6 +44,7 @@ public class EnemyBase : MonoBehaviour
     public void BaseInit()
     {
         _enemyRb = GetComponent<Rigidbody2D>();
+        _bossAudio = GetComponent<AudioBoss>();
         if (_enemyRb && _enemyRb.gravityScale != 0) _useGravity = true;
         _currentHP = MaxHP;
         DisplayHP();
@@ -75,6 +77,8 @@ public class EnemyBase : MonoBehaviour
                 effectObj.transform.position = transform.position;
                 effectObj.Play();
             }
+            _bossAudio.AttackAudioPlay();
+            
         }
         _currentHP -= damage;
         DisplayHP();
@@ -153,6 +157,7 @@ public class EnemyBase : MonoBehaviour
 
     public void GuardMode()
     {
+        _bossAudio.ShieldAudioPlay();
         _guard = true;
         _shieldRenderer.enabled = true;
         _shieldImage.enabled = true;
@@ -160,6 +165,7 @@ public class EnemyBase : MonoBehaviour
 
     public void BreakGuardMode()
     {
+        _bossAudio.ShieldBreakAudioPlay();
         _guard = false;
         _shieldRenderer.enabled = false;
         _shieldImage.enabled = false;
