@@ -175,7 +175,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     public void TimeScaleChange(float timeScale)
     {
         _timeScale = timeScale;
-        _enemyAnim._objAnimator.speed = _timeScale;
     }
 
 

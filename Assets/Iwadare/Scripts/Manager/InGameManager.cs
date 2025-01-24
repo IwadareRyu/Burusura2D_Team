@@ -10,7 +10,9 @@ public class InGameManager : MonoBehaviour
     [NonSerialized] public PlayerSpecialGuage _playerSpecialGuage;
     [SerializeField] public Text _deathCountText;
     [SerializeField] Canvas _gameOverCanvas;
-    [SerializeField] Canvas _gameCrearCanvas;
+    Animator _gameOverAnimator;
+    [SerializeField] Canvas _gameClearCanvas;
+    Animator _gameClearAnimator;
     int _deathCount;
 
     private void Awake()
@@ -19,8 +21,16 @@ public class InGameManager : MonoBehaviour
         else Destroy(gameObject);
         _playerSpecialGuage = GetComponent<PlayerSpecialGuage>();
         _deathCount = 0;
-        _gameOverCanvas.enabled = false;
-        _gameCrearCanvas.enabled = false;
+    }
+
+    private void Start()
+    {
+        _gameOverCanvas.gameObject.SetActive(true);
+        _gameClearCanvas.gameObject.SetActive(true);
+        _gameOverAnimator = _gameOverCanvas.GetComponent<Animator>();
+        _gameClearAnimator = _gameClearCanvas.GetComponent<Animator>();
+        _gameOverCanvas.gameObject.SetActive(false);
+        _gameClearCanvas.gameObject.SetActive(false);
     }
 
     public void PlayerRemain(int remain)
@@ -30,10 +40,10 @@ public class InGameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (!_gameCrearCanvas.enabled)
+        if (!_gameClearCanvas.gameObject.activeSelf)
         {
             TimeScaleManager.Instance.TimeScaleChange(0);
-            _gameOverCanvas.enabled = true;
+            _gameOverCanvas.gameObject.SetActive(true);
         }
     }
 
@@ -42,7 +52,7 @@ public class InGameManager : MonoBehaviour
         if(!_gameOverCanvas.enabled)
         {
             TimeScaleManager.Instance.TimeScaleChange(0);
-            _gameCrearCanvas.enabled = true;
+            _gameClearCanvas.gameObject.SetActive(true);
         }
     }
 }
