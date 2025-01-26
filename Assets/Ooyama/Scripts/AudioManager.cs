@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
         _bgmSource.volume = GetBGMVolume();
         _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
-        for (int i = bgmList.Length; i < audioSources.Length; i++)
+        for (int i = 1; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
             audioSources[i].volume = GetSEVolume();
@@ -123,13 +123,14 @@ public class AudioManager : MonoBehaviour
             if (source.clip.name == seName && source.isPlaying)
             {
                 source.Stop();
-                source.PlayOneShot(source.clip);
+                source.Play();
+                return;
             }
-            else
+            else if(source.clip.name == source.clip.name)
             {
-                source.PlayOneShot(source.clip);
-            }
-            return;
+                source.Play();
+                return;
+            }      
         }
     }
     public void TestBGM()
