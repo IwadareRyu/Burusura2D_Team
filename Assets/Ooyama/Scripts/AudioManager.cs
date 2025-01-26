@@ -120,21 +120,25 @@ public class AudioManager : MonoBehaviour
 
         foreach (AudioSource source in _seSourcesLis)
         {
-            if (source.isPlaying)
+            if (source.clip.name == seName && source.isPlaying)
             {
                 source.Stop();
+                source.PlayOneShot(source.clip);
             }
-            source.PlayOneShot(_seDic[seName]);
+            else
+            {
+                source.PlayOneShot(source.clip);
+            }
             return;
         }
     }
     public void TestBGM()
     {
-        PlayBGM("Test");
+        Instance.PlayBGM("Test");
     }
     public void TestSE()
     {
-        PlaySE("GetItem");
+        Instance.PlaySE("GetItem");
     }
     public void TestSE2()
     {
