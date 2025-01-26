@@ -77,6 +77,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &5411337969145706617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +185,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &5363852096798822433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,10 +314,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &2627952615963578334
 GameObject:
@@ -394,6 +399,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &8071920994487348958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,10 +528,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &3146866193494362885
 GameObject:
@@ -604,6 +613,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &5584672925348916684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,10 +742,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &3598520777392190995
 GameObject:
@@ -814,6 +827,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &4466063379708394194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,6 +935,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &2627292811206638303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,10 +1064,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &5693629054994651925
 GameObject:
@@ -1152,10 +1170,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &5915808030868669344
 GameObject:
@@ -1234,6 +1255,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &797693291195981065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,6 +1363,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &406618984100216271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,10 +1492,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &7298604772360108650
 GameObject:
@@ -1572,10 +1598,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &8258763360686074678
 GameObject:
@@ -1716,10 +1745,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &8848160988113077274
 GameObject:
@@ -1819,10 +1851,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0
 --- !u!1 &9078009345633696240
 GameObject:
@@ -1901,6 +1936,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &1678011226295533774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,6 +2044,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 0
+  _isAudio: 1
 --- !u!114 &8358577763046356770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2136,8 +2173,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
   _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
   _isUseImage: 0

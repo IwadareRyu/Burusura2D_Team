@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 [RequireComponent(typeof(WaveSpawnEnemy),typeof(SpawnShotLine))]
+
+
 public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 {
     [Header("弾の設定")]
@@ -68,7 +71,11 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 
     float _timeScale = 1f;
 
+    public bool _isAudio = true;
     IEnumerator _spawnCoroutine;
+    [NonSerialized]public string _attackName = "Throw";
+    
+    [NonSerialized]public string _strongAttackName = "Throw";
 
     [NonSerialized]public List<MoveBulletEnemy> _moveBulletList = new List<MoveBulletEnemy>();
     private void Start()
@@ -113,6 +120,14 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 
         if(_spawnShotLine && _spawnShotLine.RayUpdate())
         {
+            if (_spawnBulletMoveStruct._bulletMoveType != BulletMoveType.NewDelayFastLazer)
+            {
+                _spawnShotLine.ResetShotLine();
+            }
+            else
+            {
+                _spawnShotLine.ShotBullet();
+            }
             MoveBullet();
         }
     }
@@ -196,7 +211,7 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
         if(_spawnBulletMoveStruct._isRota) bullet.transform.Rotate(0, 0, rota);
         /// Bulletの属性をBulletMoveScriptsに入れる。
         var bulletScripts = bullet.GetComponent<MoveBulletEnemy>();
-        bulletScripts.BulletMoveStart(this,bulletSpeed,rota,activeTime);
+        bulletScripts.BulletMoveStart(this,bulletSpeed,rota,activeTime,_isAudio);
         if (!_isManualMove && _isActiveShotLine) SetRay(rota);
     }
 
@@ -210,7 +225,11 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 
     public void MoveBullet()
     {
-        if(_moveBulletList.Count != 0)
+        if (_spawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
+        {
+            AttackAudio();
+        }
+        if (_moveBulletList.Count != 0)
         {
             foreach(var bullet in _moveBulletList)
             {
@@ -241,5 +260,13 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
     public void EndPause()
     {
         _timeScale = 1f;
+    }
+
+    public void AttackAudio()
+    {
+        if (_isAudio)
+        {
+            AudioManager.Instance.PlaySE(_attackName);
+        }
     }
 }

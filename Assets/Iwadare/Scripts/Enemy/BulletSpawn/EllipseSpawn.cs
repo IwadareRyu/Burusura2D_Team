@@ -14,6 +14,10 @@ public class EllipseSpawn :BulletSpawnClass
     public void Spawn(BulletSpawnEnemy bulletSpawn)
     {
         float j = 0f;
+        if (!bulletSpawn.IsManualMove && bulletSpawn.SpawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
+        {
+            bulletSpawn.AttackAudio();
+        }
         for (float i = bulletSpawn.BulletDistance; i < 360 + bulletSpawn.BulletDistance; i += bulletSpawn.BulletRange)
         {
             if (!_isVerticalEllipse) _speedPersents = Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * j));

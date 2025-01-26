@@ -13,31 +13,31 @@ public class AudioBoss : MonoBehaviour
 
     public void CatInAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_catInAudio.name);
+        AudioManager.Instance.PlaySE(_catInAudio.name);
     }
 
     public void AttackAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_attackAudio.name);
+        AudioManager.Instance.PlaySE(_attackAudio.name);
     }
 
     public void DamageAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_damageAudio.name);
+        AudioManager.Instance.PlaySE(_damageAudio.name);
     }
 
     public void DeadAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_deadAudio.name);
+        AudioManager.Instance.PlaySE(_deadAudio.name);
     }
 
     public void ShieldAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_shieldAudio.name);
+        AudioManager.Instance.PlaySE(_shieldAudio.name);
     }
 
     public void ShieldBreakAudioPlay()
     {
-        AudioManager.Instance.PlayBGM(_shieldBreakAudio.name);
+        AudioManager.Instance.PlaySE(_shieldBreakAudio.name);
     }
 }

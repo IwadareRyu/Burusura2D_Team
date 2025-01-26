@@ -14,6 +14,10 @@ public class ForwardAfterSlowSpawn : BulletSpawnClass
 
     public void Spawn(BulletSpawnEnemy bulletSpawn)
     {
+        if (!bulletSpawn.IsManualMove && bulletSpawn.SpawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
+        {
+            bulletSpawn.AttackAudio();
+        }
         for (var i = 0; i < _spawnCount; i++)
         {
             var speedPower = (float)Math.Pow(_speedPower, i);

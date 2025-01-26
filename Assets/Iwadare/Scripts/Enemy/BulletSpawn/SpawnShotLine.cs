@@ -24,8 +24,6 @@ public class SpawnShotLine : MonoBehaviour
             _shotLine.LineUpdate(_currentShotCoolTime / _shotLineCoolTime);
             if(_currentShotCoolTime > _shotLineCoolTime)
             {
-                _isRay = false;
-                _shotLine.gameObject.SetActive(false);
                 return true;
             }
         }
@@ -54,6 +52,17 @@ public class SpawnShotLine : MonoBehaviour
             }
         }
         return transform.position;
+    }
+
+    public void ShotBullet()
+    {
+        if (_isRay)
+        {
+            _shotLine.ShotBulletRef();
+            _shotLine.ShotParticle();
+            _isRay = false;
+            _shotLine = null;
+        }
     }
 
     public void ResetShotLine()

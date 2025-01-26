@@ -126,7 +126,7 @@ public class AudioManager : MonoBehaviour
                 source.Play();
                 return;
             }
-            else if(source.clip.name == source.clip.name)
+            else if(source.clip.name == seName)
             {
                 source.Play();
                 return;

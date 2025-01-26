@@ -33,11 +33,13 @@ public class HeartAttack : MonoBehaviour,IUIAttack
             {
                 enemy.SpawnBulletRef(spawn);
             }
+            enemy._bossAudio.AttackAudioPlay();
             yield return WaitforSecondsCashe.Wait(_attackMiddleTime);
             foreach(var spawn in _centerHeartSpawns)
             {
                 enemy.SpawnBulletRef(spawn);
             }
+            enemy._bossAudio.AttackAudioPlay();
             yield return WaitforSecondsCashe.Wait(_attackEndTime);
         }
     }

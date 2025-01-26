@@ -98,9 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dangerousSprite: {fileID: 21300000, guid: 857b27bf305c140dab35e3de694fcfbc, type: 3}
+  _dangerousFramePool: {fileID: 0}
+  _dangerousImage: {fileID: 0}
+  _dangerousFrameImage: {fileID: 0}
   _lightUpColor: {r: 1, g: 1, b: 1, a: 1}
   _lightDownColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   _defaultMatualTime: 0.2
+  _rotationDangerousRange: 1800
+  _isUseImage: 0
 --- !u!1 &4714483271908110071
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +183,7 @@ MonoBehaviour:
       _minPersents: 0.3
   _isActiveShotLine: 0
   _isManualMove: 1
+  _isAudio: 1
 --- !u!114 &8201394067048621373
 MonoBehaviour:
   m_ObjectHideFlags: 0

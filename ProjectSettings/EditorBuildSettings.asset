@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Iwadare/SampleBossScene.unity
+    path: Assets/Iwadare/UseScene/YuaiScene.unity
     guid: ceae4526e102f544985fdb5c085ca2ae
+  - enabled: 1
+    path: Assets/Iwadare/UseScene/DataraBossStage.unity
+    guid: 2770f306a58df074e99aef4d5dec76b8
   m_configObjects: {}

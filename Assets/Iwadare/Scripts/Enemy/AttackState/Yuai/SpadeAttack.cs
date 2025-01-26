@@ -43,6 +43,7 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
                     enemy.SpawnBulletRef(spawn);
                 }
             }
+            enemy._bossAudio.AttackAudioPlay();
             yield return WaitforSecondsCashe.Wait(_spawnTime);
         }
         yield return WaitforSecondsCashe.Wait(_bulletTime);

@@ -46,6 +46,7 @@ public class CloverAttack : MonoBehaviour, IUIAttack
                     yield return WaitforSecondsCashe.Wait(_spawnTime);
                 }
             }
+            enemy._bossAudio.AttackAudioPlay();
             yield return WaitforSecondsCashe.Wait(_bulletTime);
         }
     }

@@ -6,7 +6,7 @@ public class EnemyBase : MonoBehaviour
 {
     PlayerController _player;
     public AnimationController_Enemy _enemyAnim;
-    public AudioBoss _bossAudio;
+    [NonSerialized]public AudioBoss _bossAudio;
     public PlayerController Player => _player;
     [Tooltip("敵のMaxHP"), Header("敵のMaxHP")]
     [SerializeField] float _maxHP = 100;

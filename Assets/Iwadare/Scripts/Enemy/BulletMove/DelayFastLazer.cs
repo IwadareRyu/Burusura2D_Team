@@ -27,6 +27,7 @@ public class DelayFastLazer : BulletMoveClass
         //Playerの攻撃に当たっているかの判定
         if (bulletMove.ChackAttackHit())
         {
+            if (bulletMove.IsAudio) AudioManager.Instance.PlaySE(bulletMove._strongAttackAudio);
             bulletMove.BulletBreakMehod();
             return false;
         }
@@ -34,6 +35,7 @@ public class DelayFastLazer : BulletMoveClass
         // 時間判定
         if (_currentTime > bulletMove.ActiveTime)
         {
+            if(bulletMove.IsAudio) AudioManager.Instance.PlaySE(bulletMove._strongAttackAudio);
             bulletMove.AttackRay();
             return false;
         }
