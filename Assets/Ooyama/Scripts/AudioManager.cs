@@ -79,7 +79,6 @@ public class AudioManager : MonoBehaviour
             audioSources[i].volume = GetSEVolume();
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
         }
-        PlayBGM("Test");
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
