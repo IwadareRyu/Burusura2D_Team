@@ -11,8 +11,8 @@ public class AudioManager : MonoBehaviour
     //音量設定保存用のKey及び各音声のデフォルト音量
     private const string BGM_VOLUME_KEY = "BGM_VOLUME";
     private const string SE_VOLUME_KEY = "SE_VOLUME";
-    [SerializeField,Range(0f,1.0f)] private float _defaultBGMVolume = 1.0f;
-    [SerializeField,Range(0f,1.0f)] private float _defaultSEVolume = 1.0f;
+    [SerializeField, Range(0f, 1.0f)] private float _defaultBGMVolume = 1.0f;
+    [SerializeField, Range(0f, 1.0f)] private float _defaultSEVolume = 1.0f;
 
     //各ファイルのパス
     private const string BGM_PATH = "Audio/BGM";
@@ -29,9 +29,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance = null;
 
     [SerializeField] private AudioMixer _audioMixer = null;
-
-    private bool _isCanPlaySe = true;
-    [SerializeField] float _intervalTimer = 0.1f;
 
     private void Awake()
     {
@@ -118,15 +115,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (_isCanPlaySe)
+        foreach (AudioSource source in _seSourcesLis)
         {
-            foreach (AudioSource source in _seSourcesLis)
+            Debug.Log("Play" + seName);
+            if (source.isPlaying)
             {
-                Debug.Log("Play" + seName);
-                source.PlayOneShot(_seDic[seName]);
-                StartCoroutine(IntervalTimer());
-                return;
+                source.Stop();
             }
+            source.PlayOneShot(_seDic[seName]);
+            return;
         }
     }
     public void TestBGM()
@@ -160,12 +157,5 @@ public class AudioManager : MonoBehaviour
     public void SetSEVolume(float SEVolume)
     {
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
-    }
-    IEnumerator IntervalTimer()
-    {
-        _isCanPlaySe = false;
-        yield return WaitforSecondsCashe.Wait(_intervalTimer);
-        _isCanPlaySe = true;
-        yield break;
     }
 }
