@@ -40,18 +40,10 @@ public class AudioManager : MonoBehaviour
 
         _bgmDic = new();
         _seDic = new();
+        _seSourcesLis = new();
 
         var bgmList = Resources.LoadAll(BGM_PATH);
-        foreach (AudioClip bgm in bgmList)
-        {
-            _bgmDic[bgm.name] = bgm;
-        }
-
         var seList = Resources.LoadAll(SE_PATH);
-        foreach (AudioClip se in seList)
-        {
-            _seDic[se.name] = se;
-        }
 
         _seCount = seList.Length;
         for (int i = 0; i <= _seCount; i++)
@@ -60,21 +52,32 @@ public class AudioManager : MonoBehaviour
         }
 
         AudioSource[] audioSources = GetComponents<AudioSource>();
-        _seSourcesLis = new();
-
 
         audioSources[0].loop = true;
         _bgmSource = audioSources[0];
         _bgmSource.volume = GetBGMVolume();
         _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
-        for (int i = 1; i < audioSources.Length; i++)
+        for (int i = bgmList.Length; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
-            _seSourcesLis.Add(audioSources[i]);
-            //_seSourcesLis[i].clip = audioSources[i].clip;
             audioSources[i].volume = GetSEVolume();
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
+            _seSourcesLis.Add(audioSources[i]);
+        }
+
+        foreach (AudioClip bgm in bgmList)
+        {
+            _bgmDic[bgm.name] = bgm;
+        }
+        foreach (AudioClip se in seList)
+        {
+            _seDic[se.name] = se;
+        }
+
+        for (int i = 0; i < _seSourcesLis.Count; i++)
+        {
+            _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
@@ -117,7 +120,6 @@ public class AudioManager : MonoBehaviour
 
         foreach (AudioSource source in _seSourcesLis)
         {
-            Debug.Log("Play" + seName);
             if (source.isPlaying)
             {
                 source.Stop();
