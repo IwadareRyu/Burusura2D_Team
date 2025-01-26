@@ -125,6 +125,7 @@ public class AttackTargetArrow : MonoBehaviour
         Debug.Log($"{count}回目の攻撃！");
         upBodyAnim.SetTrigger("AttackTrigger");
         AttackSlash();
+        player._audio.AttackPlayAudio();
         yield return WaitforSecondsCashe.Wait(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
         {

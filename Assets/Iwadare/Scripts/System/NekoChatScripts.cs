@@ -16,6 +16,7 @@ public class NekoChatScripts : MonoBehaviour
     [SerializeField] Sprite[] _nekoSprite;
     [SerializeField] String[] _chat;
     [SerializeField] float _maxCount = 100000;
+    [SerializeField] float _testDisCount = 1;
     [SerializeField] Sprite _maxSprite;
     [SerializeField] String _maxchat;
     float _testResponceCurrentTime;
@@ -32,7 +33,7 @@ public class NekoChatScripts : MonoBehaviour
         _testResponceCurrentTime += Time.deltaTime;
         if (_isResponceUltraChat && _testResponceCurrentTime > _testResponceCoolTime)
         {
-            StartCoroutine(UltraChatCoroutine(RamdomMethod.RandomNumber99() + 1));
+            StartCoroutine(UltraChatCoroutine(RamdomMethod.RandomNumber99() + _testDisCount));
             _testResponceCurrentTime = 0f;
         }
     }

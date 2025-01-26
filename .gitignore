@@ -75,3 +75,13 @@ Assets/Settings/
 Assets/Resources/
 Assets/BGM/
 Assets/Editor/
+Assets/Scripts/BaseSystem/
+Assets/Scripts/BaseSystemEditor/
+Assets/Scripts/VantanConnect/
+Assets/Scripts/VantanConnectEditor/
+Assets/ThirdParty/
+Assets/VCSampleScene/
+Assets/ConnectEventAssets/
+Assets/VCSampleScene.meta
+Assets/ThirdParty.meta
+Assets/ConnectEventAssets.meta

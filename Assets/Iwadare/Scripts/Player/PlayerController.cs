@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerAudio))]
 public class PlayerController : MonoBehaviour, PauseTimeInterface
 {
     [SerializeField] SpriteRenderer _currentPlayerArrowSprite;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     /// <summary>移動系の変数</summary>
     PlayerMove _moveScript;
     PlayerSpecialGuage _specialGuage;
+    [NonSerialized]public PlayerAudio _audio;
 
     [Tooltip("x方向の移動")]
     float _x = 0;
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _guardImage.enabled = false;
         _katanaTrail.enabled = false;
         /// GetComponent
+        _audio = GetComponent<PlayerAudio>();
         _moveScript = GetComponent<PlayerMove>();
         _playerRb = GetComponent<Rigidbody2D>();
         /// Init
@@ -226,6 +229,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void AddBulletDamage(int damage)
     {
+        _audio.DamageAudio();
         if (_isInvisible || _isGuard
             || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState)) != 0
             || GameStateManager.Instance.GameState == GameState.BattleEndState)
@@ -306,6 +310,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void StartGuardMode()
     {
+        _audio.ShieldAudio();
         _guardSprite.enabled = true;
         _guardImage.enabled = true;
         _isGuard = true;
@@ -314,6 +319,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public void EndGuardMode()
     {
         if (!_isInvisible) _guardSprite.enabled = false;
+        _audio.ShieldBreakAudio();
         _guardImage.enabled = false;
         _isGuard = false;
     }
