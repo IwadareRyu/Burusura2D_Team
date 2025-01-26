@@ -133,6 +133,11 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         {
             ChangeAction();
             //死ぬ
+            if(_enemyAnim._animType == AnimationType.SkeletonAnimator)
+            {
+                _enemyAnim.ChangeAnimationSpain(AnimationName.Damage);
+
+            }
             GameStateManager.Instance.ChangeState(GameState.BattleEndState);
             //Destroy(gameObject);
         }

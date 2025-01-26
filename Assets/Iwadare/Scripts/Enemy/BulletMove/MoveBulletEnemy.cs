@@ -62,7 +62,11 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
     [Tooltip("一定時間たったら追尾する弾のクラス")]
     [SerializeField] DelayTargetPlayerMove _targetPlayerMove = new();
 
+    [NonSerialized]public string _strongAttackAudio = "Throw";
+
     DelayFastLazer _delayFastLazer = new();
+
+    NewDelayFastLazer _newDelayFastLazer = new();
 
     BulletMoveClass _currentBulletMoveClass;
 
@@ -73,6 +77,9 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
 
     bool _isRota;
     public bool IsRota => _isRota;
+
+    bool _isAudio;
+    public bool IsAudio => _isAudio;
 
     public void Init()
     {
@@ -103,7 +110,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
     #region 弾の種類
     /// <summary>弾が動くときの初期化</summary>
     public void BulletMoveStart(BulletSpawnEnemy spawnPoint,
-        float bulletSpeed, float direction, float activeTime = 5f)
+        float bulletSpeed, float direction, float activeTime = 5f, bool isAudio = true)
     {
 
         _breakType = spawnPoint.SpawnBulletMoveStruct._bulletBreakType;
@@ -112,6 +119,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
         _currentBulletRota = _maxBulletRota = spawnPoint.SpawnBulletMoveStruct._bulletRotation;
         _currentBulletAngle = direction;
         _isRota = spawnPoint.SpawnBulletMoveStruct._isRota;
+        _isAudio = isAudio;
 
         //if (HitStopManager.instance._isSpeedHitStop) HitStopStart(HitStopManager.instance._speedHitStopPower);
 
@@ -142,6 +150,9 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
             case BulletMoveType.DelayFastLazer:
                 _currentBulletMoveClass = _delayFastLazer;
                 _currentBulletMoveClass.BulletMove();
+                break;
+            case BulletMoveType.NewDelayFastLazer:
+                _currentBulletMoveClass = _newDelayFastLazer;
                 break;
         }
         _bulletListRef = spawnPoint._moveBulletList;
@@ -352,6 +363,27 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
             _currentShotLine.ShotParticle();
         }
         _isRay = false;
+    }
+
+    public void NewAttackRay()
+    {
+        RaycastHit2D[] hitRays;
+        if (_isRota)
+        {
+            hitRays = Physics2D.RaycastAll(transform.position, transform.up);
+        }
+        else
+        {
+            hitRays = Physics2D.RaycastAll(transform.position, _currentDirection);
+        }
+        foreach (var hit in hitRays)
+        {
+            if (hit.transform.TryGetComponent<PlayerController>(out var player))
+            {
+                player.AddBulletDamage(2);
+                break;
+            }
+        }
     }
 
     void ResetRay()

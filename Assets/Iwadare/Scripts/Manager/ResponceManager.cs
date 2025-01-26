@@ -24,12 +24,12 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void OnEventCall(EventData data)
     {
-        switch (data.EventId)
-        {
-            case (int)EventDefine.DefeatBomb:
+        //switch (data.EventId)
+        //{
+        //    case (int)EventDefine.DefeatBomb:
 
-                break;
-        }
+        //        break;
+        //}
     }
 
     public void GetPlayerEnemy()
@@ -71,7 +71,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     {
         if (!_network) return;
         EventData data = new EventData(EventDefine.DeathStack);
-         VantanConnect.SendEvent(data);
+        VantanConnect.SendEvent(data);
     }
 
 

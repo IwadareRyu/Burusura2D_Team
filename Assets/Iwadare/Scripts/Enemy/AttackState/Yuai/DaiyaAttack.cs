@@ -43,6 +43,7 @@ public class DaiyaAttack : MonoBehaviour,IUIAttack
                     enemy.SpawnBulletRef(_rightUpLazerSpawn[j]);
                     enemy.SpawnBulletRef(_rightDownLazerSpawn[j]);
                     yield return WaitforSecondsCashe.Wait(_disSpawnTime);
+
                 }
             }
             else

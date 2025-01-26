@@ -20,16 +20,20 @@ public class WaveSpawnEnemy : MonoBehaviour
         _tmpDistance = bulletSpawnEnemy.BulletDistance;
     }
 
-    public IEnumerator WaveSpawn(BulletSpawnEnemy bulletSpawnEnemy,CircleSpawn circleSpawn)
+    public IEnumerator WaveSpawn(BulletSpawnEnemy bulletSpawn,CircleSpawn circleSpawn)
     {
-        bulletSpawnEnemy._bulletDistance = _tmpDistance;
+        bulletSpawn._bulletDistance = _tmpDistance;
         for (var i = 0; i < _waveCount; i++)
         {
             for (var j = 0; j < _waveWidth; j++)
             {
-                circleSpawn.Spawn(bulletSpawnEnemy);
+                if (!bulletSpawn.IsManualMove && bulletSpawn.SpawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
+                {
+                    bulletSpawn.AttackAudio();
+                }
+                circleSpawn.Spawn(bulletSpawn);
                 yield return new WaitForSeconds(_waveWidthTime);
-                bulletSpawnEnemy._bulletDistance += _waveDistance;
+                bulletSpawn._bulletDistance += _waveDistance;
             }
             yield return new WaitForSeconds(_waveCountTime);
             _waveDistance = -_waveDistance;
