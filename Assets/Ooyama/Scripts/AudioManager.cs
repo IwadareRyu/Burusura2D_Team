@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -28,6 +29,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance = null;
 
     [SerializeField] private AudioMixer _audioMixer = null;
+
+    private bool _isCanPlaySe = true;
+    [SerializeField] float _intervalTimer = 0.1f;
 
     private void Awake()
     {
@@ -71,9 +75,11 @@ public class AudioManager : MonoBehaviour
         {
             audioSources[i].playOnAwake = false;
             _seSourcesLis.Add(audioSources[i]);
+            //_seSourcesLis[i].clip = audioSources[i].clip;
             audioSources[i].volume = GetSEVolume();
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
         }
+        PlayBGM("Test");
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
@@ -113,12 +119,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        foreach (AudioSource source in _seSourcesLis)
+        if (_isCanPlaySe)
         {
-
-            Debug.Log("Play" + seName);
-            source.PlayOneShot(_seDic[seName]);
-            return;
+            foreach (AudioSource source in _seSourcesLis)
+            {
+                Debug.Log("Play" + seName);
+                source.PlayOneShot(_seDic[seName]);
+                StartCoroutine(IntervalTimer());
+                return;
+            }
         }
     }
     public void TestBGM()
@@ -152,5 +161,12 @@ public class AudioManager : MonoBehaviour
     public void SetSEVolume(float SEVolume)
     {
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
+    }
+    IEnumerator IntervalTimer()
+    {
+        _isCanPlaySe = false;
+        yield return WaitforSecondsCashe.Wait(_intervalTimer);
+        _isCanPlaySe = true;
+        yield break;
     }
 }
