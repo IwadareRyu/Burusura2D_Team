@@ -17,6 +17,8 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     bool _isSpecialAttackMode = false;
     bool _gameEnd = false;
     public override bool SpecialHPChack() => _isSpecialAttackMode;
+    [SerializeField] Animator _endAnimator;
+    bool _death = false;
 
     void Start()
     {
@@ -105,6 +107,8 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public override void HPChack()
     {
+        if (_death) return;
+
         if(_isSpecialAttackMode)
         {
             AddSpecialHPDamage();
@@ -136,10 +140,10 @@ public class HPBossController : EnemyBase,PauseTimeInterface
             if(_enemyAnim._animType == AnimationType.SkeletonAnimator)
             {
                 _enemyAnim.ChangeAnimationSpain(AnimationName.Damage);
-
+                _endAnimator.Play("End");
             }
-            GameStateManager.Instance.ChangeState(GameState.BattleEndState);
-            //Destroy(gameObject);
+            GameStateManager.Instance.EndBattle(true);
+            _death = true;
         }
     }
 

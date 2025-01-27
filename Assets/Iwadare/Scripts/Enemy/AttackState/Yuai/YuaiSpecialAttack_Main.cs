@@ -183,6 +183,7 @@ public class YuaiSpecialAttack_Main : MonoBehaviour, AttackInterface, PauseTimeI
         {
             yield return WaitforSecondsCashe.Wait(1f);
             enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Change);
+            _yuaiUI.ChangeTimerText();
             yield return StartCoroutine(_yuaiUI.AttackEndFadeIn());
             enemy.ChangeAnimationObject(_yureiAnim);
             enemy._enemyAnim.ChangeAnimationSpain(AnimationName.Idle);

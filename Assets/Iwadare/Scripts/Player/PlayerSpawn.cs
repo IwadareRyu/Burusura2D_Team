@@ -46,9 +46,8 @@ public class PlayerSpawn : MonoBehaviour
         ResponceManager.Instance.PlayerDeathResponce();
         if (!_isNotRemain && _currentPlayerRemain <= 0)
         {
-            GameStateManager.Instance.ChangeState(GameState.BattleEndState);
             _isNotRemain = true;
-            InGameManager.Instance.GameOver();
+            GameStateManager.Instance.EndBattle(false);
             yield break;
         }
         SpawnPlayer();

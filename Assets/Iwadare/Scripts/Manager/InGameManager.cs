@@ -13,14 +13,16 @@ public class InGameManager : MonoBehaviour
     Animator _gameOverAnimator;
     [SerializeField] Canvas _gameClearCanvas;
     Animator _gameClearAnimator;
-    int _deathCount;
+    [SerializeField] float _gameEndTime = 2f;
+    [SerializeField] float _sceneChangeWaitTime = 3f;
+    [SerializeField] AudioClip _gameClearClip;
+    [SerializeField] AudioClip _gameOverClip;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         _playerSpecialGuage = GetComponent<PlayerSpecialGuage>();
-        _deathCount = 0;
     }
 
     private void Start()
@@ -38,21 +40,31 @@ public class InGameManager : MonoBehaviour
         _deathCountText.text = $"残機数: {remain}";
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
+        AudioManager.Instance.StopBGM();
+        yield return new WaitForSecondsRealtime(_gameEndTime);
         if (!_gameClearCanvas.gameObject.activeSelf)
         {
-            TimeScaleManager.Instance.TimeScaleChange(0);
+            TimeScaleManager.Instance.TimeScaleChange(0f);
+            AudioManager.Instance.PlaySE(_gameOverClip.name);
             _gameOverCanvas.gameObject.SetActive(true);
         }
+        yield return new WaitForSecondsRealtime(_sceneChangeWaitTime);
+        TimeScaleManager.Instance.TimeScaleChange(1f);
     }
 
-    public void GameCrear()
+    public IEnumerator GameCrear()
     {
-        if(!_gameOverCanvas.enabled)
+        AudioManager.Instance.StopBGM();
+        yield return new WaitForSecondsRealtime(_gameEndTime);
+        if (!_gameOverCanvas.gameObject.activeSelf)
         {
-            TimeScaleManager.Instance.TimeScaleChange(0);
+            TimeScaleManager.Instance.TimeScaleChange(0f);
+            AudioManager.Instance.PlaySE(_gameClearClip.name);
             _gameClearCanvas.gameObject.SetActive(true);
         }
+        yield return new WaitForSecondsRealtime(_sceneChangeWaitTime);
+        TimeScaleManager.Instance.TimeScaleChange(1f);
     }
 }
