@@ -77,6 +77,14 @@ public class YuaiSpecialAttack_UI : MonoBehaviour
         yield return StartCoroutine(FadeManager.Instance.CustomFadeOut(_fadeImage, 0.5f));
     }
 
+    public void ChangeTimerText()
+    {
+        var _timerText = _timerPanel.GetComponentInChildren<Text>();
+        if (!_timerText) return;
+
+        _timerText.text = $"隠れる用だよ...";
+    }
+
     public IEnumerator FadeOutBoss()
     {
         _yuaiSearchText.gameObject.SetActive(true);

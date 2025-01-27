@@ -21,9 +21,13 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     public void EndBattle(bool win)
     {
         ChangeState(GameState.BattleEndState);
-        if(win)
+        if (win)
         {
-
+            StartCoroutine(InGameManager.Instance.GameCrear());
+        }
+        else
+        {
+            StartCoroutine(InGameManager.Instance.GameOver());
         }
     }
 

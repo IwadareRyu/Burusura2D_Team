@@ -28,7 +28,7 @@ public class DangerousDisplayEnemy : MonoBehaviour, PauseTimeInterface
     Sequence _tmpSequence;
     float _timeScale = 1f;
     [SerializeField] bool _isUseImage;
-
+    string _powerUp = "PowerUp";
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +92,7 @@ public class DangerousDisplayEnemy : MonoBehaviour, PauseTimeInterface
     public void DangerousStart(float displayTime)
     {
         if (_isDengerous) return;
+        AudioManager.Instance.PlaySE(_powerUp);
         _displayTime = displayTime;
         _tmpSequence = DOTween.Sequence()
             .Pause()

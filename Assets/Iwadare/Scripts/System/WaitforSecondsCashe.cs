@@ -10,9 +10,9 @@ public static class WaitforSecondsCashe
 
     public static WaitForSeconds Get(float waitTime)
     {
-        if(!_secondsCashe.ContainsKey(waitTime))
+        if (!_secondsCashe.ContainsKey(waitTime))
         {
-            _secondsCashe.Add(waitTime,new WaitForSeconds(waitTime));
+            _secondsCashe.Add(waitTime, new WaitForSeconds(waitTime));
         }
 
         return _secondsCashe[waitTime];

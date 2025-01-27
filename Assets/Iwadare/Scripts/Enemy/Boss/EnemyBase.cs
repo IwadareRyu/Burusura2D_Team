@@ -77,7 +77,7 @@ public class EnemyBase : MonoBehaviour
                 effectObj.transform.position = transform.position;
                 effectObj.Play();
             }
-            _bossAudio.AttackAudioPlay();
+            _bossAudio.DamageAudioPlay();
             
         }
         _currentHP -= damage;
