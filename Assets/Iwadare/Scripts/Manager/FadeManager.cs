@@ -40,12 +40,17 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         TimeScaleManager.EndPauseAction -= EndPause;
     }
 
+    public void SceneChangeStart(string nextSceneName)
+    {
+        StartCoroutine(SceneChangeFade(nextSceneName));
+    }
+
     public IEnumerator SceneChangeFade(string nextSceneName)
     {
-        yield return _defaultFadeImage.DOFade(1f,_fadeInTime);
+        yield return _defaultFadeImage.DOFade(1f,_fadeInTime).WaitForCompletion();
         //ロード処理完了的な何か
-        SceneLoader.Instance.SceneLoad(nextSceneName,0.5f);
-        yield return _defaultFadeImage.DOFade(0f,_fadeOutTime);
+        SceneLoader.Instance.SceneLoad(nextSceneName,0.01f);
+        yield return _defaultFadeImage.DOFade(0f,_fadeOutTime).WaitForCompletion();
     }
 
     public IEnumerator Fade()

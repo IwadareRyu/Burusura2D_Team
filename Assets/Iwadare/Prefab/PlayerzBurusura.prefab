@@ -331,7 +331,7 @@ MonoBehaviour:
   _damageClip: {fileID: 8300000, guid: e124d403883535d42b4fd1dfff8f85bf, type: 3}
   _explosionClip: {fileID: 8300000, guid: 79e2115707ee0a8408897e336f17f711, type: 3}
   _shieldClip: {fileID: 8300000, guid: 9669c8a136236954aa34042cb96fd38b, type: 3}
-  _shieldBreakClip: {fileID: 8300000, guid: 15110469963db974cb6564aff73a70e5, type: 3}
+  _shieldBreakClip: {fileID: 8300000, guid: 50f42edeccbec0b4087d46555f9886a5, type: 3}
 --- !u!1 &3743599520464483070
 GameObject:
   m_ObjectHideFlags: 0
