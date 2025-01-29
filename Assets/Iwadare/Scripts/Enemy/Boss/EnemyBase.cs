@@ -157,6 +157,7 @@ public class EnemyBase : MonoBehaviour
 
     public void GuardMode()
     {
+        if (_guard) return;
         _bossAudio.ShieldAudioPlay();
         _guard = true;
         _shieldRenderer.enabled = true;
@@ -165,6 +166,7 @@ public class EnemyBase : MonoBehaviour
 
     public void BreakGuardMode()
     {
+        if (!_guard) return;
         _bossAudio.ShieldBreakAudioPlay();
         _guard = false;
         _shieldRenderer.enabled = false;

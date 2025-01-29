@@ -15,6 +15,7 @@ public class InGameManager : MonoBehaviour
     Animator _gameClearAnimator;
     [SerializeField] float _gameEndTime = 2f;
     [SerializeField] float _sceneChangeWaitTime = 3f;
+    [SerializeField] string _NextsceneName = "DataraBossStage";
     [SerializeField] AudioClip _gameClearClip;
     [SerializeField] AudioClip _gameOverClip;
 
@@ -52,6 +53,7 @@ public class InGameManager : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(_sceneChangeWaitTime);
         TimeScaleManager.Instance.TimeScaleChange(1f);
+        FadeManager.Instance.SceneChangeStart(_NextsceneName);
     }
 
     public IEnumerator GameCrear()
@@ -66,5 +68,6 @@ public class InGameManager : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(_sceneChangeWaitTime);
         TimeScaleManager.Instance.TimeScaleChange(1f);
+        FadeManager.Instance.SceneChangeStart(_NextsceneName);
     }
 }
