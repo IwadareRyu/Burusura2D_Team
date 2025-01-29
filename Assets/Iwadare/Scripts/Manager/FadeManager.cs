@@ -23,6 +23,7 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         _fadeSequence
             .Append(_defaultFadeImage.DOFade(1f, _fadeInTime))
             .Append(_defaultFadeImage.DOFade(0f, _fadeOutTime));
+        _defaultFadeImage.gameObject.SetActive(false);
         _fadeSequence.Pause();
     }
 
@@ -47,21 +48,26 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
 
     public IEnumerator SceneChangeFade(string nextSceneName)
     {
+        _defaultFadeImage.gameObject.SetActive(true);
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime).WaitForCompletion();
         //ロード処理完了的な何か
         SceneLoader.Instance.SceneLoad(nextSceneName,0.01f);
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime).WaitForCompletion();
+        _defaultFadeImage.gameObject.SetActive(false);
     }
 
     public IEnumerator Fade()
     {
         Debug.Log("fade開始");
+        _defaultFadeImage.gameObject.SetActive(true);
         yield return _fadeSequence.Play();
         yield return new WaitForSeconds(_fadeInTime + _fadeOutTime);
+        _defaultFadeImage.gameObject.SetActive(false);
     }
 
     public IEnumerator FadeIn()
     {
+        _defaultFadeImage.gameObject.SetActive(true);
         _currrentFadeTween = _defaultFadeImage.DOFade(1f, _fadeInTime);
         yield return _currrentFadeTween.Play();
         yield return new WaitForSeconds(_fadeInTime);
@@ -72,6 +78,7 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         _currrentFadeTween = _defaultFadeImage.DOFade(0f, _fadeOutTime);
         _currrentFadeTween.Play();
         yield return new WaitForSeconds(_fadeOutTime);
+        _defaultFadeImage.gameObject.SetActive(false);
     }
 
     public IEnumerator CustomFadeIn(Image image,float fadeInTime)

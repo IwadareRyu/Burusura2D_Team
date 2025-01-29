@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1021,6 +1021,8 @@ MonoBehaviour:
   _avoidIcon: {fileID: 253108993}
   _jumpIcon: {fileID: 90213878}
   _specialIcon: {fileID: 679584960}
+  _playerShieldIcon: {fileID: 0}
+  _enemyShieldIcon: {fileID: 0}
   _splitNumber: 12
 --- !u!224 &79504023194303995
 RectTransform:
@@ -1882,6 +1884,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 791199518133406074, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_Name
       value: IllustratedBook
@@ -1897,6 +1903,10 @@ PrefabInstance:
     - target: {fileID: 1842416772339060586, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110627637670556798, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3709828434418129009, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1981,6 +1991,10 @@ PrefabInstance:
     - target: {fileID: 6177695676368982194, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571190808282477950, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6650765356752039581, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_SizeDelta.x
