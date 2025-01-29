@@ -25414,7 +25414,7 @@ MonoBehaviour:
     _specialAction: 0
     _attackState: 0200000000000000
   - _hpPersent: 70
-    _specialAction: 0
+    _specialAction: 1
     _attackState: 03000000
   - _hpPersent: 0
     _specialAction: 0
@@ -25558,7 +25558,7 @@ MonoBehaviour:
   _attackAudio: {fileID: 8300000, guid: 5aa87fc786d22494e80b48b2a9e1ae75, type: 3}
   _damageAudio: {fileID: 8300000, guid: d2a6d021ad58dc44cb67e5558265efd8, type: 3}
   _deadAudio: {fileID: 8300000, guid: 06bf83b2dc8fad34f8d9080bad3d12a2, type: 3}
-  _shieldAudio: {fileID: 8300000, guid: 15110469963db974cb6564aff73a70e5, type: 3}
+  _shieldAudio: {fileID: 8300000, guid: 50f42edeccbec0b4087d46555f9886a5, type: 3}
   _shieldBreakAudio: {fileID: 8300000, guid: 15110469963db974cb6564aff73a70e5, type: 3}
 --- !u!1 &1837770943
 GameObject:
