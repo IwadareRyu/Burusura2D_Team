@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: 0
+  _isWin: 0
 --- !u!4 &147622866
 Transform:
   m_ObjectHideFlags: 0
@@ -6579,7 +6580,7 @@ MonoBehaviour:
   _gameClearCanvas: {fileID: 1255887017}
   _gameEndTime: 2
   _sceneChangeWaitTime: 3
-  _NextsceneName: DataraBossStage
+  _NextsceneName: ResultScene
   _gameClearClip: {fileID: 8300000, guid: cef5b4ca17178b546b1755d3e15f8ef9, type: 3}
   _gameOverClip: {fileID: 8300000, guid: 39f4648fed61f1b4cbbfd409393c9480, type: 3}
 --- !u!4 &1878063357
