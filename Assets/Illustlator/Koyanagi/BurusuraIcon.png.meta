@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BurusuraIcon_0
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 16
+        width: 392
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70c06b7fccd5b6d47b036add3c56a5ae
+      internalID: -102551377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurusuraIcon_1
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 34
+        width: 481
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99a31e8a774c20b408744a1f9b8854de
+      internalID: 590181947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurusuraIcon_2
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 26
+        width: 391
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c4f0cf275ad8694ea6db12862d56ada
+      internalID: 2143916541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurusuraIcon_3
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 11
+        width: 387
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb443b34caf5e7447ada5d17dca4d3ef
+      internalID: 1816316521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurusuraIcon_4
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 0
+        width: 486
+        height: 501
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c54b3641af227644a9a08bd3ef27835
+      internalID: -1342764290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +224,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BurusuraIcon_0: -102551377
+      BurusuraIcon_1: 590181947
+      BurusuraIcon_2: 2143916541
+      BurusuraIcon_3: 1816316521
+      BurusuraIcon_4: -1342764290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
