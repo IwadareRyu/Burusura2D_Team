@@ -13,10 +13,20 @@ public class ResultController : MonoBehaviour
     [SerializeField] Image _nekomataImage;
     [SerializeField] Sprite _nekomataWinSprite;
     [SerializeField] Sprite _nekomataLoseSprite;
+    private bool _canMoveScene = false;
     void Start()
     {
+        _canMoveScene = true;
         _targetText.text = "";
         ResultPrinter(GameStateManager.Instance._isWin);
+    }
+    private void Update()
+    {
+        if (_canMoveScene && (Input.anyKey || Input.GetButtonDown("Fire1")))
+        {
+            _canMoveScene = false;
+            FadeManager.Instance.SceneChangeStart("Title");
+        }
     }
     private void ResultPrinter(bool Win)
     {
@@ -36,7 +46,7 @@ public class ResultController : MonoBehaviour
         for (int i = 0; i < PrintText.Length; i++)
         {
             _targetText.text += PrintText[i];
-            if ((i+1) % _maxLineLength == 0)
+            if ((i + 1) % _maxLineLength == 0)
             {
                 _targetText.text += "\n";
             }
