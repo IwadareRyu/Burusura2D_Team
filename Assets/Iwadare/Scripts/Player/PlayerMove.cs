@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -32,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         if (!Input.GetButton("StopMove") && (controller._playerState & PlayerState.ImpactState) != PlayerState.ImpactState)
         {
             Move(controller.X, controller._playerRb, controller.TimeScale);
-            controller._downPlayerAnim.SetFloat("MoveSpeed",Mathf.Abs(controller.X));
+            controller._downPlayerAnim.SetFloat("MoveSpeed", Mathf.Abs(controller.X));
         }
     }
 
@@ -55,7 +54,7 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             controller._currentJumpCount++;
             controller._downPlayerAnim.SetTrigger("Jump");
-            IconManager.Instance.UpdateIcon(controller._currentJumpCount,TargetIcon.Jump);
+            IconManager.Instance.UpdateIcon(controller._currentJumpCount, TargetIcon.Jump);
         }
     }
 
@@ -77,12 +76,12 @@ public class PlayerMove : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.gravityScale = tmpGravity;
         controller._isAvoidCoolTime = true;
-        controller._downPlayerAnim.SetBool("Avoid",false);
+        controller._downPlayerAnim.SetBool("Avoid", false);
         controller._playerState &= ~PlayerState.AvoidState;
         controller._playerState &= ~PlayerState.ImpactState;
         controller._playerState |= PlayerState.NormalState;
         _bodyTrail.enabled = false;
-        IconManager.Instance.UpdateIcon(_avoidCoolTime,TargetIcon.Avoid);
+        IconManager.Instance.UpdateIcon(_avoidCoolTime, TargetIcon.Avoid);
         yield return WaitforSecondsCashe.Wait(_avoidCoolTime);
         yield return WaitforSecondsCashe.Wait(0.1f);
         controller._isAvoidCoolTime = false;
