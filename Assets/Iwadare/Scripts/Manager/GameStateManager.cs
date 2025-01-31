@@ -5,6 +5,9 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     [SerializeField]GameState _gameState = GameState.StayState;
     public GameState GameState => _gameState;
 
+    //ResultSceneの時に渡す変数。
+    public bool _isWin;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -20,6 +23,7 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
 
     public void EndBattle(bool win)
     {
+        _isWin = win;
         ChangeState(GameState.BattleEndState);
         if (win)
         {
