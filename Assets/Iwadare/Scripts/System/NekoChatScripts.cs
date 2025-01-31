@@ -40,6 +40,7 @@ public class NekoChatScripts : MonoBehaviour
 
     public IEnumerator UltraChatCoroutine(float coinNumber)
     {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState) yield break;
         _isResponceUltraChat = false;
         _ultraChatText.text = "";
         if (coinNumber <= _maxCount)
