@@ -5300,7 +5300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5559567363991148775, guid: 03d3b12c748804d4e9bbbf6fd967c48d, type: 3}
       propertyPath: m_Priority
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5702097706607331693, guid: 03d3b12c748804d4e9bbbf6fd967c48d, type: 3}
       propertyPath: m_Name
@@ -26747,6 +26747,8 @@ SceneRoots:
   - {fileID: 208977748}
   - {fileID: 493184317}
   - {fileID: 581943992}
+  - {fileID: 1179027217}
+  - {fileID: 329335748}
   - {fileID: 1141339385}
   - {fileID: 108784441}
   - {fileID: 323806129}
@@ -26776,8 +26778,6 @@ SceneRoots:
   - {fileID: 7260592514294824748}
   - {fileID: 120961620037320972}
   - {fileID: 1699314072}
-  - {fileID: 1179027217}
-  - {fileID: 329335748}
   - {fileID: 313658677}
   - {fileID: 2113997537}
   - {fileID: 993415910}

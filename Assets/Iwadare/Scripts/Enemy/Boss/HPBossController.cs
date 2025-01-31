@@ -194,7 +194,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         _enemyRb.velocity = Vector2.zero;
         _tmpGravity = _enemyRb.gravityScale;
         _enemyRb.gravityScale = 0f;
-        _enemyAnim._objAnimator.speed = 0f;
+        //_enemyAnim._objAnimator.speed = 0f;
     }
 
     public void EndPause()
@@ -202,6 +202,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         _timeScale = 1f;
         _enemyRb.velocity = _tmpVelocity;
         _enemyRb.gravityScale = _tmpGravity;
-        _enemyAnim._objAnimator.speed = 1f;
+        //_enemyAnim._objAnimator.speed = 1f;
     }
 }

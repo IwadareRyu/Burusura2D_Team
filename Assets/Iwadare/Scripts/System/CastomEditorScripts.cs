@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MonoBehaviour),true)]
+[CustomEditor(typeof(MonoBehaviour), true)]
 [CanEditMultipleObjects]
 public class CastomEditorScripts : Editor
 {
@@ -12,3 +11,4 @@ public class CastomEditorScripts : Editor
         DrawDefaultInspector();
     }
 }
+#endif
