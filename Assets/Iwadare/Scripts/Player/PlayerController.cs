@@ -119,19 +119,29 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 _moveScript.MoveUpdate(this);
             }
 
-            if (Input.GetButton("Fire1") && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0)
+            if (Input.GetButton("Fire1") && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState | PlayerState.UseSkillState)) == 0)
             {
                 _playerState |= PlayerState.AttackState;
                 StartCoroutine(Attack());
             }
 
             if (Input.GetButton("Avoid")
-                && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0
+                && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState | PlayerState.UseSkillState)) == 0
                 && !_isAvoidCoolTime)
             {
                 _playerState |= PlayerState.AvoidState;
                 _playerState &= ~PlayerState.NormalState;
                 StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerObj));
+            }
+
+            if(Input.GetButton("UseSkill") 
+                && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0)
+            {
+                if (InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage / 2))
+                {
+                    InGameManager.Instance._playerSpecialGuage.UseGuage();
+
+                }
             }
 
             if ((int)(_playerState & PlayerState.InvisibleState) != 0)
@@ -231,7 +241,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         _audio.DamageAudio();
         if (_isInvisible || _isGuard
-            || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState)) != 0
+            || (int)(_playerState & (PlayerState.InvisibleState | PlayerState.DeathState | PlayerState.AvoidState | PlayerState.UseSkillState)) != 0
             || GameStateManager.Instance.GameState == GameState.BattleEndState)
         {
             var missParticle = _missParticlePool.GetPool().GetComponent<ParticleDestroy>();
@@ -344,4 +354,5 @@ public enum PlayerState
     AvoidState = 1 << 3,
     DeathState = 1 << 4,
     ImpactState = 1 << 5,
+    UseSkillState = 1 << 6,
 }
