@@ -30,7 +30,7 @@ public class PlayerSpecialGuage : MonoBehaviour
 
     public bool IsCostChack(float cost)
     {
-        if (_currentGuage <= cost) return false;
+        if (_currentGuage < cost) return false;
         return true;
     }
 

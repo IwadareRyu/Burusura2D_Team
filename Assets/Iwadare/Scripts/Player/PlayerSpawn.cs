@@ -1,9 +1,6 @@
 ﻿using Cinemachine;
-using Spine;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using VTNConnect;
@@ -13,8 +10,6 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] PlayerController _player;
     [SerializeField] EnemyBase _enemy;
     public PlayerController _currentPlayer;
-    [SerializeField] int _playerRemain = 3;
-    int _currentPlayerRemain;
     [SerializeField] SetPlayerStruct _setPlayerStruct;
     [SerializeField] CinemachineTargetGroup _targetGroup;
     [SerializeField] ParticleSystem _spawnParticle;
@@ -24,9 +19,7 @@ public class PlayerSpawn : MonoBehaviour
 
     private void Start()
     {
-        _currentPlayerRemain = _playerRemain;
         SpawnPlayer();
-        InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
     }
 
     private void Update()
@@ -34,9 +27,8 @@ public class PlayerSpawn : MonoBehaviour
         if(!_isDeath &&_currentPlayer && (int)(_currentPlayer._playerState & PlayerState.DeathState) != 0)
         {
             _isDeath = true;
-            _currentPlayerRemain--;
+            InGameManager.Instance.AddRemain(-1);
             StartCoroutine(PlayerDelaySpawn());
-            InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
         }
     }
 
@@ -44,7 +36,7 @@ public class PlayerSpawn : MonoBehaviour
     {
         yield return WaitforSecondsCashe.Wait(_spawnDelayTime);
         ResponceManager.Instance.PlayerDeathResponce();
-        if (!_isNotRemain && _currentPlayerRemain <= 0)
+        if (!_isNotRemain && InGameManager.Instance._currentPlayerRemain <= 0)
         {
             _isNotRemain = true;
             GameStateManager.Instance.EndBattle(false);
@@ -63,12 +55,6 @@ public class PlayerSpawn : MonoBehaviour
         _enemy.PlayerSet(_currentPlayer);
         if(_spawnParticle) _spawnParticle.Play();
         ResponceManager.Instance.PlayerDeathResponce();
-    }
-
-    public void AddRemain(int plusRemain)
-    {
-        _currentPlayerRemain += plusRemain;
-        InGameManager.Instance.PlayerRemain(_currentPlayerRemain);
     }
 }
 

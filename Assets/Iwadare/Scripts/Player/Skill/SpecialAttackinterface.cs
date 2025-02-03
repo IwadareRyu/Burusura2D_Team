@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface SpecialAttackInterface
+[Serializable]
+public abstract class SpecialAttackInterface : MonoBehaviour
 {
-    public void Init(PlayerController player);
-    public void UseSkill(PlayerController player);
+    public virtual void Init() { return; }
+    public virtual void UseSkill(PlayerController player) { return; }
 }
