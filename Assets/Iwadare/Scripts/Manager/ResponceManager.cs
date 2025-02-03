@@ -46,7 +46,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     {
         if (_playerSpawn)
         {
-            _playerSpawn.AddRemain(_plusRemain);
+            InGameManager.Instance.AddRemain(_plusRemain);
         }
     }
 

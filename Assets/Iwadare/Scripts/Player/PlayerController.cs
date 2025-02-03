@@ -32,11 +32,12 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] BulletPoolActive _missParticlePool;
     [SerializeField] BulletPoolActive _hitParticlePool;
     [SerializeField] BulletPoolActive _reflectHitPool;
+    PlayerSpecialGuage _specialGuage;
+    [NonSerialized] public PlayerAudio _audio;
+    PlayerSkillSet _playerSkillSet;
     /// <summary>移動系の変数</summary>
     PlayerMove _moveScript;
-    PlayerSpecialGuage _specialGuage;
-    [NonSerialized]public PlayerAudio _audio;
-
+    
     [Tooltip("x方向の移動")]
     float _x = 0;
     public float X => _x;
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         /// GetComponent
         _audio = GetComponent<PlayerAudio>();
         _moveScript = GetComponent<PlayerMove>();
+        _playerSkillSet = GetComponent<PlayerSkillSet>();
         _playerRb = GetComponent<Rigidbody2D>();
         /// Init
         if (!_isInvisible) _guardSprite.enabled = false;
@@ -140,7 +142,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 if (InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage / 2))
                 {
                     InGameManager.Instance._playerSpecialGuage.UseGuage();
-
+                    _playerSkillSet.HalfSkill?.UseSkill(this);
                 }
             }
 

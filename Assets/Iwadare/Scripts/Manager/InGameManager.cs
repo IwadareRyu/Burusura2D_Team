@@ -18,6 +18,8 @@ public class InGameManager : MonoBehaviour
     [SerializeField] string _NextsceneName = "DataraBossStage";
     [SerializeField] AudioClip _gameClearClip;
     [SerializeField] AudioClip _gameOverClip;
+    [SerializeField] int _playerRemain = 3;
+    [NonSerialized] public int _currentPlayerRemain;
 
     private void Awake()
     {
@@ -34,6 +36,8 @@ public class InGameManager : MonoBehaviour
         _gameClearAnimator = _gameClearCanvas.GetComponent<Animator>();
         _gameOverCanvas.gameObject.SetActive(false);
         _gameClearCanvas.gameObject.SetActive(false);
+        _currentPlayerRemain = _playerRemain;
+        PlayerRemain(_currentPlayerRemain);
     }
 
     public void PlayerRemain(int remain)
@@ -69,5 +73,11 @@ public class InGameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(_sceneChangeWaitTime);
         TimeScaleManager.Instance.TimeScaleChange(1f);
         FadeManager.Instance.SceneChangeStart(_NextsceneName);
+    }
+
+    public void AddRemain(int plusRemain)
+    {
+        _currentPlayerRemain += plusRemain;
+        PlayerRemain(_currentPlayerRemain);
     }
 }
