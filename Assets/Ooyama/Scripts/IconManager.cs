@@ -9,6 +9,7 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image _avoidIcon;
     [SerializeField] private Image _jumpIcon;
     [SerializeField] private Image _specialIcon;
+    [SerializeField] private Image _healIcon;
     [SerializeField] private Image _playerShieldIcon;
     [SerializeField] private Image _enemyShieldIcon;
     [SerializeField] private float _splitNumber = 12.0f;
@@ -105,9 +106,14 @@ public class IconManager : MonoBehaviour
         {
             _specialIcon.gameObject.SetActive(true);
         }
+        else if (reciveValue >= 0.5f)
+        {
+            _healIcon.gameObject.SetActive(true);
+        }
         else
         {
             _specialIcon.gameObject.SetActive(false);
+            _healIcon.gameObject.SetActive(false);
         }
     }
     private void JumpIconChanger(float reciveValue)
