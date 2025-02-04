@@ -53,7 +53,8 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         _IsInFade = true;
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime).WaitForCompletion();
         //ロード処理完了的な何か
-        SceneLoader.Instance.SceneLoad(nextSceneName,0.01f);
+        yield return SceneLoader.Instance.SceneLoad(nextSceneName);
+        yield return WaitforSecondsCashe.Wait(0.3f);
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime).WaitForCompletion();
         _defaultFadeImage.gameObject.SetActive(false);
         _IsInFade = false;

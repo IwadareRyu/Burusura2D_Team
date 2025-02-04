@@ -66,6 +66,14 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         }
     }
 
+    public void GuageUp(float guage)
+    {
+        if(InGameManager.Instance)
+        {
+            InGameManager.Instance._playerSpecialGuage.AddGuage(250);
+        }
+    }
+
 
     public void PlayerDeathResponce()
     {
