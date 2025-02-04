@@ -11,12 +11,14 @@ public class AudioManager : MonoBehaviour
     //音量設定保存用のKey及び各音声のデフォルト音量
     private const string BGM_VOLUME_KEY = "BGM_VOLUME";
     private const string SE_VOLUME_KEY = "SE_VOLUME";
-    [SerializeField, Range(0f, 1.0f)] private float _defaultBGMVolume = 1.0f;
-    [SerializeField, Range(0f, 1.0f)] private float _defaultSEVolume = 1.0f;
+    //デフォルト音量
+    [SerializeField, Range(-80f, 0f)] private float _defaultBGMVolume = -10f; 
+    [SerializeField, Range(-80f, 0f)] private float _defaultSEVolume = -10f; 
 
     //各ファイルのパス
     private const string BGM_PATH = "Audio/BGM";
     private const string SE_PATH = "Audio/SE";
+    private const string MIXER_PATH = "Audio/Mixer";
 
     //各AudioSource
     private AudioSource _bgmSource;
@@ -44,6 +46,7 @@ public class AudioManager : MonoBehaviour
 
         var bgmList = Resources.LoadAll(BGM_PATH);
         var seList = Resources.LoadAll(SE_PATH);
+        if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
 
         _seCount = seList.Length;
         for (int i = 0; i <= _seCount; i++)
@@ -82,11 +85,11 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
-        _bgmSource.volume = BGMVolume;
-        foreach (AudioSource source in _seSourcesLis)
-        {
-            source.volume = SEVolume;
-        }
+        //_bgmSource.volume = BGMVolume;
+        //foreach (AudioSource source in _seSourcesLis)
+        //{
+        //    source.volume = SEVolume;
+        //}
 
         SetBGMVolume(BGMVolume);
         SetSEVolume(SEVolume);
@@ -126,24 +129,12 @@ public class AudioManager : MonoBehaviour
                 source.Play();
                 return;
             }
-            else if(source.clip.name == seName)
+            else if (source.clip.name == seName)
             {
                 source.Play();
                 return;
-            }      
+            }
         }
-    }
-    public void TestBGM()
-    {
-        Instance.PlayBGM("Test");
-    }
-    public void TestSE()
-    {
-        Instance.PlaySE("GetItem");
-    }
-    public void TestSE2()
-    {
-        PlaySE("se_powerup");
     }
     public void StopBGM()
     {
@@ -159,10 +150,12 @@ public class AudioManager : MonoBehaviour
     }
     public void SetBGMVolume(float BGMVolume)
     {
+        _audioMixer.SetFloat(BGM_VOLUME_KEY, BGMVolume);
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
     }
     public void SetSEVolume(float SEVolume)
     {
+        _audioMixer.SetFloat(SE_VOLUME_KEY, SEVolume);
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
     }
 }
