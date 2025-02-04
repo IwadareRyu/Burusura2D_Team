@@ -9,11 +9,11 @@ public class AudioManager : MonoBehaviour
     private int _seCount = 5;
 
     //音量設定保存用のKey及び各音声のデフォルト音量
-    private const string BGM_VOLUME_KEY = "BGM_VOLUME";
-    private const string SE_VOLUME_KEY = "SE_VOLUME";
+    private const string BGM_VOLUME_KEY = "BGM";
+    private const string SE_VOLUME_KEY = "SE";
     //デフォルト音量
-    [SerializeField, Range(-80f, 0f)] private float _defaultBGMVolume = -10f; 
-    [SerializeField, Range(-80f, 0f)] private float _defaultSEVolume = -10f; 
+    [SerializeField, Range(-80f, 0f)] private float _defaultBGMVolume = -10f;
+    [SerializeField, Range(-80f, 0f)] private float _defaultSEVolume = -10f;
 
     //各ファイルのパス
     private const string BGM_PATH = "Audio/BGM";
@@ -58,13 +58,13 @@ public class AudioManager : MonoBehaviour
 
         audioSources[0].loop = true;
         _bgmSource = audioSources[0];
-        _bgmSource.volume = GetBGMVolume();
+        _bgmSource.volume = Mathf.Lerp(0f, 1.0f, GetBGMVolume());
         _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
         for (int i = 1; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
-            audioSources[i].volume = GetSEVolume();
+            audioSources[i].volume = Mathf.Lerp(0f, 1.0f, GetSEVolume());
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
             _seSourcesLis.Add(audioSources[i]);
         }
