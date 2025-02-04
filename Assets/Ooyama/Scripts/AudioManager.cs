@@ -12,8 +12,8 @@ public class AudioManager : MonoBehaviour
     private const string BGM_VOLUME_KEY = "BGM";
     private const string SE_VOLUME_KEY = "SE";
     //デフォルト音量
-    [SerializeField, Range(-80f, 0f)] private float _defaultBGMVolume = -10f;
-    [SerializeField, Range(-80f, 0f)] private float _defaultSEVolume = -10f;
+    [SerializeField, Range(0f, 1.0f)] private float _defaultBGMVolume = 0.5f;
+    [SerializeField, Range(0f, 1.0f)] private float _defaultSEVolume = 0.5f;
 
     //各ファイルのパス
     private const string BGM_PATH = "Audio/BGM";
@@ -58,13 +58,13 @@ public class AudioManager : MonoBehaviour
 
         audioSources[0].loop = true;
         _bgmSource = audioSources[0];
-        _bgmSource.volume = Mathf.Lerp(0f, 1.0f, GetBGMVolume());
+        //_bgmSource.volume = Mathf.Lerp(0f, 1.0f, GetBGMVolume());
         _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
         for (int i = 1; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
-            audioSources[i].volume = Mathf.Lerp(0f, 1.0f, GetSEVolume());
+            //audioSources[i].volume = Mathf.Lerp(0f, 1.0f, GetSEVolume());
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
             _seSourcesLis.Add(audioSources[i]);
         }
@@ -82,6 +82,7 @@ public class AudioManager : MonoBehaviour
         {
             _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
+        ChangeVolume(_defaultBGMVolume, _defaultSEVolume);
     }
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
@@ -150,12 +151,12 @@ public class AudioManager : MonoBehaviour
     }
     public void SetBGMVolume(float BGMVolume)
     {
-        _audioMixer.SetFloat(BGM_VOLUME_KEY, BGMVolume);
+        _audioMixer.SetFloat(BGM_VOLUME_KEY, Mathf.Lerp(-80f, 0f, BGMVolume));
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
     }
     public void SetSEVolume(float SEVolume)
     {
-        _audioMixer.SetFloat(SE_VOLUME_KEY, SEVolume);
+        _audioMixer.SetFloat(SE_VOLUME_KEY, Mathf.Lerp(-80f, 0f, SEVolume));
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
     }
 }
