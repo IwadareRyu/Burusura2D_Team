@@ -6697,7 +6697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1103537324946667478, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1518406015368466937, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_Pivot.x
@@ -6807,6 +6807,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5802667246067447133, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_Name
       value: UICanvasUpdate
@@ -6825,15 +6837,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7641014356127455528, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_IsActive
@@ -9449,11 +9461,11 @@ PrefabInstance:
       objectReference: {fileID: 24100000, guid: 96afc7ea413e8e24292ab77a045faaab, type: 2}
     - target: {fileID: 444418947867488425, guid: 9352e1c6725c36541936aedd0a4fa72b, type: 3}
       propertyPath: _defaultSEVolume
-      value: 0.5
+      value: 0.963
       objectReference: {fileID: 0}
     - target: {fileID: 444418947867488425, guid: 9352e1c6725c36541936aedd0a4fa72b, type: 3}
       propertyPath: _defaultBGMVolume
-      value: 0.5
+      value: 0.971
       objectReference: {fileID: 0}
     - target: {fileID: 8560411448791482254, guid: 9352e1c6725c36541936aedd0a4fa72b, type: 3}
       propertyPath: m_Name
@@ -9627,7 +9639,7 @@ GameObject:
   - component: {fileID: 1832103392}
   m_Layer: 6
   m_Name: BossEnemyHP (1)
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

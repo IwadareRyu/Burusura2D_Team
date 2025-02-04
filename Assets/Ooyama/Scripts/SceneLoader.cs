@@ -27,6 +27,7 @@ public class SceneLoader : MonoBehaviour
         async.allowSceneActivation = false;
         while (async.progress < 0.9f) yield return null;
         async.allowSceneActivation = true;
+        while (!async.isDone) yield return null;
     }
     public void Test()
     {

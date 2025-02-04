@@ -139,7 +139,13 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             if(Input.GetButton("UseSkill") 
                 && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0)
             {
-                if (InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage / 2))
+                if(InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage))
+                {
+                    InGameManager.Instance._playerSpecialGuage.UseGuage();
+                    _playerSkillSet.AllSkill?.UseSkill(this);
+                    _playerSkillSet.HalfSkill?.UseSkill(this);
+                }
+                else if (InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage / 2))
                 {
                     InGameManager.Instance._playerSpecialGuage.UseGuage();
                     _playerSkillSet.HalfSkill?.UseSkill(this);

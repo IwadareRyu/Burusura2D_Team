@@ -43,6 +43,7 @@ Transform:
   - {fileID: 3472765389440534913}
   - {fileID: 1618525403227987129}
   - {fileID: 3271908373229979069}
+  - {fileID: 1305827399967241761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6230092625257915417
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _halfSkill: {fileID: 9157690391750805237}
-  _allSkill: {fileID: 9157690391750805237}
+  _allSkill: {fileID: 115836412770876892}
 --- !u!50 &4030173051409178830
 Rigidbody2D:
   serializedVersion: 4
@@ -348,6 +349,52 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &3104229686346790866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305827399967241761}
+  - component: {fileID: 115836412770876892}
+  m_Layer: 3
+  m_Name: Rouin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1305827399967241761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3104229686346790866}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1553328957981820917}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &115836412770876892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3104229686346790866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4284380a7e2dfb46a8633839a8102ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rouinObj: {fileID: 1015711682830543815, guid: 64f37c4f778a2ec47a497c34d5c4bcea, type: 3}
+  damage: 20
 --- !u!1 &3743599520464483070
 GameObject:
   m_ObjectHideFlags: 0

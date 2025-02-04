@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - PAttack
   - Wall
+  - Boss
   layers:
   - Default
   - TransparentFX

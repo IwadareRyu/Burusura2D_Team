@@ -85,9 +85,20 @@ public class EnemyBase : MonoBehaviour
         HPChack();
     }
 
-    public void PerforateDamage(float damage)
+    public void PerforateDamage(float damage, HitEffect effect = HitEffect.Slash)
     {
         _currentHP -= damage;
+        if (effect == HitEffect.Slash)
+        {
+            var effectObj = _slashEffect.GetPool().GetComponent<ParticleSystem>();
+            if (effectObj != null)
+            {
+                effectObj.transform.position = transform.position;
+                effectObj.Play();
+            }
+            _bossAudio.DamageAudioPlay();
+
+        }
         DisplayHP();
         HPChack();
     }
