@@ -17,19 +17,19 @@ public class SceneLoader : MonoBehaviour
             Destroy(this);
         }
     }
-    public void SceneLoad(string sceneName,float waitTime)
+    public IEnumerator SceneLoad(string sceneName)
     {
-        StartCoroutine(WaitTimer(sceneName,waitTime));
+        yield return WaitTimer(sceneName);
     }
-    IEnumerator WaitTimer(string NextSceneName,float WaitTime)
+    IEnumerator WaitTimer(string NextSceneName)
     {
         var async = SceneManager.LoadSceneAsync(NextSceneName);
         async.allowSceneActivation = false;
-        yield return new WaitForSeconds(WaitTime);
+        while (async.progress < 0.9f) yield return null;
         async.allowSceneActivation = true;
     }
     public void Test()
     {
-        SceneLoad("YuaiScene", 0.7f);
+        SceneLoad("YuaiScene");
     }
 }
