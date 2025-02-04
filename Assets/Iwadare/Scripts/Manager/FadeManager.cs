@@ -44,7 +44,10 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
 
     public void SceneChangeStart(string nextSceneName)
     {
-        StartCoroutine(SceneChangeFade(nextSceneName));
+        if (!_IsInFade)
+        {
+            StartCoroutine(SceneChangeFade(nextSceneName));
+        }
     }
 
     public IEnumerator SceneChangeFade(string nextSceneName)
@@ -52,9 +55,7 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         _defaultFadeImage.gameObject.SetActive(true);
         _IsInFade = true;
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime).WaitForCompletion();
-        //ロード処理完了的な何か
         yield return SceneLoader.Instance.SceneLoad(nextSceneName);
-        yield return WaitforSecondsCashe.Wait(0.3f);
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime).WaitForCompletion();
         _defaultFadeImage.gameObject.SetActive(false);
         _IsInFade = false;

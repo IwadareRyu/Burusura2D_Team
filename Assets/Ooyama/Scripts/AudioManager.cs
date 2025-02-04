@@ -82,8 +82,14 @@ public class AudioManager : MonoBehaviour
         {
             _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
+    }
+
+    public void Start()
+    {
         ChangeVolume(_defaultBGMVolume, _defaultSEVolume);
     }
+
+
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
         //_bgmSource.volume = BGMVolume;
