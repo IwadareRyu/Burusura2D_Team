@@ -28,7 +28,7 @@ public class SpadeAttack : MonoBehaviour,IUIAttack
         yield return DangerousText();
         for (var i = 0; i < _spawnCount; i++)
         {
-            _isRight = RamdomMethod.RamdomNumber(99) < 50;
+            _isRight = RamdomMethod.RamdomNumber0Max(99) < 50;
             if (_isRight)
             {
                 foreach(var spawn in _rightSpadeSpawns)

@@ -18,12 +18,14 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     public void InBattle()
     {
         ChangeState(GameState.InBattleState);
+
         ResponceManager.Instance.GetPlayerEnemy();
     }
 
     public void EndBattle(bool win)
     {
         _isWin = win;
+        ResponceManager.Instance.GameEnd(win);
         ChangeState(GameState.BattleEndState);
         if (win)
         {

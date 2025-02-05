@@ -34,7 +34,7 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
 
     public AttackInterface ChoiceAttack()
     {
-        switch (_action[_currentHPAction]._attackState[RamdomMethod.RamdomNumber(_action[_currentHPAction]._attackState.Length)])
+        switch (_action[_currentHPAction]._attackState[RamdomMethod.RamdomNumber0Max(_action[_currentHPAction]._attackState.Length)])
         {
             case AttackStatesList.Attack:
                 return _dataraActions._normalAttack;

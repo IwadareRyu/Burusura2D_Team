@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     [SerializeField] bool _isInvisible;
     [SerializeField] SpriteRenderer _guardSprite;
+    [SerializeField] ParticleSystem _healingObj;
+    [SerializeField] AudioClip _healingAudioClip;
     Image _guardImage;
     bool _isGuard = false;
     [NonSerialized] public bool _isAvoidCoolTime = false;
@@ -136,8 +138,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerObj));
             }
 
-            if(Input.GetButton("UseSkill") 
-                && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState)) == 0)
+            if(Input.GetButton("UseSkill"))
             {
                 if(InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage))
                 {
@@ -240,6 +241,22 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             _currentPlayerHP = 0;
             Death();
+        }
+
+        if(damage > 0)
+        {
+            var hitParticle = _hitParticlePool.GetPool().GetComponent<ParticleDestroy>();
+            if (hitParticle)
+            {
+                hitParticle.transform.position = transform.position;
+                hitParticle.Init();
+            }
+            _audio.DamageAudio();
+        }
+        else
+        {
+            _healingObj.Play();
+            AudioManager.Instance.PlaySE(_healingAudioClip.name);
         }
 
         _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;

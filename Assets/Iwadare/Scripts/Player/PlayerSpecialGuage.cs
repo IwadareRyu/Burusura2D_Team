@@ -13,6 +13,8 @@ public class PlayerSpecialGuage : MonoBehaviour
     public float AvoidBulletAddGuage => _avoidBulletAddGuage;
     [SerializeField] float _breakAddGuage = 1f;
     public float BreakAddGuage => _breakAddGuage;
+    [SerializeField] float _parryAddGuage = 25f;
+    public float ParryAddGuage => _parryAddGuage;
 
     float _currentGuage;
 

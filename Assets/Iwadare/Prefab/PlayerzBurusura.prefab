@@ -76,6 +76,8 @@ MonoBehaviour:
   _attackWaitTime: 0.5
   _isInvisible: 0
   _guardSprite: {fileID: 3569065337018587526}
+  _healingObj: {fileID: 4165712704322037436}
+  _healingAudioClip: {fileID: 8300000, guid: a70b34b5288dba14e886e131b89640b6, type: 3}
 --- !u!114 &1344201660471485145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rouinObj: {fileID: 1015711682830543815, guid: 64f37c4f778a2ec47a497c34d5c4bcea, type: 3}
-  damage: 20
+  damage: 5
 --- !u!1 &3743599520464483070
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,11 +749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5134aabc007e6b34fa8363cce199cc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healingObj: {fileID: 4165712704322037436}
-  _healingAudioClip: {fileID: 8300000, guid: a70b34b5288dba14e886e131b89640b6, type: 3}
   _healingTime: 2
-  _healingPower: 10
+  _healingPower: 5
   _upperLifePower: 1
+  _upperLifePersents: 5
 --- !u!1001 &776704059673388042
 PrefabInstance:
   m_ObjectHideFlags: 0

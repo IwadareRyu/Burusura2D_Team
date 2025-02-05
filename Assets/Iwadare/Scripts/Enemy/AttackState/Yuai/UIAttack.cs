@@ -90,7 +90,7 @@ public class UIAttack : MonoBehaviour, AttackInterface, PauseTimeInterface
             var randomNumber = _uiPosNumber;
             while (true)
             {
-                randomNumber = RamdomMethod.RamdomNumber(_uiPos.Length);
+                randomNumber = RamdomMethod.RamdomNumber0Max(_uiPos.Length);
                 bool _chackAround = false;
                 /// 1順で全ての場所に移動できるよう調整。
                 for (var i = 0; i < _aroundNumber.Count; i++)
