@@ -25,7 +25,7 @@ public class CloverAttack : MonoBehaviour, IUIAttack
     {
         for (var i = 0; i < _spawnCount; i++)
         {
-            _isturn = RamdomMethod.RamdomNumber(99) < 50;
+            _isturn = RamdomMethod.RamdomNumber0Max(99) < 50;
             if (_isturn)
             {
                 for (var j = 0; j < _rightSpawn.Length; j++)

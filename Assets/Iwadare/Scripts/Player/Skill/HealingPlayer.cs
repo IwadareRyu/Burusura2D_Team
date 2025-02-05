@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class HealingPlayer : SpecialAttackInterface
 {
-    [SerializeField] ParticleSystem _healingObj;
-    ParticleSystem.MainModule _mainParticle;
-    [SerializeField] AudioClip _healingAudioClip;
     [SerializeField] float _healingTime = 2f;
     [SerializeField] int _healingPower = 10;
     [SerializeField] int _upperLifePower = 1;
+    [SerializeField] float _upperLifePersents = 5f;
 
     public override void Init()
     {
-        _mainParticle = _healingObj.main;
+
     }
 
     public override void UseSkill(PlayerController player)
     {
-        _healingObj.Play();
         player.AddDamage(-_healingPower);
-        InGameManager.Instance.AddRemain(_upperLifePower);
-        AudioManager.Instance.PlaySE(_healingAudioClip.name);
+        if (RamdomMethod.RandomNumber99() < _upperLifePersents)
+        {
+            InGameManager.Instance.AddRemain(_upperLifePower);
+        }
     }
 
 }

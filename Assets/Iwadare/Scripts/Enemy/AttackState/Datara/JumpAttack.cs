@@ -61,7 +61,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         }
         else
         {
-            movePointX = RamdomMethod.RamdomNumber(99) <= 50 ?
+            movePointX = RamdomMethod.RamdomNumber0Max(99) <= 50 ?
                 enemy.Player.transform.position.x + _playerDistance : enemy.Player.transform.position.x - _playerDistance;
         }
 
@@ -118,7 +118,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
             enemy.BreakGuardMode();
             enemy._parryParticle.Play();
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
-            InGameManager.Instance._playerSpecialGuage.AddGuage(20);
+            InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);
             yield return WaitforSecondsCashe.Wait(_TrueAttackWaitTime);
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
             enemy._isTrueDamage = false;

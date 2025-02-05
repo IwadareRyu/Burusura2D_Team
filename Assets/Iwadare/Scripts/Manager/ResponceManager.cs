@@ -1,36 +1,63 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using VTNConnect;
 
 public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConnectEventReceiver
 {
     [SerializeField] NekoChatScripts _ultraChatScripts;
-    [SerializeField] int _plusRemain = 3;
-    [SerializeField] int _playerDamage = -10;
-    [SerializeField] int _enemyDamage = 10;
+    [SerializeField] int _plusRemain = 1;
+    [SerializeField] int _playerDamage = -5;
+    [SerializeField] int _enemyDamage = 5;
+    int _ramdomEventNumber = 4;
     PlayerSpawn _playerSpawn;
     EnemyBase _enemy;
     [SerializeField] bool _network = true;
 
-    public bool IsActive => throw new NotImplementedException();
 
     protected override void Awake()
     {
         base.Awake();
+        VantanConnect.RegisterEventReceiver(this);
     }
 
+    public bool IsActive => true;
 
     public void OnEventCall(EventData data)
     {
-        //switch (data.EventId)
-        //{
-        //    case (int)EventDefine.DefeatBomb:
+        switch (data.EventCode)
+        {
+            case EventDefine.Cheer:
+                CheerEvent cheer = new CheerEvent(data);
+                if(cheer.GetEmotion() > 0)
+                {
+                    GoodChatResponce(cheer.GetMessage());
+                }
+                else if(cheer.GetEmotion() < 0)
+                {
+                    BadChatResponce(cheer.GetMessage());
+                }
+                break;
+            case EventDefine.BonusCoin:
+                int coin = data.GetIntData("GetCoin");
+                CoinResponce(coin);
+                break;
 
-        //        break;
-        //}
+        }
     }
+
+    public void GameStart()
+    {
+        VantanConnect.GameStart();
+    }
+
+    public void GameEnd(bool win)
+    {
+        VantanConnect.GameEnd(win);
+    }
+
 
     public void GetPlayerEnemy()
     {
@@ -40,6 +67,27 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     private void Update()
     {
+    }
+
+    public void RamdomGoodEvent()
+    {
+        var ram = RamdomMethod.RandomNumber99();
+        if (ram > 100 / _ramdomEventNumber * 3)
+        {
+            RemainUp();
+        }
+        else if (ram > 100 / _ramdomEventNumber * 2)
+        {
+            PlayerDamage();
+        }
+        else if (ram > 100 / _ramdomEventNumber)
+        {
+            EnemyDamage();
+        }
+        else
+        {
+            GuageUp(25);
+        }
     }
 
     public void RemainUp()
@@ -62,15 +110,15 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     {
         if (_enemy)
         {
-            _enemy.AddDamage(_enemyDamage);
+            _enemy.PerforateDamage(_enemyDamage);
         }
     }
 
     public void GuageUp(float guage)
     {
-        if(InGameManager.Instance)
+        if (InGameManager.Instance)
         {
-            InGameManager.Instance._playerSpecialGuage.AddGuage(250);
+            InGameManager.Instance._playerSpecialGuage.AddGuage(guage);
         }
     }
 
@@ -78,8 +126,8 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     public void PlayerDeathResponce()
     {
         if (!_network) return;
-        EventData data = new EventData(EventDefine.DeathStack);
-        VantanConnect.SendEvent(data);
+        //EventData data = new EventData(EventDefine.DeathStack);
+        //VantanConnect.SendEvent(data);
     }
 
 
@@ -100,6 +148,18 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void CoinResponce(float coin)
     {
-        StartCoroutine(_ultraChatScripts.UltraChatCoroutine(coin));
+        StartCoroutine(_ultraChatScripts.CoinChatCoroutine(coin));
+    }
+
+    public void GoodChatResponce(string goodChat)
+    {
+        StartCoroutine(_ultraChatScripts.ChatCoroutine(goodChat, true));
+        RamdomGoodEvent();
+    }
+
+    public void BadChatResponce(string badChat)
+    {
+        StartCoroutine(_ultraChatScripts.ChatCoroutine(badChat, false));
+        RamdomGoodEvent();
     }
 }
