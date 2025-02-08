@@ -106,11 +106,11 @@ public class IconManager : MonoBehaviour
         {
             _specialIcon.gameObject.SetActive(true);
         }
-        else if (reciveValue >= 0.5f)
+        if (reciveValue >= 0.5f)
         {
             _healIcon.gameObject.SetActive(true);
         }
-        else
+        if(reciveValue < 0.5f)
         {
             _specialIcon.gameObject.SetActive(false);
             _healIcon.gameObject.SetActive(false);
