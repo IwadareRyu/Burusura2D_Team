@@ -46,7 +46,7 @@ public class NekoChatScripts : MonoBehaviour
 
     public IEnumerator ChatCoroutine(string chat,bool isGood)
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && _isResponceUltraChat) yield break;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceUltraChat) yield break;
         _isResponceUltraChat = false;
         _ultraChatText.text = "";
         if (chat.Length > 10)
@@ -73,11 +73,12 @@ public class NekoChatScripts : MonoBehaviour
         _ultraChatPanel.Play(_ultraChatMoveAnimClip.name);
         yield return WaitforSecondsCashe.Wait(_ultraChatMoveAnimClip.length);
         Debug.Log("ResponceOK");
+        _isResponceUltraChat = true;
     }
 
     public IEnumerator CoinChatCoroutine(float coinNumber)
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && _isResponceUltraChat) yield break;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceUltraChat) yield break;
         _isResponceUltraChat = false;
         _ultraChatText.text = "";
         if (coinNumber <= _maxCount)
