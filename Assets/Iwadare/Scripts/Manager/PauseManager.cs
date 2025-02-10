@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
@@ -11,6 +13,22 @@ public class PauseManager : MonoBehaviour
     [SerializeField] float _pauseTextTime = 2f;
     Coroutine _pauseCoroutine;
     TimeScaleManager _timeScaleManager;
+    PlayerInput _input;
+
+    private void Awake()
+    {
+        _input = new PlayerInput();
+    }
+
+    private void OnEnable()
+    {
+        _input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _input.Disable();
+    }
 
     private void Start()
     {
@@ -21,7 +39,9 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameStateManager.Instance.GameState == GameState.InBattleState)
+        if (_input.Pause.Pause.WasPerformedThisFrame() 
+            && (GameStateManager.Instance.GameState == GameState.InBattleState 
+            || GameStateManager.Instance.GameState == GameState.BattleStopState))
         {
             if (_isPause)
             {

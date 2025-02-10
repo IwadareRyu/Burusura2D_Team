@@ -34,12 +34,12 @@ public class EnemyBase : MonoBehaviour
     public Transform[] _movePoint;
     [NonSerialized] public int _minMovePointIndex;
 
-    public bool _isFlip = false;
-    public bool _isWaitDamage = false;
-    public bool _isTrueDamage = false;
-    public bool _isMove = false;
-    public bool _isAttack = false;
-    public bool _guard = false;
+    [NonSerialized] public bool _isFlip = false;
+    [NonSerialized] public bool _isWaitDamage = false;
+    [NonSerialized] public bool _isTrueDamage = false;
+    [NonSerialized] public bool _isMove = false;
+    [NonSerialized] public bool _isAttack = false;
+    [NonSerialized] public bool _guard = false;
 
     public void BaseInit()
     {
@@ -115,6 +115,8 @@ public class EnemyBase : MonoBehaviour
     public virtual void HPChack() { return; }
 
     public virtual bool SpecialHPChack() => false;
+
+    public virtual void NextAction() { return; }
 
     public void SpawnBulletRef(BulletSpawnEnemy spawnBulletEnemy)
     {

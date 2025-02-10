@@ -15,12 +15,14 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     PlayerSpawn _playerSpawn;
     EnemyBase _enemy;
     [SerializeField] bool _network = true;
+    bool _isResponceActive = false;
 
 
     protected override void Awake()
     {
         base.Awake();
         VantanConnect.RegisterEventReceiver(this);
+        ResponceStart();
     }
 
     public bool IsActive => true;
@@ -48,6 +50,16 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         }
     }
 
+    public void ResponceStart()
+    {
+        _isResponceActive = true;
+    }
+
+    public void ResponceStop()
+    {
+        _isResponceActive &= false;
+    }
+
     public void GameStart()
     {
         VantanConnect.GameStart();
@@ -63,10 +75,6 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     {
         _playerSpawn = GameObject.FindObjectOfType<PlayerSpawn>();
         _enemy = GameObject.FindObjectOfType<EnemyBase>();
-    }
-
-    private void Update()
-    {
     }
 
     public void RamdomGoodEvent()
@@ -148,17 +156,20 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void CoinResponce(float coin)
     {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.CoinChatCoroutine(coin));
     }
 
     public void GoodChatResponce(string goodChat)
     {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(goodChat, true));
         RamdomGoodEvent();
     }
 
     public void BadChatResponce(string badChat)
     {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(badChat, false));
         RamdomGoodEvent();
     }
