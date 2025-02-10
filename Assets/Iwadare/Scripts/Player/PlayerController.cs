@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [Tooltip("x方向の移動")]
     float _x = 0;
     public float X => _x;
+    float _y = 0;
+    public float Y => _y;
     bool _isGround;
     [NonSerialized] public float _currentJumpCount;
     public bool IsGround => _isGround;
@@ -48,7 +50,6 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     /// <summary>攻撃系の変数</summary>
     [Tooltip("Playerの弾を出す向きを設定するScripts"), Header("ArrowRotaのオブジェクトを入れる。")]
     [SerializeField] AttackTargetArrow _targetArrowScript;
-    bool _isAttackTime = false;
 
     [Tooltip("Playerの状態")]
     [NonSerialized] public PlayerState _playerState;
@@ -71,6 +72,11 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     Vector3 _tmpVelocity;
     float _tmpGravity;
+
+    [Tooltip("Input系")]
+    public PlayerInput _playerInput;
+    bool _isAttack = false;
+    public bool IsAttack => _isAttack;
 
     public void Init(SetPlayerStruct setPlayer)
     {
@@ -97,14 +103,32 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _specialGuage = InGameManager.Instance._playerSpecialGuage;
         _specialGuage.Init();
         _moveScript.MoveInit();
+        // InputSystem初期化
+        InputSet();
         /// ActionSet
         TimeScaleManager.ChangeTimeScaleAction += TimeScaleChange;
         TimeScaleManager.StartPauseAction += StartPause;
         TimeScaleManager.EndPauseAction += EndPause;
     }
 
+    private void InputSet()
+    {
+        _playerInput = new PlayerInput();
+
+        var player = _playerInput.Player;
+        player.Move.performed += ct => _x = ct.ReadValue<Vector2>().x;
+        player.Move.performed += ct => _y = ct.ReadValue<Vector2>().y;
+        player.Move.canceled += ct => _x = 0f;
+        player.Move.canceled += ct => _y = 0f;
+        player.Fire.performed += ct => _isAttack = true;
+        player.Fire.canceled += ct => _isAttack = false;
+
+        _playerInput.Enable();
+    }
+
     private void OnDisable()
     {
+        _playerInput.Disable();
         ///ActionReset
         TimeScaleManager.ChangeTimeScaleAction -= TimeScaleChange;
         TimeScaleManager.StartPauseAction -= StartPause;
@@ -118,18 +142,17 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             if ((int)(_playerState & PlayerState.AvoidState) == 0)
             {
-                _x = Input.GetAxisRaw("Horizontal");
                 FlipX(_x);
                 _moveScript.MoveUpdate(this);
             }
 
-            if (Input.GetButton("Fire1") && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState | PlayerState.UseSkillState)) == 0)
+            if (_isAttack && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState | PlayerState.UseSkillState)) == 0)
             {
                 _playerState |= PlayerState.AttackState;
                 StartCoroutine(Attack());
             }
 
-            if (Input.GetButton("Avoid")
+            if (_playerInput.Player.Avoid.WasPressedThisFrame()
                 && (int)(_playerState & (PlayerState.AttackState | PlayerState.AvoidState | PlayerState.UseSkillState)) == 0
                 && !_isAvoidCoolTime)
             {
@@ -138,7 +161,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 StartCoroutine(_moveScript.Avoidance(this, _playerRb, _playerObj));
             }
 
-            if(Input.GetButton("UseSkill"))
+            if(_playerInput.Player.Special.WasPressedThisFrame())
             {
                 if(InGameManager.Instance._playerSpecialGuage.IsCostChack(InGameManager.Instance._playerSpecialGuage.MaxGuage))
                 {
@@ -197,7 +220,14 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         if (x != 0)
         {
             var scale = _playerObj.transform.localScale;
-            scale.x = x * Mathf.Abs(scale.x);
+            if (x > 0)
+            {
+                scale.x = Mathf.Abs(scale.x);
+            }
+            else
+            {
+                scale.x = -Mathf.Abs(scale.x);
+            }
             _playerObj.transform.localScale = scale;
         }
     }

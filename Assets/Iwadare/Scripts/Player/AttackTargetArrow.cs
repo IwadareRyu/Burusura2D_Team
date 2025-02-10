@@ -18,8 +18,6 @@ public class AttackTargetArrow : MonoBehaviour
     [SerializeField] int MaxAttackCount = 3;
     [SerializeField] float _stopPlayerCameraMove = 0.25f;
     [SerializeField] float _movePlayerCameraMove = 0.15f;
-    float _x;
-    float _y;
     public void Init(PlayerController playerController)
     {
         _controller = playerController;
@@ -27,21 +25,21 @@ public class AttackTargetArrow : MonoBehaviour
         _playerCameraFraming = _playerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (GameStateManager.Instance.GameState == GameState.InBattleState)
-        {
-            _x = Input.GetAxisRaw("Horizontal");
-            _y = Input.GetAxisRaw("Vertical");
-        }
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (GameStateManager.Instance.GameState == GameState.InBattleState)
+    //    {
+    //        _x = Input.GetAxisRaw("Horizontal");
+    //        _y = Input.GetAxisRaw("Vertical");
+    //    }
+    //}
 
     public void ArrowUpdate(PlayerController controller)
     {
-        if (_x != 0 || _y != 0)
+        if (controller.X != 0 || controller.Y != 0)
         {
-            RotationArrow(_x, _y,controller._upPlayerAnim.transform);
+            RotationArrow(controller.X, controller.Y,controller._upPlayerAnim.transform);
         }
         else
         {
@@ -69,7 +67,7 @@ public class AttackTargetArrow : MonoBehaviour
     float ArrowDirection(float x, float y)
     {
         var rad = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-        CameraMove(_x);
+        CameraMove(x);
         if (_controller.IsGround && rad < 0)
         {
             var dir = _controller.PlayerObj.transform.localScale.x;
@@ -129,7 +127,7 @@ public class AttackTargetArrow : MonoBehaviour
         yield return WaitforSecondsCashe.Wait(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
         {
-            if (Input.GetButton("Fire1") && count < MaxAttackCount)
+            if (player.IsAttack && count < MaxAttackCount)
             {
                 yield return StartCoroutine(AttackTime(player,count + 1,upBodyAnim));
                 break;
