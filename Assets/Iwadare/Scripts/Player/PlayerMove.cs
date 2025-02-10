@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
     // ジャンプの処理
     void Jump(PlayerController controller, Rigidbody2D rb)
     {
-        if (Input.GetButtonDown("Jump") && controller._currentJumpCount < MaxJumpCount)
+        if (controller._playerInput.Player.Jump.WasPressedThisFrame() && controller._currentJumpCount < MaxJumpCount)
         {
             Debug.Log("ジャンプ！");
             rb.velocity = Vector2.zero;
