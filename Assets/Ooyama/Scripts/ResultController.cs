@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ResultController : MonoBehaviour
@@ -14,15 +15,34 @@ public class ResultController : MonoBehaviour
     [SerializeField] Sprite _nekomataWinSprite;
     [SerializeField] Sprite _nekomataLoseSprite;
     private bool _canMoveScene = false;
+    private InputAction _moveSceneAction;
+    void Awake()
+    {
+        _moveSceneAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/anyKey");
+        _moveSceneAction.AddBinding("<Gamepad>/*");
+        _moveSceneAction.AddBinding("<Mouse>/leftButton");
+        _moveSceneAction.AddBinding("<Mouse>/rightButton");
+        _moveSceneAction.performed += OnMoveSceneAction;
+    }
+    void OnEnable()
+    {
+        _moveSceneAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        _moveSceneAction.Disable();
+    }
     void Start()
     {
         _canMoveScene = true;
         _targetText.text = "";
         ResultPrinter(GameStateManager.Instance._isWin);
+
     }
-    private void Update()
+    private void OnMoveSceneAction(InputAction.CallbackContext context)
     {
-        if (_canMoveScene && (Input.anyKey || Input.GetButtonDown("Fire1")))
+        if (_canMoveScene)
         {
             _canMoveScene = false;
             FadeManager.Instance.SceneChangeStart("Title");

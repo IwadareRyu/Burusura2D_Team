@@ -617,7 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 448539552}
   - component: {fileID: 448539551}
-  - component: {fileID: 448539550}
+  - component: {fileID: 448539553}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -625,26 +625,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &448539550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448539549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &448539551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +655,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &448539553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448539549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1001 &551182546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1035,6 +1045,7 @@ GameObject:
   - component: {fileID: 771389272}
   - component: {fileID: 771389271}
   - component: {fileID: 771389270}
+  - component: {fileID: 771389273}
   m_Layer: 5
   m_Name: StagePickButton
   m_TagString: Untagged
@@ -1118,6 +1129,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 771389273}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: AudioPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &771389271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,6 +1179,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771389268}
   m_CullTransparentMesh: 1
+--- !u!114 &771389273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771389268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24b7638b5071949bd7e67627612ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audio: {fileID: 8300000, guid: 1256de28771527549adf65aa63797bcf, type: 3}
 --- !u!1001 &863601495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1225,6 +1261,7 @@ GameObject:
   - component: {fileID: 980897495}
   - component: {fileID: 980897494}
   - component: {fileID: 980897493}
+  - component: {fileID: 980897496}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -1308,6 +1345,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 980897496}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: AudioPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &980897494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,6 +1395,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980897491}
   m_CullTransparentMesh: 1
+--- !u!114 &980897496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980897491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24b7638b5071949bd7e67627612ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audio: {fileID: 8300000, guid: 1256de28771527549adf65aa63797bcf, type: 3}
 --- !u!1 &984160943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,12 +1433,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984160943}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb73036728954b74fb8ac20b9abb21d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 8300000, guid: f43447ad34561e146b158f7b44db0eae, type: 3}
+  bgmClip: {fileID: 8300000, guid: 90fc5cff1a64b9e409e6002f382e44de, type: 3}
 --- !u!4 &984160945
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,7 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed12348db1dbae4ea31564f3f9e1d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleBGM: {fileID: 8300000, guid: f43447ad34561e146b158f7b44db0eae, type: 3}
+  _titleBGM: {fileID: 8300000, guid: 90fc5cff1a64b9e409e6002f382e44de, type: 3}
 --- !u!1 &1072103592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,6 +1842,7 @@ GameObject:
   - component: {fileID: 1161154892}
   - component: {fileID: 1161154891}
   - component: {fileID: 1161154890}
+  - component: {fileID: 1161154893}
   m_Layer: 5
   m_Name: IllustratedBookButton
   m_TagString: Untagged
@@ -1863,6 +1926,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1161154893}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: AudioPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1161154891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,6 +1976,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161154888}
   m_CullTransparentMesh: 1
+--- !u!114 &1161154893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161154888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24b7638b5071949bd7e67627612ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audio: {fileID: 8300000, guid: 1256de28771527549adf65aa63797bcf, type: 3}
 --- !u!1 &1553191434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,8 +2960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5117c0d7ed316a4c9a9e8e95be7d920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultBGMVolume: 0.9
-  _defaultSEVolume: 0.9
+  _defaultBGMVolume: 0.536
+  _defaultSEVolume: 0.54
   _audioMixer: {fileID: 24100000, guid: 96afc7ea413e8e24292ab77a045faaab, type: 2}
 --- !u!114 &484134423376137483
 MonoBehaviour:
