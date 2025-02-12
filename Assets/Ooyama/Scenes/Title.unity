@@ -207,6 +207,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
   m_PrefabInstance: {fileID: 1769787493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &132478766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132478763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f6f602d6f5c3a48b0255b0fe74720d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleController: {fileID: 984160946}
+--- !u!114 &132478767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132478763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037d612384a572d4d91577807698790e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleController: {fileID: 984160946}
+  _button: {fileID: 441139933}
 --- !u!1 &134928901
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +517,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: CloseTab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &246475315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +646,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270615360}
   m_CullTransparentMesh: 1
+--- !u!114 &441139933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+  m_PrefabInstance: {fileID: 1769787493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &448539549
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,6 +1016,7 @@ GameObject:
   - component: {fileID: 676778459}
   - component: {fileID: 676778461}
   - component: {fileID: 676778460}
+  - component: {fileID: 676778462}
   m_Layer: 5
   m_Name: StagePickImage
   m_TagString: Untagged
@@ -1033,6 +1084,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676778458}
   m_CullTransparentMesh: 1
+--- !u!114 &676778462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676778458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037d612384a572d4d91577807698790e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleController: {fileID: 984160946}
+  _button: {fileID: 1138455389}
 --- !u!1 &771389268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1111,7 @@ GameObject:
   - component: {fileID: 771389271}
   - component: {fileID: 771389270}
   - component: {fileID: 771389273}
+  - component: {fileID: 771389274}
   m_Layer: 5
   m_Name: StagePickButton
   m_TagString: Untagged
@@ -1129,9 +1195,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 771389273}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: AudioPlay
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: OpenTab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 771389270}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 771389274}
+        m_TargetAssemblyTypeName: PlayStringAudio, Assembly-CSharp
+        m_MethodName: PlayNameAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1192,6 +1270,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 8300000, guid: a7d3785b2a801ff47a851d656954d717, type: 3}
+--- !u!114 &771389274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771389268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9a58837d297d43b979b10d156df63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick
 --- !u!1001 &863601495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,6 +1353,7 @@ GameObject:
   - component: {fileID: 980897494}
   - component: {fileID: 980897493}
   - component: {fileID: 980897496}
+  - component: {fileID: 980897497}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -1345,9 +1437,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 980897496}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: AudioPlay
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: OpenTab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 980897493}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 980897497}
+        m_TargetAssemblyTypeName: PlayStringAudio, Assembly-CSharp
+        m_MethodName: PlayNameAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1408,6 +1512,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 8300000, guid: a7d3785b2a801ff47a851d656954d717, type: 3}
+--- !u!114 &980897497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980897491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9a58837d297d43b979b10d156df63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick
 --- !u!1 &984160943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1583,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed12348db1dbae4ea31564f3f9e1d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleBGM: {fileID: 8300000, guid: b2d7bf4a02dacd8409d3af8fb2af7507, type: 3}
+  _titleBGM: {fileID: 8300000, guid: 90fc5cff1a64b9e409e6002f382e44de, type: 3}
+  _buttons:
+  - {fileID: 771389270}
+  - {fileID: 980897493}
+  - {fileID: 1161154890}
+  _eventSystem: {fileID: 448539551}
 --- !u!1 &1072103592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1914,18 @@ MonoBehaviour:
           m_StringArgument: YuaiScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: StopInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1138455390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1843,6 +1977,7 @@ GameObject:
   - component: {fileID: 1161154891}
   - component: {fileID: 1161154890}
   - component: {fileID: 1161154893}
+  - component: {fileID: 1161154894}
   m_Layer: 5
   m_Name: IllustratedBookButton
   m_TagString: Untagged
@@ -1926,9 +2061,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1161154893}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: AudioPlay
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: OpenTab
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1161154890}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1161154894}
+        m_TargetAssemblyTypeName: PlayStringAudio, Assembly-CSharp
+        m_MethodName: PlayNameAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1989,6 +2136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 8300000, guid: a7d3785b2a801ff47a851d656954d717, type: 3}
+--- !u!114 &1161154894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161154888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9a58837d297d43b979b10d156df63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick
 --- !u!1 &1553191434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,7 +2479,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 132478766}
+    - targetCorrespondingSourceObject: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 132478767}
   m_SourcePrefab: {fileID: 100100000, guid: 551b32133bf221242a069a7591130ebf, type: 3}
 --- !u!1001 &1776850899
 PrefabInstance:
@@ -2683,6 +2849,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: DataraBossStage
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: StopInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2057558064
@@ -3129,7 +3307,7 @@ RectTransform:
   m_Father: {fileID: 8474370323173187447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3153,13 +3331,14 @@ GameObject:
   - component: {fileID: 5770360695131633846}
   - component: {fileID: 8892032366050188230}
   - component: {fileID: 5634726993660211113}
+  - component: {fileID: 8892032366050188231}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1674759460475747156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3328,7 +3507,7 @@ RectTransform:
   m_Father: {fileID: 1326551358567211188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3347,7 +3526,7 @@ RectTransform:
   m_Father: {fileID: 8248954858854308065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3480,6 +3659,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 984160946}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: CloseTab
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3679,7 +3870,7 @@ RectTransform:
   m_Father: {fileID: 4394386173536776602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4512,6 +4703,20 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &8892032366050188231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664806835455497140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037d612384a572d4d91577807698790e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _titleController: {fileID: 984160946}
+  _button: {fileID: 2924252697809059314}
 --- !u!222 &9019831507136648276
 CanvasRenderer:
   m_ObjectHideFlags: 0
