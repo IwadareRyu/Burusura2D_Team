@@ -30,6 +30,9 @@ public class AnimationController_Enemy : MonoBehaviour
     [SpineAnimation]
     public string _damageAnimationName;
 
+    [SerializeField] AnimationClip _idleAnimatior;
+    [SerializeField] AnimationClip _moveAnimator;
+
     public AnimationName _initialName;
 
     public void Awake()
@@ -76,6 +79,21 @@ public class AnimationController_Enemy : MonoBehaviour
                     _spineAnimationState.SetAnimation(0, _attackAnimationName, true);
                     _isAttackTime = true;
                 }
+                break;
+        }
+    }
+
+    public void ChangeAnimationAnimator(AnimationName animation)
+    {
+        if (!_objAnimator) return;
+
+        switch (animation)
+        {
+            case AnimationName.Idle:
+                _objAnimator.Play(_idleAnimatior.name);
+                break;
+            case AnimationName.Run:
+                _objAnimator.Play(_moveAnimator.name);
                 break;
         }
     }

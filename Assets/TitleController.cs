@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class TitleController : MonoBehaviour
 {
-    [SerializeField] private AudioClip _titleBGM;
+    [SerializeField] private string _titleBGM;
     [SerializeField] private Button[] _buttons;
     [SerializeField] private EventSystem _eventSystem;
     private Button _returnButton;
 
     private void Start()
     {
-        AudioManager.Instance.PlayBGM(_titleBGM.name);
+        AudioManager.Instance.PlayBGM(_titleBGM);
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<EventSystem>();
     }
     public static void StartGame(string nextSceneName)

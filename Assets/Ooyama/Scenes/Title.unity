@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed12348db1dbae4ea31564f3f9e1d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleBGM: {fileID: 8300000, guid: 90fc5cff1a64b9e409e6002f382e44de, type: 3}
+  _titleBGM: Title
   _buttons:
   - {fileID: 771389270}
   - {fileID: 980897493}
@@ -2329,7 +2329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1556653223939329075, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_FontData.m_Font

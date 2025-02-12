@@ -20,6 +20,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
     [SerializeField] float _playerDistance = 10f;
     [SerializeField] float _distancePoint = 1f;
     [SerializeField] float _moveMagnitude = 2f;
+    [SerializeField] AnimationClip _initJumpAttackAnim;
     float _currentTime = 0f;
     float _distance;
 
@@ -66,11 +67,15 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         }
 
         _distance = enemy.transform.position.x - movePointX;
+        enemy._enemyAnim._objAnimator.speed = 1.5f;
+        enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Run);
         while (_distance > _distancePoint || _distance < -_distancePoint)
         {
             ChackDistance(enemy, movePointX);
             yield return new WaitForFixedUpdate();
         }
+        enemy._enemyAnim._objAnimator.speed = 1f;
+        enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Idle);
         enemy._bossState = EnemyBase.BossState.AttackState;
     }
 
@@ -78,6 +83,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
     {
         ChackDistance(enemy, enemy.Player.transform.position.x, false);
         enemy._enemyRb.velocity = Vector2.zero;
+        enemy._enemyAnim._objAnimator.Play(_initJumpAttackAnim.name);
         yield return WaitforSecondsCashe.Wait(_jumpWaitTime);
         if (enemy._isFlip)
         {
@@ -87,7 +93,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         {
             enemy._enemyRb.AddForce(Vector2.left * _jumpPower.x + Vector2.up * _jumpPower.y,ForceMode2D.Impulse);
         }
-
+        enemy._enemyAnim._objAnimator.SetBool("IsJump", true);
         for (float i = 0; i < _jumpTime; i += Time.deltaTime)
         {
             _meleeAttack.MeleeAttackWait(enemy, _jumpJuageSize, transform.position, _jumpDamage);
@@ -98,6 +104,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         Debug.Log("攻撃待機");
         _meleeAttack.StartParryTime(enemy);
         enemy._isWaitDamage = true;
+        // パリィ受付時間
         for (var i = 0f; i < _damageWaitTime; i += Time.deltaTime)
         {
             _meleeAttack.MeleeAttackWait(enemy, _jumpJuageSize, transform.position, _jumpDamage);
@@ -111,12 +118,13 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         }
         enemy._isWaitDamage = false;
         _meleeAttack.EndParryTime(enemy);
-
+        //パリィ成功時
         if (enemy._isTrueDamage)
         {
             enemy._enemyRb.velocity = Vector2.zero;
             enemy.BreakGuardMode();
             enemy._parryParticle.Play();
+            enemy._bossAudio.ParryAudio();
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
             InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);
             yield return WaitforSecondsCashe.Wait(_TrueAttackWaitTime);
@@ -125,6 +133,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         }
         else
         {
+            enemy._enemyAnim._objAnimator.SetBool("IsAttack", true);
             var position = _attackPosition;
             if (enemy._isFlip) position.x = -position.x;
             position = new Vector2(transform.position.x + position.x, transform.position.y + position.y);
@@ -137,6 +146,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
                 AttackParticle.transform.localScale = particleSize;
             }
             AttackParticle.Init();
+            yield return WaitforSecondsCashe.Wait(1f);
         }
         ChackDistance(enemy,enemy.Player.transform.position.x, false);
         enemy.BreakGuardMode();
@@ -148,6 +158,8 @@ public class JumpAttack : MonoBehaviour, AttackInterface
     {
         _currentTime = 0;
         _meleeAttack.Reset();
+        enemy._enemyAnim._objAnimator.SetBool("IsJump", false);
+        enemy._enemyAnim._objAnimator.SetBool("IsAttack",false);
     }
 
     public void ChackDistance(EnemyBase enemy, float movePointX, bool isMove = true)
