@@ -55,6 +55,7 @@ public class EnemyBase : MonoBehaviour
         {
             _enemyAnim.gameObject.SetActive(true);
             _enemyAnim.ChangeAnimationSpain(_enemyAnim._initialName);
+            _enemyAnim.ChangeAnimationAnimator(_enemyAnim._initialName);
         }
         GameStateManager.Instance.InBattle();
     }

@@ -22,6 +22,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     [SerializeField] Vector2 _secondAttackSize;
     [SerializeField] Transform _secondParticle;
     [SerializeField] MeleeAttackScripts _meleeAttack;
+    [SerializeField] AnimationClip _initNormalAttackAnim;
     float _currentTime = 0f;
     float _distance = 0f;
 
@@ -53,11 +54,13 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     public IEnumerator Move(EnemyBase enemy)
     {
          _distance = enemy.transform.position.x - enemy.Player.transform.localPosition.x;
+        enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Run);
         while (_distance > _distancePlayer || _distance < -_distancePlayer)
         {
             ChackDistance(enemy);
             yield return new WaitForFixedUpdate();
         }
+        enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Idle);
         enemy._bossState = EnemyBase.BossState.AttackState;
     }
 
@@ -67,7 +70,9 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
         Debug.Log("攻撃待機");
         enemy._enemyRb.velocity = Vector3.zero;
         _meleeAttack.StartParryTime(enemy);
+        enemy._enemyAnim._objAnimator.Play(_initNormalAttackAnim.name);
         enemy._isWaitDamage = true;
+        // パリィ受付時間
         for (var i = 0f; i < _damageWaitTime; i += Time.deltaTime)
         {
             _meleeAttack.ParryTimeUpdate();
@@ -79,18 +84,22 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
         }
         enemy._isWaitDamage = false;
         _meleeAttack.EndParryTime(enemy);
+        //パリィ成功時
         if (enemy._isTrueDamage)
         {
             enemy.BreakGuardMode();
             enemy._parryParticle.Play();
+            enemy._bossAudio.ParryAudio();
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
             InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);
             yield return WaitforSecondsCashe.Wait(_TrueAttackWaitTime);
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
             enemy._isTrueDamage = false;
+            enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Idle);
         }
         else
         {
+            enemy._enemyAnim._objAnimator.SetBool("IsAttack",true);
             for (var i = 0; i < _attackCount; i++)
             {
                 Vector2 position;
@@ -130,13 +139,13 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
             enemy.BreakGuardMode();
         }
         yield return null;
-
+        ActionReset(enemy);
         enemy._bossState = EnemyBase.BossState.ChangeActionState;
     }
 
     public void ActionReset(EnemyBase enemy)
     {
-        
+        enemy._enemyAnim._objAnimator.SetBool("IsAttack", false);
     }
 
     public void ChackDistance(EnemyBase enemy,bool isMove = true)

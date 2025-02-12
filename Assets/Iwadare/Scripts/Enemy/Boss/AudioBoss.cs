@@ -10,6 +10,7 @@ public class AudioBoss : MonoBehaviour
     [SerializeField] AudioClip _deadAudio;
     [SerializeField] AudioClip _shieldAudio;
     [SerializeField] AudioClip _shieldBreakAudio;
+    [SerializeField] AudioClip _parryAudio;
 
     public void CatInAudioPlay()
     {
@@ -39,5 +40,10 @@ public class AudioBoss : MonoBehaviour
     public void ShieldBreakAudioPlay()
     {
         AudioManager.Instance.PlaySE(_shieldBreakAudio.name);
+    }
+
+    public void ParryAudio()
+    {
+        AudioManager.Instance.PlaySE(_parryAudio.name);
     }
 }
