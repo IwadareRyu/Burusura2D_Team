@@ -32,6 +32,8 @@ public class AnimationController_Enemy : MonoBehaviour
 
     [SerializeField] AnimationClip _idleAnimatior;
     [SerializeField] AnimationClip _moveAnimator;
+    [SerializeField] AnimationClip _parryAnimator;
+    [SerializeField] AnimationClip _deathAnimator;
 
     public AnimationName _initialName;
 
@@ -95,6 +97,12 @@ public class AnimationController_Enemy : MonoBehaviour
             case AnimationName.Run:
                 _objAnimator.Play(_moveAnimator.name);
                 break;
+            case AnimationName.Parry:
+                _objAnimator.Play(_parryAnimator.name);
+                break;
+            case AnimationName.Damage:
+                _objAnimator.Play(_deathAnimator.name);
+                break;
         }
     }
 
@@ -138,5 +146,6 @@ public enum AnimationName
     Change,
     Run,
     Damage,
-    Attack
+    Attack,
+    Parry,
 }

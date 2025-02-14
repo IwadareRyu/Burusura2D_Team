@@ -58,6 +58,10 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
         while (_distance > _distancePlayer || _distance < -_distancePlayer)
         {
             ChackDistance(enemy);
+            if(enemy._bossState == EnemyBase.BossState.DeathState)
+            {
+                yield break;
+            }
             yield return new WaitForFixedUpdate();
         }
         enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Idle);
@@ -89,6 +93,7 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
         {
             enemy.BreakGuardMode();
             enemy._parryParticle.Play();
+            enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Parry);
             enemy._bossAudio.ParryAudio();
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
             InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);

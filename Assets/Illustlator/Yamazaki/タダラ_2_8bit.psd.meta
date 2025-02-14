@@ -101,8 +101,8 @@ ScriptedImporter:
   rigSpriteImportData:
   - name: "\u2192\u8155"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.80704004, y: 0.108368546}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -122,8 +122,8 @@ ScriptedImporter:
     spritePosition: {x: 427, y: 515}
   - name: "\u306B\u304F"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.244, y: 0.259}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -290,8 +290,8 @@ ScriptedImporter:
     spritePosition: {x: 213, y: 490}
   - name: "\u2192\u4E8C\u306E\u8155"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.1960453, y: 0.8417565}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -374,8 +374,8 @@ ScriptedImporter:
     spritePosition: {x: 446, y: 124}
   - name: "\u8DB3"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.8044412, y: 0.24191496}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -395,8 +395,8 @@ ScriptedImporter:
     spritePosition: {x: 370, y: 97}
   - name: "\u8DB3\u2191"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.8602555, y: 0.86567193}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -416,8 +416,8 @@ ScriptedImporter:
     spritePosition: {x: 341, y: 280}
   - name: "\u8DB3\u2193"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.1881221, y: 0.685}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -479,8 +479,8 @@ ScriptedImporter:
     spritePosition: {x: 248, y: 167}
   - name: "\u30EC\u30A4\u30E4\u30FC 70"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.83919495, y: 0.86215395}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -500,8 +500,8 @@ ScriptedImporter:
     spritePosition: {x: 253, y: 337}
   - name: "\u30EC\u30A4\u30E4\u30FC 63"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5000015, y: 0.87680125}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2

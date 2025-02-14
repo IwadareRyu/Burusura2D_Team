@@ -142,6 +142,11 @@ public class HPBossController : EnemyBase,PauseTimeInterface
                 _enemyAnim.ChangeAnimationSpain(AnimationName.Damage);
                 _endAnimator.Play("End");
             }
+            else
+            {
+                _enemyAnim.ChangeAnimationAnimator(AnimationName.Damage);
+                _endAnimator.Play("End");
+            }
             GameStateManager.Instance.EndBattle(true);
             _death = true;
         }

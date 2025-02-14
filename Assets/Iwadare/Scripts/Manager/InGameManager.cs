@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class InGameManager : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class InGameManager : MonoBehaviour
     [SerializeField] AudioClip _gameOverClip;
     [SerializeField] int _playerRemain = 3;
     [NonSerialized] public int _currentPlayerRemain;
+    [Header("Bomb系")]
+    [SerializeField] ParticleSystem _bombParticle;
+    BombScripts _bombScripts;
+    [SerializeField] SpriteRenderer _bombCircle;
+    [SerializeField] string _bombAudioClipName;
+    Color _bombCircleColor;
+    Vector3 _bombRadius;
+    [SerializeField] float _maxRadius = 10f;
+    [SerializeField] float _bombTime = 5f;
+    bool _isBomb = false;
 
     private void Awake()
     {
@@ -38,6 +49,10 @@ public class InGameManager : MonoBehaviour
         _gameClearCanvas.gameObject.SetActive(false);
         _currentPlayerRemain = _playerRemain;
         PlayerRemain(_currentPlayerRemain);
+        _bombScripts = _bombParticle.GetComponent<BombScripts>();
+        _bombCircleColor = _bombCircle.color;
+        _bombRadius = _bombParticle.transform.localScale;
+        _bombParticle.gameObject.SetActive(false);
     }
 
     public void PlayerRemain(int remain)
@@ -79,5 +94,27 @@ public class InGameManager : MonoBehaviour
     {
         _currentPlayerRemain += plusRemain;
         PlayerRemain(_currentPlayerRemain);
+    }
+
+    public IEnumerator BombSystem()
+    {
+        if(_isBomb) yield break;
+        _isBomb = true;
+        _bombParticle.gameObject.SetActive(true);
+        _bombCircle.color = _bombCircleColor;
+        var pos = Camera.main.transform.position;
+        pos.z = 0f;
+        _bombParticle.transform.position = pos;
+        _bombParticle.transform.localScale = _bombRadius;
+        _bombParticle.Play();
+        _bombScripts.StartBomb();
+        AudioManager.Instance.PlaySE(_bombAudioClipName);
+        yield return _bombParticle.transform.DOScale(_bombRadius * _maxRadius, 5f).SetLink(_bombCircle.gameObject).WaitForCompletion();
+        _bombScripts.EndBomb();
+        _bombParticle.Stop();
+        yield return _bombCircle.DOFade(0, 1f).SetLink(_bombCircle.gameObject).WaitForCompletion();
+        _bombParticle.gameObject.SetActive(false);
+        _isBomb = false;
+        yield return null;
     }
 }

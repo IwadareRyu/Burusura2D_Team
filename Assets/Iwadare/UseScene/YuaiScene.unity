@@ -2596,6 +2596,10 @@ MonoBehaviour:
   _attackEventName: 1
   _runAnimationName: run
   _damageAnimationName: 
+  _idleAnimatior: {fileID: 0}
+  _moveAnimator: {fileID: 0}
+  _parryAnimator: {fileID: 0}
+  _deathAnimator: {fileID: 0}
   _initialName: 0
 --- !u!114 &267236212
 MonoBehaviour:
@@ -5144,6 +5148,7 @@ MonoBehaviour:
   _stayTime: 1
   _moveTime: 1
   _slashEffect: {fileID: 0}
+  _reflectEffect: {fileID: 0}
   _defaultMoveSpeed: 2
   _shieldRenderer: {fileID: 0}
   _shieldImage: {fileID: 0}
@@ -13197,6 +13202,10 @@ MonoBehaviour:
   _attackEventName: 1
   _runAnimationName: walk2
   _damageAnimationName: damege
+  _idleAnimatior: {fileID: 0}
+  _moveAnimator: {fileID: 0}
+  _parryAnimator: {fileID: 0}
+  _deathAnimator: {fileID: 0}
   _initialName: 0
 --- !u!114 &1074787387 stripped
 MonoBehaviour:
@@ -17918,9 +17927,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4066229485226605492, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 3320391602347177540, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
+      propertyPath: m_Text
+      value: "\u30DC\u30E0"
       objectReference: {fileID: 0}
     - target: {fileID: 6187658650578679220, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20130,6 +20139,10 @@ PrefabInstance:
       propertyPath: _hitParticlePool
       value: 
       objectReference: {fileID: 1770785513}
+    - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: _reflectParticlePool
+      value: 
+      objectReference: {fileID: 495363847}
     - target: {fileID: 3473792543063635512, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: m_Name
       value: EnemyBullet (1)
@@ -20448,6 +20461,10 @@ PrefabInstance:
       propertyPath: _mySpriteRenderer
       value: 
       objectReference: {fileID: 1142242243}
+    - target: {fileID: 1610986177052868385, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
+      propertyPath: _reflectParticlePool
+      value: 
+      objectReference: {fileID: 495363847}
     - target: {fileID: 3473792543063635512, guid: 4c3398bf15f8cff43a0e79ffd7092bcb, type: 3}
       propertyPath: m_Name
       value: EnemyBullet
@@ -24972,6 +24989,7 @@ MonoBehaviour:
   _stayTime: 1
   _moveTime: 1
   _slashEffect: {fileID: 1770785513}
+  _reflectEffect: {fileID: 495363847}
   _defaultMoveSpeed: 2
   _shieldRenderer: {fileID: 1022346939}
   _shieldImage: {fileID: 1701348134}
@@ -25085,6 +25103,7 @@ MonoBehaviour:
   _deadAudio: {fileID: 8300000, guid: 06bf83b2dc8fad34f8d9080bad3d12a2, type: 3}
   _shieldAudio: {fileID: 8300000, guid: 50f42edeccbec0b4087d46555f9886a5, type: 3}
   _shieldBreakAudio: {fileID: 8300000, guid: 15110469963db974cb6564aff73a70e5, type: 3}
+  _parryAudio: {fileID: 0}
 --- !u!1 &1837770943
 GameObject:
   m_ObjectHideFlags: 0
@@ -25559,6 +25578,11 @@ MonoBehaviour:
   _gameClearClip: {fileID: 8300000, guid: cef5b4ca17178b546b1755d3e15f8ef9, type: 3}
   _gameOverClip: {fileID: 8300000, guid: 39f4648fed61f1b4cbbfd409393c9480, type: 3}
   _playerRemain: 3
+  _bombParticle: {fileID: 1880017566}
+  _bombCircle: {fileID: 1945429463}
+  _bombAudioClipName: Bomb
+  _maxRadius: 25
+  _bombTime: 5
 --- !u!4 &1878063357
 Transform:
   m_ObjectHideFlags: 0
@@ -25568,13 +25592,14 @@ Transform:
   m_GameObject: {fileID: 1878063355}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.586731, y: -2.5031128, z: 0.57965803}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2140366799}
   - {fileID: 2010362691}
   - {fileID: 1837770944}
+  - {fileID: 1880017563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1878063358
@@ -25594,6 +25619,73 @@ MonoBehaviour:
   _avoidBulletAddGuage: 2
   _breakAddGuage: 2
   _parryAddGuage: 25
+--- !u!1001 &1880017560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1878063357}
+    m_Modifications:
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265909444245487705, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+      propertyPath: m_Name
+      value: ExplosionParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+--- !u!4 &1880017563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4801747911581251712, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+  m_PrefabInstance: {fileID: 1880017560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1880017566 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 80142068271895291, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+  m_PrefabInstance: {fileID: 1880017560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900538918
 GameObject:
   m_ObjectHideFlags: 0
@@ -26212,6 +26304,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 198807159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1945429463 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2089065192115491028, guid: 2f3ca880e6e3c8c49a574495cca37f86, type: 3}
+  m_PrefabInstance: {fileID: 1880017560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1946745443
 GameObject:
   m_ObjectHideFlags: 0
@@ -26421,6 +26518,7 @@ MonoBehaviour:
   _stayTime: 1
   _moveTime: 1
   _slashEffect: {fileID: 0}
+  _reflectEffect: {fileID: 0}
   _defaultMoveSpeed: 2
   _shieldRenderer: {fileID: 0}
   _shieldImage: {fileID: 0}
@@ -28652,6 +28750,10 @@ PrefabInstance:
     - target: {fileID: 3536286006736882504, guid: 29dce89d3d6a6b34f8690f839c54309c, type: 3}
       propertyPath: m_Name
       value: BulletParticle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612350626532617041, guid: 29dce89d3d6a6b34f8690f839c54309c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

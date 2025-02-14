@@ -49,6 +49,8 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
     [SerializeField] BulletPoolActive _hitParticlePool;
     public BulletPoolActive HitParticle => _hitParticlePool;
 
+    [SerializeField] BulletPoolActive _reflectParticlePool;
+
     [SerializeField] BulletPoolActive _shotPool;
     ShotLine _currentShotLine;
     public ShotLine CurrentShotLine => _currentShotLine;
@@ -395,6 +397,17 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
     public void CancelBullet()
     {
         if (_isRay) ResetRay();
+        Reset();
+    }
+
+    public void BombReset()
+    {
+        var effectObj = _reflectParticlePool.GetPool().GetComponent<ParticleSystem>();
+        if (effectObj != null)
+        {
+            effectObj.transform.position = transform.position;
+            effectObj.Play();
+        }
         Reset();
     }
 
