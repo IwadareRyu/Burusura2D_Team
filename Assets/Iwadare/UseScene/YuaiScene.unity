@@ -24960,7 +24960,7 @@ MonoBehaviour:
   _action:
   - _hpPersent: 100
     _specialAction: 0
-    _attackState: 00000000
+    _attackState: 02000000
   - _hpPersent: 70
     _specialAction: 1
     _attackState: 03000000

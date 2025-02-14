@@ -96,7 +96,12 @@ public class InGameManager : MonoBehaviour
         PlayerRemain(_currentPlayerRemain);
     }
 
-    public IEnumerator BombSystem()
+    public void BombSystem()
+    {
+        StartCoroutine(BombSystemCoroutine());
+    }
+
+    public IEnumerator BombSystemCoroutine()
     {
         if(_isBomb) yield break;
         _isBomb = true;

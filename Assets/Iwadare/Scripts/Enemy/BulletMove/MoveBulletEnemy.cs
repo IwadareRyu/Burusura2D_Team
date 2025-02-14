@@ -408,7 +408,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
             effectObj.transform.position = transform.position;
             effectObj.Play();
         }
-        Reset();
+        CancelBullet();
     }
 
     // <summary>リセット</summary>
