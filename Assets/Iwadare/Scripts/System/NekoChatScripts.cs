@@ -13,10 +13,10 @@ public class NekoChatScripts : MonoBehaviour
     [SerializeField] Text _ultraChatText;
     [SerializeField] Transform _initialPosition;
     [SerializeField] float _testResponceCoolTime = 5f;
-    [SerializeField] Sprite[] _nekoSprite;
-    [SerializeField] String[] _goodChat;
-    [SerializeField] String[] _badChat;
-    [SerializeField] String[] _chat;
+    [SerializeField] Chat[] _goodChat;
+    [SerializeField] Chat[] _badChat;
+    [SerializeField] Chat[] _chat;
+    [SerializeField] Chat[] _explosionChat;
     [SerializeField] float _maxCount = 100000;
     [SerializeField] float _testDisCount = 1;
     [SerializeField] Sprite _maxSprite;
@@ -56,18 +56,18 @@ public class NekoChatScripts : MonoBehaviour
         }
         _ultraChatText.text += "『" + chat + "』";
         _ultraChatText.text += Environment.NewLine;
-        var ram = RamdomMethod.RamdomNumber0Max(_nekoSprite.Length);
+        var ram = RamdomMethod.RamdomNumber0Max(_goodChat.Length);
         if (isGood)
         {
-            var str = _goodChat[ram].Split("\\n");
+            var str = _goodChat[ram]._chat.Split("\\n");
             TextFill(str);
-            _nekoImage.sprite = _nekoSprite[ram];
+            _nekoImage.sprite = _goodChat[ram]._sprite;
         }
         else
         {
-            var str = _badChat[ram].Split("\\n");
+            var str = _badChat[ram]._chat.Split("\\n");
             TextFill(str);
-            _nekoImage.sprite = _nekoSprite[3];
+            _nekoImage.sprite = _badChat[ram]._sprite;
         }
 
         _ultraChatPanel.Play(_ultraChatMoveAnimClip.name);
@@ -83,15 +83,15 @@ public class NekoChatScripts : MonoBehaviour
         _ultraChatText.text = "";
         if (coinNumber <= _maxCount)
         {
-            var ram = RamdomMethod.RamdomNumber0Max(_nekoSprite.Length);
-            var str = _chat[ram].Split("\\n");
+            var ram = RamdomMethod.RamdomNumber0Max(_chat.Length);
+            var str = _chat[ram]._chat.Split("\\n");
             for (int i = 0; i < str.Length; i++)
             {
                 _ultraChatText.text += str[i].Contains("yen") ? str[i].Replace("yen", coinNumber.ToString()) : str[i];
                 _ultraChatText.text += Environment.NewLine;
             }
 
-            _nekoImage.sprite = _nekoSprite[ram];
+            _nekoImage.sprite = _chat[ram]._sprite;
         }
         else
         {
@@ -105,6 +105,21 @@ public class NekoChatScripts : MonoBehaviour
         _isResponceUltraChat = true;
     }
 
+    public IEnumerator ExplosionChat()
+    {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceUltraChat) yield break;
+        _isResponceUltraChat = false;
+        _ultraChatText.text = "";
+        var ram = RamdomMethod.RamdomNumber0Max(_explosionChat.Length);
+        var str = _explosionChat[ram]._chat.Split("\\n");
+        TextFill(str);
+        _nekoImage.sprite = _explosionChat[ram]._sprite;
+        _ultraChatPanel.Play(_ultraChatMoveAnimClip.name);
+        yield return WaitforSecondsCashe.Wait(_ultraChatMoveAnimClip.length);
+        Debug.Log("ResponceOK");
+        _isResponceUltraChat = true;
+    }
+
     public void TextFill(string[] str)
     {
         for (int i = 0; i < str.Length; i++)
@@ -112,5 +127,12 @@ public class NekoChatScripts : MonoBehaviour
             _ultraChatText.text += str[i];
             _ultraChatText.text += Environment.NewLine;
         }
+    }
+
+    [Serializable]
+    struct Chat
+    {
+        public Sprite _sprite;
+        public string _chat;
     }
 }

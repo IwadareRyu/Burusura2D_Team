@@ -30,7 +30,7 @@ public class InGameManager : MonoBehaviour
     Vector3 _bombRadius;
     [SerializeField] float _maxRadius = 10f;
     [SerializeField] float _bombTime = 5f;
-    bool _isBomb = false;
+    public bool _isBomb = false;
 
     private void Awake()
     {
@@ -96,14 +96,16 @@ public class InGameManager : MonoBehaviour
         PlayerRemain(_currentPlayerRemain);
     }
 
-    public void BombSystem()
+    public bool BombSystem()
     {
+        if(_isBomb) return false;
+
         StartCoroutine(BombSystemCoroutine());
+        return true;
     }
 
     public IEnumerator BombSystemCoroutine()
     {
-        if(_isBomb) yield break;
         _isBomb = true;
         _bombParticle.gameObject.SetActive(true);
         _bombCircle.color = _bombCircleColor;

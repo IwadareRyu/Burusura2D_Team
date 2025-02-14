@@ -17927,10 +17927,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3320391602347177540, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
-      propertyPath: m_Text
-      value: "\u30DC\u30E0"
-      objectReference: {fileID: 0}
     - target: {fileID: 6187658650578679220, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5282917
@@ -23834,7 +23830,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u4FFA\u304C\u59BB\u3092\n\u6BBA\u3057\u305F\u3093\u3060..."
+  m_Text: "\u4FFA\u304C\u59BB\u306E\u547D\u3092\n\u596A\u3063\u305F\u3093\u3060..."
 --- !u!222 &1755840471
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25583,6 +25579,7 @@ MonoBehaviour:
   _bombAudioClipName: Bomb
   _maxRadius: 25
   _bombTime: 5
+  _isBomb: 0
 --- !u!4 &1878063357
 Transform:
   m_ObjectHideFlags: 0
