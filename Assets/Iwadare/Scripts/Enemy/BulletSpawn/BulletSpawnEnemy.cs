@@ -217,20 +217,23 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
 
     public void SetRay(float direction)
     {
-        if(_spawnShotLine)
+        if (_moveBulletList.Count != 0)
         {
-            _spawnShotLine.SetRayStart(direction);
+            if (_spawnShotLine)
+            {
+                _spawnShotLine.SetRayStart(direction);
+            }
         }
     }
 
     public void MoveBullet()
     {
-        if (_spawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
-        {
-            AttackAudio();
-        }
         if (_moveBulletList.Count != 0)
         {
+            if (_spawnBulletMoveStruct._bulletMoveType != BulletMoveType.DelayFastLazer)
+            {
+                AttackAudio();
+            }
             foreach(var bullet in _moveBulletList)
             {
                 bullet._isAttackTime = true;

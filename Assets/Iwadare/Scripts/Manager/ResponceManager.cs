@@ -181,6 +181,6 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     public void BombStart()
     {
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
-        StartCoroutine(InGameManager.Instance.BombSystem());
+        InGameManager.Instance.BombSystem();
     }
 }
