@@ -448,7 +448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u60AA\u3044\u5FDC\u63F4"
+  m_Text: "\u30DC\u30E0"
 --- !u!1 &2609895546715867647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,6 +2000,134 @@ PrefabInstance:
       propertyPath: _badChat.Array.data[3]
       value: "\u30EF\u30F3\u30EF\u30F3\u3057\u304B\u8A00\u3048\u306A\u3044\\n\u91CE\u751F\u5150\u30CB\u30E3\u8CA0\u3051\u306A\u3044\u30CB\u30E3\u3088\uFF01"
       objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[0]._chat
+      value: " yen V\u30B3\u30A4\u30F3\\n \u3042\u308A\u304C\u3068\u3046\u30CB\u30E3\uFF01\\n
+        \u30CD\u30B3\u53C9\u3082\u652F\u63F4\u3059\u308B\u30CB\u30E3\u3088\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[1]._chat
+      value: " \u304A\u91D1\u30CB\u30E3\u30FC\uFF01\uFF01\\n yen V\u30B3\u30A4\u30F3\u3042\u308A\u304C\u3068\u3046\u30CB\u30E3\uFF01\\n
+        \u5927\u5207\u306B\u4F7F\u308F\u305B\u3066\u3082\u3089\u3046\u30CB\u30E3\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[2]._chat
+      value: " \u30CD\u30B3\u53C9\u53C2\u4E0A\u30CB\u30E3\uFF01\\n yen V\u30B3\u30A4\u30F3\u3082\u3089\u3063\u3066\u3044\u304F\u30CB\u30E3\uFF01\\n\u3042\u308A\u304C\u3068\u3046\u30CB\u30E3\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[3]._chat
+      value: " yen V\u30B3\u30A4\u30F3\\n \u3042\u308A\u304C\u3068\u3046\u30CB\u30E3\uFF01\\n
+        \u3053\u306E\u304A\u91D1\u3067\u3054\u99B3\u8D70\u3092\u30B2\u30DB\u30B2\u30DB"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6972a416b753b6e4a9314ba38dc30129, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fa89439ef5bf544ca861f44b85c254e, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5c05004b72a10a4b9b6f97ed548d070, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _chat.Array.data[3]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[0]._chat
+      value: " \u8352\u3089\u3057\u306F\u3084\u3081\u3066\u307B\u3057\u3044\u30CB\u30E3\u30FC\uFF1F\\n\u3084\u3081\u306A\u3044\u3068\u30CD\u30B3\u3072\u3063\u304B\u304D\u30CB\u30E3\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[1]._chat
+      value: " \u30CB\u30E3\u30CB\u30E3\uFF01\uFF1F\\n\u305D\u3093\u306A\u3042\u3093\u307E\u308A\u30CB\u30E3\uFF5E\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[2]._chat
+      value: " \u541B\u305F\u3061\u60AA\u3044\u5B50\u3060\u30CB\u30E3\u30FC\uFF1F\\n\u30CB\u30E3\u30FC\u306E\u6C17\u6301\u3061\u3082\u8003\u3048\u308B\u30CB\u30E3\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[3]._chat
+      value: " \u30EF\u30F3\u30EF\u30F3\u3057\u304B\u8A00\u3048\u306A\u3044\\n\u91CE\u751F\u5150\u30CB\u30E3\u8CA0\u3051\u306A\u3044\u30CB\u30E3\u3088\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[0]._chat
+      value: " \u5B09\u3057\u3044\u30CB\u30E3\u30FC\uFF01\\n\u30CD\u30B3\u53C9\u305F\u3061\u3082\u9811\u5F35\u308B\u30CB\u30E3\u30FC\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[1]._chat
+      value: " \u7D20\u6575\u306A\u5FDC\u63F4\uFF01\uFF01\\n\u3042\u308A\u304C\u3068\u30CB\u30E3\u30FC\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[2]._chat
+      value: " \u3042\u308A\u304C\u3068\u30CB\u30E3\uFF01\uFF01\\n\u671F\u5F85\u306B\u5FDC\u3048\u308B\u30CB\u30E3\u3088\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[3]._chat
+      value: " \u30CF\u30C3\u30D4\u30FC\u30CB\u30E3\uFF01\\n\u304A\u91D1\u3082\u6B32\u3057\u3044\u30B2\u30DB\u30B2\u30DB..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _badChat.Array.data[3]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6972a416b753b6e4a9314ba38dc30129, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fa89439ef5bf544ca861f44b85c254e, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5c05004b72a10a4b9b6f97ed548d070, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _goodChat.Array.data[3]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[0]._chat
+      value: " \u30CB\u30E3\u30CB\u30E3\uFF5E\uFF01\uFF01\uFF01\\n \u82B8\u8853\u306F\u7206\u767A\u30CB\u30E3\u30FC\uFF01\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[1]._chat
+      value: " \u3046\u308B\u3055\u3044\u306E\u306F\u5ACC\u3044... \\n \u3084\u3081\u306A\u3044\u3068\\n
+        \u30AD\u30DF\u306E\u5FC3\u3092\u53D6\u308B\u3088..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[2]._chat
+      value: "\u3046\u304A\u304A\u304A\u304A\u304A\u304A\u304A\uFF01 \\n\u3053\u308C\u304C\u4FFA\u305F\u3061\u53CB\u60C5\u306E\\n\u7206\u767A\u3060\u3042\u3042\u3042\u3042\uFF01\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6972a416b753b6e4a9314ba38dc30129, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 882448886288cfc4798ec68635a87c5a, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _explosionChat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4892bba0f500d8a4794711865878ddca, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
