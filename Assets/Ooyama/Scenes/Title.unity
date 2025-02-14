@@ -2329,7 +2329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1556653223939329075, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_FontData.m_Font
@@ -3097,8 +3097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5117c0d7ed316a4c9a9e8e95be7d920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultBGMVolume: 0.536
-  _defaultSEVolume: 0.54
+  _defaultBGMVolume: 0.948
+  _defaultSEVolume: 0.963
   _audioMixer: {fileID: 24100000, guid: 96afc7ea413e8e24292ab77a045faaab, type: 2}
 --- !u!114 &484134423376137483
 MonoBehaviour:

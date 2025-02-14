@@ -46,6 +46,9 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
                 int coin = data.GetIntData("GetCoin");
                 CoinResponce(coin);
                 break;
+            case EventDefine.DefeatBomb:
+                BombStart();
+                break;
 
         }
     }
@@ -172,5 +175,12 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(badChat, false));
         RamdomGoodEvent();
+    }
+
+
+    public void BombStart()
+    {
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
+        StartCoroutine(InGameManager.Instance.BombSystem());
     }
 }

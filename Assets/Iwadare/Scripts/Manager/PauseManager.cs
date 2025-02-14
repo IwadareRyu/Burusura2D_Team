@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
@@ -39,8 +37,8 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (_input.Pause.Pause.WasPerformedThisFrame() 
-            && (GameStateManager.Instance.GameState == GameState.InBattleState 
+        if (_input.Pause.Pause.WasPerformedThisFrame()
+            && (GameStateManager.Instance.GameState == GameState.InBattleState
             || GameStateManager.Instance.GameState == GameState.BattleStopState))
         {
             if (_isPause)

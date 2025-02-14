@@ -26,6 +26,7 @@ public class EnemyBase : MonoBehaviour
 
     [NonSerialized] public float _timeScale = 1f;
     [SerializeField] BulletPoolActive _slashEffect;
+    [SerializeField] BulletPoolActive _reflectEffect;
     [SerializeField] float _defaultMoveSpeed = 2f;
     [SerializeField] SpriteRenderer _shieldRenderer;
     [SerializeField] Image _shieldImage;
@@ -69,7 +70,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (_isWaitDamage) _isTrueDamage = true;
         if (_guard) return;
-
+        
         if (effect == HitEffect.Slash)
         {
             var effectObj = _slashEffect.GetPool().GetComponent<ParticleSystem>();
@@ -80,6 +81,16 @@ public class EnemyBase : MonoBehaviour
             }
             _bossAudio.DamageAudioPlay();
             
+        }
+        else if (effect == HitEffect.Reflect)
+        {
+            var effectObj = _reflectEffect.GetPool().GetComponent<ParticleSystem>();
+            if (effectObj != null)
+            {
+                effectObj.transform.position = transform.position;
+                effectObj.Play();
+            }
+            _bossAudio.DamageAudioPlay();
         }
         _currentHP -= damage;
         DisplayHP();
@@ -210,4 +221,5 @@ public enum HitEffect
     None,
     Slash,
     Blow,
+    Reflect,
 }

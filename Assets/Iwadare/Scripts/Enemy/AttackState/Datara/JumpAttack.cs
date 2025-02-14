@@ -72,6 +72,10 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         while (_distance > _distancePoint || _distance < -_distancePoint)
         {
             ChackDistance(enemy, movePointX);
+            if (enemy._bossState == EnemyBase.BossState.DeathState)
+            {
+                yield break;
+            }
             yield return new WaitForFixedUpdate();
         }
         enemy._enemyAnim._objAnimator.speed = 1f;
@@ -124,6 +128,7 @@ public class JumpAttack : MonoBehaviour, AttackInterface
             enemy._enemyRb.velocity = Vector2.zero;
             enemy.BreakGuardMode();
             enemy._parryParticle.Play();
+            enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Parry);
             enemy._bossAudio.ParryAudio();
             TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
             InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);

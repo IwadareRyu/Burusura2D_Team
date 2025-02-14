@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEditor.Tilemaps;
-using UnityEngine;
+﻿using System.Collections;
 
 public class TutorialEnemyScripts : EnemyBase
 {
