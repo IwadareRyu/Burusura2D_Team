@@ -2072,6 +2072,10 @@ PrefabInstance:
       value: " \u30CF\u30C3\u30D4\u30FC\u30CB\u30E3\uFF01\\n\u304A\u91D1\u3082\u6B32\u3057\u3044\u30B2\u30DB\u30B2\u30DB..."
       objectReference: {fileID: 0}
     - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
       propertyPath: _badChat.Array.data[0]._sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
@@ -2087,6 +2091,10 @@ PrefabInstance:
       propertyPath: _badChat.Array.data[3]._sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6cd7bc04d92af934e936b001c04542e3, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
       propertyPath: _goodChat.Array.data[0]._sprite
       value: 
@@ -2128,6 +2136,58 @@ PrefabInstance:
       propertyPath: _explosionChat.Array.data[2]._sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4892bba0f500d8a4794711865878ddca, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[0]._chat
+      value: " \u30CB\u30E3\u30CB\u30E3\uFF01\\n\u82B8\u8853\u306F\u7206\u767A\u30CB\u30E3\u30FC\uFF01\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[1]._chat
+      value: " \u3046\u308B\u3055\u3044\u306E\u306F\u5ACC\u3044... \\n \u3084\u3081\u306A\u3044\u3068\\n
+        \u30AD\u30DF\u306E\u5FC3\u3092\u53D6\u308B\u3088..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[2]._chat
+      value: " \u3046\u304A\u304A\u304A\u304A\u304A\u304A\u304A\uFF01 \\n\u3053\u308C\u304C\u4FFA\u305F\u3061\u53CB\u60C5\u306E\\n\u7206\u767A\u3060\u3042\u3042\u3042\u3042\uFF01\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[0]._chat
+      value: " \u30CB\u30E3\u30CB\u30E3\uFF01\uFF1F\\n \u304A\u30CB\u30E3\u304B\u305F\uFF01\\n
+        \u7A7A\u304B\u3089\u7206\u767A\u304C\uFF01\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[1]._chat
+      value: " \u5FC3\u306E\u5F37\u3055\u304C\\n \u7206\u767A\u306B\u8868\u308C\u3066\u308B...\uFF01\\n
+        \u9811\u5F35\u3063\u3066...\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[2]._chat
+      value: " \u306F\u3042\u3042\u3042\u3042\u3042\u3042\uFF01\uFF1F \\n\u3053\u3093\u306A\u306E\u3042\u308A\u304B\u3042\u3042\u3042\u3042\uFF01\uFF1F\\n
+        \u907F\u3051\u3089\u308C\u306D\u3048\u3048\u3048\u3048\u3048\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fa89439ef5bf544ca861f44b85c254e, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 882448886288cfc4798ec68635a87c5a, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _yuaiExplosionChat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4892bba0f500d8a4794711865878ddca, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[0]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5fa89439ef5bf544ca861f44b85c254e, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[1]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3186400c2cf3f4d458d03f9ee41a53c1, type: 3}
+    - target: {fileID: 9210631832486044901, guid: 0633a514c6a4c4f42a8f84dada1d64b9, type: 3}
+      propertyPath: _dataraExplosionChat.Array.data[2]._sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 570e9e06d01b46c4ba9c362b5c5df5eb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

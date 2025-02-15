@@ -12,6 +12,7 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
 
     void Start()
     {
+        _dataraActions._specialAttack.Init();
     }
 
     public bool ChackHP(float currentHpPersent)
@@ -48,7 +49,7 @@ public class DataraChoiceSkill : MonoBehaviour,ChoiceActionInterface
 
     public AttackInterface SelectSpecialAttack()
     {
-        return _dataraActions._normalAttack;
+        return _dataraActions._specialAttack;
     }
 
     [Serializable]

@@ -39,6 +39,7 @@ public class BombScripts : MonoBehaviour
             if(collision.TryGetComponent<MoveBulletEnemy>(out var bullet))
             {
                 bullet.BombReset();
+                InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.BreakAddGuage);
             }
             else if(collision.TryGetComponent<EnemyBase>(out var enemy))
             {

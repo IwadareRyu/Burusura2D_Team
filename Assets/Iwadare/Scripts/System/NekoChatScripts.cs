@@ -2,6 +2,7 @@
 using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NekoChatScripts : MonoBehaviour
@@ -16,7 +17,8 @@ public class NekoChatScripts : MonoBehaviour
     [SerializeField] Chat[] _goodChat;
     [SerializeField] Chat[] _badChat;
     [SerializeField] Chat[] _chat;
-    [SerializeField] Chat[] _explosionChat;
+    [SerializeField] Chat[] _yuaiExplosionChat;
+    [SerializeField] Chat[] _dataraExplosionChat; 
     [SerializeField] float _maxCount = 100000;
     [SerializeField] float _testDisCount = 1;
     [SerializeField] Sprite _maxSprite;
@@ -110,10 +112,20 @@ public class NekoChatScripts : MonoBehaviour
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceUltraChat) yield break;
         _isResponceUltraChat = false;
         _ultraChatText.text = "";
-        var ram = RamdomMethod.RamdomNumber0Max(_explosionChat.Length);
-        var str = _explosionChat[ram]._chat.Split("\\n");
-        TextFill(str);
-        _nekoImage.sprite = _explosionChat[ram]._sprite;
+        if (SceneManager.GetActiveScene().name == "YuaiScene")
+        {
+            var ram = RamdomMethod.RamdomNumber0Max(_yuaiExplosionChat.Length);
+            var str = _yuaiExplosionChat[ram]._chat.Split("\\n");
+            TextFill(str);
+            _nekoImage.sprite = _yuaiExplosionChat[ram]._sprite;
+        }
+        else if(SceneManager.GetActiveScene().name == "DataraBossStage")
+        {
+            var ram = RamdomMethod.RamdomNumber0Max(_dataraExplosionChat.Length);
+            var str = _dataraExplosionChat[ram]._chat.Split("\\n");
+            TextFill(str);
+            _nekoImage.sprite = _dataraExplosionChat[ram]._sprite;
+        }
         _ultraChatPanel.Play(_ultraChatMoveAnimClip.name);
         yield return WaitforSecondsCashe.Wait(_ultraChatMoveAnimClip.length);
         Debug.Log("ResponceOK");
