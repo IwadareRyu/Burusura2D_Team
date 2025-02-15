@@ -35,7 +35,7 @@ public class EnemyBase : MonoBehaviour
     public Transform[] _movePoint;
     [NonSerialized] public int _minMovePointIndex;
 
-    [NonSerialized] public bool _isFlip = false;
+    public bool _isFlip = false;
     [NonSerialized] public bool _isWaitDamage = false;
     [NonSerialized] public bool _isTrueDamage = false;
     [NonSerialized] public bool _isMove = false;

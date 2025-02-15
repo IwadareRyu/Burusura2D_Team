@@ -8,4 +8,5 @@ public class DataraActions
 {
     public NormalAttackState _normalAttack;
     public JumpAttack _jumpAttack;
+    public DataraSpecialAttack_Main _specialAttack;
 }

@@ -36,7 +36,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: MainPositionCamera
-    m_To: CenterUpCamera
+    m_To: Virtual Camera
     m_Blend:
       m_Style: 1
       m_Time: 1.5
@@ -46,7 +46,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CenterUpCamera
+  - m_From: Virtual Camera
     m_To: MainPositionCamera
     m_Blend:
       m_Style: 1
