@@ -5068,6 +5068,7 @@ MonoBehaviour:
   _parryParticle: {fileID: 0}
   _attackText: {fileID: 0}
   _movePoint: []
+  _isFlip: 0
   _action:
   - _hpPersent: 0
     _specialAction: 0
@@ -24869,13 +24870,10 @@ MonoBehaviour:
   _action:
   - _hpPersent: 100
     _specialAction: 0
-    _attackState: 02000000
+    _attackState: 0200000000000000
   - _hpPersent: 70
     _specialAction: 1
     _attackState: 03000000
-  - _hpPersent: 0
-    _specialAction: 0
-    _attackState: 01000000
   _currentHPAction: 0
 --- !u!114 &1832103388
 MonoBehaviour:
@@ -24905,6 +24903,7 @@ MonoBehaviour:
   _parryParticle: {fileID: 0}
   _attackText: {fileID: 0}
   _movePoint: []
+  _isFlip: 0
   _timePanel: {fileID: 45073926}
   _specialAttackHP: 5
   _specialAttackUI: {fileID: 2092048632}
@@ -26435,6 +26434,7 @@ MonoBehaviour:
   _parryParticle: {fileID: 0}
   _attackText: {fileID: 0}
   _movePoint: []
+  _isFlip: 0
   _timePanel: {fileID: 0}
   _specialAttackHP: 0
   _specialAttackUI: {fileID: 0}

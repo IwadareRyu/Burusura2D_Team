@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Ooyama/Scenes/Title.unity
+    path: Assets/Iwadare/UseScene/Title.unity
     guid: 42078455f5523954d8142bb80ecd985b
   - enabled: 1
     path: Assets/Iwadare/UseScene/YuaiScene.unity

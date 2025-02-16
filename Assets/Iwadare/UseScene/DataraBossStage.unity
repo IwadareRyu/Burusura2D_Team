@@ -4207,7 +4207,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 11400000, guid: d7c548f0cb566164fac8adfeef7add5f, type: 2}
+  m_CustomBlends: {fileID: 11400000, guid: 8e63e80416f9f5c4a97aade0ee426b02, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -4451,7 +4451,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 570e9e06d01b46c4ba9c362b5c5df5eb, type: 3}
     - target: {fileID: 4066229485226605492, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6187658650578679220, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9003,7 +9003,7 @@ MonoBehaviour:
     _specialAttack: {fileID: 1170547564}
   _action:
   - _hpPersent: 100
-    _specialAction: 1
+    _specialAction: 0
     _attackState: 0100000000000000
   - _hpPersent: 60
     _specialAction: 1

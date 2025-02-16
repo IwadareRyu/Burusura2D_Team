@@ -159,20 +159,20 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void CoinResponce(float coin)
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && !_isResponceActive) return;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.CoinChatCoroutine(coin));
     }
 
     public void GoodChatResponce(string goodChat)
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && !_isResponceActive) return;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(goodChat, true));
         RamdomGoodEvent();
     }
 
     public void BadChatResponce(string badChat)
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && !_isResponceActive) return;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(badChat, false));
         RamdomGoodEvent();
     }
@@ -180,7 +180,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void BombStart()
     {
-        if (GameStateManager.Instance.GameState != GameState.InBattleState && !_isResponceActive) return;
+        if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         if(InGameManager.Instance.BombSystem())
         {
             StartCoroutine(_ultraChatScripts.ExplosionChat());

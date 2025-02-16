@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour
     Coroutine _pauseCoroutine;
     TimeScaleManager _timeScaleManager;
     PlayerInput _input;
+    PlayStringAudio _clickAudioPlay;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class PauseManager : MonoBehaviour
         _pauseText.gameObject.SetActive(false);
         _pauseCanvas.gameObject.SetActive(false);
         _timeScaleManager = TimeScaleManager.Instance;
+        _clickAudioPlay = GetComponent<PlayStringAudio>();
     }
 
     private void Update()
@@ -59,6 +61,7 @@ public class PauseManager : MonoBehaviour
         _pauseCanvas.gameObject.SetActive(true);
         _pauseCoroutine = StartCoroutine(PauseLoop());
         _timeScaleManager.StartPauseManager();
+        _clickAudioPlay.PlayNameAudio();
     }
 
     public void PauseEnd()
@@ -69,11 +72,13 @@ public class PauseManager : MonoBehaviour
         _pauseText.gameObject.SetActive(false);
         _pauseCanvas.gameObject.SetActive(false);
         _timeScaleManager.EndPauseManager();
+        _clickAudioPlay.PlayNameAudio();
     }
 
     public void BattleEnd()
     {
         _isPause = false;
+        _clickAudioPlay.PlayNameAudio();
         GameStateManager.Instance.ChangeState(GameState.BattleEndState);
         StopCoroutine(_pauseCoroutine);
         _pauseText.gameObject.SetActive(false);

@@ -116,8 +116,16 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _playerInput = new PlayerInput();
 
         var player = _playerInput.Player;
-        player.Move.performed += ct => _x = ct.ReadValue<Vector2>().x;
-        player.Move.performed += ct => _y = ct.ReadValue<Vector2>().y;
+        player.Move.performed += ct => 
+        {
+            _x = ct.ReadValue<Vector2>().x;
+            if(-0.01f < _x && _x< 0.01f) _x = 0f;
+        };
+        player.Move.performed += ct => 
+        {
+            _y = ct.ReadValue<Vector2>().y;
+            if (-0.01f < _y &&_y < 0.01f) _y = 0f;
+        };
         player.Move.canceled += ct => _x = 0f;
         player.Move.canceled += ct => _y = 0f;
         player.Fire.performed += ct => _isAttack = true;
@@ -140,6 +148,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     {
         if ((int)(_playerState & PlayerState.DeathState) == 0 && GameStateManager.Instance.GameState == GameState.InBattleState)
         {
+            
             if ((int)(_playerState & PlayerState.AvoidState) == 0)
             {
                 FlipX(_x);
