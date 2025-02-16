@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class SpecialAttackUI : MonoBehaviour
 {
     GridLayoutGroup _grid;
-    [SerializeField] Image _hpImage;
+    [SerializeField] GameObject _hpImageObj;
     List<Image> _hpImageList = new List<Image>();
+    List<GameObject> _objectList = new List<GameObject>();
 
     public void InitHPView(float hp)
     {
@@ -21,9 +22,10 @@ public class SpecialAttackUI : MonoBehaviour
 
         for(var i = 0;i < hp;i++)
         {
-            var hpImage = Instantiate(_hpImage,transform.position, quaternion.identity);
+            var hpImage = Instantiate(_hpImageObj,transform.position, quaternion.identity);
             hpImage.transform.SetParent(transform);
-            _hpImageList.Add(hpImage);
+            _hpImageList.Add(hpImage.GetComponent<Image>());
+            _objectList.Add(hpImage);
         }
     }
 
@@ -34,6 +36,16 @@ public class SpecialAttackUI : MonoBehaviour
             var hpImage = _hpImageList[0];
             _hpImageList.Remove(hpImage);
             Destroy(hpImage);
+        }
+    }
+
+    public void EndSpecial()
+    {
+        while(_objectList.Count != 0)
+        {
+            var hpObj = _objectList[0];
+            _objectList.Remove(hpObj);
+            Destroy(hpObj);
         }
     }
 

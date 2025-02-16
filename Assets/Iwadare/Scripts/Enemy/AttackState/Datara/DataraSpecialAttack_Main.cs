@@ -1,31 +1,34 @@
 ﻿using Cinemachine;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class DataraSpecialAttack_Main : MonoBehaviour, AttackInterface
 {
     [SerializeField] float _stayTime = 0.1f;
-    [SerializeField] float _moveTime = 1.0f;
     [SerializeField] float _distancePoint = 3;
     [SerializeField] float _damageWaitTime = 0.5f;
-    [SerializeField] float _TrueAttackWaitTime = 1f;
-    [SerializeField] float _distanceAttack = 0.5f;
+    [SerializeField] float _trueAttackWaitTime = 1f;
+    [SerializeField] float _blowMeetDisTime = 0.5f;
     [SerializeField] float _moveMagnitude = 1f;
-    [SerializeField] float _runMagnitude = 2f;
+    [SerializeField] float _runMagnitude = 1.5f;
     [SerializeField] float _runTime = 2f;
-    [SerializeField] int _attackCount = 0;
     [SerializeField] int _damage = 2;
     [SerializeField] Transform _initMovePosition;
+    [SerializeField] Transform _blowPos;
     [SerializeField] MeleeAttackScripts _meleeAttack;
-    [SerializeField] AnimationClip _initNormalAttackAnim;
     [SerializeField] CinemachineVirtualCamera _bossUpCamera;
     [SerializeField] DataraSpecialAttack_UI _ui;
     [SerializeField] ParticleSystem _flareParticle;
     [SerializeField] AudioSource _attackStartAudio;
     [SerializeField] AudioSource _runAudio;
+    [SerializeField] MeetBlow _normalMeet;
+    [SerializeField] MeetBlow _explosionMeet;
+    [SerializeField] Vector2 _blowPower = Vector2.one;
     [SerializeField] float _rayRadius = 3f;
     [SerializeField] LayerMask _wallLayer;
     float _currentTime = 0f;
+    float _currentBlowMeetTime = 0f;
     float _distance = 0f;
     public void Init()
     {
@@ -94,10 +97,17 @@ public class DataraSpecialAttack_Main : MonoBehaviour, AttackInterface
             for (var time = 0f; time < _runTime; time += Time.deltaTime)
             {
                 AttackMove(enemy);
+                _currentBlowMeetTime += Time.deltaTime;
+                if(_currentBlowMeetTime > _blowMeetDisTime)
+                {
+                    _currentBlowMeetTime = 0f;
+                    BlowMeetStart(_normalMeet);
+                }
                 yield return new WaitForFixedUpdate();
             }
             enemy._bossAudio.ShieldAudioPlay();
             _meleeAttack.StartParryTime(enemy);
+            _currentBlowMeetTime = 0f;
             enemy._isWaitDamage = true;
             //パリィ受付時間
             for (var i = 0f; i < _damageWaitTime; i += Time.deltaTime)
@@ -124,9 +134,13 @@ public class DataraSpecialAttack_Main : MonoBehaviour, AttackInterface
                 enemy._bossAudio.ParryAudio();
                 TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale * 0.8f);
                 InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.ParryAddGuage);
-                yield return WaitforSecondsCashe.Wait(_TrueAttackWaitTime);
+                yield return WaitforSecondsCashe.Wait(_trueAttackWaitTime);
                 TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
                 enemy._isTrueDamage = false;
+            }
+            else
+            {
+                BlowMeetStart(_explosionMeet);
             }
         }
         enemy.BreakGuardMode();
@@ -137,7 +151,7 @@ public class DataraSpecialAttack_Main : MonoBehaviour, AttackInterface
     public void AttackMove(EnemyBase enemy)
     {
         var flip = enemy._isFlip;
-        enemy.MoveEnemyX(!flip);
+        enemy.MoveEnemyX(!flip,_runMagnitude);
         var hit = Physics2D.RaycastAll(enemy.transform.position, flip ? Vector2.right : Vector2.left, _rayRadius, _wallLayer);
         if (hit.Length != 0)
         {
@@ -151,6 +165,23 @@ public class DataraSpecialAttack_Main : MonoBehaviour, AttackInterface
         enemy._enemyAnim.ChangeAnimationAnimator(AnimationName.Idle);
         if (_runAudio.isPlaying) _runAudio.Stop();
         if (_flareParticle.IsAlive()) _flareParticle.Stop();
+        _currentBlowMeetTime = 0f;
+        _currentTime = 0f;
+    }
+
+    public void BlowMeetStart(MeetBlow blowMeet)
+    {
+        BlowMeet(blowMeet,15,_damage,_blowPower);
+        BlowMeet(blowMeet, 10, _damage, new Vector2(0, _blowPower.y));
+        BlowMeet(blowMeet, -15, _damage, new Vector2(-_blowPower.x,_blowPower.y));
+        AudioManager.Instance.PlaySE("Throw");
+    }
+
+    public void BlowMeet(MeetBlow blowMeet,float rotateRadius,int damage,Vector2 power)
+    {
+        var meet = Instantiate(blowMeet, _blowPos.position, Quaternion.identity).GetComponent<MeetBlow>();
+        meet.Init(rotateRadius, _damage);
+        meet.GetComponent<Rigidbody2D>().AddForce(power,ForceMode2D.Impulse);
     }
 
     public void ChackDistance(EnemyBase enemy, bool isMove = true)

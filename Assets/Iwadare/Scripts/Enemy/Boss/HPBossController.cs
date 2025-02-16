@@ -23,7 +23,6 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     void Start()
     {
         BaseInit();
-        _specialAttackUI.InitHPView(_specialAttackHP);
         _specialAttackUI.gameObject.SetActive(false);
         _currentSpecialAttackHP = _specialAttackHP;
         _enemyActions = GetComponent<ChoiceActionInterface>();
@@ -159,6 +158,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         if (_currentSpecialAttackHP <= 0f)
         {
             _isSpecialAttackMode = false;
+            _specialAttackUI.EndSpecial();
         }
     }
 
@@ -172,9 +172,11 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public void SpecialAttack()
     {
+        _currentSpecialAttackHP = _specialAttackHP;
         _isSpecialAttackMode = true;
         GuardMode();
         _specialAttackUI.gameObject.SetActive(true);
+        _specialAttackUI.InitHPView(_specialAttackHP);
         ChangeAction();
     }
 
