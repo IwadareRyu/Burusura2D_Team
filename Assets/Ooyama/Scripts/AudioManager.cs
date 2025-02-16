@@ -157,12 +157,12 @@ public class AudioManager : MonoBehaviour
     }
     public void SetBGMVolume(float BGMVolume)
     {
-        _audioMixer.SetFloat(BGM_VOLUME_KEY, Mathf.Lerp(-80f, 0f, BGMVolume));
+        _audioMixer.SetFloat(BGM_VOLUME_KEY, Mathf.Lerp(-40f, 0f, BGMVolume));
         PlayerPrefs.SetFloat(BGM_VOLUME_KEY, BGMVolume);
     }
     public void SetSEVolume(float SEVolume)
     {
-        _audioMixer.SetFloat(SE_VOLUME_KEY, Mathf.Lerp(-80f, 0f, SEVolume));
+        _audioMixer.SetFloat(SE_VOLUME_KEY, Mathf.Lerp(-40f, 0f, SEVolume));
         PlayerPrefs.SetFloat(SE_VOLUME_KEY, SEVolume);
     }
 }

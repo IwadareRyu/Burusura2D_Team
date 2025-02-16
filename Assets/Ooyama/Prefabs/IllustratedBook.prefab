@@ -1472,10 +1472,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9325c833afa072848a4f52f95959d27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charactorList:
+  _canvasList:
   - {fileID: 5336510386706360578}
   - {fileID: 1832743266489150084}
   - {fileID: 9122588100993380450}
+  - {fileID: 362353924328324296}
 --- !u!1 &1671060140295930980
 GameObject:
   m_ObjectHideFlags: 0
