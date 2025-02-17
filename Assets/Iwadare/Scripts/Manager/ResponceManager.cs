@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     [SerializeField] int _plusRemain = 1;
     [SerializeField] int _playerDamage = -5;
     [SerializeField] int _enemyDamage = 5;
+    [SerializeField] float _eventWaitTime = 0.5f;
     int _ramdomEventNumber = 4;
     PlayerSpawn _playerSpawn;
     EnemyBase _enemy;
@@ -60,7 +62,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void ResponceStop()
     {
-        _isResponceActive &= false;
+        _isResponceActive = false;
     }
 
     public void GameStart()
@@ -71,6 +73,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     public void GameEnd(bool win)
     {
         VantanConnect.GameEnd(win);
+        //VantanConnect.SystemReset();
     }
 
 
@@ -80,8 +83,9 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         _enemy = GameObject.FindObjectOfType<EnemyBase>();
     }
 
-    public void RamdomGoodEvent()
+    public IEnumerator RamdomGoodEvent()
     {
+        _isResponceActive = false;
         var ram = RamdomMethod.RandomNumber99();
         if (ram > 100 / _ramdomEventNumber * 3)
         {
@@ -99,6 +103,8 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         {
             GuageUp(25);
         }
+        yield return WaitforSecondsCashe.Wait(_eventWaitTime);
+        _isResponceActive = true;
     }
 
     public void RemainUp()
@@ -142,39 +148,40 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     }
 
 
-    public void StageClearResponce()
-    {
-        if (!_network) return;
-        var ct = this.GetCancellationTokenOnDestroy();
-        StageClearResponceAsync(ct).Forget();
-    }
+    //public void StageClearResponce()
+    //{
+    //    if (!_network) return;
+    //    var ct = this.GetCancellationTokenOnDestroy();
+    //    StageClearResponceAsync(ct).Forget();
+    //}
 
-    private async UniTask StageClearResponceAsync(CancellationToken ct)
-    {
-        /// サーバーに指令を送る。
+    //private async UniTask StageClearResponceAsync(CancellationToken ct)
+    //{
+    //    /// サーバーに指令を送る。
 
-        ///
-        await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime), cancellationToken: ct);
-    }
+    //    ///
+    //    await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime), cancellationToken: ct);
+    //}
 
     public void CoinResponce(float coin)
     {
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.CoinChatCoroutine(coin));
+        StartCoroutine(RamdomGoodEvent());
     }
 
     public void GoodChatResponce(string goodChat)
     {
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(goodChat, true));
-        RamdomGoodEvent();
+        StartCoroutine(RamdomGoodEvent());
     }
 
     public void BadChatResponce(string badChat)
     {
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
         StartCoroutine(_ultraChatScripts.ChatCoroutine(badChat, false));
-        RamdomGoodEvent();
+        StartCoroutine(RamdomGoodEvent());
     }
 
 

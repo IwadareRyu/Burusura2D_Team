@@ -45,8 +45,10 @@ public class ResultController : MonoBehaviour
     {
         if (_canMoveScene)
         {
-            _canMoveScene = false;
-            FadeManager.Instance.SceneChangeStart("Title");
+            if(FadeManager.Instance.SceneChangeStart("Title"))
+            {
+                _canMoveScene = false;
+            }
         }
     }
     private void ResultPrinter(bool Win)
