@@ -18,7 +18,7 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     public void InBattle()
     {
         ChangeState(GameState.InBattleState);
-
+        ResponceManager.Instance.GameStart();
         ResponceManager.Instance.GetPlayerEnemy();
     }
 

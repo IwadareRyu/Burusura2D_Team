@@ -14,9 +14,12 @@ public class TitleController : MonoBehaviour
         AudioManager.Instance.PlayBGM(_titleBGM);
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<EventSystem>();
     }
-    public static void StartGame(string nextSceneName)
+    public void StartGame(string nextSceneName)
     {
-        FadeManager.Instance.SceneChangeStart(nextSceneName);
+        if(FadeManager.Instance.SceneChangeStart(nextSceneName))
+        {
+            StopInput();
+        }
     }
     public void OpenTab(Button returnTarget)
     {
@@ -41,5 +44,6 @@ public class TitleController : MonoBehaviour
     public void StopInput()
     {
         _eventSystem.SetSelectedGameObject(null);
+        AudioManager.Instance.PlaySE("ButtonClick");
     }
 }

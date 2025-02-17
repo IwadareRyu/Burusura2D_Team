@@ -12,7 +12,7 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
     [SerializeField] float _fadeOutTime = 1f;
     Sequence _fadeSequence;
     Tweener _currrentFadeTween;
-    public bool _IsInFade = false;
+    public bool _isInFade = false;
 
     protected override void Awake()
     {
@@ -42,23 +42,25 @@ public class FadeManager : SingletonMonovihair<FadeManager>,PauseTimeInterface
         TimeScaleManager.EndPauseAction -= EndPause;
     }
 
-    public void SceneChangeStart(string nextSceneName)
+    public bool SceneChangeStart(string nextSceneName)
     {
-        if (!_IsInFade)
+        if (!_isInFade)
         {
             StartCoroutine(SceneChangeFade(nextSceneName));
+            return true;
         }
+        return false;
     }
 
     public IEnumerator SceneChangeFade(string nextSceneName)
     {
         _defaultFadeImage.gameObject.SetActive(true);
-        _IsInFade = true;
+        _isInFade = true;
         yield return _defaultFadeImage.DOFade(1f,_fadeInTime).WaitForCompletion();
         yield return SceneLoader.Instance.SceneLoad(nextSceneName);
         yield return _defaultFadeImage.DOFade(0f,_fadeOutTime).WaitForCompletion();
         _defaultFadeImage.gameObject.SetActive(false);
-        _IsInFade = false;
+        _isInFade = false;
     }
 
     public IEnumerator Fade()

@@ -112,24 +112,27 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         {
             AddSpecialHPDamage();
         }
-        else if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
+        if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
         {
-            _bossState = BossState.NextActionState;
-            if (_currentCoroutine != null)
+            if (!_isSpecialAttackMode)
             {
-                StopCoroutine(_currentCoroutine);
-                _currentCoroutine = null;
-            }
-            _currentAction.ActionReset(this);
-            if (_enemyActions.ChackSpecial())
-            {
-                // スペシャルアタック発動
-                SpecialAttack();
-            }
-            else
-            {
-                // 次に行動するアクションを決める。
-                ChangeAction();
+                _bossState = BossState.NextActionState;
+                if (_currentCoroutine != null)
+                {
+                    StopCoroutine(_currentCoroutine);
+                    _currentCoroutine = null;
+                }
+                _currentAction.ActionReset(this);
+                if (_enemyActions.ChackSpecial())
+                {
+                    // スペシャルアタック発動
+                    SpecialAttack();
+                }
+                else
+                {
+                    // 次に行動するアクションを決める。
+                    ChangeAction();
+                }
             }
         }
         if (_currentHP <= 0)
@@ -172,6 +175,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
 
     public void SpecialAttack()
     {
+        if (_isSpecialAttackMode) return;
         _currentSpecialAttackHP = _specialAttackHP;
         _isSpecialAttackMode = true;
         GuardMode();

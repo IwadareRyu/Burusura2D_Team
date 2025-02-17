@@ -16,7 +16,7 @@ public class ResultController : MonoBehaviour
     [SerializeField] Sprite _nekomataLoseSprite;
     private bool _canMoveScene = false;
     private InputAction _moveSceneAction;
-    void Awake()
+    private void Awake()
     {
         _moveSceneAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/anyKey");
         _moveSceneAction.AddBinding("<Gamepad>/*");
@@ -24,6 +24,7 @@ public class ResultController : MonoBehaviour
         _moveSceneAction.AddBinding("<Mouse>/rightButton");
         _moveSceneAction.performed += OnMoveSceneAction;
     }
+
     void OnEnable()
     {
         _moveSceneAction.Enable();
@@ -31,21 +32,23 @@ public class ResultController : MonoBehaviour
 
     void OnDisable()
     {
-        _moveSceneAction.Disable();
+        _moveSceneAction.performed -= OnMoveSceneAction;
+        _moveSceneAction?.Disable();
     }
     void Start()
     {
         _canMoveScene = true;
         _targetText.text = "";
         ResultPrinter(GameStateManager.Instance._isWin);
-
     }
     private void OnMoveSceneAction(InputAction.CallbackContext context)
     {
         if (_canMoveScene)
         {
-            _canMoveScene = false;
-            FadeManager.Instance.SceneChangeStart("Title");
+            if(FadeManager.Instance.SceneChangeStart("Title"))
+            {
+                _canMoveScene = false;
+            }
         }
     }
     private void ResultPrinter(bool Win)

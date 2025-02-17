@@ -9,6 +9,6 @@ public class CloseIllustratedBook : MonoBehaviour
     }
     private void OnDisable()
     {
-        _titleController.CloseTab();
+        _titleController?.CloseTab();
     }
 }

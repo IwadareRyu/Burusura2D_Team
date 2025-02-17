@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36baaa8bdcb9d8b49b9199833965d2c3, type: 3}
-  m_Name: Main Camera Blends
+  m_Name: DataraBlendCamera
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: MainPositionCamera
+  - m_From: Virtual Camera
     m_To: BossUpCamera
     m_Blend:
-      m_Style: 6
+      m_Style: 1
       m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
@@ -25,32 +25,10 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: BossUpCamera
-    m_To: MainPositionCamera
+    m_To: Virtual Camera
     m_Blend:
       m_Style: 1
       m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: MainPositionCamera
-    m_To: CenterUpCamera
-    m_Blend:
-      m_Style: 1
-      m_Time: 1.5
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: CenterUpCamera
-    m_To: MainPositionCamera
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6878895601837854643}
   - component: {fileID: 8267689945870930947}
+  - component: {fileID: 1347663173771941512}
   m_Layer: 0
   m_Name: PauseManager
   m_TagString: Untagged
@@ -127,6 +128,19 @@ MonoBehaviour:
   _pauseCanvas: {fileID: 6675323214024285546}
   _pauseText: {fileID: 1131566761305633667}
   _pauseTextTime: 0.5
+--- !u!114 &1347663173771941512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479591064369509387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a9a58837d297d43b979b10d156df63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioName: ButtonClick
 --- !u!1 &3307145286475223036
 GameObject:
   m_ObjectHideFlags: 0

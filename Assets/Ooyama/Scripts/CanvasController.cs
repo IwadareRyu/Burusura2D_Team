@@ -23,19 +23,19 @@ public class CanvasController : MonoBehaviour
     }
     private void Update()
     {
-        if (_horizontalinput > 0f && _input.Player.Move.WasPerformedThisFrame() && _loop)
+        if (_horizontalinput > 0f && _input.Player.Move.WasPressedThisFrame() && _loop)
         {
             MoveRight();
         }
-        else if (_horizontalinput > 0f && _input.Player.Move.WasPerformedThisFrame() && !_loop)
+        else if (_horizontalinput > 0f && _input.Player.Move.WasPressedThisFrame() && !_loop)
         {
             MoveRightEx();
         }
-        else if (_horizontalinput < 0f && _input.Player.Move.WasPerformedThisFrame() && _loop)
+        else if (_horizontalinput < 0f && _input.Player.Move.WasPressedThisFrame() && _loop)
         {
             MoveLeft();
         }
-        else if (_horizontalinput < 0f && _input.Player.Move.WasPerformedThisFrame() && !_loop)
+        else if (_horizontalinput < 0f && _input.Player.Move.WasPressedThisFrame() && !_loop)
         {
             MoveLeftEx();
         }
