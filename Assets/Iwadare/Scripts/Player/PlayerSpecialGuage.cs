@@ -46,7 +46,7 @@ public class PlayerSpecialGuage : MonoBehaviour
     private void SetSlider(float maxNumber, float currentNumber)
     {
         var num = currentNumber / maxNumber;
-        _guageSlider.value = num;
+        BattleUISlider.Instance.SpecialGuageSlider(num);
         IconManager.Instance.UpdateIcon(num, TargetIcon.Special);
     }
 }

@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VTNConnect;
 
 public class TitleController : MonoBehaviour
 {
     [SerializeField] private string _titleBGM;
     [SerializeField] private Button[] _buttons;
-    [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private UnityEngine.EventSystems.EventSystem _eventSystem;
     private Button _returnButton;
 
     private void Start()
     {
         AudioManager.Instance.PlayBGM(_titleBGM);
-        if (_eventSystem == null) _eventSystem = FindAnyObjectByType<EventSystem>();
+        VantanConnect.SystemReset();
+        if (_eventSystem == null) _eventSystem = FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>();
     }
     public void StartGame(string nextSceneName)
     {

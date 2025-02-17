@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             PlayerInvisible();
         }
 
-        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+        BattleUISlider.Instance.PlayerHPSlider(_currentPlayerHP,_playerDefaultHP);
     }
 
     public void Death()

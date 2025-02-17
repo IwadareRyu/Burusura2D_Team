@@ -4,6 +4,8 @@ using System.Collections;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using VTNConnect;
 
 public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConnectEventReceiver
@@ -72,8 +74,43 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void GameEnd(bool win)
     {
+        if (SceneManager.GetActiveScene().name == "YuaiScene")
+        {
+            if (!win)
+            {
+                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADead);
+                epic.SetEpisode("ユウアイに心を奪われてしまった"); // エピソードを設定する
+                epic.DataPack("心を奪われた位置", Camera.main.transform.position); // エピソードの補足を設定する
+                VantanConnect.SendEpisode(epic);
+            }
+            else
+            {
+                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
+                epic.SetEpisode("ユウアイを倒した！"); // エピソードを設定する
+                epic.DataPack("ユウアイを倒した位置", Camera.main.transform.position); // エピソードの補足を設定する
+                VantanConnect.SendEpisode(epic);
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "DataraBossStage")
+        {
+            if (!win)
+            {
+                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADead);
+                epic.SetEpisode("ダタラの肉に叩きつけられた"); // エピソードを設定する
+                epic.DataPack("肉で叩きつけられた位置", Camera.main.transform.position); // エピソードの補足を設定する
+                VantanConnect.SendEpisode(epic);
+            }
+            else
+            {
+                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
+                epic.SetEpisode("ダタラの肉を奪った！"); // エピソードを設定する
+                epic.DataPack("肉を奪った位置", Camera.main.transform.position); // エピソードの補足を設定する
+                VantanConnect.SendEpisode(epic);
+            }
+        }
         VantanConnect.GameEnd(win);
         //VantanConnect.SystemReset();
+   
     }
 
 
