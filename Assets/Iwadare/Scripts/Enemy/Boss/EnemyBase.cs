@@ -93,7 +93,7 @@ public class EnemyBase : MonoBehaviour
             _bossAudio.DamageAudioPlay();
         }
         _currentHP -= damage;
-        DisplayHP();
+        DamageDisPlayHP();
         HPChack();
     }
 
@@ -111,7 +111,7 @@ public class EnemyBase : MonoBehaviour
             _bossAudio.DamageAudioPlay();
 
         }
-        DisplayHP();
+        DamageDisPlayHP();
         HPChack();
     }
 
@@ -122,6 +122,11 @@ public class EnemyBase : MonoBehaviour
         {
             _hpSlider.value = _currentHP / _maxHP;
         }
+    }
+
+    public void DamageDisPlayHP()
+    {
+        BattleUISlider.Instance.EnemyHPSlider(_currentHP,_maxHP);
     }
 
     public virtual void HPChack() { return; }
