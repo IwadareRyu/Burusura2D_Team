@@ -35,7 +35,7 @@ public class PlayerSpawn : MonoBehaviour
     private IEnumerator PlayerDelaySpawn()
     {
         yield return WaitforSecondsCashe.Wait(_spawnDelayTime);
-        ResponceManager.Instance.PlayerDeathResponce();
+        ResponceManager.Instance?.PlayerDeathResponce();
         if (!_isNotRemain && InGameManager.Instance._currentPlayerRemain <= 0)
         {
             _isNotRemain = true;
@@ -54,7 +54,7 @@ public class PlayerSpawn : MonoBehaviour
         _currentPlayer.Init(_setPlayerStruct);
         _enemy.PlayerSet(_currentPlayer);
         if(_spawnParticle) _spawnParticle.Play();
-        ResponceManager.Instance.PlayerDeathResponce();
+        ResponceManager.Instance?.PlayerDeathResponce();
     }
 }
 

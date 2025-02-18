@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -77,6 +78,11 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public PlayerInput _playerInput;
     bool _isAttack = false;
     public bool IsAttack => _isAttack;
+    [Tooltip("ダメージ時のシェイク設定"),Header("ダメージ時のシェイク設定")]
+    [SerializeField] Transform _shakeObj;
+    [SerializeField] float _shakeTime = 0.5f;
+    [SerializeField] float _shakePower = 0.1f;
+    Tween _shakeTween;
 
     public void Init(SetPlayerStruct setPlayer)
     {
@@ -274,6 +280,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     public void AddDamage(int damage)
     {
+        
         _currentPlayerHP = Mathf.Min(_playerDefaultHP,_currentPlayerHP -= damage);
 
         if (_currentPlayerHP <= 0)
@@ -298,7 +305,10 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             AudioManager.Instance.PlaySE(_healingAudioClip.name);
         }
 
-        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+        if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
+        _shakeTween = _shakeObj.DOShakePosition(_shakeTime,_shakePower).SetLink(_shakeObj.gameObject);
+
+        BattleUISlider.Instance.PlayerHPSlider(_currentPlayerHP, _playerDefaultHP);
     }
 
     public void AddBulletDamage(int damage)
@@ -334,6 +344,9 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             PlayerInvisible();
         }
+
+        if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
+        _shakeTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);
 
         BattleUISlider.Instance.PlayerHPSlider(_currentPlayerHP,_playerDefaultHP);
     }

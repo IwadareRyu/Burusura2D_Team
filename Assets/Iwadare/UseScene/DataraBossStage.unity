@@ -6358,6 +6358,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 3794995110593891439, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
+      propertyPath: _defaultGuageColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4534979252578971371, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8812,6 +8816,9 @@ MonoBehaviour:
   _specialAttackHP: 7
   _specialAttackUI: {fileID: 46115683}
   _endAnimator: {fileID: 4550829456608246954}
+  _shakeObj: {fileID: 4550829456608246953}
+  _shakeTime: 0.5
+  _shakePower: 0.2
 --- !u!50 &1832103389
 Rigidbody2D:
   serializedVersion: 4
@@ -9253,6 +9260,9 @@ MonoBehaviour:
   _specialAttackHP: 0
   _specialAttackUI: {fileID: 0}
   _endAnimator: {fileID: 0}
+  _shakeObj: {fileID: 0}
+  _shakeTime: 0.5
+  _shakePower: 5
 --- !u!50 &1949333117
 Rigidbody2D:
   serializedVersion: 4

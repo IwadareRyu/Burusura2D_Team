@@ -10,7 +10,7 @@ public class BattleUISlider : MonoBehaviour
     [SerializeField] Image _specialGuage;
     [SerializeField] Color _upGuageColor = Color.white;
     [SerializeField] Color _downGuageColor = Color.black;
-    Color _defaultGuageColor;
+    [SerializeField] Color _defaultGuageColor = Color.yellow;
     [SerializeField] float _hpMoveTime = 1f;
     [SerializeField] float _shakeTime = 2f;
     [SerializeField] float _shakePower = 5f;
@@ -39,7 +39,6 @@ public class BattleUISlider : MonoBehaviour
 
     private void Start()
     {
-        _defaultGuageColor = _specialGuage.color;
     }
 
     // Update is called once per frame
@@ -65,6 +64,7 @@ public class BattleUISlider : MonoBehaviour
         if(_enemyHpSlider.value > afterHP)_enemyHPShake = _enemyHpSlider.transform.DOShakePosition(_shakeTime, _shakePower).SetLink(gameObject);
         _enemyHPMoveTween = _enemyHpSlider.DOValue(afterHP, _hpMoveTime).SetLink(gameObject);
     }
+
     public void SpecialGuageSlider(float value)
     {
         if (_specialGuageMoveTween != null && _specialGuageMoveTween.IsActive()) _specialGuageSlider.DOComplete();
