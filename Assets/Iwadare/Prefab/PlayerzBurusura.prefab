@@ -78,6 +78,9 @@ MonoBehaviour:
   _guardSprite: {fileID: 3569065337018587526}
   _healingObj: {fileID: 4165712704322037436}
   _healingAudioClip: {fileID: 8300000, guid: a70b34b5288dba14e886e131b89640b6, type: 3}
+  _shakeObj: {fileID: 8531093590518533398}
+  _shakeTime: 0.5
+  _shakePower: 0.1
 --- !u!114 &1344201660471485145
 MonoBehaviour:
   m_ObjectHideFlags: 0

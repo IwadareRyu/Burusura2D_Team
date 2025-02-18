@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,10 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     public override bool SpecialHPChack() => _isSpecialAttackMode;
     [SerializeField] Animator _endAnimator;
     bool _death = false;
+    [SerializeField] Transform _shakeObj;
+    [SerializeField] float _shakeTime = 0.5f;
+    [SerializeField] float _shakePower = 5f;
+    Tween _damageTween;
 
     void Start()
     {
@@ -108,7 +113,10 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     {
         if (_death) return;
 
-        if(_isSpecialAttackMode)
+        if (_damageTween != null && _damageTween.IsActive()) _shakeObj.DOComplete();
+        _damageTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);
+
+        if (_isSpecialAttackMode)
         {
             AddSpecialHPDamage();
         }
@@ -157,6 +165,7 @@ public class HPBossController : EnemyBase,PauseTimeInterface
     public void AddSpecialHPDamage()
     {
         _currentSpecialAttackHP--;
+
         _specialAttackUI.HPDamageView();
         if (_currentSpecialAttackHP <= 0f)
         {

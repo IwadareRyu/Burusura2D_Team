@@ -613,10 +613,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1103537324946667478, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1518406015368466937, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -697,6 +693,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3794995110593891439, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
+      propertyPath: _defaultGuageColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4534979252578971371, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -711,59 +711,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4862066005055428543, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5108787584876009486, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5802667246067447133, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_Name
       value: UICanvasUpdate
       objectReference: {fileID: 0}
-    - target: {fileID: 6443068712636359481, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -170
-      objectReference: {fileID: 0}
-    - target: {fileID: 6523860989450922438, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 6625764461140725976, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6625764461140725976, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7572760878290278182, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5802667246067447133, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1490580178}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
 --- !u!1 &108784438
 GameObject:
@@ -18663,11 +18628,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotpool: {fileID: 604650325}
---- !u!1 &1425655246 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5802667246067447133, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-  m_PrefabInstance: {fileID: 81300999}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1426429041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5214089833408326233, guid: e141d440bb7092b48a9cde65d2603a73, type: 3}
@@ -19243,27 +19203,6 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 832160291908906833, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
   m_PrefabInstance: {fileID: 81300999}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1490580178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425655246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bafd127fce1a0749b63e2a08db620a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerHpSlider: {fileID: 1967868242}
-  _enemyHpSlider: {fileID: 958186099}
-  _specialGuageSlider: {fileID: 1694507102}
-  _specialGuage: {fileID: 1703120412}
-  _upGuageColor: {r: 0.98751014, g: 1, b: 0.60188675, a: 1}
-  _downGuageColor: {r: 0.39841652, g: 0.4113207, b: 0, a: 1}
-  _hpMoveTime: 0.5
-  _shakeTime: 1
-  _shakePower: 10
 --- !u!1 &1502783972
 GameObject:
   m_ObjectHideFlags: 0
@@ -22385,17 +22324,6 @@ MonoBehaviour:
   _mixParticle: 0
   _mixParticleArray: []
   _parentObject: {fileID: 0}
---- !u!114 &1703120412 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3838178209615266143, guid: 81299a0d5d45b1a4e92e8d221206c01b, type: 3}
-  m_PrefabInstance: {fileID: 81300999}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1709838140 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4243140026277640611, guid: f4ca9f9e1b5f2f0439ef33badc1897c6, type: 3}
@@ -24891,6 +24819,9 @@ MonoBehaviour:
   _specialAttackHP: 5
   _specialAttackUI: {fileID: 2092048632}
   _endAnimator: {fileID: 1750430955}
+  _shakeObj: {fileID: 1750430954}
+  _shakeTime: 0.5
+  _shakePower: 0.1
 --- !u!50 &1832103389
 Rigidbody2D:
   serializedVersion: 4
@@ -26422,6 +26353,9 @@ MonoBehaviour:
   _specialAttackHP: 0
   _specialAttackUI: {fileID: 0}
   _endAnimator: {fileID: 0}
+  _shakeObj: {fileID: 0}
+  _shakeTime: 0.5
+  _shakePower: 5
 --- !u!50 &1949333117
 Rigidbody2D:
   serializedVersion: 4

@@ -1275,7 +1275,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2711af50dbefeec47aac7b5bbce80e1e, type: 3}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -2763,6 +2763,7 @@ GameObject:
   - component: {fileID: 832160291908906833}
   - component: {fileID: 7300192866157751986}
   - component: {fileID: 4261529884863696392}
+  - component: {fileID: 3794995110593891439}
   m_Layer: 5
   m_Name: UICanvasUpdate
   m_TagString: Untagged
@@ -2856,6 +2857,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3794995110593891439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802667246067447133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bafd127fce1a0749b63e2a08db620a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHpSlider: {fileID: 1175938487259196937}
+  _enemyHpSlider: {fileID: 47405766019320369}
+  _specialGuageSlider: {fileID: 6815812503301737630}
+  _specialGuage: {fileID: 3838178209615266143}
+  _upGuageColor: {r: 0.98751014, g: 1, b: 0.60188675, a: 1}
+  _downGuageColor: {r: 0.39841652, g: 0.4113207, b: 0, a: 1}
+  _defaultGuageColor: {r: 0.96862745, g: 1, b: 0, a: 0}
+  _hpMoveTime: 0.5
+  _shakeTime: 1
+  _shakePower: 10
 --- !u!1 &5854670908794476870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,7 +3379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 186, y: 2}
+  m_AnchoredPosition: {x: -170, y: 2}
   m_SizeDelta: {x: 10, y: 108.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &996671719191324419
