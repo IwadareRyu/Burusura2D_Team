@@ -13,7 +13,7 @@ public class TitleController : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlayBGM(_titleBGM);
-        VantanConnect.SystemReset();
+        if(ResponceManager.Instance._isNetwork)VantanConnect.SystemReset();
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>();
     }
     public void StartGame(string nextSceneName)

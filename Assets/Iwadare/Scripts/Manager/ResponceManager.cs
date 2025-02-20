@@ -1,10 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using System;
-using System.Collections;
-using System.Threading;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using VTNConnect;
 
@@ -18,7 +13,9 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     int _ramdomEventNumber = 4;
     PlayerSpawn _playerSpawn;
     EnemyBase _enemy;
-    [SerializeField] bool _network = true;
+    public bool _isNetwork = true;
+    [SerializeField] float _debugChatTime = 30f;
+    float _currentChatTime;
     bool _isResponceActive = false;
 
 
@@ -29,19 +26,49 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         ResponceStart();
     }
 
+    private void Update()
+    {
+        if(!_isNetwork)
+        {
+            _currentChatTime += Time.deltaTime;
+            if(_currentChatTime > _debugChatTime)
+            {
+                var ram = RamdomMethod.RandomNumber99();
+                if(ram < 25)
+                {
+                    GoodChatResponce("頑張れワン！");
+                }
+                else if(ram < 50)
+                {
+                    BadChatResponce("ダメダメワン！");
+                }
+                else if (ram < 75)
+                {
+                    CoinResponce(RamdomMethod.RandomNumber99());
+                }
+                else
+                {
+                    BombStart();
+                }
+                _currentChatTime = 0f;
+            }
+        }
+    }
+
     public bool IsActive => true;
 
     public void OnEventCall(EventData data)
     {
+        if (!_isNetwork) return;
         switch (data.EventCode)
         {
             case EventDefine.Cheer:
                 CheerEvent cheer = new CheerEvent(data);
-                if(cheer.GetEmotion() > 0)
+                if (cheer.GetEmotion() > 0)
                 {
                     GoodChatResponce(cheer.GetMessage());
                 }
-                else if(cheer.GetEmotion() < 0)
+                else if (cheer.GetEmotion() < 0)
                 {
                     BadChatResponce(cheer.GetMessage());
                 }
@@ -59,6 +86,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void ResponceStart()
     {
+
         _isResponceActive = true;
     }
 
@@ -69,11 +97,15 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void GameStart()
     {
-        VantanConnect.GameStart();
+        if (_isNetwork)
+        {
+            VantanConnect.GameStart();
+        }
     }
 
     public void GameEnd(bool win)
     {
+        if (!_isNetwork) return;
         if (SceneManager.GetActiveScene().name == "YuaiScene")
         {
             if (!win)
@@ -110,7 +142,6 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         }
         VantanConnect.GameEnd(win);
         //VantanConnect.SystemReset();
-   
     }
 
 
@@ -179,7 +210,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void PlayerDeathResponce()
     {
-        if (!_network) return;
+        if (!_isNetwork) return;
         //EventData data = new EventData(EventDefine.DeathStack);
         //VantanConnect.SendEvent(data);
     }
@@ -225,7 +256,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     public void BombStart()
     {
         if (GameStateManager.Instance.GameState != GameState.InBattleState || !_isResponceActive) return;
-        if(InGameManager.Instance.BombSystem())
+        if (InGameManager.Instance.BombSystem())
         {
             StartCoroutine(_ultraChatScripts.ExplosionChat());
         }
