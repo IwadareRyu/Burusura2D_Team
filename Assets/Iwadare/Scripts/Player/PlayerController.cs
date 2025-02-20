@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     [SerializeField] BulletPoolActive _missParticlePool;
     [SerializeField] BulletPoolActive _hitParticlePool;
     [SerializeField] BulletPoolActive _reflectHitPool;
+    BulletPoolActive _numberPool;
     PlayerSpecialGuage _specialGuage;
     [NonSerialized] public PlayerAudio _audio;
     PlayerSkillSet _playerSkillSet;
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         _missParticlePool = setPlayer._missBulletPool;
         _reflectHitPool = setPlayer._reflectParticlePool;
         _guardImage = setPlayer._shieldImage;
+        _numberPool = setPlayer._numberPool;
         _guardImage.enabled = false;
         _katanaTrail.enabled = false;
         /// GetComponent
@@ -289,6 +292,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             Death();
         }
 
+        var number = _numberPool.GetPool().GetComponent<NumberColorScripts>();
+        number.transform.position = transform.position;
         if(damage > 0)
         {
             var hitParticle = _hitParticlePool.GetPool().GetComponent<ParticleDestroy>();
@@ -298,13 +303,15 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
                 hitParticle.Init();
             }
             _audio.DamageAudio();
+            number.NumberColorChange(number._damageColor);
         }
         else
         {
             _healingObj.Play();
             AudioManager.Instance.PlaySE(_healingAudioClip.name);
+            number.NumberColorChange(number._healColor);
         }
-
+        number.MoveNumber(-damage);
         if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
         _shakeTween = _shakeObj.DOShakePosition(_shakeTime,_shakePower).SetLink(_shakeObj.gameObject);
 
@@ -344,6 +351,11 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         {
             PlayerInvisible();
         }
+
+        var number = _numberPool.GetPool().GetComponent<NumberColorScripts>();
+        number.transform.position = transform.position;
+        number.NumberColorChange(number._damageColor);
+        number.MoveNumber(-damage);
 
         if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
         _shakeTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);

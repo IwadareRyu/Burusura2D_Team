@@ -15,6 +15,7 @@ public class PlayerSpecialGuage : MonoBehaviour
     public float BreakAddGuage => _breakAddGuage;
     [SerializeField] float _parryAddGuage = 25f;
     public float ParryAddGuage => _parryAddGuage;
+    [SerializeField] BulletPoolActive _numPool;
 
     float _currentGuage;
 
@@ -27,6 +28,10 @@ public class PlayerSpecialGuage : MonoBehaviour
     public void AddGuage(float addNumber)
     {
         _currentGuage = Mathf.Min(_maxGuage, _currentGuage + addNumber);
+        var num = _numPool.GetPool().GetComponent<NumberColorScripts>();
+        num.transform.position = _guageSlider.transform.position;
+        num.NumberColorChange(num._guageUpColor);
+        num.MoveNumber((int)addNumber);
         SetSlider(_maxGuage, _currentGuage);
     }
 

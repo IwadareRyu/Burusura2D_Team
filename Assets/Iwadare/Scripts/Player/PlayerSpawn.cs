@@ -66,4 +66,5 @@ public struct SetPlayerStruct
     public BulletPoolActive _hitParticlePool;
     public BulletPoolActive _reflectParticlePool;
     public Image _shieldImage;
+    public BulletPoolActive _numberPool;
 }
