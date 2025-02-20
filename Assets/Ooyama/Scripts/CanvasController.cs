@@ -19,7 +19,7 @@ public class CanvasController : MonoBehaviour
     }
     private void OnDisable()
     {
-        _input.Disable();
+        _input?.Disable();
     }
     private void Update()
     {
@@ -41,6 +41,7 @@ public class CanvasController : MonoBehaviour
         }
         else if (_input.Player.Jump.WasPerformedThisFrame())
         {
+            AudioManager.Instance.PlaySE("ButtonClick");
             gameObject.SetActive(false);
         }
     }
