@@ -27,6 +27,7 @@ public class EnemyBase : MonoBehaviour
     [NonSerialized] public float _timeScale = 1f;
     [SerializeField] BulletPoolActive _slashEffect;
     [SerializeField] BulletPoolActive _reflectEffect;
+    [SerializeField] BulletPoolActive _numberPool;
     [SerializeField] float _defaultMoveSpeed = 2f;
     [SerializeField] SpriteRenderer _shieldRenderer;
     [SerializeField] Image _shieldImage;
@@ -93,6 +94,10 @@ public class EnemyBase : MonoBehaviour
             _bossAudio.DamageAudioPlay();
         }
         _currentHP -= damage;
+        var num = _numberPool.GetPool().GetComponent<NumberColorScripts>();
+        num.transform.position = transform.position;
+        num.NumberColorChange(num._damageColor);
+        num.MoveNumber((int)-damage);
         DamageDisPlayHP();
         HPChack();
     }
@@ -111,6 +116,10 @@ public class EnemyBase : MonoBehaviour
             _bossAudio.DamageAudioPlay();
 
         }
+        var num = _numberPool.GetPool().GetComponent<NumberColorScripts>();
+        num.transform.position = transform.position;
+        num.NumberColorChange(num._damageColor);
+        num.MoveNumber((int)-damage);
         DamageDisPlayHP();
         HPChack();
     }

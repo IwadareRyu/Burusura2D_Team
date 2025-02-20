@@ -32,7 +32,7 @@ public class BulletPoolActive : MonoBehaviour
                 enemyBullet.Init(); 
             }
             newObj.SetActive(false);
-            if (Parent) newObj.transform.parent = Parent.transform; //Hielarceyを綺麗にしたいので一度球を空の親オブジェクトの子にした。
+            if (Parent) newObj.transform.SetParent(Parent.transform); //Hielarceyを綺麗にしたいので一度球を空の親オブジェクトの子にした。
             _poolObjects.Add(newObj); //球をリストに追加。
         }
     }
@@ -64,7 +64,7 @@ public class BulletPoolActive : MonoBehaviour
         var newObj = CreateNewBullet();
         //Debug.Log("生成しました。");
         _poolObjects.Add(newObj);
-        if (Parent) newObj.transform.parent = Parent.transform; //Hielarceyを綺麗にしたいので一度球を空の親オブジェクトの子にした。
+        if (Parent) newObj.transform.SetParent(Parent.transform); //Hielarceyを綺麗にしたいので一度球を空の親オブジェクトの子にした。
         newObj.SetActive(true);
         return newObj;
     }

@@ -9,6 +9,7 @@ public class InGameManager : MonoBehaviour
 {
     public static InGameManager Instance;
     [NonSerialized] public PlayerSpecialGuage _playerSpecialGuage;
+    
     [SerializeField] public Text _deathCountText;
     [SerializeField] Canvas _gameOverCanvas;
     Animator _gameOverAnimator;
@@ -30,6 +31,7 @@ public class InGameManager : MonoBehaviour
     Vector3 _bombRadius;
     [SerializeField] float _maxRadius = 10f;
     [SerializeField] float _bombTime = 5f;
+    [SerializeField] BulletPoolActive _numberOverlayPool;
     public bool _isBomb = false;
 
     private void Awake()
@@ -93,6 +95,10 @@ public class InGameManager : MonoBehaviour
     public void AddRemain(int plusRemain)
     {
         _currentPlayerRemain += plusRemain;
+        var num = _numberOverlayPool.GetPool().GetComponent<NumberColorScripts>();
+        num.transform.position = _deathCountText.transform.position;
+        num.NumberColorChange(plusRemain > 0 ? num._healColor : num._damageColor);
+        num.MoveNumber(plusRemain);
         PlayerRemain(_currentPlayerRemain);
     }
 
