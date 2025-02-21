@@ -38,7 +38,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
     [Tooltip("フェードの時間"), Header("フェードの時間")]
     [SerializeField] float _fadeTime = 1f;
     public float FadeTime => _fadeTime;
-    float defaultBulleetAlpha = 1f;
+    //float defaultBulleetAlpha = 1f;
     [NonSerialized] public bool _isFade = false;
 
     bool _isRay = false;

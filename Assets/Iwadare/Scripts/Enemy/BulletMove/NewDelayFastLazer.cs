@@ -2,9 +2,6 @@
 
 public class NewDelayFastLazer : BulletMoveClass
 {
-    Vector3 _hitPosition;
-    float _currentTime = 0f;
-    float _persent;
     public override void BulletMove()
     {
     }

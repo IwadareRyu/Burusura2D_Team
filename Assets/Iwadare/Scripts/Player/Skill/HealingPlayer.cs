@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealingPlayer : SpecialAttackInterface
 {
-    [SerializeField] float _healingTime = 2f;
+    //[SerializeField] float _healingTime = 2f;
     [SerializeField] int _healingPower = 10;
     [SerializeField] int _upperLifePower = 1;
     [SerializeField] float _upperLifePersents = 5f;

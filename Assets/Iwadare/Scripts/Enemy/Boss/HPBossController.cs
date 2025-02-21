@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HPBossController : EnemyBase,PauseTimeInterface
 {
-    BossState _currentActionState = BossState.StayState;
+    //BossState _currentActionState = BossState.StayState;
     AttackInterface _currentAction;
     public Image _timePanel;
     [SerializeField] float _specialAttackHP = 4;

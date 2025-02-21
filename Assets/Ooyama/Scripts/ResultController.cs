@@ -10,7 +10,7 @@ public class ResultController : MonoBehaviour
     [SerializeField] List<string> _loseCommentList;
     [SerializeField] Text _targetText;
     [SerializeField] float _printCharSpeed = 0.1f;
-    [SerializeField] int _maxLineLength;
+    [SerializeField] char _nextLineCommand;
     [SerializeField] Image _nekomataImage;
     [SerializeField] Sprite _nekomataWinSprite;
     [SerializeField] Sprite _nekomataLoseSprite;
@@ -68,10 +68,13 @@ public class ResultController : MonoBehaviour
     {
         for (int i = 0; i < PrintText.Length; i++)
         {
-            _targetText.text += PrintText[i];
-            if ((i + 1) % _maxLineLength == 0)
+            if (PrintText[i] == '$')
             {
                 _targetText.text += "\n";
+            }
+            else
+            {
+                _targetText.text += PrintText[i];
             }
             yield return WaitforSecondsCashe.Wait(_printCharSpeed);
         }
