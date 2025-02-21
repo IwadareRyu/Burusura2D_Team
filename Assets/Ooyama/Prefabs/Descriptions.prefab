@@ -1852,14 +1852,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6948109973193524503}
   - component: {fileID: 5986474851094757881}
-  - component: {fileID: 211229230625931312}
+  - component: {fileID: 6901253599575043992}
   m_Layer: 0
   m_Name: Descriptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6948109973193524503
 Transform:
   m_ObjectHideFlags: 0
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   - {fileID: 7938039961961750337}
   - {fileID: 4800002265391459031}
   _loop: 0
---- !u!114 &211229230625931312
+--- !u!114 &6901253599575043992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1907,7 +1907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3825813266048203205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f6f602d6f5c3a48b0255b0fe74720d, type: 3}
+  m_Script: {fileID: 11500000, guid: 01a8018e662de4f458f516850a2c4100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _titleController: {fileID: 0}

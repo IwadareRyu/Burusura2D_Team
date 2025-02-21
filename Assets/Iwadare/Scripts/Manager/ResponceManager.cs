@@ -110,7 +110,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         {
             if (!win)
             {
-                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADead);
+                GameEpisode epic = VantanConnect.CreateEpisode(VTNConnect.EpisodeCode.BADead);
                 epic.SetEpisode("ユウアイに心を奪われてしまった"); // エピソードを設定する
                 epic.DataPack("心を奪われた位置", Camera.main.transform.position); // エピソードの補足を設定する
                 VantanConnect.SendEpisode(epic);

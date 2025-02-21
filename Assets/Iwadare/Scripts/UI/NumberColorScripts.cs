@@ -30,6 +30,7 @@ public class NumberColorScripts : MonoBehaviour
         _numText.transform.DOMoveY(transform.position.y + _transY,_lifeTime).SetLink(gameObject);
         yield return WaitforSecondsCashe.Wait(_lifeTime - 1f);
         yield return _numText.DOFade(0,1f).SetLink(gameObject).WaitForCompletion();
+        yield return WaitforSecondsCashe.Wait(1f);
         gameObject.SetActive(false);
     }
 }
