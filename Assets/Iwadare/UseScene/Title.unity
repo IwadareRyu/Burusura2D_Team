@@ -7907,7 +7907,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30C7\u30B6\u30A4\u30CA\u30FC"
+  m_Text: "\u30C7\u30B6\u30A4\u30CA\u30FC\n\u77E2\u6FA4\u3000\u5B87\n\u85C1\u79D1\u3000\u6E96\n\u5C71\u5D0E\u3000\u4EAC\u9999\n\u5C0F\u67F3\u3000\u4E08\u8F14\n(\u674E\u3000\u6C81\u96C5)\n(\u524D\u4F5C\u30A4\u30E9\u30B9\u30C8\u4F7F\u7528)\n"
 --- !u!222 &1361513528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8924,7 +8924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6092504903609138560, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: _isNetwork
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6092504903609138560, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: _debugChatTime
