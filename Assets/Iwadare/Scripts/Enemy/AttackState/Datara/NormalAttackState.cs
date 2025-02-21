@@ -7,7 +7,7 @@ using static UnityEngine.ParticleSystem;
 public class NormalAttackState : MonoBehaviour,AttackInterface
 {
     [SerializeField] float _stayTime = 0.1f;
-    [SerializeField] float _moveTime = 1.0f;
+    //[SerializeField] float _moveTime = 1.0f;
     [SerializeField] float _distancePlayer = 3;
     [SerializeField] float _damageWaitTime = 0.5f;
     [SerializeField] float _TrueAttackWaitTime = 1f;

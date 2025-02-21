@@ -7,13 +7,10 @@ public class ShotLine : MonoBehaviour
     [SerializeField] Vector3 _point1;
     [SerializeField] float _lineRange = 1.0f;
     Vector3 _disPoint;
-    [SerializeField] float _lineTime = 1.0f;
+    //[SerializeField] float _lineTime = 1.0f;
     [SerializeField] float _shotTime = 0.5f;
     [SerializeField] float _shotRange = 0.5f;
-    float _currentTime = 0;
-    float _persent;
     [SerializeField] bool _isVertical = false;
-    bool _isTime = false;
     [SerializeField] LineRenderer _lineForward;
     [SerializeField] LineRenderer _lineBack;
     [SerializeField] LineRenderer _shotLine;

@@ -6,8 +6,9 @@ public class FrameRateManager : SingletonMonovihair<FrameRateManager>
 {
     [SerializeField] int _frameRate = 60;
     [SerializeField] bool _vSinc = false;
-    void Awake()
-    {
+    protected override void Awake()
+    {    
+        base.Awake();
         Application.targetFrameRate = _frameRate;
         if (_vSinc) QualitySettings.vSyncCount = 1;
         else QualitySettings.vSyncCount = 0;

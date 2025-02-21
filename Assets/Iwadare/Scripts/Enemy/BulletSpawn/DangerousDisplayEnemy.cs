@@ -14,7 +14,7 @@ public class DangerousDisplayEnemy : MonoBehaviour, PauseTimeInterface
     [SerializeField] Image _dangerousFrameImage;
     Vector3 _tmpDangerousScale;
     float _displayTime = 1f;
-    float _currentDisplayTime;
+    //float _currentDisplayTime;
     Color _currentColor;
 
     [Header("危険信号の点滅の色")]
@@ -165,7 +165,6 @@ public class DangerousDisplayEnemy : MonoBehaviour, PauseTimeInterface
     {
         _isDengerous = false;
         _isDangerousMove = false;
-        _currentDisplayTime = 0;
         if (_tmpSequence != null && _tmpSequence.IsActive()) _tmpSequence.Kill();
         if (_isUseImage)
         {

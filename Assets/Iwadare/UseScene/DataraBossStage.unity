@@ -12131,9 +12131,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 812510712397014209, guid: 36170dbb3161549449683fda4452c9e4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 812510712397014209, guid: 36170dbb3161549449683fda4452c9e4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 3542636592341684288, guid: 36170dbb3161549449683fda4452c9e4, type: 3}
       propertyPath: m_Name
       value: DataraObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 7682320526027327629, guid: 36170dbb3161549449683fda4452c9e4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531901672264408886, guid: 36170dbb3161549449683fda4452c9e4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
