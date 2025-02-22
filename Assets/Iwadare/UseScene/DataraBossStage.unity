@@ -7781,7 +7781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stayTime: 0.1
-  _moveTime: 1
   _distancePlayer: 2
   _damageWaitTime: 0.5
   _TrueAttackWaitTime: 1
@@ -9252,7 +9251,7 @@ MonoBehaviour:
   - {fileID: 1455764229}
   _isFlip: 0
   _timePanel: {fileID: 304215389}
-  _specialAttackHP: 7
+  _specialAttackHP: 5
   _specialAttackUI: {fileID: 46115683}
   _endAnimator: {fileID: 4550829456608246954}
   _shakeObj: {fileID: 4550829456608246953}

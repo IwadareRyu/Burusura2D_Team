@@ -64,7 +64,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
         {
             case EventDefine.Cheer:
                 CheerEvent cheer = new CheerEvent(data);
-                if (cheer.GetEmotion() > 0)
+                if (cheer.GetEmotion() >= 0)
                 {
                     GoodChatResponce(cheer.GetMessage());
                 }
