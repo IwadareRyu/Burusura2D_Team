@@ -35,7 +35,7 @@ public class TitleController : MonoBehaviour
     {
         foreach (var button in _buttons)
         {
-            button.gameObject.SetActive(true);
+            button?.gameObject.SetActive(true);
         }
         _eventSystem.SetSelectedGameObject(_returnButton.gameObject);
     }
