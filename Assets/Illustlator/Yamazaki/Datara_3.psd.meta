@@ -99,7 +99,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: LeftDownArm
     originalName: 
     pivot: {x: 0.8, y: 0.12}
     alignment: 9
@@ -120,7 +120,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1471, y: -23}
     spritePosition: {x: 427, y: 515}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Meet
     originalName: 
     pivot: {x: 0.245, y: 0.26}
     alignment: 9
@@ -141,7 +141,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1066, y: -124}
     spritePosition: {x: 407, y: 616}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Bangs
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -162,7 +162,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: -195, y: 119}
     spritePosition: {x: 199, y: 695}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: BackBungs
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -183,7 +183,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 588, y: -223}
     spritePosition: {x: 199, y: 715}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Mouth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -204,7 +204,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1698, y: 12}
     spritePosition: {x: 264, y: 684}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Eye
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -225,7 +225,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1675, y: -23}
     spritePosition: {x: 223, y: 719}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Head
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -246,7 +246,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 703, y: 131}
     spritePosition: {x: 213, y: 671}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: UpperForwardCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -267,7 +267,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 688, y: -486}
     spritePosition: {x: 213, y: 490}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: LeftUpperArm
     originalName: 
     pivot: {x: 0.22, y: 0.87}
     alignment: 9
@@ -288,7 +288,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 354, y: 289}
     spritePosition: {x: 387, y: 513}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: SideBungs
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -309,15 +309,15 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 359, y: 141}
     spritePosition: {x: 167, y: 661}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: ForwardDownCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 432
-      y: 4
+      x: 433
+      y: 3
       width: 461
       height: 405
     spriteID: 247cc51e363ded7408c8e82e08cd2ef1
@@ -330,7 +330,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 278, y: -134}
     spritePosition: {x: 154, y: 138}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: UpperBackCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -351,7 +351,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 852, y: -120}
     spritePosition: {x: 446, y: 124}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: DownLeg
     originalName: 
     pivot: {x: 0.8, y: 0.24}
     alignment: 9
@@ -372,7 +372,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: -96, y: 395}
     spritePosition: {x: 370, y: 97}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: UpperLeg
     originalName: 
     pivot: {x: 0.19, y: 0.685}
     alignment: 9
@@ -393,7 +393,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: -337, y: 378}
     spritePosition: {x: 341, y: 114}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Thigh
     originalName: 
     pivot: {x: 0.86, y: 0.86}
     alignment: 9
@@ -414,7 +414,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 880, y: 212}
     spritePosition: {x: 341, y: 280}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -435,7 +435,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 194, y: 81}
     spritePosition: {x: 332, y: 411}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: UpperRIghtSideCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -456,7 +456,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1376, y: -163}
     spritePosition: {x: 248, y: 167}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: RightDownArm
     originalName: 
     pivot: {x: 0.85, y: 0.85}
     alignment: 9
@@ -477,7 +477,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 21, y: 494}
     spritePosition: {x: 253, y: 337}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: RightUpperArm
     originalName: 
     pivot: {x: 0.47, y: 0.83}
     alignment: 9
@@ -498,7 +498,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 743, y: 341}
     spritePosition: {x: 343, y: 461}
-  - name: "\u633F\u5165\u3055\u308C\u305F\u30A4\u30E1\u30FC\u30B8"
+  - name: UpperLeftSideCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -506,7 +506,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 1694
-      y: 492
+      y: 493
       width: 196
       height: 231
     spriteID: 5e4ebab36c59629428d155fd9491e6b6
@@ -519,7 +519,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 1361, y: 28}
     spritePosition: {x: 333, y: 464}
-  - name: "\u30EC\u30A4\u30E4\u30FC 1"
+  - name: BackDownCloth
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
