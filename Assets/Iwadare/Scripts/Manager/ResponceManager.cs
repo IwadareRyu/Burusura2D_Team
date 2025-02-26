@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VTNConnect;
 
-public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConnectEventReceiver
+public class ResponceManager : SingletonMonovihair<ResponceManager>
 {
     [SerializeField] NekoChatScripts _ultraChatScripts;
     [SerializeField] int _plusRemain = 1;
@@ -22,7 +21,7 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
     protected override void Awake()
     {
         base.Awake();
-        VantanConnect.RegisterEventReceiver(this);
+        //VantanConnect.RegisterEventReceiver(this);
         ResponceStart();
     }
 
@@ -57,32 +56,32 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public bool IsActive => true;
 
-    public void OnEventCall(EventData data)
-    {
-        if (!_isNetwork) return;
-        switch (data.EventCode)
-        {
-            case EventDefine.Cheer:
-                CheerEvent cheer = new CheerEvent(data);
-                if (cheer.GetEmotion() >= 0)
-                {
-                    GoodChatResponce(cheer.GetMessage());
-                }
-                else if (cheer.GetEmotion() < 0)
-                {
-                    BadChatResponce(cheer.GetMessage());
-                }
-                break;
-            case EventDefine.BonusCoin:
-                int coin = data.GetIntData("GetCoin");
-                CoinResponce(coin);
-                break;
-            case EventDefine.DefeatBomb:
-                BombStart();
-                break;
+    //public void OnEventCall(EventData data)
+    //{
+    //    if (!_isNetwork) return;
+    //    switch (data.EventCode)
+    //    {
+    //        case EventDefine.Cheer:
+    //            CheerEvent cheer = new CheerEvent(data);
+    //            if (cheer.GetEmotion() >= 0)
+    //            {
+    //                GoodChatResponce(cheer.GetMessage());
+    //            }
+    //            else if (cheer.GetEmotion() < 0)
+    //            {
+    //                BadChatResponce(cheer.GetMessage());
+    //            }
+    //            break;
+    //        case EventDefine.BonusCoin:
+    //            int coin = data.GetIntData("GetCoin");
+    //            CoinResponce(coin);
+    //            break;
+    //        case EventDefine.DefeatBomb:
+    //            BombStart();
+    //            break;
 
-        }
-    }
+    //    }
+    //}
 
     public void ResponceStart()
     {
@@ -97,50 +96,50 @@ public class ResponceManager : SingletonMonovihair<ResponceManager>, IVantanConn
 
     public void GameStart()
     {
-        if (_isNetwork)
-        {
-            VantanConnect.GameStart();
-        }
+        //if (_isNetwork)
+        //{
+        //    VantanConnect.GameStart();
+        //}
     }
 
     public void GameEnd(bool win)
     {
-        if (!_isNetwork) return;
-        if (SceneManager.GetActiveScene().name == "YuaiScene")
-        {
-            if (!win)
-            {
-                GameEpisode epic = VantanConnect.CreateEpisode(VTNConnect.EpisodeCode.BADead);
-                epic.SetEpisode("ユウアイに心を奪われてしまった"); // エピソードを設定する
-                epic.DataPack("心を奪われた位置", Camera.main.transform.position); // エピソードの補足を設定する
-                VantanConnect.SendEpisode(epic);
-            }
-            else
-            {
-                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
-                epic.SetEpisode("ユウアイを倒した！"); // エピソードを設定する
-                epic.DataPack("ユウアイを倒した位置", Camera.main.transform.position); // エピソードの補足を設定する
-                VantanConnect.SendEpisode(epic);
-            }
-        }
-        if (SceneManager.GetActiveScene().name == "DataraBossStage")
-        {
-            if (!win)
-            {
-                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADead);
-                epic.SetEpisode("ダタラの肉に叩きつけられた"); // エピソードを設定する
-                epic.DataPack("肉で叩きつけられた位置", Camera.main.transform.position); // エピソードの補足を設定する
-                VantanConnect.SendEpisode(epic);
-            }
-            else
-            {
-                GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
-                epic.SetEpisode("ダタラの肉を奪った！"); // エピソードを設定する
-                epic.DataPack("肉を奪った位置", Camera.main.transform.position); // エピソードの補足を設定する
-                VantanConnect.SendEpisode(epic);
-            }
-        }
-        VantanConnect.GameEnd(win);
+        //if (!_isNetwork) return;
+        //if (SceneManager.GetActiveScene().name == "YuaiScene")
+        //{
+        //    if (!win)
+        //    {
+        //        GameEpisode epic = VantanConnect.CreateEpisode(VTNConnect.EpisodeCode.BADead);
+        //        epic.SetEpisode("ユウアイに心を奪われてしまった"); // エピソードを設定する
+        //        epic.DataPack("心を奪われた位置", Camera.main.transform.position); // エピソードの補足を設定する
+        //        VantanConnect.SendEpisode(epic);
+        //    }
+        //    else
+        //    {
+        //        GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
+        //        epic.SetEpisode("ユウアイを倒した！"); // エピソードを設定する
+        //        epic.DataPack("ユウアイを倒した位置", Camera.main.transform.position); // エピソードの補足を設定する
+        //        VantanConnect.SendEpisode(epic);
+        //    }
+        //}
+        //if (SceneManager.GetActiveScene().name == "DataraBossStage")
+        //{
+        //    if (!win)
+        //    {
+        //        GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADead);
+        //        epic.SetEpisode("ダタラの肉に叩きつけられた"); // エピソードを設定する
+        //        epic.DataPack("肉で叩きつけられた位置", Camera.main.transform.position); // エピソードの補足を設定する
+        //        VantanConnect.SendEpisode(epic);
+        //    }
+        //    else
+        //    {
+        //        GameEpisode epic = VantanConnect.CreateEpisode(EpisodeCode.BADefeatBoss);
+        //        epic.SetEpisode("ダタラの肉を奪った！"); // エピソードを設定する
+        //        epic.DataPack("肉を奪った位置", Camera.main.transform.position); // エピソードの補足を設定する
+        //        VantanConnect.SendEpisode(epic);
+        //    }
+        //}
+        //VantanConnect.GameEnd(win);
         //VantanConnect.SystemReset();
     }
 

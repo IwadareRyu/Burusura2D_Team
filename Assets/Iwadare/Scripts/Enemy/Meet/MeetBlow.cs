@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks.Triggers;
 using DG.Tweening;
-using GameLoopTest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

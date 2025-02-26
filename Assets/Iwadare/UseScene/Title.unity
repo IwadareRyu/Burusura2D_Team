@@ -9707,7 +9707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6092504903609138560, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: _isNetwork
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6092504903609138560, guid: 9a8eb2b58245e2741897ae79edba4b7a, type: 3}
       propertyPath: _debugChatTime

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using VTNConnect;
 
 public class TitleController : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class TitleController : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.PlayBGM(_titleBGM);
-        if(ResponceManager.Instance._isNetwork)VantanConnect.SystemReset();
+        //if(ResponceManager.Instance._isNetwork)VantanConnect.SystemReset();
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>();
     }
     public void StartGame(string nextSceneName)
