@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using VTNConnect;
-
 public class PlayerSpawn : MonoBehaviour
 {
     [SerializeField] PlayerController _player;
