@@ -90,12 +90,12 @@ public class IconManager : MonoBehaviour
     }
     private void SpecialIconChanger(float reciveValue)
     {
-        if (reciveValue == 1.0f && !_specialIcon.enabled)
+        if (reciveValue == 1.0f && !_specialIcon.gameObject.activeSelf)
         {
             _specialIcon.gameObject.SetActive(true);
             AudioManager.Instance.PlaySE("SpecialReady");
         }
-        if (reciveValue >= 0.5f && !_healIcon.enabled)
+        if (reciveValue >= 0.5f && !_healIcon.gameObject.activeSelf)
         {
             _healIcon.gameObject.SetActive(true);
             AudioManager.Instance.PlaySE("HealReady");
