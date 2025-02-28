@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
 
     [SerializeField] BulletPoolActive _missParticlePool;
     [SerializeField] BulletPoolActive _hitParticlePool;
+    public BulletPoolActive HitParticlePool => _hitParticlePool;
     [SerializeField] BulletPoolActive _reflectHitPool;
     BulletPoolActive _numberPool;
     PlayerSpecialGuage _specialGuage;
@@ -255,7 +256,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         if (collision.tag == "Ground")
         {
             _isGround = true;
-            Debug.Log("接地");
+            //Debug.Log("接地");
             _targetArrowScript.ResetDirection();
             _currentJumpCount = 0;
             _playerRb.sharedMaterial = _playerPhysicFric;

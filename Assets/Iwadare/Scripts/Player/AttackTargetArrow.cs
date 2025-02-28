@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using UnityEngine;
 
@@ -122,7 +123,7 @@ public class AttackTargetArrow : MonoBehaviour
     {
         Debug.Log($"{count}回目の攻撃！");
         upBodyAnim.SetTrigger("AttackTrigger");
-        AttackSlash();
+        AttackSlash(player);
         player._audio.AttackPlayAudio();
         yield return WaitforSecondsCashe.Wait(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
@@ -137,9 +138,11 @@ public class AttackTargetArrow : MonoBehaviour
     }
 
     /// <summary>攻撃を出す処理</summary>
-    void AttackSlash()
+    void AttackSlash(PlayerController player)
     {
-        Instantiate(_attackScript.gameObject,_arrowObj.transform.position,transform.rotation);
-        Instantiate(_slashingScript.gameObject, _arrowObj.transform.position, transform.rotation);
+        var attack = Instantiate(_attackScript.gameObject,_arrowObj.transform.position,transform.rotation).GetComponent<PlayerAttack>();
+        attack.Init(player.HitParticlePool);
+        var slash = Instantiate(_slashingScript.gameObject, _arrowObj.transform.position, transform.rotation).GetComponent<PlayerAttack>();
+        slash.Init(player.HitParticlePool);
     }
 }

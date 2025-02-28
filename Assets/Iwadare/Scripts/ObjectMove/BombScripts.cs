@@ -9,6 +9,8 @@ public class BombScripts : MonoBehaviour
     [SerializeField] float _disDamageTime = 0.5f;
     float _currentDamageTime;
     [SerializeField] int _damage = 2;
+    [SerializeField] BulletPoolActive _reflectPool;
+    //[SerializeField] string _reflectAudio;
     
     public void StartBomb()
     {
@@ -36,12 +38,20 @@ public class BombScripts : MonoBehaviour
     {
         if(_isBomb)
         {
-            if(collision.TryGetComponent<MoveBulletEnemy>(out var bullet))
+            if(collision.gameObject.tag == "Enemy")
+            {
+                var particle = _reflectPool.GetPool().GetComponent<ParticleDestroy>();
+                particle.transform.position = collision.transform.position;
+                particle.Init();
+                //AudioManager.Instance.PlaySE(_reflectAudio);
+                Destroy(collision.gameObject);
+            }
+            else if (collision.TryGetComponent<MoveBulletEnemy>(out var bullet))
             {
                 bullet.BombReset();
                 InGameManager.Instance._playerSpecialGuage.AddGuage(InGameManager.Instance._playerSpecialGuage.BreakAddGuage);
             }
-            else if(collision.TryGetComponent<EnemyBase>(out var enemy))
+            else if (collision.TryGetComponent<EnemyBase>(out var enemy))
             {
                 _enemy = enemy;
             }

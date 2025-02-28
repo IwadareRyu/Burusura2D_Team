@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (controller._playerInput.Player.Jump.WasPressedThisFrame() && controller._currentJumpCount < MaxJumpCount)
         {
-            Debug.Log("ジャンプ！");
+            //Debug.Log("ジャンプ！");
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             controller._currentJumpCount++;

@@ -165,6 +165,11 @@ public class JumpAttack : MonoBehaviour, AttackInterface
         _meleeAttack.Reset();
         enemy._enemyAnim._objAnimator.SetBool("IsJump", false);
         enemy._enemyAnim._objAnimator.SetBool("IsAttack",false);
+        if(enemy._isTrueDamage)
+        {
+            TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
+            enemy._isTrueDamage = false;
+        }
     }
 
     public void ChackDistance(EnemyBase enemy, float movePointX, bool isMove = true)

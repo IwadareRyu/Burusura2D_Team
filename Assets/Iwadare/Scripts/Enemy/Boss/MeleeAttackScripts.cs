@@ -82,7 +82,7 @@ public class MeleeAttackScripts
         if ((enemy.Player._playerState & PlayerState.DeathState) != PlayerState.DeathState)
         {
             enemy.Player._playerState |= PlayerState.ImpactState;
-            Debug.Log(enemy.Player._playerState);
+            //Debug.Log(enemy.Player._playerState);
             var playerVelocity = enemy.Player._playerRb;
 
             if (enemy._isFlip)

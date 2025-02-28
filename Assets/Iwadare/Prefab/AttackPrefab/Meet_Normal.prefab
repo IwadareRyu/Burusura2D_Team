@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 311389677414042785}
   m_Layer: 0
   m_Name: Meet_Normal
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,11 +134,10 @@ MonoBehaviour:
   _meetRenderer: {fileID: 428018446490505469}
   _blowPowerX: 3
   _blowPowerY: 10
-  _layer:
-    serializedVersion: 2
-    m_Bits: 256
   _isExplosion: 0
   _rotateRadius: 20
+  _explosion: {fileID: 0}
+  _fireParticle: {fileID: 0}
 --- !u!50 &2404278757375779932
 Rigidbody2D:
   serializedVersion: 4

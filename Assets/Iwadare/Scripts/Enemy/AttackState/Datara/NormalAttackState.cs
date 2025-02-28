@@ -151,6 +151,11 @@ public class NormalAttackState : MonoBehaviour,AttackInterface
     public void ActionReset(EnemyBase enemy)
     {
         enemy._enemyAnim._objAnimator.SetBool("IsAttack", false);
+        if (enemy._isTrueDamage)
+        {
+            TimeScaleManager.Instance.TimeScaleChange(TimeScaleManager.Instance.DefaultTimeScale);
+            enemy._isTrueDamage = false;
+        }
     }
 
     public void ChackDistance(EnemyBase enemy,bool isMove = true)
