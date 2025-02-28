@@ -29,18 +29,6 @@ public class IconManager : MonoBehaviour
         _jumpIcon.fillAmount = 1;
         _specialIcon.fillAmount = 1;
     }
-    public void Test()
-    {
-        UpdateIcon(0.5f, TargetIcon.Attack);
-    }
-    public void Test2()
-    {
-        UpdateIcon(1, TargetIcon.Avoid);
-    }
-    public void Test3()
-    {
-        UpdateIcon(0, TargetIcon.Jump);
-    }
     public void UpdateIcon(float reciveValue, TargetIcon icon)
     {
         switch (icon)
@@ -102,13 +90,15 @@ public class IconManager : MonoBehaviour
     }
     private void SpecialIconChanger(float reciveValue)
     {
-        if (reciveValue == 1.0f)
+        if (reciveValue == 1.0f && !_specialIcon.enabled)
         {
             _specialIcon.gameObject.SetActive(true);
+            AudioManager.Instance.PlaySE("SpecialReady");
         }
-        if (reciveValue >= 0.5f)
+        if (reciveValue >= 0.5f && !_healIcon.enabled)
         {
             _healIcon.gameObject.SetActive(true);
+            AudioManager.Instance.PlaySE("HealReady");
         }
         if(reciveValue < 0.5f)
         {
