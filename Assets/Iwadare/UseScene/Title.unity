@@ -206,7 +206,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1046245489}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.23625077
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -712,6 +712,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &135814919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135814920}
+  - component: {fileID: 135814922}
+  - component: {fileID: 135814921}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &135814920
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135814919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1333798303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 326}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &135814921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135814919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 210
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: License
+--- !u!222 &135814922
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135814919}
+  m_CullTransparentMesh: 1
 --- !u!1 &187926204
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,9 +904,9 @@ RectTransform:
   m_Father: {fileID: 1372155820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00009767335}
-  m_SizeDelta: {x: 6152, y: 4200}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.000011056662, y: 0}
+  m_SizeDelta: {x: 69, y: 5376}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &214651316
 MonoBehaviour:
@@ -856,16 +935,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 100
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -6281,6 +6360,7 @@ RectTransform:
   - {fileID: 510358352}
   - {fileID: 1416970095}
   - {fileID: 1152132586}
+  - {fileID: 649934677}
   m_Father: {fileID: 1574703262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6720,6 +6800,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546491080}
   m_CullTransparentMesh: 1
+--- !u!1 &551001476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551001477}
+  - component: {fileID: 551001479}
+  - component: {fileID: 551001478}
+  m_Layer: 5
+  m_Name: Text (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &551001477
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551001476}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649934677}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 829, y: -343}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &551001478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551001476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.93207544, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 2711af50dbefeec47aac7b5bbce80e1e, type: 3}
+    m_FontSize: 39
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 109
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 2/2
+--- !u!222 &551001479
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551001476}
+  m_CullTransparentMesh: 1
 --- !u!1001 &551182546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6815,8 +6974,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 800}
+  m_AnchoredPosition: {x: 0, y: -26}
+  m_SizeDelta: {x: 1700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625528974
 MonoBehaviour:
@@ -6861,7 +7020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6904,7 +7063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &649934677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6912,19 +7071,22 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649934676}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1333798303}
+  - {fileID: 1639439475}
+  - {fileID: 551001477}
   - {fileID: 625528973}
-  m_Father: {fileID: 1574703262}
+  m_Father: {fileID: 406914939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649934678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8301,7 +8463,7 @@ RectTransform:
   m_Father: {fileID: 1232580703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.23625077, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8453,7 +8615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8463,105 +8625,302 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2711af50dbefeec47aac7b5bbce80e1e, type: 3}
     m_FontSize: 30
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 61
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30E9\u30A4\u30BB\u30F3\u30B9\nUniRx\r\n\r\nThe MIT License (MIT)\r\n\r\nCopyright
-    (c) 2018 Yoshifumi Kawai\r\n\r\nPermission is hereby granted, free of charge,
-    to any person obtaining a copy\r\nof this software and associated documentation
-    files (the \"Software\"), to deal\r\nin the Software without restriction, including
-    without limitation the rights\r\nto use, copy, modify, merge, publish, distribute,
-    sublicense, and/or sell\r\ncopies of the Software, and to permit persons to whom
-    the Software is\r\nfurnished to do so, subject to the following conditions:\r\n\r\nThe
-    above copyright notice and this permission notice shall be included in all\r\ncopies
-    or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS
-    IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT
-    LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE
-    AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE
-    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF
-    CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\nSOFTWARE.\r\n\r\nUniTask\r\n\r\nThe
-    MIT License (MIT)\r\n\r\nCopyright (c) 2019 Yoshifumi Kawai / Cysharp, Inc.\r\n\r\nPermission
-    is hereby granted, free of charge, to any person obtaining a copy\r\nof this
-    software and associated documentation files (the \"Software\"), to deal\r\nin
-    the Software without restriction, including without limitation the rights\r\nto
-    use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\ncopies
-    of the Software, and to permit persons to whom the Software is\r\nfurnished to
-    do so, subject to the following conditions:\r\n\r\nThe above copyright notice
-    and this permission notice shall be included in all\r\ncopies or substantial
-    portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT
-    WARRANTY OF ANY KIND, EXPRESS OR\r\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    WARRANTIES OF MERCHANTABILITY,\r\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-    IN NO EVENT SHALL THE\r\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-    DAMAGES OR OTHER\r\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-    ARISING FROM,\r\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-    DEALINGS IN THE3\r\nSOFTWARE.\r\n\r\nDoTween License\r\n\r\nCopyright (c) 2014
-    Daniele Giardini - Demigiant\r\n\r\nNon-legalese summary\r\nYou can freely use
-    DOTween in both commercial and non-commercial projects.\r\nYou can modify the
-    code only for your own use and you cannot redistribute modified versions.\r\nDOTween
-    was/is hard work: please respect the copyright.\r\nDefinitions\r\nCopyright Holder\r\nDaniele
-    Giardini - Demigiant.\r\nYou/Your\r\nMeans any person who would like to copy,
-    distribute, or modify the Package.\r\nPackage\r\nMeans the collection of files
-    distributed by the Copyright Holder, and derivatives of that collection and/or
-    of those files. A given Package may consist of either the Standard Version, or
-    a Modified Version.\r\nDistribute\r\nMeans providing a copy of the Package or
-    making it accessible to anyone else, or in the case of a company or organization,
-    to others outside of your company or organization.\r\nStandard Version\r\nRefers
-    to the Package if it has not been modified, or has been modified only in ways
-    explicitly requested by the Copyright Holder.\r\nModified Version\r\nMeans the
-    Package, if it has been changed, and such changes were not explicitly requested
-    by the Copyright Holder.\r\nLicense\r\nYou are permitted to use the Standard
-    Version and create and use Modified Versions for any purpose without restriction,
-    provided that you do not Distribute the Modified Version.\r\n\r\nYou may Distribute
-    verbatim copies of the Source form of the Standard Version of this Package in
-    any medium without restriction, either gratis or for a Distributor Fee, provided
-    that you duplicate all of the original copyright notices and associated disclaimers
-    and also include the original readme.txt file. At your discretion, such verbatim
-    copies may or may not include a Compiled form of the Package.\r\n\r\nAny use,
-    modification, and distribution of the Standard or Modified Versions is governed
-    by this Artistic License. By using, modifying or distributing the Package, you
-    accept this license. Do not use, modify, or distribute the Package, if you do
-    not accept this license.\r\n\r\nThis license does not grant you the right to
-    use any trademark, service mark, tradename, or logo of the Copyright Holder.\r\n\r\nTHE
-    SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-    PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n\r\nParticleEffectForUGUI\r\n\r\nCopyright
-    2018-2024 mob-sakai\r\n\r\nPermission is hereby granted, free of charge, to any
-    person obtaining a copy of this software and associated documentation files (the
-    \"Software\"), to deal in the Software without restriction, including without
-    limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the Software
-    is furnished to do so, subject to the following conditions:\r\n\r\nThe above
-    copyright notice and this permission notice shall be included in all copies or
-    substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\",
+  m_Text: 'UniRx
+
+    
+
+    The MIT License (MIT)
+
+    
+
+    Copyright (c) 2018
+    Yoshifumi Kawai
+
+    
+
+    Permission is hereby granted, free of charge, to
+    any person obtaining a copy
+
+    of this software and associated documentation
+    files (the "Software"), to deal
+
+    in the Software without restriction, including
+    without limitation the rights
+
+    to use, copy, modify, merge, publish, distribute,
+    sublicense, and/or sell
+
+    copies of the Software, and to permit persons to
+    whom the Software is
+
+    furnished to do so, subject to the following conditions:
+
+    
+
+    The
+    above copyright notice and this permission notice shall be included in all
+
+    copies
+    or substantial portions of the Software.
+
+    
+
+    THE SOFTWARE IS PROVIDED
+    "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+
+    IMPLIED, INCLUDING BUT
+    NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+
+    FITNESS FOR A PARTICULAR
+    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+
+    AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+    LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+    OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+
+    SOFTWARE.
+
+    
+
+    UniTask
+
+    
+
+    The
+    MIT License (MIT)
+
+    
+
+    Copyright (c) 2019 Yoshifumi Kawai / Cysharp,
+    Inc.
+
+    
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy
+
+    of this software and associated documentation files (the
+    "Software"), to deal
+
+    in the Software without restriction, including without
+    limitation the rights
+
+    to use, copy, modify, merge, publish, distribute,
+    sublicense, and/or sell
+
+    copies of the Software, and to permit persons to
+    whom the Software is
+
+    furnished to do so, subject to the following conditions:
+
+    
+
+    The
+    above copyright notice and this permission notice shall be included in all
+
+    copies
+    or substantial portions of the Software.
+
+    
+
+    THE SOFTWARE IS PROVIDED
+    "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+
+    IMPLIED, INCLUDING BUT
+    NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+
+    FITNESS FOR A PARTICULAR
+    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+
+    AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+    LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+    OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE3
+
+    SOFTWARE.
+
+    
+
+    DoTween
+    License
+
+    
+
+    Copyright (c) 2014 Daniele Giardini - Demigiant
+
+    
+
+    Non-legalese
+    summary
+
+    You can freely use DOTween in both commercial and non-commercial
+    projects.
+
+    You can modify the code only for your own use and you cannot
+    redistribute modified versions.
+
+    DOTween was/is hard work: please respect
+    the copyright.
+
+    Definitions
+
+    Copyright Holder
+
+    Daniele Giardini
+    - Demigiant.
+
+    You/Your
+
+    Means any person who would like to copy, distribute,
+    or modify the Package.
+
+    Package
+
+    Means the collection of files distributed
+    by the Copyright Holder, and derivatives of that collection and/or of those files.
+    A given Package may consist of either the Standard Version, or a Modified Version.
+
+    Distribute
+
+    Means
+    providing a copy of the Package or making it accessible to anyone else, or in
+    the case of a company or organization, to others outside of your company or organization.
+
+    Standard
+    Version
+
+    Refers to the Package if it has not been modified, or has been
+    modified only in ways explicitly requested by the Copyright Holder.
+
+    Modified
+    Version
+
+    Means the Package, if it has been changed, and such changes were
+    not explicitly requested by the Copyright Holder.
+
+    License
+
+    You are
+    permitted to use the Standard Version and create and use Modified Versions for
+    any purpose without restriction, provided that you do not Distribute the Modified
+    Version.
+
+    
+
+    You may Distribute verbatim copies of the Source form of
+    the Standard Version of this Package in any medium without restriction, either
+    gratis or for a Distributor Fee, provided that you duplicate all of the original
+    copyright notices and associated disclaimers and also include the original readme.txt
+    file. At your discretion, such verbatim copies may or may not include a Compiled
+    form of the Package.
+
+    
+
+    Any use, modification, and distribution of
+    the Standard or Modified Versions is governed by this Artistic License. By using,
+    modifying or distributing the Package, you accept this license. Do not use, modify,
+    or distribute the Package, if you do not accept this license.
+
+    
+
+    This
+    license does not grant you the right to use any trademark, service mark, tradename,
+    or logo of the Copyright Holder.
+
+    
+
+    THE SOFTWARE IS PROVIDED "AS IS",
     WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
     THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
     OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.\r\n\r\nspine-unity\r\n\r\nYou are welcome to evaluate the Spine
-    Runtimes and the examples we provide in this repository free of charge.\r\n\r\nYou
+    IN THE SOFTWARE.
+
+    
+
+    ParticleEffectForUGUI
+
+    
+
+    Copyright 2018-2024
+    mob-sakai
+
+    
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is furnished
+    to do so, subject to the following conditions:
+
+    
+
+    The above copyright
+    notice and this permission notice shall be included in all copies or substantial
+    portions of the Software.
+
+    
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT
+    WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+    NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+    OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
+
+    
+
+    spine-unity
+
+    
+
+    You are welcome to evaluate
+    the Spine Runtimes and the examples we provide in this repository free of charge.
+
+    
+
+    You
     can integrate the Spine Runtimes into your software free of charge, but users
     of your software must have their own Spine license. Please make your users aware
     of this requirement! This option is often chosen by those making development
-    tools, such as an SDK, game toolkit, or software library.\r\n\r\nIn order to
-    distribute your software containing the Spine Runtimes to others that don't have
-    a Spine license, you need a Spine license at the time of integration. Then you
-    can distribute your software containing the Spine Runtimes however you like,
-    provided others don't modify it or use it to create new software. If others want
-    to do that, they'll need their own Spine license.\r\n\r\nFor the official legal
-    terms governing the Spine Runtimes, please read the Spine Runtimes License Agreement
-    and Section 2 of the Spine Editor License Agreement."
+    tools, such as an SDK, game toolkit, or software library.
+
+    
+
+    In order
+    to distribute your software containing the Spine Runtimes to others that don''t
+    have a Spine license, you need a Spine license at the time of integration. Then
+    you can distribute your software containing the Spine Runtimes however you like,
+    provided others don''t modify it or use it to create new software. If others
+    want to do that, they''ll need their own Spine license.
+
+    
+
+    For the
+    official legal terms governing the Spine Runtimes, please read the Spine Runtimes
+    License Agreement and Section 2 of the Spine Editor License Agreement.'
 --- !u!222 &1073653127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8586,8 +8945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4027.5, y: -2100}
-  m_SizeDelta: {x: 8055, y: 4200}
+  m_AnchoredPosition: {x: 850, y: -2688}
+  m_SizeDelta: {x: 1500, y: 5376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1107115759
 GameObject:
@@ -9253,6 +9612,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1333798302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333798303}
+  - component: {fileID: 1333798305}
+  - component: {fileID: 1333798304}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1333798303
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333798302}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 135814920}
+  m_Father: {fileID: 649934677}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 800}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1333798304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333798302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1333798305
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333798302}
+  m_CullTransparentMesh: 1
 --- !u!1 &1361513525
 GameObject:
   m_ObjectHideFlags: 0
@@ -9978,7 +10413,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 406914939}
-  - {fileID: 649934677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1574703263
@@ -10095,6 +10529,85 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b74a6f070aa15641a0cdaa83d20e924, type: 3}
+--- !u!1 &1639439474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1639439475}
+  - component: {fileID: 1639439477}
+  - component: {fileID: 1639439476}
+  m_Layer: 5
+  m_Name: Text (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1639439475
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639439474}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 649934677}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -327}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1639439476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639439474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.93207544, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 2711af50dbefeec47aac7b5bbce80e1e, type: 3}
+    m_FontSize: 39
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 109
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "A\u30DC\u30BF\u30F3\u3067\u9589\u3058\u308B"
+--- !u!222 &1639439477
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639439474}
+  m_CullTransparentMesh: 1
 --- !u!1 &1697949518
 GameObject:
   m_ObjectHideFlags: 0
@@ -10202,7 +10715,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 390844559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.81357145}
+  m_AnchorMin: {x: 0, y: 0.91015625}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -10328,7 +10841,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1753476095}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.18642858
+  m_Size: 0.08984375
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13048,7 +13561,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 672664796}
   - {fileID: 1769787493}
-  - {fileID: 1574703262}
   - {fileID: 822602473}
   - {fileID: 1480742666}
   - {fileID: 134928905}
@@ -13062,3 +13574,4 @@ SceneRoots:
   - {fileID: 863601495}
   - {fileID: 1600754483}
   - {fileID: 872390329}
+  - {fileID: 1574703262}

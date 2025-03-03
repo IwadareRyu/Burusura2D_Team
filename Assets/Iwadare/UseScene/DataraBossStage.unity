@@ -771,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 239208614}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.7, y: 2.8, z: 0}
+  m_LocalPosition: {x: 22.7, y: 2.94, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3783,7 +3783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345448877928584655, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8551347903260957159, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5083,8 +5083,8 @@ GameObject:
   m_Component:
   - component: {fileID: 874532607}
   - component: {fileID: 874532610}
-  - component: {fileID: 874532609}
   - component: {fileID: 874532608}
+  - component: {fileID: 874532611}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -5126,7 +5126,7 @@ MonoBehaviour:
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_TargetMovementOnly: 1
+  m_TargetMovementOnly: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
@@ -5150,7 +5150,19 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 7
   m_MaximumOrthoSize: 8
---- !u!114 &874532609
+--- !u!114 &874532610
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874532606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &874532611
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5178,8 +5190,8 @@ MonoBehaviour:
   m_BiasY: 0
   m_CenterOnActivate: 1
   m_GroupFramingSize: 0.8
-  m_FramingMode: 0
-  m_FrameDamping: 2.7
+  m_FramingMode: 2
+  m_FrameDamping: 2
   m_AdjustmentMode: 0
   m_MaxDollyIn: 5000
   m_MaxDollyOut: 5000
@@ -5189,18 +5201,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!114 &874532610
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874532606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &889471175 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5400503000328137140, guid: 9453b58dfa8550f4dadca23b58693fcc, type: 3}
