@@ -10548,8 +10548,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResponceDebug
       objectReference: {fileID: 0}
+    - target: {fileID: 3324295488938056072, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324295488938056072, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324295488938056072, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 8251737941872046809, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
       propertyPath: _isNetwork
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345448877928584655, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8551347903260957159, guid: f028951e78bd6024bb9968cf6e550955, type: 3}
@@ -12191,10 +12207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -18969,10 +18985,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -26209,7 +26225,7 @@ MonoBehaviour:
   _action:
   - _hpPersent: 100
     _specialAction: 0
-    _attackState: 0200000000000000
+    _attackState: 0000000002000000
   - _hpPersent: 70
     _specialAction: 1
     _attackState: 03000000
