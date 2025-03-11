@@ -168,7 +168,7 @@ public class MoveBulletEnemy : MonoBehaviour, PauseTimeInterface
 
     #region 弾の動きの処理
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isAttackTime)
         {
