@@ -120,7 +120,7 @@ public class AudioManager : MonoBehaviour
             PlayBGM(bgmName);
         }
     }
-    public void PlaySE(string seName)
+    public void PlaySE(string seName,float Volume = 1.1f)
     {
         if (!_seDic.ContainsKey(seName))
         {
@@ -130,17 +130,34 @@ public class AudioManager : MonoBehaviour
 
         foreach (AudioSource source in _seSourcesLis)
         {
-            if (source.clip.name == seName && source.isPlaying)
+            if (source.clip.name == seName)
             {
-                source.Stop();
+                if (Volume != 1.1f)
+                {
+                    source.volume = Volume;
+                }
+                if (source.isPlaying)
+                {
+                    source.Stop();
+                }
                 source.Play();
                 return;
             }
-            else if (source.clip.name == seName)
-            {
-                source.Play();
-                return;
-            }
+            //if (source.clip.name == seName && source.isPlaying)
+            //{
+            //    if(Volume !=1.1f)
+            //    {
+            //        source.volume = Volume;
+            //    }
+            //    source.Stop();
+            //    source.Play();
+            //    return;
+            //}
+            //else if (source.clip.name == seName)
+            //{
+            //    source.Play();
+            //    return;
+            //}
         }
     }
     public void StopBGM()
