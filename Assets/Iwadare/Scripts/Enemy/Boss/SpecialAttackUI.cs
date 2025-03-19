@@ -24,6 +24,7 @@ public class SpecialAttackUI : MonoBehaviour
         {
             var hpImage = Instantiate(_hpImageObj,transform.position, quaternion.identity);
             hpImage.transform.SetParent(transform);
+            hpImage.transform.localScale = transform.localScale;
             _hpImageList.Add(hpImage.GetComponent<Image>());
             _objectList.Add(hpImage);
         }

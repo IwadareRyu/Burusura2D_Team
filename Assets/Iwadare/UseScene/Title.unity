@@ -1081,7 +1081,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.00002670288, y: -0.00064942316}
-  m_SizeDelta: {x: 69, y: 4871}
+  m_SizeDelta: {x: 69, y: 5800}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &214651316
 MonoBehaviour:
@@ -8872,255 +8872,254 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'UniRx
 
-    
+
 
     The MIT License (MIT)
 
-    
 
-    Copyright (c) 2018
-    Yoshifumi Kawai
 
-    
+    Copyright (c) 2018 Yoshifumi
+    Kawai
 
-    Permission is hereby granted, free of charge, to
-    any person obtaining a copy
 
-    of this software and associated documentation
-    files (the "Software"), to deal
 
-    in the Software without restriction, including
-    without limitation the rights
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy
 
-    to use, copy, modify, merge, publish, distribute,
-    sublicense, and/or sell
+    of this software and associated documentation files (the "Software"),
+    to deal
 
-    copies of the Software, and to permit persons to
-    whom the Software is
+    in the Software without restriction, including without limitation
+    the rights
+
+    to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell
+
+    copies of the Software, and to permit persons to whom the Software
+    is
 
     furnished to do so, subject to the following conditions:
 
-    
 
-    The
-    above copyright notice and this permission notice shall be included in all
+
+    The above
+    copyright notice and this permission notice shall be included in all
 
     copies
     or substantial portions of the Software.
 
-    
 
-    THE SOFTWARE IS PROVIDED
-    "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 
-    IMPLIED, INCLUDING BUT
-    NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    THE SOFTWARE IS PROVIDED "AS
+    IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 
-    FITNESS FOR A PARTICULAR
-    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    IMPLIED, INCLUDING BUT NOT
+    LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 
-    AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    FITNESS FOR A PARTICULAR PURPOSE
+    AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 
-    LIABILITY, WHETHER IN
-    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 
-    OUT OF OR IN CONNECTION
-    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+    OUT OF OR IN CONNECTION WITH
+    THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 
     SOFTWARE.
 
-    
+
 
     UniTask
 
-    
+
 
     The
     MIT License (MIT)
 
-    
 
-    Copyright (c) 2019 Yoshifumi Kawai / Cysharp,
-    Inc.
 
-    
+    Copyright (c) 2019 Yoshifumi Kawai / Cysharp, Inc.
 
-    Permission is hereby granted, free of charge, to any person
-    obtaining a copy
 
-    of this software and associated documentation files (the
-    "Software"), to deal
 
-    in the Software without restriction, including without
-    limitation the rights
+    Permission
+    is hereby granted, free of charge, to any person obtaining a copy
 
-    to use, copy, modify, merge, publish, distribute,
-    sublicense, and/or sell
+    of this
+    software and associated documentation files (the "Software"), to deal
 
-    copies of the Software, and to permit persons to
-    whom the Software is
+    in
+    the Software without restriction, including without limitation the rights
 
-    furnished to do so, subject to the following conditions:
-
-    
-
-    The
-    above copyright notice and this permission notice shall be included in all
+    to
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 
     copies
-    or substantial portions of the Software.
+    of the Software, and to permit persons to whom the Software is
 
-    
+    furnished
+    to do so, subject to the following conditions:
 
-    THE SOFTWARE IS PROVIDED
-    "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 
-    IMPLIED, INCLUDING BUT
-    NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 
-    FITNESS FOR A PARTICULAR
-    PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    The above copyright notice
+    and this permission notice shall be included in all
 
-    AUTHORS OR COPYRIGHT
-    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    copies or substantial
+    portions of the Software.
 
-    LIABILITY, WHETHER IN
-    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 
-    OUT OF OR IN CONNECTION
-    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE3
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY
+    OF ANY KIND, EXPRESS OR
+
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+    OF MERCHANTABILITY,
+
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE
+
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+    DAMAGES OR OTHER
+
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM,
+
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE3
 
     SOFTWARE.
 
-    
 
-    DoTween
-    License
 
-    
+    DoTween License
 
-    Copyright (c) 2014 Daniele Giardini - Demigiant
 
-    
 
-    Non-legalese
-    summary
+    Copyright (c) 2014
+    Daniele Giardini - Demigiant
 
-    You can freely use DOTween in both commercial and non-commercial
-    projects.
 
-    You can modify the code only for your own use and you cannot
-    redistribute modified versions.
 
-    DOTween was/is hard work: please respect
-    the copyright.
+    Non-legalese summary
+
+    You can freely
+    use DOTween in both commercial and non-commercial projects.
+
+    You can modify
+    the code only for your own use and you cannot redistribute modified versions.
+
+    DOTween
+    was/is hard work: please respect the copyright.
 
     Definitions
 
-    Copyright Holder
+    Copyright
+    Holder
 
-    Daniele Giardini
-    - Demigiant.
+    Daniele Giardini - Demigiant.
 
     You/Your
 
-    Means any person who would like to copy, distribute,
-    or modify the Package.
+    Means any person
+    who would like to copy, distribute, or modify the Package.
 
     Package
 
-    Means the collection of files distributed
-    by the Copyright Holder, and derivatives of that collection and/or of those files.
-    A given Package may consist of either the Standard Version, or a Modified Version.
+    Means
+    the collection of files distributed by the Copyright Holder, and derivatives
+    of that collection and/or of those files. A given Package may consist of either
+    the Standard Version, or a Modified Version.
 
     Distribute
 
-    Means
-    providing a copy of the Package or making it accessible to anyone else, or in
-    the case of a company or organization, to others outside of your company or organization.
+    Means providing
+    a copy of the Package or making it accessible to anyone else, or in the case
+    of a company or organization, to others outside of your company or organization.
 
     Standard
     Version
 
-    Refers to the Package if it has not been modified, or has been
-    modified only in ways explicitly requested by the Copyright Holder.
+    Refers to the Package if it has not been modified, or has been modified
+    only in ways explicitly requested by the Copyright Holder.
 
-    Modified
-    Version
+    Modified Version
 
-    Means the Package, if it has been changed, and such changes were
-    not explicitly requested by the Copyright Holder.
+    Means
+    the Package, if it has been changed, and such changes were not explicitly requested
+    by the Copyright Holder.
 
     License
 
-    You are
-    permitted to use the Standard Version and create and use Modified Versions for
-    any purpose without restriction, provided that you do not Distribute the Modified
-    Version.
+    You are permitted to use the Standard
+    Version and create and use Modified Versions for any purpose without restriction,
+    provided that you do not Distribute the Modified Version.
 
-    
 
-    You may Distribute verbatim copies of the Source form of
-    the Standard Version of this Package in any medium without restriction, either
-    gratis or for a Distributor Fee, provided that you duplicate all of the original
-    copyright notices and associated disclaimers and also include the original readme.txt
-    file. At your discretion, such verbatim copies may or may not include a Compiled
-    form of the Package.
 
-    
+    You may Distribute
+    verbatim copies of the Source form of the Standard Version of this Package in
+    any medium without restriction, either gratis or for a Distributor Fee, provided
+    that you duplicate all of the original copyright notices and associated disclaimers
+    and also include the original readme.txt file. At your discretion, such verbatim
+    copies may or may not include a Compiled form of the Package.
 
-    Any use, modification, and distribution of
-    the Standard or Modified Versions is governed by this Artistic License. By using,
-    modifying or distributing the Package, you accept this license. Do not use, modify,
-    or distribute the Package, if you do not accept this license.
 
-    
 
-    This
-    license does not grant you the right to use any trademark, service mark, tradename,
-    or logo of the Copyright Holder.
+    Any use,
+    modification, and distribution of the Standard or Modified Versions is governed
+    by this Artistic License. By using, modifying or distributing the Package, you
+    accept this license. Do not use, modify, or distribute the Package, if you do
+    not accept this license.
 
-    
 
-    THE SOFTWARE IS PROVIDED "AS IS",
-    WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-    OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+
+    This license does not grant you the right to
+    use any trademark, service mark, tradename, or logo of the Copyright Holder.
+
+
+
+    THE
+    SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+    PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
     spine-unity
 
-    
 
-    You are welcome to evaluate
-    the Spine Runtimes and the examples we provide in this repository free of charge.
-
-    
 
     You
-    can integrate the Spine Runtimes into your software free of charge, but users
-    of your software must have their own Spine license. Please make your users aware
-    of this requirement! This option is often chosen by those making development
-    tools, such as an SDK, game toolkit, or software library.
+    are welcome to evaluate the Spine Runtimes and the examples we provide in this
+    repository free of charge.
 
-    
 
-    In order
-    to distribute your software containing the Spine Runtimes to others that don''t
-    have a Spine license, you need a Spine license at the time of integration. Then
-    you can distribute your software containing the Spine Runtimes however you like,
-    provided others don''t modify it or use it to create new software. If others
-    want to do that, they''ll need their own Spine license.
 
-    
+    You can integrate the Spine Runtimes into your
+    software free of charge, but users of your software must have their own Spine
+    license. Please make your users aware of this requirement! This option is often
+    chosen by those making development tools, such as an SDK, game toolkit, or software
+    library.
 
-    For the
-    official legal terms governing the Spine Runtimes, please read the Spine Runtimes
-    License Agreement and Section 2 of the Spine Editor License Agreement.'
+
+
+    In order to distribute your software containing the Spine Runtimes
+    to others that don''t have a Spine license, you need a Spine license at the time
+    of integration. Then you can distribute your software containing the Spine Runtimes
+    however you like, provided others don''t modify it or use it to create new software.
+    If others want to do that, they''ll need their own Spine license.
+
+
+
+    For
+    the official legal terms governing the Spine Runtimes, please read the Spine
+    Runtimes License Agreement and Section 2 of the Spine Editor License Agreement.'
 --- !u!222 &1073653127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9145,8 +9144,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 850, y: -2435.5}
-  m_SizeDelta: {x: 1500, y: 4871}
+  m_AnchoredPosition: {x: 850, y: -2900}
+  m_SizeDelta: {x: 1500, y: 5800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1107115759
 GameObject:
@@ -9180,10 +9179,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 822602473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1107115761
 MonoBehaviour:
@@ -10843,6 +10842,18 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 1570042851067300432, guid: 4b74a6f070aa15641a0cdaa83d20e924, type: 3}
+      propertyPath: m_Text
+      value: "20\u79D2\u3054\u3068\u306B\u732B\u53C8\u304C\u8A71\u3057\u3066\n\u30E9\u30F3\u30C0\u30E0\u3067\u6709\u5229\u306A\u52B9\u679C\u3092\u5F97\u3089\u308C\u308B\u305E\uFF01\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402367209900233286, guid: 4b74a6f070aa15641a0cdaa83d20e924, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523960003195345050, guid: 4b74a6f070aa15641a0cdaa83d20e924, type: 3}
+      propertyPath: m_Text
+      value: "\n\u307E\u308C\u306B\u5927\u7206\u767A\u304C\u8D77\u304D\u308B\u3053\u3068\u3082...!?"
+      objectReference: {fileID: 0}
     - target: {fileID: 3825813266048203205, guid: 4b74a6f070aa15641a0cdaa83d20e924, type: 3}
       propertyPath: m_Name
       value: Descriptions
@@ -11130,7 +11141,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 390844559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.9008417}
+  m_AnchorMin: {x: 0, y: 0.91672415}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -11256,7 +11267,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1753476095}
   m_Direction: 2
   m_Value: 1.0000001
-  m_Size: 0.09915829
+  m_Size: 0.08327586
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11307,106 +11318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 227807882719316849, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 227807882719316849, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 362353924328324296, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1001
-      objectReference: {fileID: 0}
-    - target: {fileID: 568605675990544686, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 647329071657640953, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 647329071657640953, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 791199518133406074, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1769787494}
     - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 984160946}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 132478763}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayNameAudio
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseTab
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayStringAudio, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: TitleController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194240899366555987, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_Name
       value: IllustratedBook
@@ -11415,14 +11330,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1832743266489150084, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1002
-      objectReference: {fileID: 0}
-    - target: {fileID: 2110627637670556798, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 1808178158793625885, guid: 551b32133bf221242a069a7591130ebf, type: 3}
+      propertyPath: _titleController
+      value: 
+      objectReference: {fileID: 984160946}
     - target: {fileID: 3709828434418129009, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960
@@ -11463,294 +11374,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3821044134696107130, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
-    - target: {fileID: 4094610739273175113, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1769787494}
     - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 984160946}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 132478763}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayNameAudio
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseTab
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayStringAudio, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: TitleController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706818980025293979, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597157528602366, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597157528602366, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 5336510386706360578, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1004
-      objectReference: {fileID: 0}
-    - target: {fileID: 5979487664419771677, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 5979487664419771677, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 6021633495541933398, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 6021633495541933398, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1769787494}
     - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 984160946}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 132478763}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayNameAudio
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseTab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayStringAudio, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: TitleController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6326909865711121999, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1769787494}
     - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 984160946}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 132478763}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayNameAudio
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseTab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayStringAudio, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: TitleController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8688265757443336524, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122588100993380450, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1003
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1495683533010927822, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1769787497}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 551b32133bf221242a069a7591130ebf, type: 3}
---- !u!114 &1769787494 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3629791590378424373, guid: 551b32133bf221242a069a7591130ebf, type: 3}
-  m_PrefabInstance: {fileID: 1769787493}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132478763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a9a58837d297d43b979b10d156df63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1769787497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132478763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a8018e662de4f458f516850a2c4100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _titleController: {fileID: 984160946}
 --- !u!1001 &1776850899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12179,7 +11819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
