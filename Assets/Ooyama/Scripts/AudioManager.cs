@@ -5,6 +5,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    [ContextMenuItem("CreateAudioSources", "CreateAudioSources")]
+    [SerializeField] GameObject _bgmTarget;
+    [ContextMenuItem("CreateAudioSources", "CreateAudioSources")]
+    [SerializeField] GameObject _seTarget;
     //ファイル内のSE数
     private int _seCount = 5;
 
@@ -32,14 +36,23 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixer _audioMixer = null;
 
+
     private void Awake()
     {
-
         if (Instance == null) Instance = this;
         else Destroy(this.gameObject);
-
         DontDestroyOnLoad(Instance.gameObject);
+        CreateAudioSources();
+    }
 
+    public void Start()
+    {
+        ChangeVolume(_defaultBGMVolume, _defaultSEVolume);
+    }
+
+    void CreateAudioSources()
+    {
+        ResetAudios();
         _bgmDic = new();
         _seDic = new();
         _seSourcesLis = new();
@@ -48,23 +61,23 @@ public class AudioManager : MonoBehaviour
         var seList = Resources.LoadAll(SE_PATH);
         if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
 
+        _bgmTarget.AddComponent<AudioSource>();
+
         _seCount = seList.Length;
-        for (int i = 0; i <= _seCount; i++)
+        for (int i = 0; i < _seCount; i++)
         {
-            gameObject.AddComponent<AudioSource>();
+            _seTarget.AddComponent<AudioSource>();
         }
 
-        AudioSource[] audioSources = GetComponents<AudioSource>();
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
 
         audioSources[0].loop = true;
         _bgmSource = audioSources[0];
-        //_bgmSource.volume = Mathf.Lerp(0f, 1.0f, GetBGMVolume());
         _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
 
         for (int i = 1; i < audioSources.Length; i++)
         {
             audioSources[i].playOnAwake = false;
-            //audioSources[i].volume = Mathf.Lerp(0f, 1.0f, GetSEVolume());
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
             _seSourcesLis.Add(audioSources[i]);
         }
@@ -84,20 +97,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    void ResetAudios()
     {
-        ChangeVolume(_defaultBGMVolume, _defaultSEVolume);
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+        if (audioSources.Length == 0)
+        {
+            return;
+        }
+        foreach (var audio in audioSources)
+        {
+            DestroyImmediate(audio);
+        }
     }
-
 
     public void ChangeVolume(float BGMVolume, float SEVolume)
     {
-        //_bgmSource.volume = BGMVolume;
-        //foreach (AudioSource source in _seSourcesLis)
-        //{
-        //    source.volume = SEVolume;
-        //}
-
         SetBGMVolume(BGMVolume);
         SetSEVolume(SEVolume);
     }
@@ -120,7 +134,7 @@ public class AudioManager : MonoBehaviour
             PlayBGM(bgmName);
         }
     }
-    public void PlaySE(string seName,float Volume = 1.1f)
+    public void PlaySE(string seName, float Volume = 1.1f)
     {
         if (!_seDic.ContainsKey(seName))
         {
@@ -143,21 +157,6 @@ public class AudioManager : MonoBehaviour
                 source.Play();
                 return;
             }
-            //if (source.clip.name == seName && source.isPlaying)
-            //{
-            //    if(Volume !=1.1f)
-            //    {
-            //        source.volume = Volume;
-            //    }
-            //    source.Stop();
-            //    source.Play();
-            //    return;
-            //}
-            //else if (source.clip.name == seName)
-            //{
-            //    source.Play();
-            //    return;
-            //}
         }
     }
     public void StopBGM()
