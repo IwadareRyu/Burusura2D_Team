@@ -41,6 +41,14 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else 
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(Instance.gameObject);
+
         _seSourcesLis = new();
         _bgmDic = new();
         _seDic = new();
@@ -69,10 +77,6 @@ public class AudioManager : MonoBehaviour
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
             _seSourcesLis.Add(audioSources[i]);
         }
-
-        if (Instance == null) Instance = this;
-        else Destroy(this.gameObject);
-        DontDestroyOnLoad(Instance.gameObject);
     }
 
     public void Start()
@@ -113,6 +117,7 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < _seSourcesLis.Count; i++)
         {
             _seSourcesLis[i].clip = (AudioClip)seList[i];
+            _seSourcesLis[i].playOnAwake = false;
         }
         var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
         for (int i = 0; i < SeSources.Length ; i++)
