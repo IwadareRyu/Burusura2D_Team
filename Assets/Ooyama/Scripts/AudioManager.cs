@@ -62,17 +62,22 @@ public class AudioManager : MonoBehaviour
         var seList = Resources.LoadAll(SE_PATH);
         if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
 
-        if (_bgmTarget.GetComponent<AudioSource>() == null)
+        if (_bgmTarget.GetComponentInChildren<AudioSource>() == null)
         {
-            _bgmTarget.AddComponent<AudioSource>();
+            GameObject Source = new GameObject();
+            Source.name = "BGMSource";
+            Source.transform.SetParent(_bgmTarget.transform);
+            Source.AddComponent<AudioSource>();
         }
 
-        var oldSeList = _seTarget.GetComponents<AudioSource>();
+        var oldSeList = _seTarget.GetComponentsInChildren<AudioSource>();
 
         _seCount = seList.Length;
         for (int i = 0; i < _seCount - oldSeList.Length; i++)
         {
-            _seTarget.AddComponent<AudioSource>();
+            GameObject Source = new GameObject();
+            Source.AddComponent<AudioSource>();
+            Source.transform.SetParent(_seTarget.transform);
         }
 
         AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
@@ -101,18 +106,24 @@ public class AudioManager : MonoBehaviour
         {
             _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
+        var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
+        for (int i = 0; i < SeSources.Length ; i++)
+        {
+            SeSources[i].gameObject.name = SeSources[i].GetComponent<AudioSource>().clip.name;
+        }
     }
 
     void ResetAudios()
     {
-        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+        AudioSource[] audioSources = _seTarget.GetComponentsInChildren<AudioSource>();
         if (audioSources.Length == 0)
         {
             return;
         }
+        DestroyImmediate(_bgmTarget.GetComponentInChildren<AudioSource>().gameObject);
         foreach (var audio in audioSources)
         {
-            DestroyImmediate(audio);
+            DestroyImmediate(audio.gameObject);
         }
     }
 
