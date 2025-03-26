@@ -69,10 +69,7 @@ public class AudioManager : MonoBehaviour
             audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
             _seSourcesLis.Add(audioSources[i]);
         }
-        for (int i = 0; i < _seSourcesLis.Count; i++)
-        {
-            _seSourcesLis[i].clip = (AudioClip)seList[i];
-        }
+
         if (Instance == null) Instance = this;
         else Destroy(this.gameObject);
         DontDestroyOnLoad(Instance.gameObject);
@@ -105,6 +102,17 @@ public class AudioManager : MonoBehaviour
             GameObject Source = new GameObject();
             Source.AddComponent<AudioSource>();
             Source.transform.SetParent(_seTarget.transform);
+        }
+
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+
+        for (int i = 1; i < audioSources.Length; i++)
+        {
+            _seSourcesLis.Add(audioSources[i]);
+        }
+        for (int i = 0; i < _seSourcesLis.Count; i++)
+        {
+            _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
         var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
         for (int i = 0; i < SeSources.Length ; i++)
