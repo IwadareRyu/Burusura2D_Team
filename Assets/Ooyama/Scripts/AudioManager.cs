@@ -6,8 +6,10 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     [ContextMenuItem("CreateAudioSources", "CreateAudioSources")]
+    [ContextMenuItem("ResetAudios", "ResetAudios")]
     [SerializeField] GameObject _bgmTarget;
     [ContextMenuItem("CreateAudioSources", "CreateAudioSources")]
+    [ContextMenuItem("ResetAudios", "ResetAudios")]
     [SerializeField] GameObject _seTarget;
     //ファイル内のSE数
     private int _seCount = 5;
@@ -52,7 +54,6 @@ public class AudioManager : MonoBehaviour
 
     void CreateAudioSources()
     {
-        ResetAudios();
         _bgmDic = new();
         _seDic = new();
         _seSourcesLis = new();
@@ -61,10 +62,15 @@ public class AudioManager : MonoBehaviour
         var seList = Resources.LoadAll(SE_PATH);
         if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
 
-        _bgmTarget.AddComponent<AudioSource>();
+        if (_bgmTarget.GetComponent<AudioSource>() == null)
+        {
+            _bgmTarget.AddComponent<AudioSource>();
+        }
+
+        var oldSeList = _seTarget.GetComponents<AudioSource>();
 
         _seCount = seList.Length;
-        for (int i = 0; i < _seCount; i++)
+        for (int i = 0; i < _seCount - oldSeList.Length; i++)
         {
             _seTarget.AddComponent<AudioSource>();
         }
