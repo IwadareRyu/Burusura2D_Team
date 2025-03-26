@@ -41,10 +41,41 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        _seSourcesLis = new();
+        _bgmDic = new();
+        _seDic = new();
+
+        var bgmList = Resources.LoadAll(BGM_PATH);
+        var seList = Resources.LoadAll(SE_PATH);
+
+        foreach (AudioClip bgm in bgmList)
+        {
+            _bgmDic[bgm.name] = bgm;
+        }
+        foreach (AudioClip se in seList)
+        {
+            _seDic[se.name] = se;
+        }
+
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+
+        audioSources[0].loop = true;
+        _bgmSource = audioSources[0];
+        _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
+
+        for (int i = 1; i < audioSources.Length; i++)
+        {
+            audioSources[i].playOnAwake = false;
+            audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
+            _seSourcesLis.Add(audioSources[i]);
+        }
+        for (int i = 0; i < _seSourcesLis.Count; i++)
+        {
+            _seSourcesLis[i].clip = (AudioClip)seList[i];
+        }
         if (Instance == null) Instance = this;
         else Destroy(this.gameObject);
         DontDestroyOnLoad(Instance.gameObject);
-        CreateAudioSources();
     }
 
     public void Start()
@@ -54,10 +85,6 @@ public class AudioManager : MonoBehaviour
 
     void CreateAudioSources()
     {
-        _bgmDic = new();
-        _seDic = new();
-        _seSourcesLis = new();
-
         var bgmList = Resources.LoadAll(BGM_PATH);
         var seList = Resources.LoadAll(SE_PATH);
         if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
@@ -78,33 +105,6 @@ public class AudioManager : MonoBehaviour
             GameObject Source = new GameObject();
             Source.AddComponent<AudioSource>();
             Source.transform.SetParent(_seTarget.transform);
-        }
-
-        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
-
-        audioSources[0].loop = true;
-        _bgmSource = audioSources[0];
-        _bgmSource.outputAudioMixerGroup = _audioMixer.FindMatchingGroups("BGM")[0];
-
-        for (int i = 1; i < audioSources.Length; i++)
-        {
-            audioSources[i].playOnAwake = false;
-            audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("SE")[0];
-            _seSourcesLis.Add(audioSources[i]);
-        }
-
-        foreach (AudioClip bgm in bgmList)
-        {
-            _bgmDic[bgm.name] = bgm;
-        }
-        foreach (AudioClip se in seList)
-        {
-            _seDic[se.name] = se;
-        }
-
-        for (int i = 0; i < _seSourcesLis.Count; i++)
-        {
-            _seSourcesLis[i].clip = (AudioClip)seList[i];
         }
         var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
         for (int i = 0; i < SeSources.Length ; i++)
