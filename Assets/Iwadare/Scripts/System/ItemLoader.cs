@@ -23,6 +23,7 @@ public static class ItemLoader
 
             SearchExistingItem(ref itemList);
 
+            // ファイル内に同じIDのアイテムがあるかの確認。
             foreach (ItemData item in data.Data)
             {
                 bool _chackOverLap = false;
