@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        else 
+        else
         {
             Destroy(this.gameObject);
             return;
@@ -84,8 +84,11 @@ public class AudioManager : MonoBehaviour
 
     void CreateAudioSources()
     {
-        var bgmList = Resources.LoadAll(BGM_PATH);
-        var seList = Resources.LoadAll(SE_PATH);
+        _seClipList.RemoveAll(clip => clip == null);
+        _seSourcesLis = new();
+
+        var bgmclips = Resources.LoadAll(BGM_PATH);
+        var seclips = Resources.LoadAll(SE_PATH);
         if (_audioMixer == null) _audioMixer = (AudioMixer)Resources.Load(MIXER_PATH);
 
         if (_bgmTarget.GetComponentInChildren<AudioSource>() == null)
@@ -98,42 +101,83 @@ public class AudioManager : MonoBehaviour
 
         var oldSeList = _seTarget.GetComponentsInChildren<AudioSource>();
 
-        _seCount = seList.Length;
-        for (int i = 0; i < _seCount - oldSeList.Length; i++)
+        foreach (var oldSource in oldSeList)
         {
-            GameObject Source = new GameObject();
-            Source.AddComponent<AudioSource>();
-            Source.transform.SetParent(_seTarget.transform);
+            if (oldSource.clip == null)
+            {
+                DestroyImmediate(oldSource.gameObject);
+            }
         }
 
-        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+        oldSeList = _seTarget.GetComponentsInChildren<AudioSource>();
 
-        for (int i = 1; i < audioSources.Length; i++)
+        _seCount = seclips.Length;
+
+        for (int i = 0; i < _seCount; i++)
         {
-            _seSourcesLis.Add(audioSources[i]);
-        }
-        for (int i = 0; i < _seSourcesLis.Count; i++)
-        {
-            _seSourcesLis[i].clip = (AudioClip)seList[i];
-            _seSourcesLis[i].playOnAwake = false;
+            string clipName = ((AudioClip)seclips[i]).name;
+
+            AudioSource existingSource = FindAudioSource(oldSeList, clipName);
+
+            if (existingSource != null)
+            {
+                _seSourcesLis.Add(existingSource);
+            }
+            else
+            {
+                GameObject Source = new GameObject();
+                Source.name = clipName;
+                Source.transform.SetParent(_seTarget.transform);
+
+                AudioSource newSource = Source.AddComponent<AudioSource>();
+                newSource.clip = (AudioClip)seclips[i];
+                newSource.playOnAwake = false;
+                _seSourcesLis.Add(newSource);
+            }
         }
 
-        var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
-        for (int i = 0; i < SeSources.Length ; i++)
+        foreach (AudioClip clip in bgmclips)
         {
-            SeSources[i].gameObject.name = SeSources[i].GetComponent<AudioSource>().clip.name;
+            if (TryAdd(clip, _bgmClipList))
+            {
+                _bgmClipList.Add(clip);
+            }           
         }
-
-        foreach (AudioClip clip in bgmList)
+        foreach (AudioClip clip in seclips)
         {
-            _bgmClipList.Add(clip);
+            if (TryAdd(clip, _seClipList))
+            {
+                _seClipList.Add(clip);
+            }
         }
-        foreach (AudioClip clip in seList)
+        foreach (AudioSource source in _seSourcesLis)
         {
-            _seClipList.Add(clip);
+            source.gameObject.name = source.clip.name;
         }
     }
-
+    bool TryAdd(AudioClip clip, List<AudioClip> cliplist)
+    {
+        foreach (Object obj in cliplist)
+        {
+            AudioClip Clip = obj as AudioClip;
+            if (Clip != null && Clip.name == clip.name)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    private AudioSource FindAudioSource(AudioSource[] sources, string clipName)
+    {
+        foreach (var source in sources)
+        {
+            if (source.clip != null && source.clip.name == clipName)
+            {
+                return source;
+            }
+        }
+        return null; 
+    }
     void ResetAudios()
     {
         AudioSource[] audioSources = _seTarget.GetComponentsInChildren<AudioSource>();
