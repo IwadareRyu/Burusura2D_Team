@@ -37,7 +37,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance = null;
 
     [SerializeField] private AudioMixer _audioMixer = null;
-
+    [SerializeField] private List<AudioClip> _bgmClipList = new();
+    [SerializeField] private List<AudioClip> _seClipList = new();
 
     private void Awake()
     {
@@ -53,14 +54,11 @@ public class AudioManager : MonoBehaviour
         _bgmDic = new();
         _seDic = new();
 
-        var bgmList = Resources.LoadAll(BGM_PATH);
-        var seList = Resources.LoadAll(SE_PATH);
-
-        foreach (AudioClip bgm in bgmList)
+        foreach (AudioClip bgm in _bgmClipList)
         {
             _bgmDic[bgm.name] = bgm;
         }
-        foreach (AudioClip se in seList)
+        foreach (AudioClip se in _seClipList)
         {
             _seDic[se.name] = se;
         }
@@ -119,10 +117,20 @@ public class AudioManager : MonoBehaviour
             _seSourcesLis[i].clip = (AudioClip)seList[i];
             _seSourcesLis[i].playOnAwake = false;
         }
+
         var SeSources = _seTarget.GetComponentsInChildren<AudioSource>();
         for (int i = 0; i < SeSources.Length ; i++)
         {
             SeSources[i].gameObject.name = SeSources[i].GetComponent<AudioSource>().clip.name;
+        }
+
+        foreach (AudioClip clip in bgmList)
+        {
+            _bgmClipList.Add(clip);
+        }
+        foreach (AudioClip clip in seList)
+        {
+            _seClipList.Add(clip);
         }
     }
 
@@ -138,6 +146,8 @@ public class AudioManager : MonoBehaviour
         {
             DestroyImmediate(audio.gameObject);
         }
+        _bgmClipList.Clear();
+        _seClipList.Clear();
     }
 
     public void ChangeVolume(float BGMVolume, float SEVolume)
