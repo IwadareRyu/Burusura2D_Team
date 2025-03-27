@@ -9,6 +9,8 @@ TagManager:
   - PAttack
   - Wall
   - Boss
+  - ItemName
+  - ItemEvalation
   layers:
   - Default
   - TransparentFX

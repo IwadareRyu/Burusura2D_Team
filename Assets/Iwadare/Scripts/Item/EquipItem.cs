@@ -7,10 +7,9 @@ using UnityEngine;
 
 public class EquipItem
 {
+    Item _itemData;
+    public Item ItemData => _itemData;
 
-    public int _itemID;
-    public string _itemName;
-    public string _description;
     int _attackValue = 0;
     public int AttackValue => _attackValue;
 
@@ -25,21 +24,19 @@ public class EquipItem
 
     public EquipItemState _itemState = EquipItemState.None;
 
-    EquipItem(ItemScriptable item)
+    public EquipItem(ItemScriptable item)
     {
         AssignValue(item.ItemData);
     }
 
     void AssignValue(Item data)
     {
-        _itemID = data._itemID;
-        _itemName = data._itemName;
-        _description = data._descrition;
+        _itemData = data;
         _evaluateValue = 0;
         var count = 0;
         _attackValue = ValueAssign(data._maxAttack,data._baseAttack,EquipItemState.Weapon,ref count);
         _diffenceValue = ValueAssign(data._maxDiffence,data._baseDiffence,EquipItemState.Armor,ref count);
-        _hpValue = ValueAssign(data._baseHP,data._maxHP,EquipItemState.HP,ref count);
+        _hpValue = ValueAssign(data._maxHP,data._baseHP,EquipItemState.HP,ref count);
         if(count != 0)
         {
             _itemState &= ~EquipItemState.None;
@@ -53,9 +50,10 @@ public class EquipItem
     {
         if (max > 0)
         {
-            var ram = RamdomMethod.RamdomNumberMinMax(max, min);
+            var ram = RamdomMethod.RamdomNumberMinMax(min, max);
             var evalate = EvaluateCalculate(ram,max,min);
-            _evaluateValue = (int)(evalate * 100);
+            Debug.Log(evalate);
+            _evaluateValue += (int)(evalate * 100);
             count++;
             _itemState |= state;
             return ram;
@@ -65,7 +63,8 @@ public class EquipItem
 
     float EvaluateCalculate(int current,int max,int min)
     {
-        return (float)(current - min) / (float)(max - min);
+        if (max == min) return 1;
+        else return (float)(current - min) / (float)(max - min);
     }
 }
 [Flags]

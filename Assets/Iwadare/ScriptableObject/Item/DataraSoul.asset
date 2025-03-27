@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44d2a8f0b8ea304e878848dd6c5d8e0, type: 3}
-  m_Name: Item2
+  m_Name: DataraSoul
   m_EditorClassIdentifier: 
   _itemData:
-    _itemID: 2
-    _itemName: "\u3051\u3064\u3070\u3093\u306E\u30BD\u30A6\u30EB"
-    _descrition: NO.152
-    _baseAttack: 152
-    _maxAttack: 152
-    _baseDiffence: 152
-    _maxDiffence: 152
-    _baseHP: 152
-    _maxHP: 152
+    _itemID: 3
+    _itemName: "\u30C0\u30BF\u30E9\u306E\u30BD\u30A6\u30EB"
+    _descrition: "\u653B\u6483UP"
+    _baseAttack: 20
+    _maxAttack: 30
+    _baseDiffence: 0
+    _maxDiffence: 0
+    _baseHP: 0
+    _maxHP: 0
