@@ -4,48 +4,38 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipItemInventory : MonoBehaviour
+public class EquipItemSet : MonoBehaviour
 {
-    List<EquipItem> _equipItemInvantory;
     [SerializeField] Button _itemButton;
     [SerializeField] int _displayItems = 7;
     Button[] _itemButtons;
     [SerializeField] Transform _constants;
     [SerializeField] Transform _tmpBottonPos;
     [SerializeField] Text _numText;
-    [SerializeField] int _instanceCount = 5;
-    [SerializeField] ItemScriptable[] _itemDatas;
+    [SerializeField] Text _infoNameText;
+    [SerializeField] Text _infoEvalateText;
+    [SerializeField] Text _infoAvilityText;
     int _currentPage = 1;
     int _maxPage;
-
+    EquipInventorySystem _inventorySystem;
 
     private void Start()
     {
-        _equipItemInvantory = new List<EquipItem>();
+        _inventorySystem = EquipInventorySystem.Instance;
         _itemButtons = new Button[_displayItems];
-        
-        for(var i = 0;i < _instanceCount;i++)
-        {
-            var ram = RamdomMethod.RamdomNumber0Max(_itemDatas.Length);
-            EquipItem item = new EquipItem(_itemDatas[ram]);
-            _equipItemInvantory.Add(item);
-        }
-
         _currentPage = 1;
-        SetItem();
-        _maxPage = _equipItemInvantory.Count / 7 + 1;
-        _numText.text = $"{_currentPage}/{_maxPage}";
+        SetItemButton();
     }
 
-    void SetItem()
+    void SetItemButton()
     {
         var currentCount = _displayItems * (_currentPage - 1);
-        for (var i = 0; i < _itemButtons.Length; i++)
+        for (var i = 0; i < _displayItems; i++)
         {
             _itemButtons[i] = Instantiate(_itemButton, transform.position, Quaternion.identity);
-            if (currentCount + i < _equipItemInvantory.Count)
+            if (currentCount + i < _inventorySystem._equipItemInvantory.Count)
             {
-                var itemData = _equipItemInvantory[currentCount + i];
+                var itemData = _inventorySystem._equipItemInvantory[currentCount + i];
                 _itemButtons[i].transform.SetParent(_constants);
                 _itemButtons[i].interactable = true;
                 Text nameText = null;
@@ -60,7 +50,7 @@ public class EquipItemInventory : MonoBehaviour
                     nameText.text = itemData.ItemData._itemName;
                     evaluateText.text = itemData.EvaluateValue.ToString();
                 }
-                _itemButtons[i].onClick.AddListener(() => SelectItem(itemData));
+                _itemButtons[i].onClick.AddListener(() => SelectItemButton(itemData));
             }
             else
             {
@@ -69,13 +59,34 @@ public class EquipItemInventory : MonoBehaviour
                 _itemButton.interactable = false;
             }
         }
+        // ちょうど_displayItemsの値と同じ場合、_maxPageのカウントが上がってしまうので限りなく小さい値で切り捨て調整。
+        float num = ((float)_inventorySystem._equipItemInvantory.Count / _displayItems) - 0.01f;
+        _maxPage = num > 0 ? (int)num + 1 : 1;
+        _numText.text = $"{_currentPage}/{_maxPage}";
     }
 
-    public void SelectItem(EquipItem item)
+    public void SelectItemButton(EquipItem item)
     {
-        Debug.Log($"名前{item.ItemData._itemName} 評価値{item.EvaluateValue} \n" +
-            $"攻撃{item.AttackValue}({item.ItemData._maxAttack}) " +
-            $"防御{item.DiffenceValue}({item.ItemData._maxDiffence}) " +
-            $"HP{item.HPValue}({item.ItemData._maxHP})");
+        _infoNameText.text = item.ItemData._itemName;
+        _infoEvalateText.text = "評価値:" + item.EvaluateValue.ToString();
+        _infoAvilityText.text = 
+            $"攻撃: {item.AttackValue}({item.ItemData._maxAttack}) " +
+            $"防御: {item.DiffenceValue}({item.ItemData._maxDiffence}) \r\n" +
+            $"HP: {item.HPValue}({item.ItemData._maxHP})";
+    }
+
+    public void ResetItemButton()
+    {
+        foreach (var button in _itemButtons)
+        {
+            Destroy(button.gameObject);
+        }
+    }
+
+    public void InstanceItemSet()
+    {
+        _inventorySystem.InstanceItem();
+        ResetItemButton();
+        SetItemButton();
     }
 }
