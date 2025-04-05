@@ -28,15 +28,17 @@ public abstract class SingletonMonovihair<T> : MonoBehaviour where T : MonoBehav
         ObjectOnLoad();
     }
 
-    public void ObjectOnLoad()
+    public bool ObjectOnLoad()
     {
         if (this != Instance)
         {
             Destroy(gameObject);
+            return false;
         }
         else
         {
             DontDestroyOnLoad(gameObject);
+            return true;
         }
     }
 }
