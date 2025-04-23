@@ -17067,6 +17067,7 @@ GameObject:
   - component: {fileID: 8616300520194385510}
   - component: {fileID: 444418947922055807}
   - component: {fileID: 4690521798176275640}
+  - component: {fileID: 8616300520194385511}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -17142,6 +17143,20 @@ Transform:
   - {fileID: 474263309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8616300520194385511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8560411448736996696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa48c8fa43284f40966e086e04a4651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _eventSystem: {fileID: 448539551}
+  _titleController: {fileID: 984160946}
 --- !u!114 &8892032366050188230
 MonoBehaviour:
   m_ObjectHideFlags: 0
