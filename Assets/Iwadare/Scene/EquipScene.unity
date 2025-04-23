@@ -551,7 +551,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &355522573
 MonoBehaviour:
@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 516966862}
   - component: {fileID: 516966861}
   - component: {fileID: 516966860}
+  - component: {fileID: 516966864}
   m_Layer: 5
   m_Name: EquipMenuCanvas
   m_TagString: Untagged
@@ -854,6 +855,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &516966864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516966859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd9d62874a42f0429ac63c202ff862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemButton: {fileID: 1389480026}
+  _displayItems: 7
+  _constants: {fileID: 355522572}
+  _tmpBottonPos: {fileID: 1639146841}
+  _numText: {fileID: 991991295}
+  _equipItemSet: {fileID: 973965231}
+  _equipButton:
+  - {fileID: 495211913}
+  - {fileID: 1151257675}
+  - {fileID: 772218566}
 --- !u!1 &544711532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,11 +1461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43332340f19c6be45976f8ea667bd4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemButton: {fileID: 1389480026}
-  _displayItems: 7
-  _constants: {fileID: 355522572}
-  _tmpBottonPos: {fileID: 1639146841}
-  _numText: {fileID: 991991295}
   _infoNameText: {fileID: 1345508714}
   _infoEvalateText: {fileID: 750531175}
   _infoAvilityText: {fileID: 544711534}

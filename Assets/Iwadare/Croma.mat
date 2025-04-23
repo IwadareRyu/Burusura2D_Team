@@ -44,7 +44,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _Threshold: 0.68
     m_Colors:
-    - _ChromaKeyColor: {r: 0, g: 1, b: 0.15442252, a: 1}
+    - _ChromaKeyColor: {r: 0.016323686, g: 1, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
