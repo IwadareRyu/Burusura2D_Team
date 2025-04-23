@@ -1,35 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using MasterDataClass;
+using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipItemSet : MonoBehaviour
+public class EquipMenuScripts : MonoBehaviour
 {
+
+    [Tooltip("装備アイテムメニュー"), Header("装備アイテムメニュー")]
     [SerializeField] Button _itemButton;
     [SerializeField] int _displayItems = 7;
     Button[] _itemButtons;
     [SerializeField] Transform _constants;
     [SerializeField] Transform _tmpBottonPos;
     [SerializeField] Text _numText;
-    [SerializeField] Text _infoNameText;
-    [SerializeField] Text _infoEvalateText;
-    [SerializeField] Text _infoAvilityText;
-    int _currentPage = 1;
     int _maxPage;
+    [SerializeField]EquipItemSetInfo _equipItemSet;
     EquipInventorySystem _inventorySystem;
+    int _currentPage = 1;
 
-    private void Start()
+
+    [Tooltip("装備メニュー"), Header("装備メニュー")]
+    [SerializeField] Button[] _equipButton;
+    EquipItem[] _equipPoints;
+    public EquipItem[] EquipPoints => _equipPoints;
+    EquipItem _selectEquip;
+    public EquipItem SelectEquip => _selectEquip;
+
+    // Start is called before the first frame update
+    void Start()
     {
         _inventorySystem = EquipInventorySystem.Instance;
+        _equipPoints = new EquipItem[_equipButton.Length];
+        _selectEquip = null;
+        _equipItemSet.Init();
         _itemButtons = new Button[_displayItems];
         _currentPage = 1;
-        SetItemButton();
+        SetItemButton(_currentPage);
     }
 
-    void SetItemButton()
+    void Update()
     {
-        var currentCount = _displayItems * (_currentPage - 1);
+
+    }
+
+    public void SetItemButton(int currentPage)
+    {
+        var currentCount = _displayItems * (currentPage - 1);
         for (var i = 0; i < _displayItems; i++)
         {
             _itemButtons[i] = Instantiate(_itemButton, transform.position, Quaternion.identity);
@@ -50,7 +67,8 @@ public class EquipItemSet : MonoBehaviour
                     nameText.text = itemData.ItemData._itemName;
                     evaluateText.text = itemData.EvaluateValue.ToString();
                 }
-                _itemButtons[i].onClick.AddListener(() => SelectItemButton(itemData));
+                var count = currentCount + i;
+                _itemButtons[i].onClick.AddListener(() => SelectItemButton(itemData, count));
             }
             else
             {
@@ -62,17 +80,37 @@ public class EquipItemSet : MonoBehaviour
         // ちょうど_displayItemsの値と同じ場合、_maxPageのカウントが上がってしまうので限りなく小さい値で切り捨て調整。
         float num = ((float)_inventorySystem._equipItemInvantory.Count / _displayItems) - 0.01f;
         _maxPage = num > 0 ? (int)num + 1 : 1;
-        _numText.text = $"{_currentPage}/{_maxPage}";
+        _numText.text = $"{currentPage}/{_maxPage}";
     }
 
-    public void SelectItemButton(EquipItem item)
+    public void SelectItemButton(EquipItem itemData,int selectIndex)
     {
-        _infoNameText.text = item.ItemData._itemName;
-        _infoEvalateText.text = "評価値:" + item.EvaluateValue.ToString();
-        _infoAvilityText.text = 
-            $"攻撃: {item.AttackValue}({item.ItemData._maxAttack}) " +
-            $"防御: {item.DiffenceValue}({item.ItemData._maxDiffence}) \r\n" +
-            $"HP: {item.HPValue}({item.ItemData._maxHP})";
+        _equipItemSet.SelectItemButtonInfo(itemData,selectIndex);
+    }
+
+
+    public void SelectEquipPoint()
+    {
+
+    }
+
+    public void SetSelectButton()
+    {
+        for (var i = 0; i < _equipButton.Length; i++)
+        {
+            var buttonText = GetComponentInChildren<Text>();
+            if (_equipPoints[i] != null)
+            {
+                buttonText.text = _equipPoints[i].ItemData._itemName;
+            }
+        }
+    }
+
+    public void InstanceItemSet()
+    {
+        _inventorySystem.InstanceItem();
+        ResetItemButton();
+        SetItemButton(_currentPage);
     }
 
     public void ResetItemButton()
@@ -82,11 +120,11 @@ public class EquipItemSet : MonoBehaviour
             Destroy(button.gameObject);
         }
     }
+}
 
-    public void InstanceItemSet()
-    {
-        _inventorySystem.InstanceItem();
-        ResetItemButton();
-        SetItemButton();
-    }
+[Serializable]
+public struct EquipButton
+{
+    Button _equipButton;
+    Text _evalateText;
 }
