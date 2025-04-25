@@ -32,6 +32,15 @@ public class CursorSwitcher : MonoBehaviour
     {
         _titleController?.SetTarget();
         Cursor.visible = visible;
-        Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
+        if (Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            _titleController.SetTarget();
+        }
+        //Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
