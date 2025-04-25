@@ -1905,7 +1905,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -8365,7 +8365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037d612384a572d4d91577807698790e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleController: {fileID: 984160946}
+  _titleController: {fileID: 0}
   _button: {fileID: 1138455389}
 --- !u!1 &683920754
 GameObject:
@@ -8568,7 +8568,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -9134,7 +9134,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -9255,7 +9255,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 984160945}
-  - component: {fileID: 984160946}
   - component: {fileID: 984160947}
   m_Layer: 0
   m_Name: TitleController
@@ -9279,18 +9278,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &984160946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984160943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed12348db1dbae4ea31564f3f9e1d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &984160947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10698,7 +10685,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -12154,7 +12141,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 18bef68a5e63a244a90f77456eb4f497, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7106e4ea30fc3b942b2d29d2e75ab03a, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -14181,7 +14168,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 984160946}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 5
@@ -16342,7 +16329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037d612384a572d4d91577807698790e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleController: {fileID: 984160946}
+  _titleController: {fileID: 0}
   _button: {fileID: 2924252697809059314}
 --- !u!222 &9019831507136648276
 CanvasRenderer:
