@@ -1,11 +1,11 @@
-﻿using MasterDataClass;
-using System;
-using Unity.Burst.CompilerServices;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EquipMenuScripts : MonoBehaviour
 {
+    TotalPlusStatus _totalStatus;
+    public TotalPlusStatus TotalStatus => _totalStatus;
 
     [Tooltip("装備アイテムメニュー"), Header("装備アイテムメニュー")]
     [SerializeField] Button _itemButton;
@@ -15,17 +15,20 @@ public class EquipMenuScripts : MonoBehaviour
     [SerializeField] Transform _tmpBottonPos;
     [SerializeField] Text _numText;
     int _maxPage;
-    [SerializeField]EquipItemSetInfo _equipItemSet;
+    [SerializeField] EquipItemSetInfo _equipItemSet;
     EquipInventorySystem _inventorySystem;
     int _currentPage = 1;
+    [SerializeField] Image _inventoryPanel;
 
 
     [Tooltip("装備メニュー"), Header("装備メニュー")]
     [SerializeField] Button[] _equipButton;
+    [SerializeField] Text _totalStatusText;
     EquipItem[] _equipPoints;
     public EquipItem[] EquipPoints => _equipPoints;
     EquipItem _selectEquip;
     public EquipItem SelectEquip => _selectEquip;
+    int _currentSelectIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,8 @@ public class EquipMenuScripts : MonoBehaviour
         _itemButtons = new Button[_displayItems];
         _currentPage = 1;
         SetItemButton(_currentPage);
+        _inventoryPanel.gameObject.SetActive(false);
+        TotalStatusCal();
     }
 
     void Update()
@@ -83,15 +88,64 @@ public class EquipMenuScripts : MonoBehaviour
         _numText.text = $"{currentPage}/{_maxPage}";
     }
 
-    public void SelectItemButton(EquipItem itemData,int selectIndex)
+    public void SelectItemButton(EquipItem itemData, int selectIndex)
     {
-        _equipItemSet.SelectItemButtonInfo(itemData,selectIndex);
+        var equipBool = _equipItemSet.SelectItemButtonInfo(itemData, selectIndex);
+        if (equipBool) EquipItem(itemData, selectIndex);
+    }
+
+    public void EquipItem(EquipItem itemData, int selectIndex)
+    {
+        _equipItemSet.EquipItemInfo(itemData);
+        if (_equipPoints[_currentSelectIndex] != null)
+        {
+            EquipItem tmpItemData = _equipPoints[_currentSelectIndex];
+            _inventorySystem._equipItemInvantory.Add(tmpItemData);
+        }
+        _equipPoints[_currentSelectIndex] = itemData;
+        _inventorySystem._equipItemInvantory.Remove(itemData);
+        TotalStatusCal();
+        ResetItemButton();
+        SetItemButton(_currentPage);
+        _inventoryPanel.gameObject.SetActive(false);
+        foreach (var equipButton in _equipButton)
+        {
+            equipButton.interactable = true;
+        }
+        ShowEquipButtonText(_equipButton[_currentSelectIndex], _equipPoints[_currentSelectIndex].ItemData._itemName);
+        _currentSelectIndex = -1;
+    }
+
+    public void TotalStatusCal()
+    {
+        _totalStatus = new TotalPlusStatus();
+        for (var i = 0; i < _equipPoints.Length; i++)
+        {
+            if (_equipPoints[i] != null)
+            {
+                _totalStatus.TotalHP += _equipPoints[i].HPValue;
+                _totalStatus.TotalATK += _equipPoints[i].AttackValue;
+                _totalStatus.TotalDEF += _equipPoints[i].DiffenceValue;
+            }
+        }
+        _totalStatusText.text = $"HP+ {_totalStatus.TotalHP}  ATK+ {_totalStatus.TotalATK}  DEF+ {_totalStatus.TotalDEF}";
+    }
+
+    public void ShowEquipButtonText(Button button,string name)
+    {
+        var text = button.GetComponentInChildren<Text>();
+        text.text = name;
     }
 
 
-    public void SelectEquipPoint()
+    public void SelectEquipPoint(int selectIndex)
     {
-
+        _inventoryPanel.gameObject.SetActive(true);
+        _currentSelectIndex = selectIndex;
+        foreach (var equipButton in _equipButton)
+        {
+            equipButton.interactable = false;
+        }
     }
 
     public void SetSelectButton()
@@ -106,9 +160,20 @@ public class EquipMenuScripts : MonoBehaviour
         }
     }
 
+    public void CancelSelect()
+    {
+        _equipItemSet.ResetSelect();
+        _inventoryPanel.gameObject.SetActive(false);
+        foreach (var equipButton in _equipButton)
+        {
+            equipButton.interactable = true;
+        }
+    }
+
     public void InstanceItemSet()
     {
         _inventorySystem.InstanceItem();
+        _equipItemSet.ResetSelect();
         ResetItemButton();
         SetItemButton(_currentPage);
     }
@@ -123,8 +188,9 @@ public class EquipMenuScripts : MonoBehaviour
 }
 
 [Serializable]
-public struct EquipButton
+public struct TotalPlusStatus
 {
-    Button _equipButton;
-    Text _evalateText;
+    public int TotalHP;
+    public int TotalATK;
+    public int TotalDEF;
 }
