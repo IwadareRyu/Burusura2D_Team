@@ -15,6 +15,7 @@ public class TitleController : MonoBehaviour
         AudioManager.Instance.PlayBGM(_titleBGM);
         //if(ResponceManager.Instance._isNetwork)VantanConnect.SystemReset();
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>();
+        _returnButton = _buttons[0];
     }
     public void StartGame(string nextSceneName)
     {
