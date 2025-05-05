@@ -3,34 +3,58 @@ using UnityEngine.InputSystem;
 
 public class CursorSwitcher : MonoBehaviour
 {
-    public PlayerInput playerInput;
-    private string _lastControlScheme = "";
+    public InputAction.CallbackContext _input;
     [SerializeField] private UnityEngine.EventSystems.EventSystem _eventSystem;
     [SerializeField] private TitleController _titleController;
-
     private void Start()
     {
-        playerInput = new();
         if (_titleController == null) _titleController = FindAnyObjectByType<TitleController>();
-        //_lastControlScheme = playerInput.controlSchemes[0].name;
     }
-    void Update()
+    private void OnEnable()
     {
-        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+        InputSystem.onDeviceChange += OnDeviceChange;
+    }
+
+    private void OnDisable()
+    {
+        InputSystem.onDeviceChange -= OnDeviceChange;
+    }
+
+    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        if (device is Gamepad)
         {
-            SetCursorVisible(false);
-            //_lastControlScheme = "Gamepad";
-        }
-        else if (Mouse.current != null && Mouse.current.wasUpdatedThisFrame)
-        {
-            SetCursorVisible(true);
-            //_lastControlScheme = "Mouse";
+            switch (change)
+            {
+                case InputDeviceChange.Added:
+                    Debug.Log($"Gamepad connected: {device.displayName}");
+                    OnGamepadConnected(device as Gamepad);                
+                    break;
+
+                case InputDeviceChange.Removed:
+                    Debug.Log($"Gamepad disconnected: {device.displayName}");
+                    OnGamepadDisconnected(device as Gamepad);                  
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 
+    private void OnGamepadConnected(Gamepad gamepad)
+    {
+        Debug.Log($"Gamepad {gamepad.displayName} is ready to use.");
+        SetCursorVisible(false);
+    }
+
+    private void OnGamepadDisconnected(Gamepad gamepad)
+    {
+        Debug.Log($"Gamepad {gamepad.displayName} has been disconnected.");
+        SetCursorVisible(true);
+    }
     void SetCursorVisible(bool visible)
     {
-        _titleController?.SetTarget();
         Cursor.visible = visible;
         if (Cursor.visible)
         {
@@ -41,6 +65,5 @@ public class CursorSwitcher : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             _titleController.SetTarget();
         }
-        //Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
