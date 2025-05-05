@@ -34,8 +34,7 @@ public class CursorSwitcher : MonoBehaviour
         else if (device is Gamepad)
         {
             // ゲームパッド入力：指定のUIを選択状態に
-            if (EventSystem.current != null && gamepadDefaultSelect != null &&
-                EventSystem.current.currentSelectedGameObject != gamepadDefaultSelect)
+            if (EventSystem.current != null)
             {
                 _titleController.CloseTab();
                 Debug.Log("Gamepad input detected: Selected UI");
