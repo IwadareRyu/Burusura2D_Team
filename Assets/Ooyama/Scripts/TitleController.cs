@@ -16,6 +16,7 @@ public class TitleController : MonoBehaviour
         //if(ResponceManager.Instance._isNetwork)VantanConnect.SystemReset();
         if (_eventSystem == null) _eventSystem = FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>();
         _returnButton = _buttons[0];
+        _startMoveButton = _buttons[0];
     }
     public void StartGame(string nextSceneName)
     {
