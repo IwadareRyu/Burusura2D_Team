@@ -8,6 +8,7 @@ public class CursorSwitcher : MonoBehaviour
     public GameObject gamepadDefaultSelect; // ゲームパッド用の初期選択ボタン
     //[SerializeField] private UnityEngine.EventSystems.EventSystem _eventSystem;
     [SerializeField] private TitleController _titleController;
+    module _module;
     private void OnEnable()
     {
         InputSystem.onEvent += OnInputEvent;
@@ -25,8 +26,9 @@ public class CursorSwitcher : MonoBehaviour
 
         if (device is Pointer || device is Mouse)
         {
-            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null && _module != module.Mouse)
             {
+                _module = module.Mouse;
                 EventSystem.current.SetSelectedGameObject(null);
                 Debug.Log("Mouse input detected: Deselected UI");
             }
@@ -34,8 +36,9 @@ public class CursorSwitcher : MonoBehaviour
         else if (device is Gamepad)
         {
             // ゲームパッド入力：指定のUIを選択状態に
-            if (EventSystem.current != null)
+            if (EventSystem.current != null &&  _module != module.GamePad)
             {
+                _module = module.GamePad;
                 _titleController.CloseTab();
                 Debug.Log("Gamepad input detected: Selected UI");
             }
@@ -102,3 +105,9 @@ public class CursorSwitcher : MonoBehaviour
     //    }
     //}
 }
+enum module
+{ 
+    GamePad,
+    Mouse
+}
+
