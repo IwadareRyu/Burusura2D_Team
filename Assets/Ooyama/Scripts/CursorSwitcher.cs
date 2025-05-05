@@ -1,69 +1,105 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CursorSwitcher : MonoBehaviour
 {
-    public InputAction.CallbackContext _input;
-    [SerializeField] private UnityEngine.EventSystems.EventSystem _eventSystem;
+    public GameObject gamepadDefaultSelect; // ゲームパッド用の初期選択ボタン
+    //[SerializeField] private UnityEngine.EventSystems.EventSystem _eventSystem;
     [SerializeField] private TitleController _titleController;
-    private void Start()
-    {
-        if (_titleController == null) _titleController = FindAnyObjectByType<TitleController>();
-    }
     private void OnEnable()
     {
-        InputSystem.onDeviceChange += OnDeviceChange;
+        InputSystem.onEvent += OnInputEvent;
     }
 
     private void OnDisable()
     {
-        InputSystem.onDeviceChange -= OnDeviceChange;
+        InputSystem.onEvent -= OnInputEvent;
     }
 
-    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    private void OnInputEvent(InputEventPtr eventPtr, InputDevice device)
     {
-        if (device is Gamepad)
+        if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>())
+            return;
+
+        if (device is Pointer || device is Mouse)
         {
-            switch (change)
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
             {
-                case InputDeviceChange.Added:
-                    Debug.Log($"Gamepad connected: {device.displayName}");
-                    OnGamepadConnected(device as Gamepad);                
-                    break;
-
-                case InputDeviceChange.Removed:
-                    Debug.Log($"Gamepad disconnected: {device.displayName}");
-                    OnGamepadDisconnected(device as Gamepad);                  
-                    break;
-
-                default:
-                    break;
+                EventSystem.current.SetSelectedGameObject(null);
+                Debug.Log("Mouse input detected: Deselected UI");
+            }
+        }
+        else if (device is Gamepad)
+        {
+            // ゲームパッド入力：指定のUIを選択状態に
+            if (EventSystem.current != null && gamepadDefaultSelect != null &&
+                EventSystem.current.currentSelectedGameObject != gamepadDefaultSelect)
+            {
+                _titleController.CloseTab();
+                Debug.Log("Gamepad input detected: Selected UI");
             }
         }
     }
+    private void Start()
+    {
+        if (_titleController == null) _titleController = FindAnyObjectByType<TitleController>();
+    }
+    //private void OnEnable()
+    //{
+    //    InputSystem.onDeviceChange += OnDeviceChange;
+    //}
 
-    private void OnGamepadConnected(Gamepad gamepad)
-    {
-        Debug.Log($"Gamepad {gamepad.displayName} is ready to use.");
-        SetCursorVisible(false);
-    }
+    //private void OnDisable()
+    //{
+    //    InputSystem.onDeviceChange -= OnDeviceChange;
+    //}
 
-    private void OnGamepadDisconnected(Gamepad gamepad)
-    {
-        Debug.Log($"Gamepad {gamepad.displayName} has been disconnected.");
-        SetCursorVisible(true);
-    }
-    void SetCursorVisible(bool visible)
-    {
-        Cursor.visible = visible;
-        if (Cursor.visible)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            _titleController.SetTarget();
-        }
-    }
+    //private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    //{
+    //    if (device is Gamepad)
+    //    {
+    //        switch (change)
+    //        {
+    //            case InputDeviceChange.Added:
+    //                Debug.Log($"Gamepad connected: {device.displayName}");
+    //                OnGamepadConnected(device as Gamepad);                
+    //                break;
+
+    //            case InputDeviceChange.Removed:
+    //                Debug.Log($"Gamepad disconnected: {device.displayName}");
+    //                OnGamepadDisconnected(device as Gamepad);                  
+    //                break;
+
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
+
+    //private void OnGamepadConnected(Gamepad gamepad)
+    //{
+    //    Debug.Log($"Gamepad {gamepad.displayName} is ready to use.");
+    //    SetCursorVisible(false);
+    //}
+
+    //private void OnGamepadDisconnected(Gamepad gamepad)
+    //{
+    //    Debug.Log($"Gamepad {gamepad.displayName} has been disconnected.");
+    //    SetCursorVisible(true);
+    //}
+    //void SetCursorVisible(bool visible)
+    //{
+    //    Cursor.visible = visible;
+    //    if (Cursor.visible)
+    //    {
+    //        Cursor.lockState = CursorLockMode.None;
+    //    }
+    //    else
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;
+    //        _titleController.SetTarget();
+    //    }
+    //}
 }
