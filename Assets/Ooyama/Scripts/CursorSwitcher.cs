@@ -39,7 +39,7 @@ public class CursorSwitcher : MonoBehaviour
             if (EventSystem.current != null &&  _module != module.GamePad)
             {
                 _module = module.GamePad;
-                _titleController.CloseTab();
+                _titleController.SetTarget();
                 Debug.Log("Gamepad input detected: Selected UI");
             }
         }
