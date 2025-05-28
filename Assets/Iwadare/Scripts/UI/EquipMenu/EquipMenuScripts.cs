@@ -24,8 +24,10 @@ public class EquipMenuScripts : MonoBehaviour
     [Tooltip("装備メニュー"), Header("装備メニュー")]
     [SerializeField] Button[] _equipButton;
     [SerializeField] Text _totalStatusText;
-    EquipItem[] _equipPoints;
-    public EquipItem[] EquipPoints => _equipPoints;
+
+    EquippedItems _equippedItems;
+    //EquipItem[] _equipPoints;
+    //public EquipItem[] EquipPoints => _equipPoints;
     EquipItem _selectEquip;
     public EquipItem SelectEquip => _selectEquip;
     int _currentSelectIndex;
@@ -34,14 +36,14 @@ public class EquipMenuScripts : MonoBehaviour
     void Start()
     {
         _inventorySystem = EquipInventorySystem.Instance;
-        _equipPoints = new EquipItem[_equipButton.Length];
+        _equippedItems = EquippedItems.Instance;
         _selectEquip = null;
         _equipItemSet.Init();
         _itemButtons = new Button[_displayItems];
         _currentPage = 1;
         SetItemButton(_currentPage);
         _inventoryPanel.gameObject.SetActive(false);
-        TotalStatusCal();
+        _equippedItems.TotalStatusCal();
     }
 
     void Update()
@@ -96,15 +98,20 @@ public class EquipMenuScripts : MonoBehaviour
 
     public void EquipItem(EquipItem itemData, int selectIndex)
     {
+        Debug.Log(selectIndex);
         _equipItemSet.EquipItemInfo(itemData);
-        if (_equipPoints[_currentSelectIndex] != null)
+        if (_equippedItems.EquipPoints[_currentSelectIndex] != null)
         {
-            EquipItem tmpItemData = _equipPoints[_currentSelectIndex];
+            EquipItem tmpItemData = _equippedItems.EquipPoints[_currentSelectIndex];
             _inventorySystem._equipItemInvantory.Add(tmpItemData);
         }
-        _equipPoints[_currentSelectIndex] = itemData;
+        _equippedItems.SetEquip(_currentSelectIndex,itemData);
         _inventorySystem._equipItemInvantory.Remove(itemData);
-        TotalStatusCal();
+        _equippedItems.TotalStatusCal();
+        _totalStatusText.text = 
+            $"HP+ {_equippedItems.TotalStatus.TotalHP}  " +
+            $"ATK+ {_equippedItems.TotalStatus.TotalATK}  " +
+            $"DEF+ {_equippedItems.TotalStatus.TotalDEF}";
         ResetItemButton();
         SetItemButton(_currentPage);
         _inventoryPanel.gameObject.SetActive(false);
@@ -112,23 +119,8 @@ public class EquipMenuScripts : MonoBehaviour
         {
             equipButton.interactable = true;
         }
-        ShowEquipButtonText(_equipButton[_currentSelectIndex], _equipPoints[_currentSelectIndex].ItemData._itemName);
+        ShowEquipButtonText(_equipButton[_currentSelectIndex], _equippedItems.EquipPoints[_currentSelectIndex].ItemData._itemName);
         _currentSelectIndex = -1;
-    }
-
-    public void TotalStatusCal()
-    {
-        _totalStatus = new TotalPlusStatus();
-        for (var i = 0; i < _equipPoints.Length; i++)
-        {
-            if (_equipPoints[i] != null)
-            {
-                _totalStatus.TotalHP += _equipPoints[i].HPValue;
-                _totalStatus.TotalATK += _equipPoints[i].AttackValue;
-                _totalStatus.TotalDEF += _equipPoints[i].DiffenceValue;
-            }
-        }
-        _totalStatusText.text = $"HP+ {_totalStatus.TotalHP}  ATK+ {_totalStatus.TotalATK}  DEF+ {_totalStatus.TotalDEF}";
     }
 
     public void ShowEquipButtonText(Button button,string name)
@@ -153,9 +145,9 @@ public class EquipMenuScripts : MonoBehaviour
         for (var i = 0; i < _equipButton.Length; i++)
         {
             var buttonText = GetComponentInChildren<Text>();
-            if (_equipPoints[i] != null)
+            if (_equippedItems.EquipPoints[i] != null)
             {
-                buttonText.text = _equipPoints[i].ItemData._itemName;
+                buttonText.text = _equippedItems.EquipPoints[i].ItemData._itemName;
             }
         }
     }
@@ -185,12 +177,4 @@ public class EquipMenuScripts : MonoBehaviour
             Destroy(button.gameObject);
         }
     }
-}
-
-[Serializable]
-public struct TotalPlusStatus
-{
-    public int TotalHP;
-    public int TotalATK;
-    public int TotalDEF;
 }
