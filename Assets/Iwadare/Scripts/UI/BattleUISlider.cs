@@ -52,7 +52,7 @@ public class BattleUISlider : MonoBehaviour
         if (_playerHPMoveTween != null && _playerHPMoveTween.IsActive()) _playerHpSlider.DOComplete();
         if (_playerHPShake != null && _playerHPShake.IsActive()) _playerHpSlider.transform.DOComplete();
         var afterHP = currentHP / maxHP;
-        if (_playerHpSlider.value > afterHP) _playerHPMoveTween = _playerHpSlider.DOValue(afterHP, _hpMoveTime).SetLink(gameObject);
+        /*if (_playerHpSlider.value > afterHP) */_playerHPMoveTween = _playerHpSlider.DOValue(afterHP, _hpMoveTime).SetLink(gameObject);
         _playerHPShake = _playerHpSlider.transform.DOShakePosition(_shakeTime, _shakePower).SetLink(gameObject);
     }
 
@@ -61,7 +61,7 @@ public class BattleUISlider : MonoBehaviour
         if (_enemyHPMoveTween != null && _enemyHPMoveTween.IsActive()) _enemyHpSlider.DOComplete();
         if (_enemyHPShake != null && _enemyHPShake.IsActive()) _enemyHpSlider.transform.DOComplete();
         var afterHP = currentHP / maxHP;
-        if(_enemyHpSlider.value > afterHP)_enemyHPShake = _enemyHpSlider.transform.DOShakePosition(_shakeTime, _shakePower).SetLink(gameObject);
+        /*if(_enemyHpSlider.value > afterHP)*/_enemyHPShake = _enemyHpSlider.transform.DOShakePosition(_shakeTime, _shakePower).SetLink(gameObject);
         _enemyHPMoveTween = _enemyHpSlider.DOValue(afterHP, _hpMoveTime).SetLink(gameObject);
     }
 

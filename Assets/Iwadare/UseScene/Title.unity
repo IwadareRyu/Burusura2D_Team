@@ -2227,6 +2227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa48c8fa43284f40966e086e04a4651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamepadDefaultSelect: {fileID: 0}
   _titleController: {fileID: 984160947}
 --- !u!4 &330212169
 Transform:

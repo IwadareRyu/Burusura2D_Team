@@ -7,13 +7,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerAudio))]
-public class PlayerController : MonoBehaviour, PauseTimeInterface
+public class PlayerController : PlayerStatusClass, PauseTimeInterface
 {
     [SerializeField] SpriteRenderer _currentPlayerArrowSprite;
     [SerializeField] Collider2D _playerCollition;
-    [Tooltip("PlayerのHP"), Header("PlayerのHP")]
-    [SerializeField] float _playerDefaultHP = 100;
-    float _currentPlayerHP;
     [SerializeField] Slider _playerHPSlider;
     [Tooltip("プレイヤーのアニメーション(下半身)")]
     public Animator _downPlayerAnim;
@@ -106,8 +103,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         if (!_isInvisible) _guardSprite.enabled = false;
         _playerState |= PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
-        _currentPlayerHP = _playerDefaultHP;
-        _playerHPSlider.value = _currentPlayerHP / _playerDefaultHP;
+        base.InitStatus();
+        BattleUISlider.Instance.PlayerHPSlider(1,1);
         _targetArrowScript.Init(this);
         _specialGuage = InGameManager.Instance._playerSpecialGuage;
         _specialGuage.Init();
@@ -284,11 +281,11 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
     public void AddDamage(int damage)
     {
         
-        _currentPlayerHP = Mathf.Min(_playerDefaultHP,_currentPlayerHP -= damage);
+        CurrentHP = Mathf.Min(_playerMaxHP,CurrentHP -= damage);
 
-        if (_currentPlayerHP <= 0)
+        if (CurrentHP <= 0)
         {
-            _currentPlayerHP = 0;
+            CurrentHP = 0;
             Death();
         }
 
@@ -314,8 +311,8 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         number.MoveNumber(-damage);
         if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
         _shakeTween = _shakeObj.DOShakePosition(_shakeTime,_shakePower).SetLink(_shakeObj.gameObject);
-
-        BattleUISlider.Instance.PlayerHPSlider(_currentPlayerHP, _playerDefaultHP);
+        Debug.Log(_playerMaxHP);
+        BattleUISlider.Instance.PlayerHPSlider(CurrentHP, _playerMaxHP);
     }
 
     public void AddBulletDamage(int damage)
@@ -341,10 +338,10 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
             hitParticle.transform.position = transform.position;
             hitParticle.Init();
         }
-        _currentPlayerHP -= damage;
-        if (_currentPlayerHP <= 0)
+        CurrentHP -= damage;
+        if (CurrentHP <= 0)
         {
-            _currentPlayerHP = 0;
+            CurrentHP = 0;
             Death();
         }
         else
@@ -360,7 +357,7 @@ public class PlayerController : MonoBehaviour, PauseTimeInterface
         if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
         _shakeTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);
 
-        BattleUISlider.Instance.PlayerHPSlider(_currentPlayerHP,_playerDefaultHP);
+        BattleUISlider.Instance.PlayerHPSlider(CurrentHP,_playerMaxHP);
     }
 
     public void Death()
