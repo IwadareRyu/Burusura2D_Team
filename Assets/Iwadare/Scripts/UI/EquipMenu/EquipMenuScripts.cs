@@ -36,7 +36,7 @@ public class EquipMenuScripts : MonoBehaviour
     void Start()
     {
         _inventorySystem = EquipInventorySystem.Instance;
-        _equippedItems = EquippedItems.Instance;
+        _equippedItems = PlayerStatusSystems.Instance._equippedItems;
         _selectEquip = null;
         _equipItemSet.Init();
         _itemButtons = new Button[_displayItems];
@@ -109,9 +109,8 @@ public class EquipMenuScripts : MonoBehaviour
         _inventorySystem._equipItemInvantory.Remove(itemData);
         _equippedItems.TotalStatusCal();
         _totalStatusText.text = 
-            $"HP+ {_equippedItems.TotalStatus.TotalHP}  " +
-            $"ATK+ {_equippedItems.TotalStatus.TotalATK}  " +
-            $"DEF+ {_equippedItems.TotalStatus.TotalDEF}";
+            $"HP+ {_equippedItems.TotalEquipStatus.TotalHP}  " +
+            $"ATK+ {_equippedItems.TotalEquipStatus.TotalATK}  ";
         ResetItemButton();
         SetItemButton(_currentPage);
         _inventoryPanel.gameObject.SetActive(false);
@@ -176,5 +175,11 @@ public class EquipMenuScripts : MonoBehaviour
         {
             Destroy(button.gameObject);
         }
+    }
+
+    public void SubmitEquipped()
+    {
+        PlayerStatusSystems.Instance.SetTotalStatus();
+        gameObject.SetActive(false);
     }
 }

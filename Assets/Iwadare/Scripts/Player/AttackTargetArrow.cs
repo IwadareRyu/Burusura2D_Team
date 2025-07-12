@@ -119,18 +119,18 @@ public class AttackTargetArrow : MonoBehaviour
 
     /// <summary>攻撃のクールタイムの処理</summary>
     /// <param name="count">攻撃回数</param>
-    public IEnumerator AttackTime(PlayerController player,int count,Animator upBodyAnim)
+    public IEnumerator AttackTime(PlayerController player,int count,Animator upBodyAnim,float attackValue)
     {
         Debug.Log($"{count}回目の攻撃！");
         upBodyAnim.SetTrigger("AttackTrigger");
-        AttackSlash(player);
+        AttackSlash(player,attackValue);
         player._audio.AttackPlayAudio();
         yield return WaitforSecondsCashe.Wait(_attackInterval);
         for (var time = 0f; time < _attackVaildInputTime; time += Time.deltaTime)
         {
             if (player.IsAttack && count < MaxAttackCount)
             {
-                yield return StartCoroutine(AttackTime(player,count + 1,upBodyAnim));
+                yield return StartCoroutine(AttackTime(player,count + 1,upBodyAnim,attackValue));
                 break;
             }
             yield return null;
@@ -138,11 +138,11 @@ public class AttackTargetArrow : MonoBehaviour
     }
 
     /// <summary>攻撃を出す処理</summary>
-    void AttackSlash(PlayerController player)
+    void AttackSlash(PlayerController player,float attackValue)
     {
         var attack = Instantiate(_attackScript.gameObject,_arrowObj.transform.position,transform.rotation).GetComponent<PlayerAttack>();
-        attack.Init(player.HitParticlePool);
+        attack.Init(player.HitParticlePool,attackValue);
         var slash = Instantiate(_slashingScript.gameObject, _arrowObj.transform.position, transform.rotation).GetComponent<PlayerAttack>();
-        slash.Init(player.HitParticlePool);
+        slash.Init(player.HitParticlePool, attackValue);
     }
 }

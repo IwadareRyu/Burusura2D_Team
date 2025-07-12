@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class PlayerSlashing : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerSlashing : MonoBehaviour
     PlayerSpecialGuage _specialGuage;
     [SerializeField] float _moveSpeed = 10f;
     [SerializeField] float _moveTime = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +19,10 @@ public class PlayerSlashing : MonoBehaviour
         StartCoroutine(MoveTime());
     }
 
+
     IEnumerator MoveTime()
     {
         yield return WaitforSecondsCashe.Wait(_moveTime);
         _rb.velocity = Vector2.zero;
     }
-
-
 }

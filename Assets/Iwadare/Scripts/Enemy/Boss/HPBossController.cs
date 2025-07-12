@@ -193,13 +193,13 @@ public class HPBossController : EnemyBase,PauseTimeInterface
         ChangeAction();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "PAttack")
-        {
-            AddDamage(1);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "PAttack")
+    //    {
+    //        AddDamage(1);
+    //    }
+    //}
 
     public void TimeScaleChange(float timeScale)
     {

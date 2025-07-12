@@ -24,9 +24,8 @@ public class EquipItemSetInfo : MonoBehaviour
             _infoNameText.text = item.ItemData._itemName;
             _infoEvalateText.text = "評価値:" + item.EvaluateValue.ToString();
             _infoAvilityText.text =
-                $"攻撃: {item.AttackValue}({item.ItemData._maxAttack}) " +
-                $"防御: {item.DiffenceValue}({item.ItemData._maxDiffence}) \r\n" +
-                $"HP: {item.HPValue}({item.ItemData._maxHP})";
+                $"HP: {item.HPValue}({item.ItemData._maxHP})" + 
+                $"攻撃: {item.AttackValue}({item.ItemData._maxAttack}) ";
             _infoEquipText.text = "再度選択で装備します。";
             return false;
         }

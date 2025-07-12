@@ -103,7 +103,6 @@ public class PlayerController : PlayerStatusClass, PauseTimeInterface
         if (!_isInvisible) _guardSprite.enabled = false;
         _playerState |= PlayerState.NormalState;
         _timeScale = TimeScaleManager.Instance.DefaultTimeScale;
-        base.InitStatus();
         BattleUISlider.Instance.PlayerHPSlider(1,1);
         _targetArrowScript.Init(this);
         _specialGuage = InGameManager.Instance._playerSpecialGuage;
@@ -219,7 +218,7 @@ public class PlayerController : PlayerStatusClass, PauseTimeInterface
         _downPlayerAnim.SetBool("Attack", true);
         _upPlayerAnim.SetBool("Attack", true);
         _katanaTrail.enabled = true;
-        yield return StartCoroutine(_targetArrowScript.AttackTime(this,1, _upPlayerAnim));
+        yield return StartCoroutine(_targetArrowScript.AttackTime(this,1, _upPlayerAnim,CurrentAttack));
         IconManager.Instance.UpdateIcon(_attackWaitTime,TargetIcon.Attack);
         _katanaTrail.enabled = false;
         _downPlayerAnim.SetBool("Attack", false);
@@ -338,7 +337,7 @@ public class PlayerController : PlayerStatusClass, PauseTimeInterface
             hitParticle.transform.position = transform.position;
             hitParticle.Init();
         }
-        CurrentHP -= damage;
+        CurrentHP -= Mathf.Max(0,damage - CurrentDiffence);
         if (CurrentHP <= 0)
         {
             CurrentHP = 0;
@@ -352,7 +351,7 @@ public class PlayerController : PlayerStatusClass, PauseTimeInterface
         var number = _numberPool.GetPool().GetComponent<NumberColorScripts>();
         number.transform.position = transform.position;
         number.NumberColorChange(number._damageColor);
-        number.MoveNumber(-damage);
+        number.MoveNumber(-Mathf.Max(0, damage - CurrentDiffence));
 
         if (_shakeTween != null && _shakeTween.IsActive()) _shakeObj.DOComplete();
         _shakeTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);

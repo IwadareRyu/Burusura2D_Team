@@ -12,11 +12,15 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] CinemachineTargetGroup _targetGroup;
     [SerializeField] ParticleSystem _spawnParticle;
     [SerializeField] float _spawnDelayTime = 1.5f;
+    PlayerStatusSystems playersStatusSystems;
     bool _isDeath = false;
     bool _isNotRemain = false;
 
+
     private void Start()
     {
+        playersStatusSystems = PlayerStatusSystems.Instance;
+        playersStatusSystems.SetTotalStatus();
         SpawnPlayer();
     }
 
@@ -49,6 +53,7 @@ public class PlayerSpawn : MonoBehaviour
         if (_currentPlayer) _targetGroup.RemoveMember(_currentPlayer.transform);
         _currentPlayer = Instantiate(_player, transform.position, Quaternion.identity);
         _targetGroup.AddMember(_currentPlayer.transform,3,0);
+        //_currentPlayer.SetStatus();
         _currentPlayer.Init(_setPlayerStruct);
         _enemy.PlayerSet(_currentPlayer);
         if(_spawnParticle) _spawnParticle.Play();
