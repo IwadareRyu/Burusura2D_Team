@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks.Triggers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquippedItems : SingletonMonovihair<EquippedItems>
+public class EquippedItems : MonoBehaviour
 {
     [SerializeField] int _equipPointCount = 3;
     static EquipItem[] _equipPoints;
     public EquipItem[] EquipPoints => _equipPoints;
-    TotalPlusStatus _totalStatus;
-    public TotalPlusStatus TotalStatus => _totalStatus;
+    TotalPlusStatus _totalEquipStatus;
+    public TotalPlusStatus TotalEquipStatus => _totalEquipStatus;
 
-    void Start()
+    protected void Awake()
     {
-        if (!ObjectOnLoad()) return;
-
         _equipPoints = new EquipItem[_equipPointCount];
+        TotalStatusCal();
     }
 
     public EquipItem GetEquip(int index)
@@ -30,23 +30,15 @@ public class EquippedItems : SingletonMonovihair<EquippedItems>
 
     public void TotalStatusCal()
     {
-        _totalStatus = new TotalPlusStatus();
+        _totalEquipStatus = new TotalPlusStatus();
         for (var i = 0; i < _equipPoints.Length; i++)
         {
             if (_equipPoints[i] != null)
             {
-                _totalStatus.TotalHP += _equipPoints[i].HPValue;
-                _totalStatus.TotalATK += _equipPoints[i].AttackValue;
-                _totalStatus.TotalDEF += _equipPoints[i].DiffenceValue;
+                _totalEquipStatus.TotalHP += _equipPoints[i].HPValue;
+                _totalEquipStatus.TotalATK += _equipPoints[i].AttackValue;
+                _totalEquipStatus.TotalDEF += _equipPoints[i].DiffenceValue;
             }
         }
     }
-}
-
-[Serializable]
-public struct TotalPlusStatus
-{
-    public int TotalHP;
-    public int TotalATK;
-    public int TotalDEF;
 }

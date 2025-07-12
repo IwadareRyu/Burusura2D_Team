@@ -9,6 +9,8 @@ using MasterDataClass;
 public class ItemScriptable : ScriptableObject
 {
     [SerializeField] Item _itemData;
+
+    [SerializeField] SpecialpParts parts;
     public Item ItemData => _itemData;
 
     public void ItemDataLoad(ItemData itemData)
