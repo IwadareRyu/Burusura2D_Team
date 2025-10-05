@@ -5,6 +5,8 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     [SerializeField]GameState _gameState = GameState.StayState;
     public GameState GameState => _gameState;
 
+    public bool _isTest;
+
     //ResultSceneの時に渡す変数。
     public bool _isWin;
 
@@ -13,6 +15,7 @@ public class GameStateManager : SingletonMonovihair<GameStateManager>
     {
         base.Awake();
         ChangeState(GameState.StayState);
+        if (_isTest) ChangeState(GameState.InBattleState);
     }
 
     public void InBattle()

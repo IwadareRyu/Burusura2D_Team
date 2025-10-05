@@ -43,6 +43,10 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
     public float _bulletDistance = 90f;
     public float BulletDistance => _bulletDistance;
 
+    [Tooltip("スポーン遅延"), Header("スポーン遅延")]
+    [SerializeField] float _spawnDelay = 0;
+
+    [Tooltip("スポーン間隔"), Header("スポーン間隔")]
     [SerializeField] float _spawnCoolTime = 2f;
     float _currentCoolTime = 0f;
 
@@ -84,6 +88,7 @@ public class BulletSpawnEnemy : MonoBehaviour,PauseTimeInterface
         _spawnShotLine = GetComponent<SpawnShotLine>();
         _dangerousTime = _spawnCoolTime - _dangerousSpawnBeforeTime;
         _bulletPatterns._waveSpawnEnemy.Init(this);
+        _currentCoolTime -= _spawnDelay;
     }
 
     private void OnEnable()

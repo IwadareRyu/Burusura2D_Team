@@ -1,17 +1,31 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeBossController : EnemyBase
+public class TimeBossController : EnemyBase, PauseTimeInterface
 {
     float _elapTime;
     int _minute = 0;
-    [SerializeField]TimeAction[] _action;
-    int _currentActionNumber = 0;
     AttackInterface _currentAction;
-    [SerializeField] Text _timeText;
-    [SerializeField] YuaiActions _attackStatesBoss1 = new();
-    private Coroutine _currentCoroutine;
+    public Text _timeText;
+    [SerializeField] float _specialAttackHP = 4;
+    float _currentSpecialAttackHP;
+    [SerializeField] SpecialAttackUI _specialAttackUI;
+    ChoiceActionInterface _enemyActions;
+    IEnumerator _currentCoroutine;
+    Vector3 _tmpVelocity;
+    float _tmpGravity;
+    bool _isSpecialAttackMode = false;
+    bool _gameEnd = false;
+    public override bool SpecialHPChack() => _isSpecialAttackMode;
+    [SerializeField] Animator _endAnimator;
+    bool _death = false;
+    [SerializeField] Transform _shakeObj;
+    [SerializeField] float _shakeTime = 0.5f;
+    [SerializeField] float _shakePower = 5f;
+    Tween _damageTween;
 
     // Start is called before the first frame update
     void Start()
@@ -24,38 +38,30 @@ public class TimeBossController : EnemyBase
 
     void ChangeAction()
     {
-        // ChoiceActionでenumのAttackStateを選び、ChoiceAttackでAttackInterdfaceを継承している攻撃パターンを設定する。
-        _currentAction = ChoiceAttack(_action[_currentActionNumber]._attackState);
+        ResetState();
+        if (_isSpecialAttackMode) _currentAction = _enemyActions.SelectSpecialAttack();
+        else _currentAction = _enemyActions.ChoiceAttack();
         _bossState = BossState.StayState;
     }
 
+
     void HPChangeMinite()
     {
-        _minute = Mathf.Max(0,(int)_currentHP / 60);
+        _minute = Mathf.Max(0, (int)_currentHP / 60);
     }
 
     void SetTime()
     {
-        int setSecond = Mathf.Max(0,(int)_currentHP % 60);
+        int setSecond = Mathf.Max(0, (int)_currentHP % 60);
         _timeText.text = $"{_minute.ToString("00")}:{(setSecond).ToString("00")}";
     }
 
-    public AttackInterface ChoiceAttack(AttackStatesList attackStates)
-    {
-        switch (attackStates)
-        {
-            case AttackStatesList.DashAttack:
-                return _attackStatesBoss1._dashAttack;
-            case AttackStatesList.Attack2:
-                return _attackStatesBoss1._at2;
-        }
-        return _attackStatesBoss1._at2;
-    }
+
 
     private void Update()
     {
         _currentHP -= Time.deltaTime;
-        if(_minute > 0 && _currentHP - 60 * _minute < 0) _minute--;
+        if (_minute > 0 && _currentHP - 60 * _minute < 0) _minute--;
         _elapTime += Time.deltaTime;
         DisplayHP();
         HPChack();
@@ -78,14 +84,16 @@ public class TimeBossController : EnemyBase
                 if (!_isMove)
                 {
                     _isMove = true;
-                    _currentCoroutine = StartCoroutine(_currentAction.Move(this));
+                    _currentCoroutine = _currentAction.Move(this);
+                    StartCoroutine(_currentCoroutine);
                 }
                 break;
             case BossState.AttackState:
                 if (!_isAttack)
                 {
                     _isAttack = true;
-                    _currentCoroutine = StartCoroutine(_currentAction.Attack(this));
+                    _currentCoroutine = _currentAction.Attack(this);
+                    StartCoroutine(_currentCoroutine);
                 }
                 break;
             case BossState.ChangeActionState:
@@ -96,10 +104,14 @@ public class TimeBossController : EnemyBase
 
     public override void HPChack()
     {
-        if (_action.Length > _currentActionNumber + 1)
+        if (_death) return;
+
+        if (_damageTween != null && _damageTween.IsActive()) _shakeObj.DOComplete();
+        _damageTween = _shakeObj.DOShakePosition(_shakeTime, _shakePower).SetLink(_shakeObj.gameObject);
+
+        if (_enemyActions.ChackHP(_currentHP / MaxHP * 100))
         {
-            //現在の時間が次のアクションの指定時間になったら次に移行する処理。
-            if (_elapTime >= _action[_currentActionNumber + 1]._hpPersent)
+            if (!_isSpecialAttackMode)
             {
                 _bossState = BossState.NextActionState;
                 if (_currentCoroutine != null)
@@ -108,29 +120,55 @@ public class TimeBossController : EnemyBase
                     _currentCoroutine = null;
                 }
                 _currentAction.ActionReset(this);
-                _currentActionNumber++;
-                //特殊攻撃の場合特殊攻撃に移行。
-                if (_action[_currentActionNumber]._specialAction)
+                if (_enemyActions.ChackSpecial())
                 {
-                    // 特殊攻撃
-                    SpecialAction();
+                    // スペシャルアタック発動
+                    SpecialAttack();
                 }
-                // 次に行動するアクションを決める。
-                ChangeAction();
+                else
+                {
+                    // 次に行動するアクションを決める。
+                    ChangeAction();
+                }
             }
         }
-        else
+        if (_currentHP <= 0)
         {
-            if (_currentHP < 0f)
+            ChangeAction();
+            //死ぬ
+            if (_enemyAnim._animType == AnimationType.SkeletonAnimator)
             {
-                Destroy(gameObject);
-            }   // HPが0になった時の処理
+                _enemyAnim.ChangeAnimationSpain(AnimationName.Damage);
+                _endAnimator.Play("End");
+            }
+            else
+            {
+                _enemyAnim.ChangeAnimationAnimator(AnimationName.Damage);
+                _endAnimator.Play("End");
+            }
+            GameStateManager.Instance.EndBattle(true);
+            _death = true;
         }
     }
 
-    void SpecialAction()
+    private void SpecialAttack()
     {
         return;
+    }
+
+    public void TimeScaleChange(float timeScale)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void StartPause()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void EndPause()
+    {
+        throw new NotImplementedException();
     }
 
     [Serializable]
