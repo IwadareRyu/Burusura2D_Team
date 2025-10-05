@@ -19,6 +19,7 @@ public class EquipMenuScripts : MonoBehaviour
     EquipInventorySystem _inventorySystem;
     int _currentPage = 1;
     [SerializeField] Image _inventoryPanel;
+    bool _isItemSetFase;
 
 
     [Tooltip("装備メニュー"), Header("装備メニュー")]
@@ -31,6 +32,9 @@ public class EquipMenuScripts : MonoBehaviour
     EquipItem _selectEquip;
     public EquipItem SelectEquip => _selectEquip;
     int _currentSelectIndex;
+
+    PlayerInput _input;
+    int _moveMemuInput;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +50,41 @@ public class EquipMenuScripts : MonoBehaviour
         _equippedItems.TotalStatusCal();
     }
 
+    private void OnEnable()
+    {
+        SetInput();
+    }
+
+    void SetInput()
+    {
+        _input = new PlayerInput();
+        _input.UI.Navigate.performed += ct =>
+        {
+            _moveMemuInput = (int)ct.ReadValue<Vector2>().x;
+        };
+
+        _input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _input.Disable();
+    }
+
     void Update()
+    {
+        if(_moveMemuInput < 1)
+        {
+            MoveMenu(false);
+        }
+        else if(_moveMemuInput > 1)
+        {
+            MoveMenu(true);
+        }
+    }
+
+    // 次回
+    public void MoveMenu(bool dirLeft)
     {
 
     }
@@ -119,6 +157,7 @@ public class EquipMenuScripts : MonoBehaviour
             equipButton.interactable = true;
         }
         ShowEquipButtonText(_equipButton[_currentSelectIndex], _equippedItems.EquipPoints[_currentSelectIndex].ItemData._itemName);
+        _isItemSetFase = false;
         _currentSelectIndex = -1;
     }
 
@@ -132,6 +171,7 @@ public class EquipMenuScripts : MonoBehaviour
     public void SelectEquipPoint(int selectIndex)
     {
         _inventoryPanel.gameObject.SetActive(true);
+        _isItemSetFase = true;
         _currentSelectIndex = selectIndex;
         foreach (var equipButton in _equipButton)
         {

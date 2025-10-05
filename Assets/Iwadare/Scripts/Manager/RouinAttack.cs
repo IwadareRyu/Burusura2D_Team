@@ -20,9 +20,16 @@ public class RouinAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _enemy = GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyBase>();
-        _animRouin.transform.position = _enemy.transform.position;
-        _animRouin.transform.SetParent(_enemy.transform);
+        _enemy = GameObject.FindGameObjectWithTag("Boss")?.GetComponent<EnemyBase>();
+        if (_enemy)
+        {
+            _animRouin.transform.position = _enemy.transform.position;
+            _animRouin.transform.SetParent(_enemy.transform);
+        }
+        else
+        {
+            _animRouin.transform.position = transform.position;
+        }
         var pos = _animRouin.transform.localPosition;
         var scale = _animRouin.transform.localScale;
         _isReverse = RamdomMethod.RandomNumber99() < 50 ? true : false;
@@ -66,7 +73,7 @@ public class RouinAttack : MonoBehaviour
 
     public void EnemyDamage()
     {
-        _enemy.PerforateDamage(_damagePower);
+        if(_enemy)_enemy.PerforateDamage(_damagePower);
         StartCoroutine(FadeOutRouin());
     }
 
