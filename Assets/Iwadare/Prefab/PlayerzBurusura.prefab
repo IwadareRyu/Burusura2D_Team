@@ -58,9 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9cbffd45e1c044e90b40eedac9de24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentHP: 0
+  _currentAttack: 0
+  _currentDiffence: 0
   _currentPlayerArrowSprite: {fileID: 126320054075687383}
   _playerCollition: {fileID: 8733709516700746868}
-  _playerDefaultHP: 100
   _playerHPSlider: {fileID: 0}
   _downPlayerAnim: {fileID: 5550373071737114952}
   _upPlayerAnim: {fileID: 5407705333902377667}
@@ -97,7 +99,7 @@ MonoBehaviour:
   _avoidSpeed: 20
   _avoidTime: 0.5
   _avoidCoolTime: 3
-  _jumpPower: 10
+  _jumpPower: 13
   MaxJumpCount: 2
   _bodyTrail: {fileID: 2995458468956278149}
   _avoidColor: {r: 1, g: 1, b: 1, a: 1}
